@@ -1,7 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'DIN';
+  src: url("/fonts/DIN Next Rounded LT W04 Bold.woff") format("woff");
+    font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
     --color-duoBackground: #141f24;
+    --color-duoGreen: #58cc04;
+    --color-duoGreenShadow: #59a700;
+    --color-duoSubText: #d0f0c1;
+    --font-din: DIN;
+
+    --shadow-duoShadow: 0 5px 0 #59a700
+
 }
 
 :root {
@@ -16,4 +30,14 @@
   --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
   /* ... */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100dvw;
+  overscroll-behavior: contain;
+  font-family: DIN;
 }

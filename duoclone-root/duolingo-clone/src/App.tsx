@@ -11,12 +11,12 @@ function App() {
         <LearnHeader/>
 
         <div className='px-4 w-full'>
-          <div className='w-full h-20 flex bg-duoGreen rounded-2xl'>
+          <div className='w-full h-20 flex bg-duoGreen rounded-2xl shadow-duoShadow'>
             <div className='w-5/6 h-full px-4 pb-3 flex flex-col'>
-              <div className='mt-3'>
+              <div className='mt-3 text-duoSubText'>
                 <p>SECTION 3, UNIT 1</p>
               </div>
-              <div>
+              <div className='text-white text-xl'>
                 <p>Discuss a new job</p>
               </div>
             </div>
