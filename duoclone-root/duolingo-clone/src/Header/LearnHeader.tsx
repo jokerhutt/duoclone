@@ -6,7 +6,7 @@ import { StreakIcon } from "../UI/Icons/StreakIcon";
 export function LearnHeader () {
 
     return(
-                <nav className='w-full flex justify-between items-center h-14 px-2'>
+                <nav className='w-full absolute bg-duoBackground flex justify-between z-10 items-center h-14 px-2'>
                   <LanguageFlag/>
                   <StreakIcon/>
                   <GemsIcon/>
