@@ -27,6 +27,14 @@ function App() {
             </div>
 
           </button>
+        </div>
+
+        <div className='w-full flex mt-20 h-full justify-center'>
+          <button className='h-14 flex items-center justify-center w-16 active:translate-y-[8px] active:shadow-none bg-duoGreen shadow-duoCircleShadow rounded-full'>
+          <div className='flex items-center justify-center w-16 rounded-full'>
+            <img src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/bfa591f6854b4de08e1656b3e8ca084f.svg"/>
+          </div>
+          </button>
 
         </div>
 

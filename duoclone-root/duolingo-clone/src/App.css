@@ -14,7 +14,8 @@
     --color-duoSubText: #d0f0c1;
     --font-din: DIN;
 
-    --shadow-duoShadow: 0 5px 0 #59a700
+    --shadow-duoShadow: 0 5px 0 #59a700;
+    --shadow-duoCircleShadow: 0 8px 0 #59a700;
 
 
 }
