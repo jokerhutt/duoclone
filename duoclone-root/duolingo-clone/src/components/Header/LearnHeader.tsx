@@ -1,7 +1,8 @@
-import { GemsIcon } from "../UI/Icons/GemsIcon";
-import { HeartIcon } from "../UI/Icons/HeartIcon";
-import { LanguageFlag } from "../UI/Icons/LanguageFlag";
-import { StreakIcon } from "../UI/Icons/StreakIcon";
+import { GemsIcon } from "../Icons/GemsIcon";
+import { HeartIcon } from "../Icons/HeartIcon";
+import { LanguageFlag } from "../Icons/LanguageFlag";
+import { StreakIcon } from "../Icons/StreakIcon";
+
 
 export function LearnHeader () {
 
