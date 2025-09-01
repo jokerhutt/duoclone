@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { RectangleButton } from "../../../components/atoms/Button/RectangleButton";
+import { GET_LESSONS } from "../../../util/paths";
 
 export function SectionHeader({ currentUnit }: { currentUnit: string }) {
+
   const color =
     currentUnit == "Discuss a new Job"
       ? "bg-duoGreen shadow-duoGreenShadow"

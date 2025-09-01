@@ -3,54 +3,24 @@ import { LearnHeader } from "../../../components/Header/LearnHeader";
 import { SectionHeader } from "../organisms/SectionHeader";
 import { UnitPath } from "../../Unit/UnitPath";
 import { useUnitObserver } from "../../../util/UnitObserver";
-import { mockUnits } from "../../../Types/UnitType";
-import { GET_UNIT_IDS } from "../../../util/paths";
+import { mockUnits, type UnitType } from "../../../Types/UnitType";
+import { GET_UNIT_IDS, GET_UNITS_FROM_IDS } from "../../../util/paths";
+import { parseIdsToRequestParam } from "../../../util/pathParsers";
 
 const currentUnit = "";
 
 export function SectionPage() {
-  const unitNames: string[] = [
-    "Discuss a new Job",
-    "Talk about your Habits",
-    "Pack for a Vacation",
-  ];
 
-  const lessons: string[] = [
-    "Lesson",
-    "Lesson",
-    "Exercise",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-  ];
-  const lessonsTwo: string[] = [
-    "Lesson",
-    "Lesson",
-    "Exercise",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-  ];
-  const lessonsThree: string[] = [
-    "Lesson",
-    "Lesson",
-    "Exercise",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-    "Lesson",
-  ];
 
-  const allLessons = [lessons, lessonsTwo, lessonsThree];
+  const [units, setUnits] = useState<UnitType[]>([]);
 
-  const [currentUnit, setCurrentUnit] = useState(unitNames[0]);
+  const [currentUnit, setCurrentUnit] = useState("");
+
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
 
-  useUnitObserver(unitRefs, unitNames, setCurrentUnit);
+  useUnitObserver(unitRefs, units.map((unit) => unit.title), setCurrentUnit);
 
-  const [unitIds, setUnitIds] = useState([]);
+  const [unitIds, setUnitIds] = useState<number[]>([]);
 
   useEffect(() => {
     fetch(GET_UNIT_IDS(1))
@@ -61,12 +31,27 @@ export function SectionPage() {
       });
   }, []);
 
+  useEffect(() => {
+    if (!(unitIds.length > 0)) return;
+    console.log("Fetching");
+    const ids = parseIdsToRequestParam("unitIds", unitIds);
+    fetch(GET_UNITS_FROM_IDS(ids))
+      .then((res) => res.json())
+      .then((data: UnitType[]) => setUnits(data))
+  }, [unitIds]);
+
+  useEffect(() => {
+    if (units.length > 0 && currentUnit != "") {
+      setCurrentUnit(units[0].title);
+    }
+  }, [units]);
+
   return (
     <>
       <LearnHeader />
       <SectionHeader currentUnit={currentUnit} />
       <div className="w-full h-full overflow-auto">
-        {unitIds.length > 0 && (
+        {unitIds && unitIds.length > 0 && units && units.length > 0 && (
           <>
             {unitIds.map((id, index) => (
               <div

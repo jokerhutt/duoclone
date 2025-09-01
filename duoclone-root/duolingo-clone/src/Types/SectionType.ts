@@ -1,10 +1,8 @@
 export type SectionType = {
 
     id: number;
-    position: number;
+    orderIndex: number;
+    title: string;
+    courseId: number;
 
 }
-
-export const mockSections: SectionType[] = [
-    {id: 3, position: 3}
-]

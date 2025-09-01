@@ -8,7 +8,7 @@ export const API_PATH = API_URL + API_PORT + API_PREFIX
 export const GET_LESSONS = (unitId: number) => API_PATH + `/units/${unitId}/lessons`;
 
 //RETURN IDS AS ARRAY, USE FOR PARENTS
-export const GET_UNIT_IDS = (sectionId: number) => API_PATH + `/courses/${sectionId}/units/ids`
+export const GET_UNIT_IDS = (sectionId: number) => API_PATH + `/sections/${sectionId}/units/ids`
 export const GET_LESSON_IDS = (unitId: number) => API_PATH + `/units/${unitId}/lessons/ids`
 
 
