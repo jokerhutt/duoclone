@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import { LearnHeader } from "./components/Header/LearnHeader";
-import { SectionHeader } from "./components/Unit/SectionHeader";
-import { UnitPath } from "./components/Unit/UnitPath";
-import { useUnitObserver } from "./util/UnitObserver";
 import { LessonsPage } from "./pages/LessonsPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Lesson } from "./Lesson/Lesson";
 
 function App() {
 
   return (
-    <>
+    <Router>
       <div className="w-dvw h-dvh flex flex-col overflow-auto bg-duoBackground">
-        <LessonsPage/>
+        <Routes>
+          <Route path="" element={<LessonsPage/>}/>
+          <Route path="lesson" element={<Lesson/>}/>
+        </Routes>
       </div>
-    </>
+      </Router>
   );
 }
 

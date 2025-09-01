@@ -19,7 +19,7 @@ export function UnitPath ({lessons, index, unitName}: UnitPathProps) {
     <div className="flex flex-col w-full items-center mt-20 mb-20 space-y-6 relative">
         {lessons.map((lesson, idx) => (
           <div className="w-auto py-2" key={idx}>
-            <LessonButton idx={idx} lessonType={lessons} courseIndex={index} inverted={shouldInvert}/>
+            <LessonButton  idx={idx} lessonType={lessons} courseIndex={index} inverted={shouldInvert}/>
           </div>
         ))}
     </div>

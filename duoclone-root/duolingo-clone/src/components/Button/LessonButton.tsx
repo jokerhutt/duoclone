@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router";
+
 type LessonButtonProps = {
   idx: number
   lessonType: string[]
@@ -6,6 +8,8 @@ type LessonButtonProps = {
 }
 
 export function LessonButton({ idx, lessonType, inverted, courseIndex }: LessonButtonProps) {
+
+const navigate = useNavigate();
 
 const offsets = inverted ? [
     'ml-0',
@@ -41,7 +45,8 @@ const lessonImage : string = lessonType[idx] == "Lesson" ? "https://d35aaqx5ub95
     "bg-duoBlue shadow-duoBlueCircleShadow"
 
   return (
-        <button
+      <button
+      onClick={() => navigate("/lesson")}
         className={`h-14 w-16 rounded-full ${buttonColor}  active:translate-y-[5px] active:shadow-none flex items-center justify-center
         ${offsets[idx]}
         `}

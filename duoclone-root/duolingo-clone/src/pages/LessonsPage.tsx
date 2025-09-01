@@ -4,6 +4,10 @@ import { SectionHeader } from "../components/Unit/SectionHeader";
 import { UnitPath } from "../components/Unit/UnitPath";
 import { useUnitObserver } from "../util/UnitObserver";
 
+const currentUnit = ""
+
+
+
 export function LessonsPage() {
   const unitNames: string[] = [
     "Discuss a new Job",
@@ -43,6 +47,7 @@ export function LessonsPage() {
 
   const [currentUnit, setCurrentUnit] = useState(unitNames[0]);
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
+
 
   useUnitObserver(unitRefs, unitNames, setCurrentUnit);
 
