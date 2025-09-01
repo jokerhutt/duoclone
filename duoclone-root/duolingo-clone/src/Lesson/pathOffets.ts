@@ -28,4 +28,4 @@ const rightOffsets = [
 
 const shouldInvert = (index: number) => index % 2 == 0
 
-export const getOffsset = (index: number) => shouldInvert(index) ? leftOffsets[index] : rightOffsets[index]
+export const getOffset = (index: number, idx: number) => shouldInvert(index) ? leftOffsets[idx] : rightOffsets[idx]
