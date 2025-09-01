@@ -1,3 +1,5 @@
+import { RectangleButton } from "../atoms/RectangleButton"
+
 export function SectionHeader({ currentUnit }: { currentUnit: string }) {
 
 const color = 
@@ -11,8 +13,7 @@ currentUnit == "Pack for a Vacation" ? 3
 : 2
 
   return (
-    <div className="px-4 w-full sticky top-16 z-20">
-      <button className={`w-full h-20 active:translate-y-[5px] active:shadow-none shadow-duoShadow ${color} rounded-2xl`}>
+      <RectangleButton color={color}>
         <div className="flex rounded-2xl h-20 w-full">
           <div className="w-5/6 h-full px-4 pb-3 flex flex-col">
             <div className="mt-3 text-duoSubText">
@@ -29,7 +30,6 @@ currentUnit == "Pack for a Vacation" ? 3
             />
           </div>
         </div>
-      </button>
-    </div>
+</RectangleButton>
   );
 }
