@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { RectangleButton } from "../../../components/atoms/Button/RectangleButton";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
+import { OptionsList } from "./OptionsList";
 
 type ExerciseComponentProps = {
   exercise: Exercise;
+  selectedOption: ExerciseOption | null;
+  setSelectedOption: (option: ExerciseOption | null) => void;
+  isSelectedOption: (option: ExerciseOption) => boolean;
 };
 
-export function ExerciseComponent({ exercise }: ExerciseComponentProps) {
+export function ExerciseComponent({ exercise, selectedOption, setSelectedOption, isSelectedOption }: ExerciseComponentProps) {
   console.log(JSON.stringify("EXERCISE IS: " + JSON.stringify(exercise)));
 
   const title =
@@ -16,20 +20,10 @@ export function ExerciseComponent({ exercise }: ExerciseComponentProps) {
   const img =
     "https://d2pur3iezf4d1j.cloudfront.net/images/d109f51da8daee5c45d3f068fa1966e7";
 
-  const [selectedOption, setSelectedOption] = useState<ExerciseOption | null>(
-    null
-  );
 
-  const isSelectedOption = (option: ExerciseOption) => {
-    if (selectedOption != null && selectedOption.id == option.id) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   return (
-    <div className="w-full h-full px-3 gap-6 flex flex-col">
+    <div className="w-full h-full px-2 gap-6 flex flex-col">
       <h1 className="text-white text-2xl">{title}</h1>
       <div className="w-full h-full flex flex-col gap-12">
         <div className="w-full flex justify-center h-36">
@@ -42,7 +36,7 @@ export function ExerciseComponent({ exercise }: ExerciseComponentProps) {
             );
 
             return (
-              <span key={idx}>
+              <span key={idx} className="font-light">
                 {part}
                 {idx < arr.length - 1 && (
                   <span
@@ -60,7 +54,7 @@ export function ExerciseComponent({ exercise }: ExerciseComponentProps) {
                           onClick={() => setSelectedOption(null)}
                           className="border text-white shadow-duoGrayBorderShadow border-duoGrayBorder rounded-2xl"
                         >
-                          <p className="px-3 py-3">{selectedOption.content}</p>
+                          <p className="px-3 py-2">{selectedOption.content}</p>
                         </button>
                       </span>
                     )}
@@ -71,23 +65,14 @@ export function ExerciseComponent({ exercise }: ExerciseComponentProps) {
           })}
         </p>
         <div className="w-full h-full flex items-center justify-center">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {exercise.options.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => setSelectedOption(option)}
-                className={`active:translate-y-[5px] active:shadow-none border ${
-                  isSelectedOption(option)
-                    ? "bg-duoGrayBorder text-duoGrayBorder"
-                    : "text-white"
-                } shadow-duoGrayBorderShadow border-duoGrayBorder rounded-2xl`}
-              >
-                <p className="px-3 py-3">{option.content}</p>
-              </button>
-            ))}
-          </div>
+          <OptionsList
+            exercise={exercise}
+            isSelectedOption={isSelectedOption}
+            setSelectedOption={setSelectedOption}
+          />
         </div>
       </div>
-    </div>
+        
+      </div>
   );
 }
