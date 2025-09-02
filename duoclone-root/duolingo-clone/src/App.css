@@ -2,14 +2,23 @@
 
 @font-face {
   font-family: 'DIN';
+  src: url("/fonts/DIN Next Rounded LT W04 Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN';
   src: url("/fonts/DIN Next Rounded LT W04 Bold.woff") format("woff");
-    font-weight: normal;
+  font-weight: 700; 
   font-style: normal;
 }
 
 @theme {
 
     --color-duoGrayText: #52656d;
+
+    --color-duoGrayButtonText: #53656d;
 
     --color-duoBackground: #141f24;
     --color-duoGreen: #58cc04;
@@ -56,4 +65,5 @@ html, body {
   width: 100dvw;
   overscroll-behavior: contain;
   font-family: DIN;
+  font-weight: 700;
 }
