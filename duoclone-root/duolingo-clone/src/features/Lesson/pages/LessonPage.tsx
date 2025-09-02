@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_EXERCISES_BY_LESSON_ID } from "../../../util/paths";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { ExerciseComponent } from "../molecules/ExerciseComponent";
@@ -18,6 +18,8 @@ export function LessonPage() {
     null
   );
 
+  const navigate = useNavigate();
+
   const checkButtonStyle = selectedOption
     ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
     : "bg-duoGrayBorder";
@@ -34,6 +36,22 @@ export function LessonPage() {
         setExercises(data);
       });
   }, [lessonId]);
+
+  const goToNextExercise = () => {
+    console.log("POS: " + position + " EXERCISES LEN: " + exercises?.length);
+    if (selectedOption && position && exercises) {
+      if (Number(position) < exercises.length - 1) {
+        const next = Number(position) + 1;
+
+        setSelectedOption(null);
+        navigate(`/lessons/${lessonId}/${next}`);
+      } else if (Number(position) == exercises.length - 1) {
+        setSelectedOption(null);
+        navigate("/");
+      }
+    }
+  };
+
   if (!lessonId || !position || !exercises || exercises.length < 1)
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -61,8 +79,14 @@ export function LessonPage() {
       <div
         className={`w-full rounded-2xl h-14 justify-center items-center ${checkButtonStyle} flex text-xl`}
       >
-        <p className="text-duoGrayButtonText">Check</p>
+        <p
+          className="text-duoGrayButtonText"
+          onClick={() => goToNextExercise()}
+        >
+          Check
+        </p>
       </div>
     </div>
   );
 }
+("");
