@@ -16,6 +16,7 @@
     --color-duoBlue: #4bb0f6;
     --color-duoBlueShadow: #4099d6;
     --color-duoGreenShadow: #59a700;
+    --color-duoGrayBorder: #37464f;
     --color-duoSubText: #d0f0c1;
     --font-din: DIN;
     --color-duoPink: #f886d0;
@@ -28,6 +29,7 @@
     --shadow-duoPinkCircleShadow: 0 8px #cc6ba7;
     --shadow-duoBlueShadow: 0 5px 0 #4099d6;
     --shadow-duoBlueCircleShadow: 0 8px #4099d6;
+    --shadow-duoGrayBorderShadow: 0 3px #37464f;
 
 
 }

@@ -45,7 +45,7 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
     <CircleButton
       icon={lessonImage}
       mainColor={buttonColor}
-      onClick={() => navigate("/lessons/" + idx)}
+      onClick={() => navigate("/lessons/" + id + "/" + 0)}
       offset={getOffset(courseIndex, idx)}
     />
   );
