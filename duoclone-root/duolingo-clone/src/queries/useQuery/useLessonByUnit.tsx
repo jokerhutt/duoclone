@@ -1,0 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
+import { qk } from "../queryKeys";
+import type { UnitType } from "../../Types/UnitType";
+import { GET_LESSONS_BY_UNIT, GET_UNITS_BY_SECTION } from "../../util/paths";
+import type { LessonType } from "../../Types/LessonType";
+
+export async function fetchLessonsByUnit(unitId: number): Promise<LessonType[]> {
+  const res = await fetch(GET_LESSONS_BY_UNIT(unitId));
+  if (!res.ok) throw new Error("Failed to fetch units");
+  return (await res.json()) as LessonType[];
+}
+
+export function useLessonsByUnit(id: number) {
+  return useQuery({
+    queryKey: qk.lessonsByUnit(id),
+    queryFn: () => fetchLessonsByUnit(id),
+  });
+}

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  GET_EXERCISES_BY_LESSON_ID,
-  SUBMIT_ATTEMPT,
-} from "../../../util/paths";
+import { GET_EXERCISES_BY_LESSON, SUBMIT_ATTEMPT } from "../../../util/paths";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { ExerciseComponent } from "../molecules/ExerciseComponent";
 import { Header } from "../../../components/Header/Header";
@@ -33,7 +30,7 @@ export function LessonPage() {
   };
   useEffect(() => {
     if (!lessonId) return;
-    fetch(GET_EXERCISES_BY_LESSON_ID(Number(lessonId)))
+    fetch(GET_EXERCISES_BY_LESSON(Number(lessonId)))
       .then((res) => res.json())
       .then((data) => {
         console.log("DATA: " + JSON.stringify(data));

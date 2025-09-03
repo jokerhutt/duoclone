@@ -1,0 +1,45 @@
+import { QueryClient } from "@tanstack/react-query";
+import type { SectionTreeNode } from "../Types/SectionTree/SectionTreeNodeTypes";
+import { GET_BULK_TREE } from "./paths";
+import { qk } from "./qk";
+
+export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
+  const tree = await fetchSectionTree(id);
+
+  //SET SECTION TREE QUERY
+  qc.setQueryData(qk.section(id), tree.section);
+
+  //SET UNIT TREE QUERY
+  const units = tree.units
+    .map((unitNode) => unitNode.unit)
+    .sort((a, b) => a.position - b.position);
+  qc.setQueryData(qk.unitsBySection(id), units);
+
+  for (const unitNode of tree.units) {
+    //SET INDIVIDUAL UNIT QUERY
+    qc.setQueryData(qk.unit(unitNode.unit.id), unitNode.unit);
+
+    const lessons = [...unitNode.lessons].sort(
+      (a, b) => a.orderIndex - b.orderIndex
+    );
+
+    //SET LESSON TREE QUERY
+    qc.setQueryData(qk.lessonsByUnit(unitNode.unit.id), lessons);
+
+    for (const lesson of lessons) {
+      //SET INDIVIDUAL LESSON QUERY
+      qc.setQueryData(qk.lesson(lesson.id), lesson);
+    }
+  }
+
+  //REMOVE UNUSED BULK TREE
+  qc.removeQueries({ queryKey: qk.sectionTree(id) });
+}
+
+export async function fetchSectionTree(
+  sectionId: number
+): Promise<SectionTreeNode> {
+  const res = await fetch(GET_BULK_TREE(sectionId));
+  if (!res.ok) throw new Error(`Failed to fetch sectionTree for ${sectionId}`);
+  return (await res.json()) as SectionTreeNode;
+}
