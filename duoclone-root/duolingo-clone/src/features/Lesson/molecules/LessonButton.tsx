@@ -5,6 +5,7 @@ import {type  LessonType, type TypeOfLesson } from "../../../Types/LessonType";
 import { useEffect, useState } from "react";
 import { parseIdsToRequestParam } from "../../../util/pathParsers";
 import { GET_LESSONS_FROM_IDS } from "../../../util/paths";
+import { useLesson } from "../../../queries/useQuery/useLesson";
 
 type LessonButtonProps = {
   idx: number;
@@ -15,17 +16,15 @@ type LessonButtonProps = {
 export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
   const navigate = useNavigate();
 
-  const [lesson, setLesson] = useState<LessonType>()
+  const { data: lesson, isLoading: lessonLoading } = useLesson(id);
 
-  useEffect(() => {
-    console.log("Fetching");
-    const ids = parseIdsToRequestParam("lessonIds", [id]);
-    fetch(GET_LESSONS_FROM_IDS(ids))
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("RES FOR LESSON DATA: " + JSON.stringify(data))
-        setLesson(data[0])});
-  }, [id]);
+    if (lessonLoading) {
+    return (
+      <div className="flex justify-center items-center py-4">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   const lessonImage: string =
     lesson && lesson.lessonType == "Lesson"

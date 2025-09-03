@@ -4,11 +4,7 @@ export type LessonType = {
     unitId: number;
     lessonType: TypeOfLesson;
     orderIndex: number;
+    title: string;
 }
 
 export type TypeOfLesson = "Lesson" | "Exercise"
-
-
-const units = [
-
-]

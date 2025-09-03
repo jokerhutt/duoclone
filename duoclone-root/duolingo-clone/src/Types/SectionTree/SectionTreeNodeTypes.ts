@@ -4,10 +4,10 @@ import type { UnitType } from "../UnitType"
 
 export type SectionTreeNode = {
     section: SectionType,
-    units: UnitTreeNodes[]
+    units: UnitTreeNode[]
 }
 
-export type UnitTreeNodes = {
+export type UnitTreeNode = {
     unit: UnitType;
     lessons: LessonType[]
 }

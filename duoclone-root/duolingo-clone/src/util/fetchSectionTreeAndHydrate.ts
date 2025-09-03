@@ -9,10 +9,12 @@ export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
   //SET SECTION TREE QUERY
   qc.setQueryData(qk.section(id), tree.section);
 
+  console.log(JSON.stringify("TREE IS: " + tree));
+
   //SET UNIT TREE QUERY
   const units = tree.units
     .map((unitNode) => unitNode.unit)
-    .sort((a, b) => a.position - b.position);
+    .sort((a, b) => a.orderIndex - b.orderIndex);
   qc.setQueryData(qk.unitsBySection(id), units);
 
   for (const unitNode of tree.units) {
@@ -30,10 +32,12 @@ export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
       //SET INDIVIDUAL LESSON QUERY
       qc.setQueryData(qk.lesson(lesson.id), lesson);
     }
+
+
   }
 
-  //REMOVE UNUSED BULK TREE
-  qc.removeQueries({ queryKey: qk.sectionTree(id) });
+  return true;
+
 }
 
 export async function fetchSectionTree(

@@ -3,68 +3,56 @@ import { LearnHeader } from "../../../components/Header/LearnHeader";
 import { SectionHeader } from "../organisms/SectionHeader";
 import { UnitPath } from "../../Unit/UnitPath";
 import { useUnitObserver } from "../../../util/UnitObserver";
-import { mockUnits, type UnitType } from "../../../Types/UnitType";
 import { GET_UNIT_IDS, GET_UNITS_FROM_IDS } from "../../../util/paths";
 import { parseIdsToRequestParam } from "../../../util/pathParsers";
-
-const currentUnit = "";
+import {
+  useSectionTree,
+  useSectionTreeData,
+} from "../../../queries/useQuery/useSectionTree";
 
 export function SectionPage() {
-
-
-  const [units, setUnits] = useState<UnitType[]>([]);
+  const { isLoading, isError } = useSectionTree(1);
+  const { units } = useSectionTreeData(1);
 
   const [currentUnit, setCurrentUnit] = useState("");
-
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
 
-  useUnitObserver(unitRefs, units.map((unit) => unit.title), setCurrentUnit);
+  useUnitObserver(
+    unitRefs,
+    units ? units.map((u) => u.title) : [],
+    setCurrentUnit
+  );
 
-  const [unitIds, setUnitIds] = useState<number[]>([]);
+  if (isError)
+    return (
+      <div className="w-full h-full flex items-center justify-center text-red-500">
+        Failed to load.
+      </div>
+    );
+  if (isLoading || !units)
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-duoGreen border-t-transparent" />
+      </div>
+    );
 
-  useEffect(() => {
-    fetch(GET_UNIT_IDS(1))
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(JSON.stringify(data));
-        setUnitIds(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (!(unitIds.length > 0)) return;
-    console.log("Fetching");
-    const ids = parseIdsToRequestParam("unitIds", unitIds);
-    fetch(GET_UNITS_FROM_IDS(ids))
-      .then((res) => res.json())
-      .then((data: UnitType[]) => setUnits(data))
-  }, [unitIds]);
-
-  useEffect(() => {
-    if (units.length > 0 && currentUnit != "") {
-      setCurrentUnit(units[0].title);
-    }
-  }, [units]);
+  const headerTitle = currentUnit || units[0]?.title || "";
 
   return (
     <>
       <LearnHeader />
-      <SectionHeader currentUnit={currentUnit} />
+      <SectionHeader currentUnit={headerTitle} />
       <div className="w-full h-full overflow-auto">
-        {unitIds && unitIds.length > 0 && units && units.length > 0 && (
-          <>
-            {unitIds.map((id, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  unitRefs.current[index] = el;
-                }}
-              >
-                <UnitPath id={id} index={index} />
-              </div>
-            ))}
-          </>
-        )}
+        {units.map((unit, index) => (
+          <div
+            key={unit.id}
+            ref={(el) => {
+              unitRefs.current[index] = el;
+            }}
+          >
+            <UnitPath id={unit.id} index={index} />
+          </div>
+        ))}
       </div>
     </>
   );

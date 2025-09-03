@@ -37,8 +37,9 @@ export const GET_SECTIONS_FROM_IDS = (sectionIds: string) =>
 // -------------------------------------------------------- //
 
 export const GET_BULK_TREE = (sectionId: number) =>
-  API_PATH + `/sections/getBulk?${sectionId}`;
+  API_PATH + `/sections/getBulk/${sectionId}`;
 
 // -------------------------------------------------------- //
 
 export const SUBMIT_ATTEMPT = API_PATH + `/exercises/submit`;
+``
