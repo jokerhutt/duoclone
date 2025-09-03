@@ -32,12 +32,9 @@ export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
       //SET INDIVIDUAL LESSON QUERY
       qc.setQueryData(qk.lesson(lesson.id), lesson);
     }
-
-
   }
 
   return true;
-
 }
 
 export async function fetchSectionTree(
