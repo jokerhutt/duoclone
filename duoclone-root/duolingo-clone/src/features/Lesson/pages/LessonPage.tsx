@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { GET_EXERCISES_BY_LESSON_ID } from "../../../util/paths";
+import {
+  GET_EXERCISES_BY_LESSON_ID,
+  SUBMIT_ATTEMPT,
+} from "../../../util/paths";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { ExerciseComponent } from "../molecules/ExerciseComponent";
-import { SectionHeader } from "../../Section/organisms/SectionHeader";
-import { LearnHeader } from "../../../components/Header/LearnHeader";
 import { Header } from "../../../components/Header/Header";
 import { XIcon } from "../../../components/atoms/Icons/XIcon";
 import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
+import type { ExerciseAttemptType } from "../../../Types/ExerciseAttemptType";
+import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
+import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -52,6 +56,89 @@ export function LessonPage() {
     }
   };
 
+  function endLesson() {
+    // placeholder
+    setSelectedOption(null);
+    navigate("/");
+  }
+
+  async function handleAfterSubmit() {
+    if (!exercises || position == null) return;
+    const ok = await submitAnswer();
+    if (!ok) return;
+
+    const idx = Number(position);
+    const isLast = idx >= exercises.length - 1;
+    setSelectedOption(null);
+
+    if (isLast) {
+      await GetLessonComplete();
+      endLesson();
+    } else {
+      navigate(`/lessons/${lessonId}/${idx + 1}`);
+    }
+  }
+
+  async function GetLessonComplete() {
+    const data = {
+      lessonId: lessonId,
+      userId: 1,
+      courseId: 1,
+    };
+
+    try {
+      const response = await fetch(SUBMIT_ATTEMPT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ exerciseAttemptRequest: data }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const result: LessonCompleteType = await response.json();
+      console.log(JSON.stringify(response));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function submitAnswer() {
+    if (!exercises || !selectedOption) return;
+
+    const attempt: ExerciseAttemptType = {
+      exerciseId: exercises[Number(position)].id,
+      optionId: selectedOption.id,
+      userId: 1,
+    };
+
+    try {
+      const response = await fetch(SUBMIT_ATTEMPT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          exerciseId: exercises[Number(position)].id,
+          optionId: selectedOption.id,
+          userId: 1,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const result: ExerciseAttemptResponse = await response.json();
+      if (result.correct) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   if (!lessonId || !position || !exercises || exercises.length < 1)
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -77,14 +164,10 @@ export function LessonPage() {
         />
       </div>
       <div
+        onClick={handleAfterSubmit}
         className={`w-full rounded-2xl h-14 justify-center items-center ${checkButtonStyle} flex text-xl`}
       >
-        <p
-          className="text-duoGrayButtonText"
-          onClick={() => goToNextExercise()}
-        >
-          Check
-        </p>
+        <p className="text-duoGrayButtonText">Check</p>
       </div>
     </div>
   );

@@ -19,3 +19,5 @@ export const GET_LESSONS_FROM_IDS = (lessonIds: string) =>
 
 export const GET_EXERCISES_BY_LESSON_ID = (lessonId: number) =>
   API_PATH + `/lessons/${lessonId}/exercises`;
+
+export const SUBMIT_ATTEMPT = API_PATH + `/exercises/submit`
