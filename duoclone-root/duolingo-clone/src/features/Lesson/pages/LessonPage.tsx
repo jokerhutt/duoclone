@@ -17,7 +17,7 @@ export function LessonPage() {
   const { position } = useParams<{ position: string }>();
 
   const id = Number(lessonId); // convert
-  const { data: exercises, isLoading } = useExercises(id);
+  const { data: exercises, isLoading } = useExercises(id, 1);
 
   const [selectedOption, setSelectedOption] = useState<ExerciseOption | null>(
     null
@@ -53,12 +53,6 @@ export function LessonPage() {
 
   async function submitAnswer() {
     if (!exercises || !selectedOption) return;
-
-    const attempt: ExerciseAttemptType = {
-      exerciseId: exercises[Number(position)].id,
-      optionId: selectedOption.id,
-      userId: 1,
-    };
 
     try {
       const response = await fetch(SUBMIT_ATTEMPT, {
