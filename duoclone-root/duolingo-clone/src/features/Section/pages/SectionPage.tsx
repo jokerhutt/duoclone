@@ -9,10 +9,13 @@ import {
   useSectionTree,
   useSectionTreeData,
 } from "../../../queries/useQuery/useSectionTree";
+import { useCourseProgress } from "../../../queries/useCourseProgress";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
   const { units } = useSectionTreeData(1);
+  const {data: courseProgress, isLoading: loadingProgress} = useCourseProgress(1, 1);
+  
 
   const [currentUnit, setCurrentUnit] = useState("");
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
@@ -29,7 +32,7 @@ export function SectionPage() {
         Failed to load.
       </div>
     );
-  if (isLoading || !units)
+  if (isLoading || !units || !courseProgress)
     return (
       <div className="w-full h-full flex justify-center items-center">
         <div className="h-16 w-16 animate-spin rounded-full border-4 border-duoGreen border-t-transparent" />

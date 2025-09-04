@@ -6,11 +6,8 @@ import { ExerciseComponent } from "../molecules/ExerciseComponent";
 import { Header } from "../../../components/Header/Header";
 import { XIcon } from "../../../components/atoms/Icons/XIcon";
 import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
-import type { ExerciseAttemptType } from "../../../Types/ExerciseAttemptType";
 import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
-import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
 import { useExercises } from "../../../queries/useQuery/useExercises";
-import { checkButtonStyle } from "../../../util/lessonUtils";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -80,12 +77,14 @@ export function LessonPage() {
     }
   }
 
-  if (!lessonId || !position || !exercises || exercises.length < 1)
+  if (isLoading || !exercises) {
     return (
       <div className="w-full h-full flex justify-center items-center">
         <div className="h-16 w-16 animate-spin rounded-full border-4 border-duoGreen border-t-transparent"></div>
       </div>
     );
+  }
+
 
   return (
     <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">

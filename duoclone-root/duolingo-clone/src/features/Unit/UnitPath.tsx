@@ -10,7 +10,7 @@ type UnitPathProps = {
 
 export function UnitPath({ id, index }: UnitPathProps) {
   const { data: unit, isLoading: unitLoading } = useUnit(id);
-  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(id);
+  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(id, 1);
 
   if (unitLoading || lessonsLoading) {
     return (

@@ -3,10 +3,11 @@ import { GET_LESSONS_FROM_IDS } from "../../util/paths";
 import type { LessonType } from "../../Types/LessonType";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
 
+//TODO MAKE USER ID A PARAM
 export const lessonBatcher = create<LessonType, number>({
   fetcher: async (ids: number[]) => {
     const res = await fetch(
-      GET_LESSONS_FROM_IDS(parseIdsToRequestParam("lessonIds", ids))
+      GET_LESSONS_FROM_IDS(parseIdsToRequestParam("lessonIds", ids), 1)
     );
     if (!res.ok) throw new Error("Failed to fetch lessons");
     return await res.json();
