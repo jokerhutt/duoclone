@@ -9,6 +9,12 @@ import {
 } from "../../../queries/useQuery/useSectionTree";
 import { useCourseProgress } from "../../../queries/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
+import { Footer } from "../../../components/atoms/Footer/Footer";
+import { UserHomeIcon } from "../../../components/atoms/Icons/UserHomeIcon";
+import { UserPracticeIcon } from "../../../components/atoms/Icons/UserPracticeIcon";
+import { UserLeagueIcon } from "../../../components/atoms/Icons/UserLeagueIcon";
+import { UserChestQuestsIcon } from "../../../components/atoms/Icons/UserChestQuestsIcon";
+import { UserFooterIcon } from "../../../components/atoms/Icons/UserFooterIcon";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -53,6 +59,15 @@ export function SectionPage() {
           </div>
         ))}
       </div>
+      <Footer padding="px-6" height="h-20 border-t border-t-duoGrayBorder">
+        <div className="w-full flex items-center justify-between">
+          <UserHomeIcon/>
+          <UserPracticeIcon/>
+          <UserLeagueIcon/>
+          <UserChestQuestsIcon/>
+          <UserFooterIcon/>
+        </div>
+      </Footer>
     </>
   );
 }

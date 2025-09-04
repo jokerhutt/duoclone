@@ -24,16 +24,16 @@ export function LessonCompletePage() {
 
   const navigate = useNavigate();
 
-  // After animation finishes, restart from a chosen frame range
+
   const handleComplete = () => {
     if (!lottieRef.current) return;
 
     const totalFrames = lottieRef.current.getDuration(true);
-    if (!totalFrames) return; // guard against undefined
+    if (!totalFrames) return;
 
     console.log(totalFrames);
 
-    const loopStart = totalFrames - 4; // last 30 frames
+    const loopStart = totalFrames - 4;
     lottieRef.current.playSegments([loopStart, totalFrames], true);
   };
 
@@ -57,7 +57,6 @@ export function LessonCompletePage() {
     },
   });
 
-  // fire it once when component mounts
   useEffect(() => {
     if (lessonId) lessonCompleteMutation.mutate();
   }, [lessonId]);
