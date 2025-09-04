@@ -8,6 +8,7 @@ import { XIcon } from "../../../components/atoms/Icons/XIcon";
 import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
 import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
 import { useExercises } from "../../../queries/useQuery/useExercises";
+import { SpinnerPage } from "../../Section/pages/SpinnerPage";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -79,9 +80,7 @@ export function LessonPage() {
 
   if (isLoading || !exercises) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-duoGreen border-t-transparent"></div>
-      </div>
+      <SpinnerPage/>
     );
   }
 

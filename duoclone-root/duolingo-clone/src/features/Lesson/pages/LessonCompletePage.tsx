@@ -1,17 +1,20 @@
 import { useNavigate, useParams } from "react-router";
 import Lottie, { type LottieRefCurrentProps } from "lottie-react";
 
-import { API_PATH, SUBMIT_ATTEMPT } from "../../../util/paths";
+import { API_PATH } from "../../../util/paths";
 import { useEffect, useRef, useState } from "react";
 import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { qk } from "../../../queries/queryKeys";
+import { SpinnerPage } from "../../Section/pages/SpinnerPage";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
   const queryClient = useQueryClient();
+
+  
 
   useEffect(() => {
     fetch("/lottie-animations/lessonEnd/EL_LUCY_DUO.json")
@@ -59,7 +62,7 @@ export function LessonCompletePage() {
     if (lessonId) lessonCompleteMutation.mutate();
   }, [lessonId]);
 
-  if (lessonCompleteMutation.isPending) return <p>Loading...</p>;
+  if (lessonCompleteMutation.isPending) return <SpinnerPage/>;
   if (lessonCompleteMutation.isError)
     return <p>Error: {lessonCompleteMutation.error.message}</p>;
 
@@ -69,7 +72,7 @@ export function LessonCompletePage() {
         <Lottie
           lottieRef={lottieRef}
           animationData={animationData}
-          loop={false} // let it play once first
+          loop={false}
           autoplay
           onComplete={handleComplete}
           className="w-100 h-100"

@@ -1,15 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { LearnHeader } from "../../../components/Header/LearnHeader";
 import { SectionHeader } from "../organisms/SectionHeader";
 import { UnitPath } from "../../Unit/UnitPath";
 import { useUnitObserver } from "../../../util/UnitObserver";
-import { GET_UNIT_IDS, GET_UNITS_FROM_IDS } from "../../../util/paths";
-import { parseIdsToRequestParam } from "../../../util/pathParsers";
 import {
   useSectionTree,
   useSectionTreeData,
 } from "../../../queries/useQuery/useSectionTree";
 import { useCourseProgress } from "../../../queries/useCourseProgress";
+import { SpinnerPage } from "./SpinnerPage";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -28,15 +27,12 @@ export function SectionPage() {
 
   if (isError)
     return (
-      <div className="w-full h-full flex items-center justify-center text-red-500">
-        Failed to load.
-      </div>
+      <SpinnerPage color="border-red-400"/>
+
     );
   if (isLoading || !units || !courseProgress)
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-duoGreen border-t-transparent" />
-      </div>
+      <SpinnerPage/>
     );
 
   const headerTitle = currentUnit || units[0]?.title || "";
