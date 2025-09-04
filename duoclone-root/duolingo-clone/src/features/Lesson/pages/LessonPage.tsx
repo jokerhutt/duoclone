@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { GET_EXERCISES_BY_LESSON, SUBMIT_ATTEMPT } from "../../../util/paths";
-import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
+import { SUBMIT_ATTEMPT } from "../../../util/paths";
+import type { ExerciseOption } from "../../../Types/ExerciseType";
 import { ExerciseComponent } from "../molecules/ExerciseComponent";
 import { Header } from "../../../components/Header/Header";
 import { XIcon } from "../../../components/atoms/Icons/XIcon";
@@ -9,57 +9,31 @@ import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
 import type { ExerciseAttemptType } from "../../../Types/ExerciseAttemptType";
 import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
 import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
+import { useExercises } from "../../../queries/useQuery/useExercises";
+import { checkButtonStyle } from "../../../util/lessonUtils";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
 
-  const [exercises, setExercises] = useState<Exercise[]>();
+  const id = Number(lessonId); // convert
+  const { data: exercises, isLoading } = useExercises(id);
+
   const [selectedOption, setSelectedOption] = useState<ExerciseOption | null>(
     null
   );
 
   const navigate = useNavigate();
 
-  const checkButtonStyle = selectedOption
-    ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
-    : "bg-duoGrayBorder";
-
   const isSelectedOption = (option: ExerciseOption) => {
     return selectedOption != null && selectedOption.id == option.id;
   };
-  useEffect(() => {
-    if (!lessonId) return;
-    fetch(GET_EXERCISES_BY_LESSON(Number(lessonId)))
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("DATA: " + JSON.stringify(data));
-        setExercises(data);
-      });
-  }, [lessonId]);
-
-  const goToNextExercise = () => {
-    console.log("POS: " + position + " EXERCISES LEN: " + exercises?.length);
-    if (selectedOption && position && exercises) {
-      if (Number(position) < exercises.length - 1) {
-        const next = Number(position) + 1;
-
-        setSelectedOption(null);
-        navigate(`/lessons/${lessonId}/${next}`);
-      } else if (Number(position) == exercises.length - 1) {
-        setSelectedOption(null);
-        navigate("/");
-      }
-    }
-  };
 
   function endLesson() {
-    // placeholder
-    setSelectedOption(null);
-    navigate("/");
+     navigate(`/lessons/${lessonId}/complete`);
   }
 
-  async function handleAfterSubmit() {
+  async function submitAttempt() {
     if (!exercises || position == null) return;
     const ok = await submitAnswer();
     if (!ok) return;
@@ -69,37 +43,13 @@ export function LessonPage() {
     setSelectedOption(null);
 
     if (isLast) {
-      await GetLessonComplete();
       endLesson();
     } else {
       navigate(`/lessons/${lessonId}/${idx + 1}`);
     }
   }
 
-  async function GetLessonComplete() {
-    const data = {
-      lessonId: lessonId,
-      userId: 1,
-      courseId: 1,
-    };
 
-    try {
-      const response = await fetch(SUBMIT_ATTEMPT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ exerciseAttemptRequest: data }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
-      const result: LessonCompleteType = await response.json();
-      console.log(JSON.stringify(response));
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   async function submitAnswer() {
     if (!exercises || !selectedOption) return;
@@ -161,8 +111,10 @@ export function LessonPage() {
         />
       </div>
       <div
-        onClick={handleAfterSubmit}
-        className={`w-full rounded-2xl h-14 justify-center items-center ${checkButtonStyle} flex text-xl`}
+        onClick={submitAttempt}
+        className={`w-full rounded-2xl h-14 justify-center items-center ${  selectedOption
+    ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
+    : "bg-duoGrayBorder"} flex text-xl`}
       >
         <p className="text-duoGrayButtonText">Check</p>
       </div>

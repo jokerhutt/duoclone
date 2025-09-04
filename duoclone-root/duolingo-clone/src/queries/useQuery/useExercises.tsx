@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { qk } from "../queryKeys";
 import type { Exercise } from "../../Types/ExerciseType";
 import { GET_EXERCISES_BY_LESSON } from "../../util/paths";
-import { fetchLessonsByUnit } from "./useLessonByUnit";
 
 export function useExercises(lessonId: number) {
   return useQuery({
