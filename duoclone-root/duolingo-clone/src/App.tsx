@@ -1,7 +1,6 @@
 import "./App.css";
 import { SectionPage } from "./features/Section/pages/SectionPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Lesson } from "./Lesson/Lesson";
 import { LessonPage } from "./features/Lesson/pages/LessonPage";
 import { LessonCompletePage } from "./features/Lesson/pages/LessonCompletePage";
 

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { RectangleButton } from "../../../components/atoms/Button/RectangleButton";
-import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
+import { RectangleButton } from "../../components/atoms/Button/RectangleButton";
+import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
 import { OptionsList } from "./OptionsList";
+
 
 type ExerciseComponentProps = {
   exercise: Exercise;
@@ -10,7 +11,12 @@ type ExerciseComponentProps = {
   isSelectedOption: (option: ExerciseOption) => boolean;
 };
 
-export function ExerciseComponent({ exercise, selectedOption, setSelectedOption, isSelectedOption }: ExerciseComponentProps) {
+export function ExerciseComponent({
+  exercise,
+  selectedOption,
+  setSelectedOption,
+  isSelectedOption,
+}: ExerciseComponentProps) {
   console.log(JSON.stringify("EXERCISE IS: " + JSON.stringify(exercise)));
 
   const title =
@@ -19,8 +25,6 @@ export function ExerciseComponent({ exercise, selectedOption, setSelectedOption,
       : "Select the correct translation";
   const img =
     "https://d2pur3iezf4d1j.cloudfront.net/images/d109f51da8daee5c45d3f068fa1966e7";
-
-
 
   return (
     <div className="w-full h-full px-2 gap-6 flex flex-col">
@@ -72,7 +76,6 @@ export function ExerciseComponent({ exercise, selectedOption, setSelectedOption,
           />
         </div>
       </div>
-        
-      </div>
+    </div>
   );
 }

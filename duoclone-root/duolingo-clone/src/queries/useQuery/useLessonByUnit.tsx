@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../queryKeys";
+import { qk } from "../types/queryKeys";
 import type { UnitType } from "../../Types/UnitType";
 import { GET_LESSONS_BY_UNIT, GET_UNITS_BY_SECTION } from "../../util/paths";
 import type { LessonType } from "../../Types/LessonType";

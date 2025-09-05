@@ -5,7 +5,7 @@ import { API_PATH } from "../../../util/paths";
 import { useEffect, useRef, useState } from "react";
 import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../../../queries/queryKeys";
+import { qk } from "../../../queries/types/queryKeys";
 import { SpinnerPage } from "../../Section/pages/SpinnerPage";
 
 export function LessonCompletePage() {
@@ -14,8 +14,6 @@ export function LessonCompletePage() {
   const [animationData, setAnimationData] = useState<any>(null);
   const queryClient = useQueryClient();
 
-  
-
   useEffect(() => {
     fetch("/lottie-animations/lessonEnd/EL_LUCY_DUO.json")
       .then((res) => res.json())
@@ -23,7 +21,6 @@ export function LessonCompletePage() {
   }, []);
 
   const navigate = useNavigate();
-
 
   const handleComplete = () => {
     if (!lottieRef.current) return;
@@ -53,7 +50,10 @@ export function LessonCompletePage() {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(qk.lesson(data.lessonId), data.updatedLesson);
-      queryClient.setQueryData(qk.courseProgress(1), data.updatedUserCourseProgress)
+      queryClient.setQueryData(
+        qk.courseProgress(1),
+        data.updatedUserCourseProgress
+      );
     },
   });
 
@@ -61,7 +61,7 @@ export function LessonCompletePage() {
     if (lessonId) lessonCompleteMutation.mutate();
   }, [lessonId]);
 
-  if (lessonCompleteMutation.isPending) return <SpinnerPage/>;
+  if (lessonCompleteMutation.isPending) return <SpinnerPage />;
   if (lessonCompleteMutation.isError)
     return <p>Error: {lessonCompleteMutation.error.message}</p>;
 

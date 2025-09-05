@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SUBMIT_ATTEMPT } from "../../../util/paths";
 import type { ExerciseOption } from "../../../Types/ExerciseType";
-import { ExerciseComponent } from "../molecules/ExerciseComponent";
-import { Header } from "../../../components/Header/Header";
+import { ExerciseComponent } from "../../Exercise/ExerciseComponent";
+import { Header } from "../../Common/Header/Header";
 import { XIcon } from "../../../components/atoms/Icons/XIcon";
 import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
 import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
@@ -28,7 +28,7 @@ export function LessonPage() {
   };
 
   function endLesson() {
-     navigate(`/lessons/${lessonId}/complete`);
+    navigate(`/lessons/${lessonId}/complete`);
   }
 
   async function submitAttempt() {
@@ -46,8 +46,6 @@ export function LessonPage() {
       navigate(`/lessons/${lessonId}/${idx + 1}`);
     }
   }
-
-
 
   async function submitAnswer() {
     if (!exercises || !selectedOption) return;
@@ -79,11 +77,8 @@ export function LessonPage() {
   }
 
   if (isLoading || !exercises) {
-    return (
-      <SpinnerPage/>
-    );
+    return <SpinnerPage />;
   }
-
 
   return (
     <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
@@ -104,9 +99,11 @@ export function LessonPage() {
       </div>
       <div
         onClick={submitAttempt}
-        className={`w-full rounded-2xl h-14 justify-center items-center ${  selectedOption
-    ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
-    : "bg-duoGrayBorder"} flex text-xl`}
+        className={`w-full rounded-2xl h-14 justify-center items-center ${
+          selectedOption
+            ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
+            : "bg-duoGrayBorder"
+        } flex text-xl`}
       >
         <p className="text-duoGrayButtonText">Check</p>
       </div>

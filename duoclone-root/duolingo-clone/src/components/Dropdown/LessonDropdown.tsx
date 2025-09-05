@@ -1,8 +1,5 @@
-import { DropdownMenu } from "radix-ui";
-
 import * as Popover from "@radix-ui/react-popover";
-import { cloneElement, useState } from "react";
-import type { ReactElement } from "react";
+import { useState } from "react";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 type LessonDropdownProps = {
@@ -10,14 +7,14 @@ type LessonDropdownProps = {
   children: React.ReactElement<ButtonProps>;
 };
 
-export default function LessonDropdown({ lessonIndex, children }: LessonDropdownProps) {
+export default function LessonDropdown({
+  lessonIndex,
+  children,
+}: LessonDropdownProps) {
   const [open, setOpen] = useState(false);
-
-
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-
       <Popover.Anchor asChild>{children}</Popover.Anchor>
 
       <Popover.Portal>

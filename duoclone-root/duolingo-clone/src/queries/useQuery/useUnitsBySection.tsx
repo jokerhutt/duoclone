@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../queryKeys";
+import { qk } from "../types/queryKeys";
 import type { UnitType } from "../../Types/UnitType";
 import { GET_UNITS_BY_SECTION } from "../../util/paths";
 
@@ -17,6 +17,6 @@ export function useUnitsBySection(id: number) {
   return useQuery({
     queryKey: qk.unitsBySection(id),
     queryFn: () => fetchUnitsBySection(id),
-       initialData: () => qc.getQueryData(qk.unitsBySection(id)),
+    initialData: () => qc.getQueryData(qk.unitsBySection(id)),
   });
 }

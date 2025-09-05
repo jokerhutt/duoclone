@@ -1,4 +1,5 @@
-import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
+import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
+
 
 type OptionsListProps = {
   exercise: Exercise;
