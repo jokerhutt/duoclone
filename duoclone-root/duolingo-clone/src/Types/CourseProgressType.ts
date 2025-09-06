@@ -3,4 +3,5 @@ export type CourseProgressType = {
   userId: number;
   courseId: number;
   currentLessonId: number;
+  completedLessons: number;
 };
