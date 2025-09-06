@@ -47,7 +47,7 @@ export function SectionPage() {
           </div>
         ))}
       </div>
-      <MainFooter/>
+      <MainFooter />
     </>
   );
 }

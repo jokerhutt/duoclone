@@ -8,8 +8,6 @@ type useLessonCompleteParams = {
 };
 
 export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
-
-
   const queryClient = useQueryClient();
 
   return useMutation<LessonCompleteType>({

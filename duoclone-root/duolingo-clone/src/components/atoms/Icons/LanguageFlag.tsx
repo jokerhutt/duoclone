@@ -1,10 +1,7 @@
-
-export function LanguageFlag () {
-
-    return (
-        <>
-            <img src="/French_flag.webp" className='w-fit h-10'/>
-        </>
-    )
-
+export function LanguageFlag() {
+  return (
+    <>
+      <img src="/French_flag.webp" className="w-fit h-10" />
+    </>
+  );
 }

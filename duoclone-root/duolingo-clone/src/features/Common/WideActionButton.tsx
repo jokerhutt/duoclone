@@ -3,7 +3,7 @@ type WideActionButtonProps = {
   isActive: boolean;
   text: string;
   activeColor?: string;
-  
+
   disabledColor?: string;
   activeTextColor?: string;
   disabledTextColor?: string;
@@ -16,10 +16,9 @@ export function WideActionButton({
   activeColor = "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen",
   disabledColor = "bg-duoGrayBorder",
   activeTextColor = "text-duoGrayButtonText",
-  disabledTextColor = activeTextColor
+  disabledTextColor = activeTextColor,
 }: WideActionButtonProps) {
-
-  const textColor = isActive ? activeTextColor : disabledTextColor
+  const textColor = isActive ? activeTextColor : disabledTextColor;
 
   return (
     <div

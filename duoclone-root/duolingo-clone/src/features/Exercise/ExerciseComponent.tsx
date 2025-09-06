@@ -32,7 +32,11 @@ export function ExerciseComponent({
         <div className="w-full flex justify-center h-36">
           <img src={img} />
         </div>
-        <ExercisePrompt exercise={exercise} selectedOption={selectedOption} setSelectedOption={() => setSelectedOption(null)}/>
+        <ExercisePrompt
+          exercise={exercise}
+          selectedOption={selectedOption}
+          setSelectedOption={() => setSelectedOption(null)}
+        />
         <div className="w-full h-full flex items-center justify-center">
           <OptionsList
             exercise={exercise}

@@ -2,13 +2,15 @@ import { LightningIcon } from "../../components/atoms/Icons/LightningIcon";
 import { ScoreTargetIcon } from "../../components/atoms/Icons/ScoreTargetIcon";
 import { LessonStatsCard } from "./LessonStatsCard";
 
-
 type LessonStatsGroupProps = {
-    totalScore: string | number,
-    correctPercentage: string | number
-}
+  totalScore: string | number;
+  correctPercentage: string | number;
+};
 
-export function LessonStatsGroup({totalScore, correctPercentage} : LessonStatsGroupProps) {
+export function LessonStatsGroup({
+  totalScore,
+  correctPercentage,
+}: LessonStatsGroupProps) {
   return (
     <div className="w-full flex gap-6 justify-center">
       <LessonStatsCard
