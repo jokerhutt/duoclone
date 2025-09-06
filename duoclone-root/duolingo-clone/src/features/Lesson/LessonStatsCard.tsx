@@ -21,10 +21,6 @@ export function LessonStatsCard({
   mainTextColor = "text-duoGreen",
   altTextColor = "text-duoBackground",
 }: LessonStatsCardProps) {
-
-
-
-    
   return (
     <div
       className={`${mainColor} rounded-xl w-40 h-24 items-center flex flex-col p-1`}

@@ -98,7 +98,11 @@ export function LessonPage() {
           isSelectedOption={isSelectedOption}
         />
       </div>
-      <WideActionButton text="Check" onSubmit={() => submitAttempt()} isActive={!!selectedOption}/>
+      <WideActionButton
+        text="Check"
+        onSubmit={() => submitAttempt()}
+        isActive={!!selectedOption}
+      />
     </div>
   );
 }
