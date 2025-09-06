@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { RectangleButton } from "../../components/atoms/Button/RectangleButton";
 import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
+import { SelectionOptionButton } from "./Options/SelectionOptionButton";
 import { OptionsList } from "./OptionsList";
 
 type ExerciseComponentProps = {
@@ -53,12 +52,11 @@ export function ExerciseComponent({
 
                     {selectedOption && (
                       <span className="absolute inset-x-0 bottom-2 flex items-center justify-center z-10 leading-none">
-                        <button
+                        <SelectionOptionButton
+                          text={selectedOption.content}
+                          isSelected={false}
                           onClick={() => setSelectedOption(null)}
-                          className="border text-white shadow-duoGrayBorderShadow border-duoGrayBorder rounded-2xl"
-                        >
-                          <p className="px-3 py-2">{selectedOption.content}</p>
-                        </button>
+                        />
                       </span>
                     )}
                   </span>

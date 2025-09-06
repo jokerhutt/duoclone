@@ -9,12 +9,6 @@ import {
 } from "../../queries/useQuery/useSectionTree";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
-import { Footer } from "../../components/molecules/Footer/Footer";
-import { UserHomeIcon } from "../../components/atoms/Icons/UserHomeIcon";
-import { UserPracticeIcon } from "../../components/atoms/Icons/UserPracticeIcon";
-import { UserLeagueIcon } from "../../components/atoms/Icons/UserLeagueIcon";
-import { UserChestQuestsIcon } from "../../components/atoms/Icons/UserChestQuestsIcon";
-import { UserFooterIcon } from "../../components/atoms/Icons/UserFooterIcon";
 import { MainFooter } from "../Common/MainFooter";
 
 export function SectionPage() {
