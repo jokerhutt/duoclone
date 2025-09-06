@@ -1,12 +1,13 @@
 import { useNavigate, useParams } from "react-router";
 import Lottie, { type LottieRefCurrentProps } from "lottie-react";
 
-import { API_PATH } from "../../../util/paths";
+import { API_PATH } from "../../util/paths";
 import { useEffect, useRef, useState } from "react";
-import type { LessonCompleteType } from "../../../Types/LessonCompleteType";
+import type { LessonCompleteType } from "../../Types/LessonCompleteType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../../../queries/types/queryKeys";
-import { SpinnerPage } from "../../Section/pages/SpinnerPage";
+import { qk } from "../../queries/types/queryKeys";
+import { SpinnerPage } from "../Section/SpinnerPage";
+import { WideActionButton } from "../Common/WideActionButton";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -103,14 +104,7 @@ export function LessonCompletePage() {
           </div>
         </div>
       </div>
-      <div
-        className={`w-full rounded-2xl h-14 justify-center items-center active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen
-          )} flex text-xl`}
-      >
-        <p className="text-duoGrayButtonText" onClick={() => navigate("/")}>
-          End Lesson
-        </p>
-      </div>
+      <WideActionButton text="End Lesson" isActive={true} onSubmit={() => navigate("/")}/>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { LessonButton } from "../Lesson/molecules/LessonButton";
+import { LessonButton } from "../Lesson/LessonButton";
 import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak";
 import { useUnit } from "../../queries/useQuery/useUnit";
 import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit";
@@ -10,7 +10,10 @@ type UnitPathProps = {
 
 export function UnitPath({ id, index }: UnitPathProps) {
   const { data: unit, isLoading: unitLoading } = useUnit(id);
-  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(id, 1);
+  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(
+    id,
+    1
+  );
 
   if (unitLoading || lessonsLoading) {
     return (

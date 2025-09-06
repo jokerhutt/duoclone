@@ -3,7 +3,6 @@ import { RectangleButton } from "../../components/atoms/Button/RectangleButton";
 import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
 import { OptionsList } from "./OptionsList";
 
-
 type ExerciseComponentProps = {
   exercise: Exercise;
   selectedOption: ExerciseOption | null;

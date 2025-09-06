@@ -1,6 +1,5 @@
 import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
 
-
 type OptionsListProps = {
   exercise: Exercise;
   isSelectedOption: (option: ExerciseOption) => boolean;

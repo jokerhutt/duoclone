@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import { CircleButton } from "../../../components/atoms/Button/CircleButton";
-import { getOffset } from "../types/pathOffets";
-import { useLesson } from "../../../queries/useQuery/useLesson";
-import { useCourseProgress } from "../../../queries/useQuery/useCourseProgress";
+import { CircleButton } from "../../components/atoms/Button/CircleButton";
+import { getOffset } from "./types/pathOffets";
+import { useLesson } from "../../queries/useQuery/useLesson";
+import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 
 type LessonButtonProps = {
   idx: number;

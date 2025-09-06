@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { SUBMIT_ATTEMPT } from "../../../util/paths";
-import type { ExerciseOption } from "../../../Types/ExerciseType";
-import { ExerciseComponent } from "../../Exercise/ExerciseComponent";
-import { Header } from "../../Common/Header/Header";
-import { XIcon } from "../../../components/atoms/Icons/XIcon";
-import { HeartIcon } from "../../../components/atoms/Icons/HeartIcon";
-import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse";
-import { useExercises } from "../../../queries/useQuery/useExercises";
-import { SpinnerPage } from "../../Section/pages/SpinnerPage";
+import { SUBMIT_ATTEMPT } from "../../util/paths";
+import type { ExerciseOption } from "../../Types/ExerciseType";
+import { ExerciseComponent } from "../Exercise/ExerciseComponent";
+import { Header } from "../../components/molecules/Header/Header";
+import { XIcon } from "../../components/atoms/Icons/XIcon";
+import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
+import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptResponse";
+import { useExercises } from "../../queries/useQuery/useExercises";
+import { SpinnerPage } from "../Section/SpinnerPage";
+import { WideActionButton } from "../Common/WideActionButton";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -97,16 +98,7 @@ export function LessonPage() {
           isSelectedOption={isSelectedOption}
         />
       </div>
-      <div
-        onClick={submitAttempt}
-        className={`w-full rounded-2xl h-14 justify-center items-center ${
-          selectedOption
-            ? "active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow bg-duoGreen"
-            : "bg-duoGrayBorder"
-        } flex text-xl`}
-      >
-        <p className="text-duoGrayButtonText">Check</p>
-      </div>
+      <WideActionButton text="Check" onSubmit={() => submitAttempt()} isActive={!!selectedOption}/>
     </div>
   );
 }

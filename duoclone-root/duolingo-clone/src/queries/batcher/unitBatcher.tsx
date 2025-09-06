@@ -1,6 +1,5 @@
 import { create, windowScheduler } from "@yornaath/batshit";
-import { GET_LESSONS_FROM_IDS, GET_UNITS_FROM_IDS } from "../../util/paths";
-import type { LessonType } from "../../Types/LessonType";
+import { GET_UNITS_FROM_IDS } from "../../util/paths";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
 import type { UnitType } from "../../Types/UnitType";
 

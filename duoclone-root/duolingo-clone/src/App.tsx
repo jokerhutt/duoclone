@@ -1,8 +1,8 @@
 import "./App.css";
-import { SectionPage } from "./features/Section/pages/SectionPage";
+import { SectionPage } from "./features/Section/SectionPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LessonPage } from "./features/Lesson/pages/LessonPage";
-import { LessonCompletePage } from "./features/Lesson/pages/LessonCompletePage";
+import { LessonPage } from "./features/Lesson/LessonPage";
+import { LessonCompletePage } from "./features/Lesson/LessonCompletePage";
 
 function App() {
   return (
@@ -11,7 +11,10 @@ function App() {
         <Routes>
           <Route path="" element={<SectionPage />} />
           <Route path="/lessons/:lessonId/:position" element={<LessonPage />} />
-          <Route path="/lessons/:lessonId/complete" element={<LessonCompletePage/>}/>
+          <Route
+            path="/lessons/:lessonId/complete"
+            element={<LessonCompletePage />}
+          />
         </Routes>
       </div>
     </Router>
