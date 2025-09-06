@@ -3,6 +3,7 @@ type WideActionButtonProps = {
   isActive: boolean;
   text: string;
   activeColor?: string;
+  
   disabledColor?: string;
   activeTextColor?: string;
   disabledTextColor?: string;

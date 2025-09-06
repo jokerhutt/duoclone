@@ -23,6 +23,8 @@ export function LessonStatsGroup({totalScore, correctPercentage} : LessonStatsGr
         title="GOOD"
         score={correctPercentage}
         scoreSign="%"
+        mainColor="bg-duoLightGreen"
+        mainTextColor="text-duoLightGreen"
         scoreIcon={<ScoreTargetIcon />}
       />
     </div>

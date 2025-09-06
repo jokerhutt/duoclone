@@ -29,8 +29,14 @@
     --color-duoGrayBorder: #37464f;
     --color-duoSubText: #d0f0c1;
     --color-duoGold: #fec700;
-    --font-din: DIN;
+    --color-duoLightGreen: #93d333;
     --color-duoPink: #f886d0;
+
+
+    --shadow-duoLightGreenShadow: 0 8px #79b933;
+
+
+    --font-din: DIN;
     --shadow-duoPinkShadow: #cc6ba7;
 
 
