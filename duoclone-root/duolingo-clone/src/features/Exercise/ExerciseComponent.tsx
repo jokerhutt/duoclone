@@ -1,6 +1,7 @@
 import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
 import { SelectionOptionButton } from "./Options/SelectionOptionButton";
 import { OptionsList } from "./OptionsList";
+import { ExercisePrompt } from "./Prompt/ExercisePrompt";
 
 type ExerciseComponentProps = {
   exercise: Exercise;
@@ -31,40 +32,7 @@ export function ExerciseComponent({
         <div className="w-full flex justify-center h-36">
           <img src={img} />
         </div>
-        <p className="text-white text-xl leading-relaxed">
-          {exercise.prompt.split("___").map((part, idx, arr) => {
-            const longest = Math.max(
-              ...exercise.options.map((o) => (o.content ? o.content.length : 0))
-            );
-
-            return (
-              <span key={idx} className="font-light">
-                {part}
-                {idx < arr.length - 1 && (
-                  <span
-                    className="relative inline-block align-baseline top-[16px]"
-                    style={{
-                      width: `calc(${longest}ch + 2.5rem)`,
-                      height: "1.5rem",
-                    }}
-                  >
-                    <span className="absolute inset-x-0 bottom-0 border-b-2 border-gray-400"></span>
-
-                    {selectedOption && (
-                      <span className="absolute inset-x-0 bottom-2 flex items-center justify-center z-10 leading-none">
-                        <SelectionOptionButton
-                          text={selectedOption.content}
-                          isSelected={false}
-                          onClick={() => setSelectedOption(null)}
-                        />
-                      </span>
-                    )}
-                  </span>
-                )}
-              </span>
-            );
-          })}
-        </p>
+        <ExercisePrompt exercise={exercise} selectedOption={selectedOption} setSelectedOption={() => setSelectedOption(null)}/>
         <div className="w-full h-full flex items-center justify-center">
           <OptionsList
             exercise={exercise}
