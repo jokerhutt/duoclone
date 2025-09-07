@@ -5,6 +5,7 @@ import { useLesson } from "../../queries/useQuery/useLesson";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { useRef, useState } from "react";
 import LessonPopover from "../../components/molecules/Dropdown/LessonPopover";
+import { CircleRing } from "../../components/atoms/Button/CircleRing";
 
 type LessonButtonProps = {
   idx: number;
@@ -64,25 +65,35 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
   const iconOpacity =
     isPassed || lesson?.orderIndex == 1 ? "" : "brightness-50";
 
+  const isCurrentLesson = lesson.id == userCourseProgress?.currentLessonId;
+
   return (
     <>
-      <CircleButton
-        icon={lessonImage}
-        mainColor={buttonColor}
-        buttonRef={circleRef}
-        iconOpacity={iconOpacity}
-        extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
-        onClick={() => {
-          if (isPassed) {
-            setOpen(true);
-            console.log("open")
-            // navigate("/lessons/" + id + "/" + 0);
-          }
-        }}
-        offset={getOffset(courseIndex, idx)}
-      />
+      <CircleRing offset={getOffset(courseIndex, idx)} show={isCurrentLesson} color="green">
+        <CircleButton
+          icon={lessonImage}
+          mainColor={buttonColor}
+          buttonRef={circleRef}
+          iconOpacity={iconOpacity}
+          extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
+          onClick={() => {
+            if (isPassed) {
+              setOpen(true);
+              console.log("open");
+              // navigate("/lessons/" + id + "/" + 0);
+            }
+          }}
+          offset={getOffset(courseIndex, idx)}
+        />
+      </CircleRing>
 
-      <LessonPopover lessonIndex={idx} lesson={lesson} triggerRef={circleRef} open={open} onOpenChange={setOpen}/>
+      <LessonPopover
+        lessonIndex={idx}
+        lesson={lesson}
+        triggerRef={circleRef}
+        open={open}
+        onOpenChange={setOpen}
+      />
     </>
   );
 }
