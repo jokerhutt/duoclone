@@ -4,12 +4,13 @@ import type { LessonType } from "../../../Types/LessonType";
 import { RectangleButton } from "../../atoms/Button/RectangleButton";
 import { WideActionButton } from "../../../features/Common/WideActionButton";
 import { useNavigate } from "react-router";
+import { AnimatePresence, motion } from "framer-motion";
 
 type LessonPopoverProps = {
   lessonIndex: number;
-  triggerRef?: any; // keep it loose
+  triggerRef?: any;
   lesson: LessonType;
-  open: boolean; // controlled
+  open: boolean;
   onOpenChange: (o: boolean) => void;
 };
 
@@ -43,30 +44,48 @@ export default function LessonPopover({
 
       <Popover.Portal>
         <Popover.Content
+          asChild
+          forceMount
           side="bottom"
           align="center"
           sideOffset={8}
           avoidCollisions
           collisionPadding={10}
-          className="z-50 min-w-60 rounded-xl bg-duoGreen  px-4 py-2 pb-4 shadow-lg"
         >
-          <div className="flex w-full flex-col pb-4">
-            <div className=" text-lg font-bold text-duoSubText">
-              {lesson.title}
-            </div>
-            <button className="block w-full rounded-md text-duoSubText text-left text-sm">
-              Lesson 1 of 3
-            </button>
-          </div>
+          <AnimatePresence mode="wait">
+            {open && (
+              <motion.div
+                key="lp"
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+                style={{
+                  transformOrigin:
+                    "var(--radix-popover-content-transform-origin)",
+                }}
+                className="z-50 min-w-60 rounded-xl bg-duoGreen px-4 py-2 pb-4 shadow-lg"
+              >
+                <div className="flex w-full flex-col pb-4">
+                  <div className=" text-lg font-bold text-duoSubText">
+                    {lesson.title}
+                  </div>
+                  <button className="block w-full rounded-md text-duoSubText text-left text-sm">
+                    Lesson 1 of 3
+                  </button>
+                </div>
 
-          <WideActionButton
-            onSubmit={() => navigate(`/lessons/${lesson.id}/0`)}
-            isActive={true}
-            text="START +15 XP"
-            activeColor="active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow/50 bg-white"
-            activeTextColor="text-duoGreen text-lg"
-          />
-          <Popover.Arrow className="fill-duoGreen" />
+                <WideActionButton
+                  onSubmit={() => navigate(`/lessons/${lesson.id}/0`)}
+                  isActive={true}
+                  text="START +15 XP"
+                  activeColor="active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow/50 bg-white"
+                  activeTextColor="text-duoGreen text-lg"
+                />
+                <Popover.Arrow className="fill-duoGreen" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

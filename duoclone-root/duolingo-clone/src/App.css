@@ -1,57 +1,51 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'DIN';
+  font-family: "DIN";
   src: url("/fonts/DIN Next Rounded LT W04 Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DIN';
+  font-family: "DIN";
   src: url("/fonts/DIN Next Rounded LT W04 Bold.woff") format("woff");
-  font-weight: 700; 
+  font-weight: 700;
   font-style: normal;
 }
 
 @theme {
+  --color-duoGrayText: #52656d;
 
-    --color-duoGrayText: #52656d;
+  --color-duoGrayButtonText: #53656d;
 
-    --color-duoGrayButtonText: #53656d;
+  --color-duoBackground: #141f24;
+  --color-duoGreen: #58cc04;
+  --color-duoBlue: #4bb0f6;
+  --color-duoGrayLocked: #37464f;
+  --color-duoBlueShadow: #4099d6;
+  --color-duoGreenShadow: #59a700;
+  --color-duoGrayBorder: #37464f;
+  --color-duoSubText: #d0f0c1;
+  --color-duoGold: #fec700;
+  --color-duoLightGreen: #93d333;
+  --color-duoPink: #f886d0;
+  --color-duoOrange: #f5a632;
+  --color-duoRed: #ff4c4b;
 
-    --color-duoBackground: #141f24;
-    --color-duoGreen: #58cc04;
-    --color-duoBlue: #4bb0f6;
-    --color-duoGrayLocked: #37464f;
-    --color-duoBlueShadow: #4099d6;
-    --color-duoGreenShadow: #59a700;
-    --color-duoGrayBorder: #37464f;
-    --color-duoSubText: #d0f0c1;
-    --color-duoGold: #fec700;
-    --color-duoLightGreen: #93d333;
-    --color-duoPink: #f886d0;
-    --color-duoOrange: #f5a632;
-    --color-duoRed: #ff4c4b;
+  --shadow-duoLightGreenShadow: 0 8px #79b933;
 
+  --font-din: DIN;
+  --shadow-duoPinkShadow: #cc6ba7;
 
-    --shadow-duoLightGreenShadow: 0 8px #79b933;
-
-
-    --font-din: DIN;
-    --shadow-duoPinkShadow: #cc6ba7;
-
-
-    --shadow-duoGreenShadow: 0 5px 0 #59a700;
-    --shadow-duoPinkShadow: 0 5px 0 #cc6ba7;
-    --shadow-duoGrayLockedCircleShadow: 0 5px #2b383f;
-    --shadow-duoGreenCircleShadow: 0 8px 0 #59a700;
-    --shadow-duoPinkCircleShadow: 0 8px #cc6ba7;
-    --shadow-duoBlueShadow: 0 5px 0 #4099d6;
-    --shadow-duoBlueCircleShadow: 0 8px #4099d6;
-    --shadow-duoGrayBorderShadow: 0 3px #37464f;
-
-
+  --shadow-duoGreenShadow: 0 5px 0 #59a700;
+  --shadow-duoPinkShadow: 0 5px 0 #cc6ba7;
+  --shadow-duoGrayLockedCircleShadow: 0 5px #2b383f;
+  --shadow-duoGreenCircleShadow: 0 8px 0 #59a700;
+  --shadow-duoPinkCircleShadow: 0 8px #cc6ba7;
+  --shadow-duoBlueShadow: 0 5px 0 #4099d6;
+  --shadow-duoBlueCircleShadow: 0 8px #4099d6;
+  --shadow-duoGrayBorderShadow: 0 3px #37464f;
 }
 
 :root {
@@ -65,10 +59,10 @@
   --color-avocado-600: oklch(0.53 0.12 118.34);
   --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
-
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
