@@ -2,6 +2,9 @@ import { LessonButton } from "../Lesson/LessonButton";
 import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak";
 import { useUnit } from "../../queries/useQuery/useUnit";
 import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit";
+import { shouldInvert } from "../Lesson/types/pathOffets";
+import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
 
 type UnitPathProps = {
   id: number;
@@ -14,6 +17,19 @@ export function UnitPath({ id, index }: UnitPathProps) {
     id,
     1
   );
+  const [animationData, setAnimationData] = useState<any>(null);
+
+  useEffect(() => {
+    if (!unit) return;
+    fetch(unit.animationPath)
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data));
+  }, [unit]);
+
+  const leftOffset = "mr-40";
+  const rightOffset = "ml-40";
+
+  const imageOffset = shouldInvert(index) ? leftOffset : rightOffset;
 
   if (unitLoading || lessonsLoading) {
     return (
@@ -35,6 +51,14 @@ export function UnitPath({ id, index }: UnitPathProps) {
             ))}
           </>
         )}
+        <div className={`absolute mt-30 ${imageOffset}`}>
+          <Lottie
+            animationData={animationData}
+            loop={true}
+            autoplay
+            className="w-50 h-50"
+          />
+        </div>
       </div>
       {unit && <SectionBreak lesson={unit.title} />}
     </>

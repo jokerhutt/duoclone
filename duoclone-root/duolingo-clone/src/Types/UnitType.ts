@@ -7,4 +7,5 @@ export type UnitType = {
   description: string;
   color?: ColorType;
   orderIndex: number;
+  animationPath: string;
 };

@@ -33,7 +33,7 @@ export function SectionPage() {
 
   return (
     <>
-      <LearnHeader courseProgress={courseProgress}/>
+      <LearnHeader courseProgress={courseProgress} />
       <UnitBanner currentUnit={headerTitle} />
       <div className="w-full h-full overflow-auto">
         {units.map((unit, index) => (

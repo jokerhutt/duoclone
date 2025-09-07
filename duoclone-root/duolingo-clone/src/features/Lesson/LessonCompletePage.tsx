@@ -14,7 +14,7 @@ export function LessonCompletePage() {
   const [animationData, setAnimationData] = useState<any>(null);
 
   useEffect(() => {
-    fetch("/lottie-animations/lessonEnd/EL_LIN_DUO.json")
+    fetch("/lottie-animations/EL_LIN_DUO.json")
       .then((res) => res.json())
       .then((data) => setAnimationData(data));
   }, []);

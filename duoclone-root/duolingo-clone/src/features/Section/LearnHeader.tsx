@@ -26,7 +26,7 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
       </div>
 
       <div className="flex gap-2 items-center">
-        <HeartIcon /> 
+        <HeartIcon />
         <p className="text-xl text-duoRed">5</p>
       </div>
     </Header>

@@ -26,7 +26,7 @@ const rightOffsets = [
   "mr-36",
 ];
 
-const shouldInvert = (index: number) => index % 2 == 0;
+export const shouldInvert = (index: number) => index % 2 == 0;
 
 export const getOffset = (index: number, idx: number) =>
   shouldInvert(index) ? leftOffsets[idx] : rightOffsets[idx];
