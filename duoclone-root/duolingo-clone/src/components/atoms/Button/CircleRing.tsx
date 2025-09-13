@@ -13,7 +13,7 @@ export function CircleRing({
   show = false,
   size = 86,
   stroke = 4,
-  color = "#58cc04",
+  color = "#f886d0",
   progress = 1,
   offset = "",
 }: CircleRingProps) {

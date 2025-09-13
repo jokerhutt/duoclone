@@ -10,7 +10,6 @@ export function MainFooter() {
     <Footer padding="px-6" height="h-20 border-t border-t-duoGrayBorder">
       <div className="w-full flex items-center justify-between">
         <UserHomeIcon />
-        <UserPracticeIcon />
         <UserLeagueIcon />
         <UserChestQuestsIcon />
         <UserFooterIcon />

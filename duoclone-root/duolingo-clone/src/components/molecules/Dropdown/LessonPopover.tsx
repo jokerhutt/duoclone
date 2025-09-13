@@ -11,6 +11,7 @@ type LessonPopoverProps = {
   triggerRef?: any;
   lesson: LessonType;
   open: boolean;
+  lessonStatus: string;
   onOpenChange: (o: boolean) => void;
 };
 
@@ -19,6 +20,7 @@ export default function LessonPopover({
   lesson,
   triggerRef,
   open,
+  lessonStatus,
   onOpenChange,
 }: LessonPopoverProps) {
   const navigate = useNavigate();
@@ -37,6 +39,26 @@ export default function LessonPopover({
       window.removeEventListener("touchmove", close);
     };
   }, [open, onOpenChange]);
+
+  const bgColor = () => {
+    if (lessonStatus == "PASSED" || lessonStatus == "CURRENT"
+    ) {
+        return "bg-duoGreen"
+    } if (lessonStatus == "LOCKED") {
+        return "bg-duoGrayLocked"
+    }
+  }
+
+  const buttonText = () => {
+    if (lessonStatus == "CURRENT") {
+      return "START +15 XP"
+    } else if (lessonStatus == "PASSED") {
+      return "Practice +5 XP"
+    }
+    else {
+      return "LOCKED"
+    }
+  }
 
   return (
     <Popover.Root open={open} onOpenChange={onOpenChange}>
@@ -64,7 +86,7 @@ export default function LessonPopover({
                   transformOrigin:
                     "var(--radix-popover-content-transform-origin)",
                 }}
-                className="z-50 min-w-60 rounded-xl bg-duoGreen px-4 py-2 pb-4 shadow-lg"
+                className={`z-50 min-w-60 rounded-xl ${bgColor()} px-4 py-2 pb-4 shadow-lg`}
               >
                 <div className="flex w-full flex-col pb-4">
                   <div className=" text-lg font-bold text-duoSubText">
@@ -78,7 +100,7 @@ export default function LessonPopover({
                 <WideActionButton
                   onSubmit={() => navigate(`/lessons/${lesson.id}/0`)}
                   isActive={true}
-                  text="START +15 XP"
+                  text={buttonText()}
                   activeColor="active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow/50 bg-white"
                   activeTextColor="text-duoGreen text-lg"
                 />

@@ -69,7 +69,7 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
 
   return (
     <>
-      <CircleRing offset={getOffset(courseIndex, idx)} show={isCurrentLesson} color="green">
+      <CircleRing offset={getOffset(courseIndex, idx)} show={isCurrentLesson}>
         <CircleButton
           icon={lessonImage}
           mainColor={buttonColor}
@@ -77,17 +77,16 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
           iconOpacity={iconOpacity}
           extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
           onClick={() => {
-            if (isPassed) {
               setOpen(true);
               console.log("open");
               // navigate("/lessons/" + id + "/" + 0);
-            }
           }}
           offset={getOffset(courseIndex, idx)}
         />
       </CircleRing>
 
       <LessonPopover
+      lessonStatus={isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"}
         lessonIndex={idx}
         lesson={lesson}
         triggerRef={circleRef}

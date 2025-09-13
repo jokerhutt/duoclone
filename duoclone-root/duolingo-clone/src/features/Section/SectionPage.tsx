@@ -10,6 +10,7 @@ import {
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
 import { MainFooter } from "../Common/MainFooter";
+import type { UnitType } from "../../Types/UnitType";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -17,24 +18,18 @@ export function SectionPage() {
   const { data: courseProgress, isLoading: loadingProgress } =
     useCourseProgress(1, 1);
 
-  const [currentUnit, setCurrentUnit] = useState("");
+  const [currentUnit, setCurrentUnit] = useState<UnitType | null>(null);
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
 
-  useUnitObserver(
-    unitRefs,
-    units ? units.map((u) => u.title) : [],
-    setCurrentUnit
-  );
+useUnitObserver(unitRefs, units ?? [], (u) => setCurrentUnit(u));
 
   if (isError) return <SpinnerPage color="border-red-400" />;
   if (isLoading || !units || !courseProgress) return <SpinnerPage />;
 
-  const headerTitle = currentUnit || units[0]?.title || "";
-
   return (
     <>
       <LearnHeader courseProgress={courseProgress} />
-      <UnitBanner currentUnit={headerTitle} />
+      <UnitBanner currentUnit={currentUnit} />
       <div className="w-full h-full overflow-auto">
         {units.map((unit, index) => (
           <div

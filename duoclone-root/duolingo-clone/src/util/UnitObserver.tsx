@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import type { RefObject } from "react";
+import type { UnitType } from "../Types/UnitType";
 
 export function useUnitObserver(
   unitRefs: RefObject<(HTMLElement | null)[]>,
-  unitNames: string[],
-  setCurrentUnit: (unitName: string) => void
+  units: UnitType[],
+  setCurrentUnit: (unit: UnitType) => void
 ) {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -20,7 +21,7 @@ export function useUnitObserver(
         const index =
           unitRefs.current?.findIndex((el) => el === topEntry.target) ?? -1;
         if (index !== -1) {
-          setCurrentUnit(unitNames[index]);
+          setCurrentUnit(units[index]);   // 🔑 pass the full unit object
         }
       },
       { root: null, rootMargin: "-80px 0px 0px 0px", threshold: 0.5 }
@@ -35,5 +36,5 @@ export function useUnitObserver(
         if (el) observer.unobserve(el);
       });
     };
-  }, [unitRefs, unitNames, setCurrentUnit]);
+  }, [unitRefs, units, setCurrentUnit]);
 }
