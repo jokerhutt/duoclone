@@ -50,9 +50,21 @@ export default function LessonPopover({
       return "START +15 XP"
     } else if (lessonStatus == "PASSED") {
       return "Practice +5 XP"
+    } else if (lessonStatus == "REVIEW") {
+      return "GO TO LEGENDARY"
     }
     else {
       return "LOCKED"
+    }
+  }
+
+  const subText = () => {
+    if (lessonStatus == "REVIEW") {
+      return "Earn Legendary on every level to unlock the final trophy!"
+    } else if (lessonStatus == "LOCKED") {
+      return "Complete all levels above to unlock this!"
+    } else {
+      return "Lesson 1 of 3"
     }
   }
 
@@ -83,14 +95,14 @@ export default function LessonPopover({
                     "var(--radix-popover-content-transform-origin)",
                 }}
                 
-                className={`z-50 min-w-60 rounded-xl ${style.altBg} px-4 py-2 pb-4 shadow-lg`}
+                className={`z-50 min-w-60 max-w-70 rounded-xl ${style.altBg} px-4 py-2 pb-4 shadow-lg`}
               >
                 <div className={`flex w-full flex-col pb-4 ${unitColor == "LOCKED" ? style.lightVersionText : "text-duoSubText"}`}>
                   <div className=" text-lg font-bold">
                     {lesson.title}
                   </div>
                   <button className="block w-full rounded-md text-left text-sm">
-                    Lesson 1 of 3
+                    {subText()}
                   </button>
                 </div>
 

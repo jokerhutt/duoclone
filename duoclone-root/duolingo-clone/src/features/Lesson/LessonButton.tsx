@@ -8,15 +8,23 @@ import LessonPopover from "../../components/molecules/Dropdown/LessonPopover";
 import { CircleRing } from "../../components/atoms/Button/CircleRing";
 import type { ColorType } from "../../Types/ColorType";
 import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopPopover";
+import { colorMap } from "../../util/colorMap";
 
 type LessonButtonProps = {
   idx: number;
   id: number;
+  unitOrderIndex: number;
   unitColor?: ColorType;
   courseIndex: number;
 };
 
-export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonProps) {
+export function LessonButton({
+  idx,
+  id,
+  courseIndex,
+  unitColor,
+  unitOrderIndex,
+}: LessonButtonProps) {
   const navigate = useNavigate();
 
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
@@ -50,9 +58,9 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
     }
 
     if (lesson.lessonType == "Review" && !lesson.isPassed) {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/f4b1c683214cf55f5ddea4535b983745.svg"
+      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/f4b1c683214cf55f5ddea4535b983745.svg";
     } else if (lesson.lessonType == "Review") {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/49d034cef4f32ed000c8a343425e0497.svg"
+      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/49d034cef4f32ed000c8a343425e0497.svg";
     }
 
     return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7aa61c3f60bd961a60a46fb36e76c72f.svg";
@@ -67,50 +75,69 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
 
   const isCurrentLesson = lesson.id == userCourseProgress?.currentLessonId;
 
-  const unitColorToShow = isPassed || isCurrentLesson || lesson?.orderIndex == 1 ? unitColor : "LOCKED";
+  const unitColorToShow =
+    isPassed || isCurrentLesson || lesson?.orderIndex == 1
+      ? unitColor
+      : "LOCKED";
+
+  const style = unitColor ? colorMap[unitColor] : colorMap["LOCKED"];
+
+  const handleButtonClick = () => {
+    if (isPassed || isCurrentLesson || lesson.orderIndex != 1) {
+      setOpen(true);
+      console.log("open");
+    } else {
+      navigate(`lessons/${id}/0`);
+    }
+  };
 
   return (
     <>
-      <CircleRing unitColor={unitColorToShow} offset={getOffset(courseIndex, idx)} show={isCurrentLesson}>
-        <CircleButton
-          icon={lessonImage}
+      {lesson.lessonType == "Review" && isPassed ? (
+        <button ref={circleRef ?? undefined} className="relative hover:cursor-pointer" onClick={handleButtonClick}>
+          <p className="absolute inset-0 flex items-center mb-2 justify-center text-2xl text-duoSubText font-bold">{unitOrderIndex}</p>
+          <img className="h-20" src={style.reviewTrophy} />
+        </button>
+      ) : (
+        <CircleRing
           unitColor={unitColorToShow}
-          buttonRef={circleRef}
-          iconOpacity={iconOpacity}
-          extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
-          onClick={() => {
-
-              if (isPassed || isCurrentLesson || lesson.orderIndex != 1) {
-                setOpen(true);
-                console.log("open");
-              } else {
-                navigate(`lessons/${id}/0`)
-              }
-          }}
           offset={getOffset(courseIndex, idx)}
-        />
-      </CircleRing>
+          show={isCurrentLesson}
+        >
+          <CircleButton
+            icon={lessonImage}
+            unitColor={unitColorToShow}
+            buttonRef={circleRef}
+            iconOpacity={iconOpacity}
+            extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
+            onClick={handleButtonClick}
+            offset={getOffset(courseIndex, idx)}
+          />
+        </CircleRing>
+      )}
+
       {(lesson.orderIndex != 1 || isPassed || isCurrentLesson) && (
-      <LessonPopover
-      lessonStatus={isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"}
-        lessonIndex={idx}
-        lesson={lesson}
-        triggerRef={circleRef}
-        unitColor={unitColorToShow}
-        open={open}
-        onOpenChange={setOpen}
-      />)}
-        {(!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson)) && (
-      <LessonTopPopover
-        open={isCurrentLesson && open ? false : true}
-        lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
-        onOpenChange={() => null}
-        triggerRef={circleRef} 
-        unitColor={unitColor}
+        <LessonPopover
+          lessonStatus={
+            (lesson.lessonType == "Review" && isPassed) ? "REVIEW" : isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"
+          }
+          lessonIndex={idx}
+          lesson={lesson}
+          triggerRef={circleRef}
+          unitColor={unitColorToShow}
+          open={open}
+          onOpenChange={setOpen}
         />
-        )}
-
-
+      )}
+      {!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson) && (
+        <LessonTopPopover
+          open={isCurrentLesson && open ? false : true}
+          lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
+          onOpenChange={() => null}
+          triggerRef={circleRef}
+          unitColor={unitColor}
+        />
+      )}
     </>
-  );
+  );   
 }
