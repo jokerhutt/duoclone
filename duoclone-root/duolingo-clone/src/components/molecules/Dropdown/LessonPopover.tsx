@@ -98,10 +98,10 @@ export default function LessonPopover({
                 className={`z-50 min-w-60 max-w-70 rounded-xl ${style.altBg} px-4 py-2 pb-4 shadow-lg`}
               >
                 <div className={`flex w-full flex-col pb-4 ${unitColor == "LOCKED" ? style.lightVersionText : "text-duoSubText"}`}>
-                  <div className=" text-lg font-bold">
+                  <div className=" text-xl font-bold">
                     {lesson.title}
                   </div>
-                  <button className="block w-full rounded-md text-left text-sm">
+                  <button className="block w-full rounded-md text-left text-lg font-light">
                     {subText()}
                   </button>
                 </div>

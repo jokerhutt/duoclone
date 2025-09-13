@@ -94,8 +94,14 @@ export function LessonButton({
   return (
     <>
       {lesson.lessonType == "Review" && isPassed ? (
-        <button ref={circleRef ?? undefined} className="relative hover:cursor-pointer" onClick={handleButtonClick}>
-          <p className="absolute inset-0 flex items-center mb-2 justify-center text-2xl text-duoSubText font-bold">{unitOrderIndex}</p>
+        <button
+          ref={circleRef ?? undefined}
+          className="relative hover:cursor-pointer"
+          onClick={handleButtonClick}
+        >
+          <p className="absolute inset-0 flex items-center mb-2 justify-center text-2xl text-duoSubText font-bold">
+            {unitOrderIndex}
+          </p>
           <img className="h-20" src={style.reviewTrophy} />
         </button>
       ) : (
@@ -119,7 +125,13 @@ export function LessonButton({
       {(lesson.orderIndex != 1 || isPassed || isCurrentLesson) && (
         <LessonPopover
           lessonStatus={
-            (lesson.lessonType == "Review" && isPassed) ? "REVIEW" : isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"
+            lesson.lessonType == "Review" && isPassed
+              ? "REVIEW"
+              : isCurrentLesson
+              ? "CURRENT"
+              : isPassed
+              ? "PASSED"
+              : "LOCKED"
           }
           lessonIndex={idx}
           lesson={lesson}
@@ -139,5 +151,5 @@ export function LessonButton({
         />
       )}
     </>
-  );   
+  );
 }
