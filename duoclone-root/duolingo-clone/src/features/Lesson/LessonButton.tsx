@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import LessonPopover from "../../components/molecules/Dropdown/LessonPopover";
 import { CircleRing } from "../../components/atoms/Button/CircleRing";
 import type { ColorType } from "../../Types/ColorType";
+import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopPopover";
 
 type LessonButtonProps = {
   idx: number;
@@ -94,7 +95,11 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
         onOpenChange={setOpen}
       />
       ) : (
-        null
+        <LessonTopPopover
+        open={true}
+        onOpenChange={() => null}
+        triggerRef={circleRef} 
+        />
       )}    
 
     </>
