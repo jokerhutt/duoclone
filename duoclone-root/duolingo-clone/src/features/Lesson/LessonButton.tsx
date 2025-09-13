@@ -85,6 +85,7 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
         lessonIndex={idx}
         lesson={lesson}
         triggerRef={circleRef}
+        unitColor={unitColorToShow}
         open={open}
         onOpenChange={setOpen}
       />

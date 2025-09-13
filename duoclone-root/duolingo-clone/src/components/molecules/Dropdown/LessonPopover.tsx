@@ -5,10 +5,13 @@ import { RectangleButton } from "../../atoms/Button/RectangleButton";
 import { WideActionButton } from "../../../features/Common/WideActionButton";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import type { ColorType } from "../../../Types/ColorType";
+import { colorMap } from "../../../util/colorMap";
 
 type LessonPopoverProps = {
   lessonIndex: number;
   triggerRef?: any;
+  unitColor?: ColorType;
   lesson: LessonType;
   open: boolean;
   lessonStatus: string;
@@ -19,6 +22,7 @@ export default function LessonPopover({
   lessonIndex,
   lesson,
   triggerRef,
+  unitColor = "LOCKED",
   open,
   lessonStatus,
   onOpenChange,
@@ -39,6 +43,8 @@ export default function LessonPopover({
       window.removeEventListener("touchmove", close);
     };
   }, [open, onOpenChange]);
+
+  const style = colorMap[unitColor]
 
   const bgColor = () => {
     if (lessonStatus == "PASSED" || lessonStatus == "CURRENT"
@@ -86,13 +92,13 @@ export default function LessonPopover({
                   transformOrigin:
                     "var(--radix-popover-content-transform-origin)",
                 }}
-                className={`z-50 min-w-60 rounded-xl ${bgColor()} px-4 py-2 pb-4 shadow-lg`}
+                className={`z-50 min-w-60 rounded-xl ${style.altBg} px-4 py-2 pb-4 shadow-lg`}
               >
-                <div className="flex w-full flex-col pb-4">
-                  <div className=" text-lg font-bold text-duoSubText">
+                <div className={`flex w-full flex-col pb-4 ${unitColor == "LOCKED" ? style.lightVersionText : "text-duoSubText"}`}>
+                  <div className=" text-lg font-bold">
                     {lesson.title}
                   </div>
-                  <button className="block w-full rounded-md text-duoSubText text-left text-sm">
+                  <button className="block w-full rounded-md text-left text-sm">
                     Lesson 1 of 3
                   </button>
                 </div>
@@ -101,10 +107,10 @@ export default function LessonPopover({
                   onSubmit={() => navigate(`/lessons/${lesson.id}/0`)}
                   isActive={true}
                   text={buttonText()}
-                  activeColor="active:shadow-none active:translate-y-[5px] shadow-duoGreenShadow/50 bg-white"
-                  activeTextColor="text-duoGreen text-lg"
+                  activeColor={`active:shadow-none active:translate-y-[5px] ${style.shadow}/50 ${unitColor == "LOCKED" ? style.bg : "bg-white"}`}
+                  activeTextColor={`text-lg ${unitColor == "LOCKED" ? style.lightVersionText : style.text}`}
                 />
-                <Popover.Arrow className="fill-duoGreen" />
+                <Popover.Arrow className={`${style.fill}`} />
               </motion.div>
             )}
           </AnimatePresence>
