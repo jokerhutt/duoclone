@@ -72,14 +72,21 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
           iconOpacity={iconOpacity}
           extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
           onClick={() => {
-              setOpen(true);
-              console.log("open");
+
+              if (lesson.orderIndex != 1 || isPassed) {
+                setOpen(true);
+                console.log("open");
+              } else {
+                navigate(`lessons/${id}/0`)
+              }
+
+
               // navigate("/lessons/" + id + "/" + 0);
           }}
           offset={getOffset(courseIndex, idx)}
         />
       </CircleRing>
-
+      {lesson.orderIndex != 1 ? (
       <LessonPopover
       lessonStatus={isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"}
         lessonIndex={idx}
@@ -89,6 +96,10 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
         open={open}
         onOpenChange={setOpen}
       />
+      ) : (
+        null
+      )}    
+
     </>
   );
 }
