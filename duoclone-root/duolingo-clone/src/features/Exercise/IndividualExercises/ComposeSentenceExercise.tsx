@@ -9,6 +9,26 @@ type ComponentSentenceExerciseProps = {
   exercise: Exercise;
 };
 
+function chunkByChars(items: ExerciseOption[], limit = 40) {
+  const rows: ExerciseOption[][] = [];
+  let row: ExerciseOption[] = [];
+  let len = 0;
+  for (const it of items) {
+    if (it.content == null) continue;
+    const w = it.content.length + (row.length ? 1 : 0);
+    if (row.length && len + w > limit) {
+      rows.push(row);
+      row = [it];
+      len = it.content.length;
+    } else {
+      row.push(it);
+      len += w;
+    }
+  }
+  if (row.length) rows.push(row);
+  return rows;
+}
+
 export function ComposeSentenceExercise({
   exercise,
 }: ComponentSentenceExerciseProps) {
@@ -22,17 +42,16 @@ export function ComposeSentenceExercise({
     ExerciseOption[]
   >([]);
 
-  const isSelectedOption = (option: ExerciseOption) => {
-    return selectedOptions != null && selectedOptions.id == option.id;
-  };
+  const plannedRows = Math.max(
+    1,
+    chunkByChars(exercise.options, 40).length 
+  );
 
-  const addOption = (option: ExerciseOption) => {
-    setCurrentSelectedOptions((prev) => [...prev, option]);
-  };
-
-  const isInList = (option: ExerciseOption) => {
-    return currentSelectedOptions.some((o) => o.id === option.id);
-  };
+  const displayRows = chunkByChars(
+    selectedOptions
+      ? [...currentSelectedOptions, selectedOptions]
+      : currentSelectedOptions,
+    40  );
 
   return (
     <div className="w-full h-full flex flex-col gap-12">
@@ -50,34 +69,41 @@ export function ComposeSentenceExercise({
         </div>
       </div>
 
-      <div className="w-full border-b-4 min-h-13 max-h-13 border-b-duoGrayBorder">
-        {currentSelectedOptions.map((option) => (
-          <SelectionOptionButton
-            key={option.id}
-            text={option.content}
-            isSelected={false}
-            onClick={() => {
-              setCurrentSelectedOptions((prev) =>
-                prev.filter((o) => o.id != option.id)
-              );
-            }}
-          />
-        ))}
-
-        {!!selectedOptions && (
-          <SelectionOptionButton
-            text={selectedOptions?.content ?? ""}
-            isSelected={false}
-            onClick={() => setSelectedOptions(null)}
-          />
-        )}
+      <div>
+      {Array.from({ length: plannedRows }).map((_, i) => {
+        const row = displayRows[i] ?? [];
+        return (
+          <div key={i} className="w-full border-b-4 min-h-16 max-h-16 border-b-duoGrayBorder">
+            <div className="flex gap-2 py-2 min-h-10">
+              {row.map((option) => (
+                <SelectionOptionButton
+                  key={option.id}
+                  text={option.content}
+                  isSelected={false}
+                  onClick={() =>
+                    setCurrentSelectedOptions((prev) =>
+                      prev.filter((opt) => opt.id !== option.id)
+                    )
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
       </div>
 
       <div className="w-full h-full flex items-center justify-center">
         <OptionsList
           exercise={exercise}
-          isSelectedOption={isInList}
-          setSelectedOption={addOption}
+          isSelectedOption={(option) =>
+            currentSelectedOptions.some((opt) => opt.id === option.id)
+          }
+          setSelectedOption={(option) =>
+            setCurrentSelectedOptions((prev) =>
+              prev.some((opt) => opt.id === option.id) ? prev : [...prev, option]
+            )
+          }
         />
       </div>
     </div>
