@@ -35,8 +35,7 @@ export default function LessonPopover({
 
     window.addEventListener("scroll", close, { passive: true });
     window.addEventListener("wheel", close, { passive: true });
-         window.removeEventListener("touchmove", close);
-
+    window.addEventListener("touchmove", close, { passive: true });
     return () => {
       window.removeEventListener("scroll", close);
       window.removeEventListener("wheel", close);
