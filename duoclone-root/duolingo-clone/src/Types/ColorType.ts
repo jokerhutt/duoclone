@@ -1,1 +1,1 @@
-export type ColorType = "GREEN" | "PINK" | "BLUE";
+export type ColorType = "GREEN" | "PINK" | "BLUE" | "LOCKED";
