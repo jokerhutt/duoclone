@@ -41,12 +41,18 @@ export function UnitPath({ id, index }: UnitPathProps) {
 
   return (
     <>
-      <div className="flex flex-col w-full items-center mt-20 mb-20 space-y-6 relative">
+      <div className="flex flex-col w-full items-center mt-20 mb-10 space-y-6 relative">
         {unit && unitLessons && (
           <>
             {unitLessons.map((lesson, idx) => (
               <div className="w-auto py-1" key={idx}>
-                <LessonButton idx={idx} id={lesson.id} courseIndex={index} unitColor={unit.color} unitOrderIndex={unit.orderIndex}/>
+                <LessonButton
+                  idx={idx}
+                  id={lesson.id}
+                  courseIndex={index}
+                  unitColor={unit.color}
+                  unitOrderIndex={unit.orderIndex}
+                />
               </div>
             ))}
           </>

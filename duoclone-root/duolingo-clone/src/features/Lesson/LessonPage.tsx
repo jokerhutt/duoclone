@@ -10,6 +10,7 @@ import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptRespons
 import { useExercises } from "../../queries/useQuery/useExercises";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { WideActionButton } from "../Common/WideActionButton";
+import { LessonHeader } from "./LessonHeader";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -83,13 +84,7 @@ export function LessonPage() {
 
   return (
     <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-      <Header padding="px-4" height="">
-        <XIcon />
-        <div className="w-full h-7 px-6 py-1">
-          <div className="w-full bg-duoGrayBorder rounded-4xl h-full border"></div>
-        </div>
-        <HeartIcon />
-      </Header>
+      <LessonHeader/>
       <div className="my-14 flex w-full h-full pt-4">
         <ExerciseComponent
           exercise={exercises[Number(position)]}
