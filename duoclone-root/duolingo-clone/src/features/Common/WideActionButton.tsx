@@ -22,7 +22,11 @@ export function WideActionButton({
 
   return (
     <div
-      onClick={onSubmit}
+      onClick={(e) => {
+        e.stopPropagation()
+        onSubmit()
+      }
+      }
       className={`w-full rounded-2xl h-14 justify-center items-center ${
         isActive ? activeColor : disabledColor
       } flex text-xl`}

@@ -35,7 +35,7 @@ export default function LessonPopover({
 
     window.addEventListener("scroll", close, { passive: true });
     window.addEventListener("wheel", close, { passive: true });
-    window.addEventListener("touchmove", close, { passive: true });
+         window.removeEventListener("touchmove", close);
 
     return () => {
       window.removeEventListener("scroll", close);
@@ -45,15 +45,6 @@ export default function LessonPopover({
   }, [open, onOpenChange]);
 
   const style = colorMap[unitColor]
-
-  const bgColor = () => {
-    if (lessonStatus == "PASSED" || lessonStatus == "CURRENT"
-    ) {
-        return "bg-duoGreen"
-    } if (lessonStatus == "LOCKED") {
-        return "bg-duoGrayLocked"
-    }
-  }
 
   const buttonText = () => {
     if (lessonStatus == "CURRENT") {
@@ -92,6 +83,7 @@ export default function LessonPopover({
                   transformOrigin:
                     "var(--radix-popover-content-transform-origin)",
                 }}
+                
                 className={`z-50 min-w-60 rounded-xl ${style.altBg} px-4 py-2 pb-4 shadow-lg`}
               >
                 <div className={`flex w-full flex-col pb-4 ${unitColor == "LOCKED" ? style.lightVersionText : "text-duoSubText"}`}>
@@ -104,7 +96,11 @@ export default function LessonPopover({
                 </div>
 
                 <WideActionButton
-                  onSubmit={() => navigate(`/lessons/${lesson.id}/0`)}
+                  onSubmit={() => {
+                    if (unitColor != "LOCKED") {
+                      navigate(`/lessons/${lesson.id}/0`)
+                    }
+                }}
                   isActive={true}
                   text={buttonText()}
                   activeColor={`active:shadow-none active:translate-y-[5px] ${style.shadow}/50 ${unitColor == "LOCKED" ? style.bg : "bg-white"}`}

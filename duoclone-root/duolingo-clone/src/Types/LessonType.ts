@@ -7,4 +7,4 @@ export type LessonType = {
   isPassed: boolean;
 };
 
-export type TypeOfLesson = "Lesson" | "Exercise";
+export type TypeOfLesson = "Lesson" | "Exercise" | "Review";
