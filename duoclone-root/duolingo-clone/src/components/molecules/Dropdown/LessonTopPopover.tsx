@@ -37,10 +37,10 @@ export function LessonTopPopover({
           {open && (
             <div
               key="lp"
-              className={`rounded-xl bg-duoBackground border border-duoGrayBorder py-3 px-4 shadow-lg bob`}
+              className={`rounded-xl bg-duoBackground border border-duoGrayBorder py-2 px-4 shadow-lg bob`}
             >
               <div
-                className={`flex w-full text-xl text-center font-bold flex-col ${style.text}`}
+                className={`flex w-full text-lg text-center font-bold flex-col ${style.text}`}
               >
                 {text}
               </div>

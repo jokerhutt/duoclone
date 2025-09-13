@@ -1,4 +1,4 @@
-export const colorMap: Record<string, {color: string, text: string; shadow: string; bg: string; circleShadow: string, fill: string, altBg: string, lightVersionText?: string}> = {
+export const colorMap: Record<string, {color: string, text: string; shadow: string; bg: string; circleShadow: string, fill: string, altBg: string, reviewTrophy: string, lightVersionText?: string}> = {
   PINK: {
     color: "#f886d0",
     text: "text-duoPink",
@@ -7,6 +7,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
     circleShadow: "shadow-duoPinkCircleShadow",
     fill: "fill-duoPink",
     altBg: "bg-duoPink",
+    reviewTrophy: "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/af1c7b5aebc9a1cbb23a9ddc5c7091e7.svg";
   },
   BLUE: {
     color: "#4bb0f6",
@@ -16,6 +17,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
     circleShadow: "shadow-duoBlueCircleShadow",
     fill: "fill-duoBlue",
     altBg: "bg-duoBlue",
+    reviewTrophy: "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/c610ac3d2982c63695de280bfc5b2690.svg"
   },
   GREEN: {
     color: "#58cc04",
@@ -25,6 +27,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
     circleShadow: "shadow-duoGreenCircleShadow",
     fill: "fill-duoGreen",
     altBg: "bg-duoGreen",
+    reviewTrophy: "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/c610ac3d2982c63695de280bfc5b2690.svg"
   },
   LOCKED: {
     color: "#37464f",
@@ -34,6 +37,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
     circleShadow: "shadow-duoGrayLockedCircleShadow",
     fill: "fill-duoGrayLocked",
     altBg: "bg-duoDarkGray",
-    lightVersionText: "text-duoGrayButtonText"
+    lightVersionText: "text-duoGrayButtonText",
+    reviewTrophy: ""
   }
 };
