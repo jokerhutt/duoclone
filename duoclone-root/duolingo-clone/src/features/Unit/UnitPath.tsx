@@ -46,7 +46,7 @@ export function UnitPath({ id, index }: UnitPathProps) {
           <>
             {unitLessons.map((lesson, idx) => (
               <div className="w-auto py-2" key={idx}>
-                <LessonButton idx={idx} id={lesson.id} courseIndex={index} />
+                <LessonButton idx={idx} id={lesson.id} courseIndex={index} unitColor={unit.color}/>
               </div>
             ))}
           </>

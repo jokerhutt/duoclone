@@ -1,5 +1,9 @@
+import type { ColorType } from "../../../Types/ColorType";
+import { colorMap } from "../../../util/colorMap";
+
 type CircleRingProps = {
   children: React.ReactNode;
+  unitColor?: ColorType
   show?: boolean;       // ← new
   size?: number;
   stroke?: number;
@@ -14,6 +18,7 @@ export function CircleRing({
   size = 86,
   stroke = 4,
   color = "#f886d0",
+  unitColor = "LOCKED",
   progress = 1,
   offset = "",
 }: CircleRingProps) {
@@ -21,11 +26,13 @@ export function CircleRing({
   const c = 2 * Math.PI * r;
   const dashOffset = c * (1 - progress);
 
+  const style = colorMap[unitColor]
+
   return (
     <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
       {show && (
         <svg className={`absolute ${offset} mt-2`} width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={size/2} cy={size/2} r={r} stroke={color} strokeWidth={stroke}
+          <circle cx={size/2} cy={size/2} r={r} stroke={style.color} strokeWidth={stroke}
                   fill="none" strokeDasharray={c} strokeDashoffset={dashOffset} strokeLinecap="round" />
         </svg>
       )}

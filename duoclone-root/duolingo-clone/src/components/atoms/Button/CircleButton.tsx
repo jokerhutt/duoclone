@@ -1,7 +1,10 @@
 import { forwardRef, type RefObject } from "react";
+import type { ColorType } from "../../../Types/ColorType";
+import { colorMap } from "../../../util/colorMap";
 
 type CircleButtonProps = {
-  mainColor: string;
+  mainColor?: string;
+  unitColor?: ColorType;
   shadowColor?: string;
   icon?: string;
   offset?: string;
@@ -13,6 +16,7 @@ type CircleButtonProps = {
 
 export function CircleButton({
   mainColor,
+  unitColor,
   shadowColor,
   icon,
   offset = "",
@@ -21,12 +25,17 @@ export function CircleButton({
   onClick,
   buttonRef,
 }: CircleButtonProps) {
+  const toDisplayColor = unitColor ? colorMap[unitColor] : colorMap["GREEN"];
+  const colorCSS = mainColor 
+    ? mainColor
+    : `${toDisplayColor.circleShadow} ${toDisplayColor.bg}`;
+
   return (
     <>
       <button
         ref={buttonRef ?? undefined}
         onClick={onClick}
-        className={`h-14 w-16 rounded-full ${mainColor} ${offset} ${extraStyle} active:translate-y-[5px] active:shadow-none flex items-center justify-center
+        className={`h-14 w-16 rounded-full ${colorCSS} ${offset} ${extraStyle} active:translate-y-[5px] active:shadow-none flex items-center justify-center
         `}
         style={{ transition: "transform 0.2s" }}
       >

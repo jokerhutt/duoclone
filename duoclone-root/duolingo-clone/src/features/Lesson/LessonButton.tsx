@@ -6,14 +6,16 @@ import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { useRef, useState } from "react";
 import LessonPopover from "../../components/molecules/Dropdown/LessonPopover";
 import { CircleRing } from "../../components/atoms/Button/CircleRing";
+import type { ColorType } from "../../Types/ColorType";
 
 type LessonButtonProps = {
   idx: number;
   id: number;
+  unitColor?: ColorType;
   courseIndex: number;
 };
 
-export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
+export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonProps) {
   const navigate = useNavigate();
 
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
@@ -33,15 +35,6 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
 
   const isPassed =
     lesson?.isPassed || userCourseProgress?.currentLessonId == lesson?.id;
-
-  const buttonColor =
-    !isPassed && lesson?.orderIndex != 1
-      ? "bg-duoGrayLocked shadow-duoGrayLockedCircleShadow"
-      : courseIndex % 6 == 0
-      ? "bg-duoGreen shadow-duoGreenCircleShadow"
-      : courseIndex % 6 == 1
-      ? "bg-duoPink shadow-duoPinkCircleShadow"
-      : "bg-duoBlue shadow-duoBlueCircleShadow ";
 
   const chooseLessonImage = () => {
     if (!lesson || !lesson.lessonType || !lesson.orderIndex || !lesson.id)
@@ -67,12 +60,14 @@ export function LessonButton({ idx, id, courseIndex }: LessonButtonProps) {
 
   const isCurrentLesson = lesson.id == userCourseProgress?.currentLessonId;
 
+  const unitColorToShow = isPassed || lesson?.orderIndex == 1 ? unitColor : "LOCKED";
+
   return (
     <>
-      <CircleRing offset={getOffset(courseIndex, idx)} show={isCurrentLesson}>
+      <CircleRing unitColor={unitColorToShow} offset={getOffset(courseIndex, idx)} show={isCurrentLesson}>
         <CircleButton
           icon={lessonImage}
-          mainColor={buttonColor}
+          unitColor={unitColorToShow}
           buttonRef={circleRef}
           iconOpacity={iconOpacity}
           extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}
