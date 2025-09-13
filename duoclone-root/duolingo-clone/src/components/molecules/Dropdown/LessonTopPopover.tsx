@@ -1,53 +1,59 @@
 import * as Popover from "@radix-ui/react-popover";
 import { AnimatePresence, motion } from "framer-motion";
+import type { ColorType } from "../../../Types/ColorType";
+import { colorMap } from "../../../util/colorMap";
 
 type LessonTopPopoverProps = {
-    open: boolean;
-    onOpenChange: (o: boolean) => void;
-    triggerRef: any;
-}
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+  triggerRef: any;
+  lessonStatus: "CURRENT" | "JUMP"
+  unitColor?: ColorType;
+};
 
-export function LessonTopPopover({open, onOpenChange, triggerRef}: LessonTopPopoverProps) {
+export function LessonTopPopover({
+  open,
+  onOpenChange,
+  triggerRef,
+  unitColor = "LOCKED",
+  lessonStatus,
+}: LessonTopPopoverProps) {
 
-    return (
-           <Popover.Root open={open} onOpenChange={onOpenChange}>
-                  {triggerRef && <Popover.Anchor virtualRef={triggerRef} />}
+    const style = colorMap[unitColor];
+    const text = lessonStatus == "CURRENT" ? "START" : "JUMP HERE?"
+
+  return (
+    <Popover.Root open={open} onOpenChange={onOpenChange}>
+      {triggerRef && <Popover.Anchor virtualRef={triggerRef} />}
       <Popover.Portal>
         <Popover.Content
           asChild
           forceMount
           side="top"
           align="center"
-          sideOffset={8}
-          avoidCollisions
-          collisionPadding={10}
+          sideOffset={-12}
+          avoidCollisions={false}
         >
-          <AnimatePresence>
-            {open && (
-              <motion.div
-                key="lp"
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-                style={{
-                  transformOrigin:
-                    "var(--radix-popover-content-transform-origin)",
-                }}
-                
-                className={`z-50 rounded-xl bg-duoBackground border border-duoGrayBorder py-1 px-3 shadow-lg`}
+          {open && (
+            <div
+              key="lp"
+              className={`rounded-xl bg-duoBackground border border-duoGrayBorder py-3 px-4 shadow-lg bob`}
+            >
+              <div
+                className={`flex w-full text-xl text-center font-bold flex-col ${style.text}`}
               >
-                <div className={`flex w-full text-lg text-center font-bold flex-col text-duoSubText`}>
-                    JUMP HERE?
-                </div>
-              
-                <Popover.Arrow className={`fill-duoGrayBorder`} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+                {text}
+              </div>
+
+              <Popover.Arrow
+                className={`fill-duoBackground`}
+                width={16}
+                height={12}
+              />
+            </div>
+          )}
         </Popover.Content>
       </Popover.Portal>
-    </Popover.Root> 
-    )
-
+    </Popover.Root>
+  );
 }

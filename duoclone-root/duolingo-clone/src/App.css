@@ -50,6 +50,15 @@
   --shadow-duoGrayBorderShadow: 0 3px #37464f;
 }
 
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.bob {
+  animation: bob 3s ease-in-out infinite;
+  will-change: transform;
+}
+
 :root {
   --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 1920px;

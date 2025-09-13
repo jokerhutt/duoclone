@@ -84,7 +84,7 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
           offset={getOffset(courseIndex, idx)}
         />
       </CircleRing>
-      {lesson.orderIndex != 1 || isCurrentLesson || isPassed ? (
+      {(lesson.orderIndex != 1 || isPassed || isCurrentLesson) && (
       <LessonPopover
       lessonStatus={isCurrentLesson ? "CURRENT" : isPassed ? "PASSED" : "LOCKED"}
         lessonIndex={idx}
@@ -93,14 +93,17 @@ export function LessonButton({ idx, id, courseIndex, unitColor }: LessonButtonPr
         unitColor={unitColorToShow}
         open={open}
         onOpenChange={setOpen}
-      />
-      ) : (
-        <LessonTopPopover
-        open={true}
+      />)}
+        {(!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson)) && (
+      <LessonTopPopover
+        open={isCurrentLesson && open ? false : true}
+        lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
         onOpenChange={() => null}
         triggerRef={circleRef} 
+        unitColor={unitColor}
         />
-      )}    
+        )}
+
 
     </>
   );
