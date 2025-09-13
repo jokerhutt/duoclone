@@ -41,7 +41,8 @@
 
   --shadow-duoGreenShadow: 0 5px 0 #59a700;
   --shadow-duoPinkShadow: 0 5px 0 #cc6ba7;
-  --shadow-duoGrayLockedCircleShadow: 0 5px #2b383f;
+  --shadow-duoGrayLockedShadow: 0 8px 0 #2b383f; 
+  --shadow-duoGrayLockedCircleShadow: 0 5px 0 #2b383f;
   --shadow-duoGreenCircleShadow: 0 8px 0 #59a700;
   --shadow-duoPinkCircleShadow: 0 8px #cc6ba7;
   --shadow-duoBlueShadow: 0 5px 0 #4099d6;

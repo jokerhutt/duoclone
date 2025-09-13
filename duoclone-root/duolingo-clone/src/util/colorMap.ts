@@ -29,7 +29,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
   LOCKED: {
     color: "#37464f",
     text: "text-duoGrayLocked",
-    shadow: "shadow-duoGrayLockedCircleShadow",
+    shadow: "shadow-duoGrayLockedShadow",
     bg: "bg-duoGrayLocked", 
     circleShadow: "shadow-duoGrayLockedCircleShadow",
     fill: "fill-duoGrayLocked",
