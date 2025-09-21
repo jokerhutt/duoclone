@@ -11,6 +11,7 @@ import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
 import { AnimatePresence, motion } from "framer-motion";
 import { bottomUpSpringAnimation } from "../../animations/BottomUpSpringAnimation";
+import { BottomSheet } from "./BottomSheet";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -115,24 +116,18 @@ export function LessonPage() {
           isIncorrect={lessonResponse?.correct == false}
         />
       </div>
-      <AnimatePresence>
+
+      <BottomSheet
+        isActive={!!lessonResponse}
+        key={`result-${Number(position)}-${lessonResponse?.correct}`}
+      >
         {lessonResponse && (
-          <motion.div
-          className="absolute inset-x-0 bottom-0"
-            key={`result-${Number(position)}-${lessonResponse.correct}`}
-            variants={bottomUpSpringAnimation}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            style={{ transformOrigin: "bottom center" }}
-          >
-            <LessonResult
-              correctAnswer={lessonResponse.correctAnswer}
-              isCorrect={lessonResponse.correct}
-            />
-          </motion.div>
+          <LessonResult
+            correctAnswer={lessonResponse.correctAnswer}
+            isCorrect={lessonResponse.correct}
+          />
         )}
-      </AnimatePresence>
+      </BottomSheet>
     </>
   );
 }
