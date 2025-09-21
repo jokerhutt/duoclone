@@ -9,6 +9,8 @@ import { SpinnerPage } from "../Section/SpinnerPage";
 import { WideActionButton } from "../Common/WideActionButton";
 import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
+import { AnimatePresence, motion } from "framer-motion";
+import { bottomUpSpringAnimation } from "../../animations/BottomUpSpringAnimation";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -113,7 +115,23 @@ export function LessonPage() {
           isIncorrect={lessonResponse?.correct == false}
         />
       </div>
-      {lessonResponse && <LessonResult correctAnswer={lessonResponse.correctAnswer} isCorrect={lessonResponse.correct} />}
+      <AnimatePresence>
+        {lessonResponse && (
+          <motion.div
+            key={`result-${Number(position)}-${lessonResponse.correct}`}
+            variants={bottomUpSpringAnimation}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ transformOrigin: "bottom center" }}
+          >
+            <LessonResult
+              correctAnswer={lessonResponse.correctAnswer}
+              isCorrect={lessonResponse.correct}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
