@@ -7,7 +7,6 @@ import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
-  selectedOptions: ExerciseOption | null;
     addOption: (option: ExerciseOption) => void;
   currentSelectedOptions: ExerciseOption[];
   removeOption: (option: ExerciseOption) => void;
@@ -35,7 +34,6 @@ function chunkByChars(items: ExerciseOption[], limit = 40) {
 
 export function ComposeSentenceExercise({
   exercise,
-  selectedOptions,
   currentSelectedOptions,
   addOption,
   removeOption
@@ -48,9 +46,7 @@ export function ComposeSentenceExercise({
   );
 
   const displayRows = chunkByChars(
-    selectedOptions
-      ? [...currentSelectedOptions, selectedOptions]
-      : currentSelectedOptions,
+    currentSelectedOptions,
     40  );
 
   return (

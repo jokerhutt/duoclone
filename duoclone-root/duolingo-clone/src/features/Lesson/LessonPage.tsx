@@ -16,21 +16,11 @@ export function LessonPage() {
   const id = Number(lessonId); // convert
   const { data: exercises, isLoading } = useExercises(id, 1);
 
-  const [selectedOptions, setSelectedOptions] = useState<ExerciseOption | null>(
-    null
-  );
-
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]
   >([]);
 
   const navigate = useNavigate();
-
-  const isSelectedOption = (option: ExerciseOption) => {
-    return currentSelectedOptions.some(
-      (selectedOption) => selectedOption.id == option.id
-    );
-  };
 
   function endLesson() {
     navigate(`/lessons/${lessonId}/complete`);
@@ -73,7 +63,7 @@ export function LessonPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           exerciseId: exercises[Number(position)].id,
-          optionId: currentSelectedOptions,
+          optionIds: currentSelectedOptions.map((option) => option.id),
           userId: 1,
         }),
       });
@@ -103,11 +93,9 @@ export function LessonPage() {
       <div className="my-14 flex w-full h-full pt-4">
         <ExerciseComponent
           exercise={exercises[Number(position)]}
-          selectedOptions={selectedOptions}
           currentSelectedOptions={currentSelectedOptions}
           addOption={addOption}
           removeOption={removeOption}
-          isSelectedOption={isSelectedOption}
         />
       </div>
       <WideActionButton

@@ -7,18 +7,14 @@ import { ExercisePrompt } from "./Prompt/ExercisePrompt";
 
 type ExerciseComponentProps = {
   exercise: Exercise;
-  selectedOptions: ExerciseOption | null;
   currentSelectedOptions: ExerciseOption[];
   addOption: (option: ExerciseOption) => void;
   removeOption: (option: ExerciseOption) => void;
-  isSelectedOption: (option: ExerciseOption) => boolean;
 };
 
 export function ExerciseComponent({
   exercise,
-  selectedOptions,
   currentSelectedOptions,
-  isSelectedOption,
   addOption,
   removeOption,
 }: ExerciseComponentProps) {
@@ -34,7 +30,6 @@ export function ExerciseComponent({
           exercise={exercise}
           addOption={addOption}
           removeOption={removeOption}
-          selectedOptions={selectedOptions}
           currentSelectedOptions={currentSelectedOptions}
         />
       );
@@ -44,7 +39,6 @@ export function ExerciseComponent({
           exercise={exercise}
           addOption={addOption}
           removeOption={removeOption}
-          selectedOptions={selectedOptions}
           currentSelectedOptions={currentSelectedOptions}
         />
       );

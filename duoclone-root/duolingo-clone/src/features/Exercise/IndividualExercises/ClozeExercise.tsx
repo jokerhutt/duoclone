@@ -4,7 +4,6 @@ import { ExercisePrompt } from "../Prompt/ExercisePrompt";
 
 type ClozeExerciseProps = {
   exercise: Exercise;
-  selectedOptions: ExerciseOption | null;
   currentSelectedOptions: ExerciseOption[];
   addOption: (option: ExerciseOption) => void;
   removeOption: (option: ExerciseOption) => void;
@@ -12,7 +11,6 @@ type ClozeExerciseProps = {
 
 export function ClozeExercise({
   exercise,
-  selectedOptions,
   currentSelectedOptions,
   addOption,
   removeOption,
