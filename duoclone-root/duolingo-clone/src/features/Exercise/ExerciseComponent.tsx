@@ -1,9 +1,6 @@
 import type { Exercise, ExerciseOption } from "../../Types/ExerciseType";
 import { ClozeExercise } from "./IndividualExercises/ClozeExercise";
 import { ComposeSentenceExercise } from "./IndividualExercises/ComposeSentenceExercise";
-import { SelectionOptionButton } from "./Options/SelectionOptionButton";
-import { OptionsList } from "./OptionsList";
-import { ExercisePrompt } from "./Prompt/ExercisePrompt";
 
 type ExerciseComponentProps = {
   exercise: Exercise;

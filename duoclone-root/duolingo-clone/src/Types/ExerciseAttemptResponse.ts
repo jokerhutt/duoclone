@@ -1,6 +1,8 @@
+type responseMessage = "Correct!" | "Incorrect!";
+
 export type ExerciseAttemptResponse = {
   correct: boolean;
   score: number;
-  message: string;
+  message: responseMessage;
   correctResponses: number[];
 };

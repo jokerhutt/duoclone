@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SUBMIT_ATTEMPT } from "../../util/paths";
 import type { ExerciseOption } from "../../Types/ExerciseType";
@@ -8,6 +8,7 @@ import { useExercises } from "../../queries/useQuery/useExercises";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { WideActionButton } from "../Common/WideActionButton";
 import { LessonHeader } from "./LessonHeader";
+import { LessonResult } from "./LessonResult";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -20,27 +21,18 @@ export function LessonPage() {
     ExerciseOption[]
   >([]);
 
+  const [lessonResponse, setLessonResponse] =
+    useState<ExerciseAttemptResponse | null>(null);
+
   const navigate = useNavigate();
 
   function endLesson() {
     navigate(`/lessons/${lessonId}/complete`);
   }
 
-  async function submitAttempt() {
-    if (!exercises || position == null) return;
-    const ok = await submitAnswer();
-    if (!ok) return;
-
-    const idx = Number(position);
-    const isLast = idx >= exercises.length - 1;
-    setCurrentSelectedOptions([]);
-
-    if (isLast) {
-      endLesson();
-    } else {
-      navigate(`/lessons/${lessonId}/${idx + 1}`);
-    }
-  }
+  useEffect(() => {
+    if (!lessonResponse) return;
+  }, [lessonResponse]);
 
   const removeOption = (option: ExerciseOption) => {
     setCurrentSelectedOptions((prev) =>
@@ -55,31 +47,46 @@ export function LessonPage() {
   };
 
   async function submitAnswer() {
-    if (!exercises || currentSelectedOptions.length < 1) return;
+    if (!exercises) return;
+    if (!lessonResponse) {
+      if (position == null || currentSelectedOptions.length < 1) return;
 
-    try {
-      const response = await fetch(SUBMIT_ATTEMPT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          exerciseId: exercises[Number(position)].id,
-          optionIds: currentSelectedOptions.map((option) => option.id),
-          userId: 1,
-        }),
-      });
+      try {
+        const response = await fetch(SUBMIT_ATTEMPT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            exerciseId: exercises[Number(position)].id,
+            optionIds: currentSelectedOptions.map((option) => option.id),
+            userId: 1,
+          }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result: ExerciseAttemptResponse = await response.json();
+        setLessonResponse(result);
+        if (result.correct) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
       }
+    } else {
+      const idx = Number(position);
+      const isLast = idx >= exercises.length - 1;
+      setCurrentSelectedOptions([]);
+      setLessonResponse(null);
 
-      const result: ExerciseAttemptResponse = await response.json();
-      if (result.correct) {
-        return true;
+      if (isLast) {
+        endLesson();
       } else {
-        return false;
+        navigate(`/lessons/${lessonId}/${idx + 1}`);
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -88,22 +95,26 @@ export function LessonPage() {
   }
 
   return (
-    <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-      <LessonHeader />
-      <div className="my-14 flex w-full h-full pt-4">
-        <ExerciseComponent
-          exercise={exercises[Number(position)]}
-          currentSelectedOptions={currentSelectedOptions}
-          addOption={addOption}
-          removeOption={removeOption}
+    <>
+      <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
+        <LessonHeader />
+        <div className="my-14 flex w-full h-full pt-4">
+          <ExerciseComponent
+            exercise={exercises[Number(position)]}
+            currentSelectedOptions={currentSelectedOptions}
+            addOption={addOption}
+            removeOption={removeOption}
+          />
+        </div>
+        <WideActionButton
+          text="Check"
+          onSubmit={() => submitAnswer()}
+          isActive={currentSelectedOptions.length > 0}
+          isIncorrect={lessonResponse?.correct == false}
         />
       </div>
-      <WideActionButton
-        text="Check"
-        onSubmit={() => submitAttempt()}
-        isActive={currentSelectedOptions.length > 0}
-      />
-    </div>
+      {lessonResponse && <LessonResult isCorrect={lessonResponse.correct} />}
+    </>
   );
 }
 ("");
