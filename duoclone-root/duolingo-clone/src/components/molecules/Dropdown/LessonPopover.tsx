@@ -114,6 +114,7 @@ export default function LessonPopover({
                 }}
                   isActive={true}
                   text={buttonText()}
+                  activeText={buttonText()}
                   activeColor={`active:shadow-none active:translate-y-[5px] ${style.shadow}/50 ${unitColor == "LOCKED" ? style.bg : "bg-white"}`}
                   activeTextColor={`text-lg ${unitColor == "LOCKED" ? style.lightVersionText : style.text}`}
                 />
