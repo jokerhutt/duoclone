@@ -16,7 +16,7 @@ export function LessonResult({isCorrect, correctAnswer}: LessonResultProps) {
   const header = isCorrect ? correctHeader : incorrectHeader;
 
   return (
-    <div className="absolute inset-x-0 p-4 bottom-0 pb-24 gap-2 w-full flex flex-col bg-duoDarkGray">
+    <div className="p-4 pb-24 gap-2 w-full flex flex-col bg-duoDarkGray">
         <p className={`text-2xl ${color}`}>{header}</p>
         {!isCorrect && (
             <p className={`${color} font-light`}>{correctAnswer}</p>

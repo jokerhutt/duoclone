@@ -118,6 +118,7 @@ export function LessonPage() {
       <AnimatePresence>
         {lessonResponse && (
           <motion.div
+          className="absolute inset-x-0 bottom-0"
             key={`result-${Number(position)}-${lessonResponse.correct}`}
             variants={bottomUpSpringAnimation}
             initial="initial"
