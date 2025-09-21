@@ -60,7 +60,7 @@ export function ComposeSentenceExercise({
         />
         <div className="mt-10 p-4 border h-fit border-duoGrayBorder rounded-xl">
           <p className="text-white font-light text-xl">
-            My dog is very strong!
+            {exercise.prompt} 
           </p>
         </div>
       </div>

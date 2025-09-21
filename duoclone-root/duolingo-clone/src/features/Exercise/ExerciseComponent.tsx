@@ -18,7 +18,7 @@ export function ExerciseComponent({
   console.log(JSON.stringify("EXERCISE IS: " + JSON.stringify(exercise)));
 
   const title =
-    exercise.type != "CLOZE" ? "Fill in the blank" : "Translate this sentence";
+    exercise.type == "CLOZE" ? "Fill in the blank" : "Translate this sentence";
 
   const toRender = () => {
     if (exercise.type == "CLOZE") {
