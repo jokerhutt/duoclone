@@ -5,4 +5,5 @@ export type ExerciseAttemptResponse = {
   score: number;
   message: responseMessage;
   correctResponses: number[];
+  correctAnswer: string;
 };

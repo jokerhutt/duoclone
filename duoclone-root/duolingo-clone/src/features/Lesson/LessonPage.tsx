@@ -113,7 +113,7 @@ export function LessonPage() {
           isIncorrect={lessonResponse?.correct == false}
         />
       </div>
-      {lessonResponse && <LessonResult isCorrect={lessonResponse.correct} />}
+      {lessonResponse && <LessonResult correctAnswer={lessonResponse.correctAnswer} isCorrect={lessonResponse.correct} />}
     </>
   );
 }
