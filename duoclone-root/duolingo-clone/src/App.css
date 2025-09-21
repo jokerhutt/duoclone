@@ -33,6 +33,7 @@
   --color-duoOrange: #f5a632;
   --color-duoRed: #ff4c4b;
   --color-duoDarkGray: #202f36;
+  --color-duoIncorrectRed: #ee5555;
 
   --shadow-duoLightGreenShadow: 0 8px #79b933;
 
@@ -41,7 +42,7 @@
 
   --shadow-duoGreenShadow: 0 5px 0 #59a700;
   --shadow-duoPinkShadow: 0 5px 0 #cc6ba7;
-  --shadow-duoGrayLockedShadow: 0 8px 0 #2b383f; 
+  --shadow-duoGrayLockedShadow: 0 8px 0 #2b383f;
   --shadow-duoGrayLockedCircleShadow: 0 5px 0 #2b383f;
   --shadow-duoGreenCircleShadow: 0 8px 0 #59a700;
   --shadow-duoPinkCircleShadow: 0 8px #cc6ba7;
@@ -51,8 +52,13 @@
 }
 
 @keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 .bob {
   animation: bob 3s ease-in-out infinite;
