@@ -3,9 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SUBMIT_ATTEMPT } from "../../util/paths";
 import type { ExerciseOption } from "../../Types/ExerciseType";
 import { ExerciseComponent } from "../Exercise/ExerciseComponent";
-import { Header } from "../../components/molecules/Header/Header";
-import { XIcon } from "../../components/atoms/Icons/XIcon";
-import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
 import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptResponse";
 import { useExercises } from "../../queries/useQuery/useExercises";
 import { SpinnerPage } from "../Section/SpinnerPage";
@@ -19,14 +16,20 @@ export function LessonPage() {
   const id = Number(lessonId); // convert
   const { data: exercises, isLoading } = useExercises(id, 1);
 
-  const [selectedOption, setSelectedOption] = useState<ExerciseOption | null>(
+  const [selectedOptions, setSelectedOptions] = useState<ExerciseOption | null>(
     null
   );
+
+  const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
+    ExerciseOption[]
+  >([]);
 
   const navigate = useNavigate();
 
   const isSelectedOption = (option: ExerciseOption) => {
-    return selectedOption != null && selectedOption.id == option.id;
+    return currentSelectedOptions.some(
+      (selectedOption) => selectedOption.id == option.id
+    );
   };
 
   function endLesson() {
@@ -40,7 +43,7 @@ export function LessonPage() {
 
     const idx = Number(position);
     const isLast = idx >= exercises.length - 1;
-    setSelectedOption(null);
+    setCurrentSelectedOptions([]);
 
     if (isLast) {
       endLesson();
@@ -49,8 +52,20 @@ export function LessonPage() {
     }
   }
 
+  const removeOption = (option: ExerciseOption) => {
+    setCurrentSelectedOptions((prev) =>
+      prev.filter((opt) => opt.id !== option.id)
+    );
+  };
+
+  const addOption = (option: ExerciseOption) => {
+    setCurrentSelectedOptions((prev) =>
+      prev.some((opt) => opt.id === option.id) ? prev : [...prev, option]
+    );
+  };
+
   async function submitAnswer() {
-    if (!exercises || !selectedOption) return;
+    if (!exercises || currentSelectedOptions.length < 1) return;
 
     try {
       const response = await fetch(SUBMIT_ATTEMPT, {
@@ -58,7 +73,7 @@ export function LessonPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           exerciseId: exercises[Number(position)].id,
-          optionId: selectedOption.id,
+          optionId: currentSelectedOptions,
           userId: 1,
         }),
       });
@@ -84,19 +99,21 @@ export function LessonPage() {
 
   return (
     <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-      <LessonHeader/>
+      <LessonHeader />
       <div className="my-14 flex w-full h-full pt-4">
         <ExerciseComponent
           exercise={exercises[Number(position)]}
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
+          selectedOptions={selectedOptions}
+          currentSelectedOptions={currentSelectedOptions}
+          addOption={addOption}
+          removeOption={removeOption}
           isSelectedOption={isSelectedOption}
         />
       </div>
       <WideActionButton
         text="Check"
         onSubmit={() => submitAttempt()}
-        isActive={!!selectedOption}
+        isActive={currentSelectedOptions.length > 0}
       />
     </div>
   );

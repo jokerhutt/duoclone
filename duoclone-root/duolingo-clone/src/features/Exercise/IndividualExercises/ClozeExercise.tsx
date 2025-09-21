@@ -4,18 +4,19 @@ import { ExercisePrompt } from "../Prompt/ExercisePrompt";
 
 type ClozeExerciseProps = {
   exercise: Exercise;
-  selectedOption: ExerciseOption | null;
-  setSelectedOption: (option: ExerciseOption | null) => void;
-  isSelectedOption: (option: ExerciseOption) => boolean;
+  selectedOptions: ExerciseOption | null;
+  currentSelectedOptions: ExerciseOption[];
+  addOption: (option: ExerciseOption) => void;
+  removeOption: (option: ExerciseOption) => void;
 };
 
 export function ClozeExercise({
   exercise,
-  selectedOption,
-  setSelectedOption,
-  isSelectedOption,
+  selectedOptions,
+  currentSelectedOptions,
+  addOption,
+  removeOption,
 }: ClozeExerciseProps) {
-
   const img =
     "https://d2pur3iezf4d1j.cloudfront.net/images/d109f51da8daee5c45d3f068fa1966e7";
 
@@ -26,14 +27,17 @@ export function ClozeExercise({
       </div>
       <ExercisePrompt
         exercise={exercise}
-        selectedOption={selectedOption}
-        setSelectedOption={() => setSelectedOption(null)}
+        selectedOption={currentSelectedOptions[0]}
+        setSelectedOption={() => removeOption(currentSelectedOptions[0])}
       />
       <div className="w-full h-full flex items-center justify-center">
         <OptionsList
           exercise={exercise}
-          isSelectedOption={isSelectedOption}
-          setSelectedOption={setSelectedOption}
+          isSelectedOption={(option) =>
+            currentSelectedOptions.some((opt) => opt.id === option.id)
+          }
+          canAddMore={currentSelectedOptions.length < 1}
+          addOption={addOption}
         />
       </div>
     </div>

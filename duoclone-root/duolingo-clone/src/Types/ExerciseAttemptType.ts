@@ -1,5 +1,5 @@
 export type ExerciseAttemptType = {
   exerciseId: number;
-  optionId: number;
+  optionIds: number[];
   userId: number;
 };

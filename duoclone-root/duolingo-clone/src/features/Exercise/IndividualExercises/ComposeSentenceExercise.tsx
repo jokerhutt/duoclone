@@ -7,6 +7,10 @@ import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
+  selectedOptions: ExerciseOption | null;
+    addOption: (option: ExerciseOption) => void;
+  currentSelectedOptions: ExerciseOption[];
+  removeOption: (option: ExerciseOption) => void;
 };
 
 function chunkByChars(items: ExerciseOption[], limit = 40) {
@@ -31,16 +35,12 @@ function chunkByChars(items: ExerciseOption[], limit = 40) {
 
 export function ComposeSentenceExercise({
   exercise,
+  selectedOptions,
+  currentSelectedOptions,
+  addOption,
+  removeOption
 }: ComponentSentenceExerciseProps) {
   const [animationData, setAnimationData] = useState<any>(test);
-
-  const [selectedOptions, setSelectedOptions] = useState<ExerciseOption | null>(
-    null
-  );
-
-  const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
-    ExerciseOption[]
-  >([]);
 
   const plannedRows = Math.max(
     1,
@@ -80,11 +80,7 @@ export function ComposeSentenceExercise({
                   key={option.id}
                   text={option.content}
                   isSelected={false}
-                  onClick={() =>
-                    setCurrentSelectedOptions((prev) =>
-                      prev.filter((opt) => opt.id !== option.id)
-                    )
-                  }
+                  onClick={() => removeOption(option)}
                 />
               ))}
             </div>
@@ -99,11 +95,7 @@ export function ComposeSentenceExercise({
           isSelectedOption={(option) =>
             currentSelectedOptions.some((opt) => opt.id === option.id)
           }
-          setSelectedOption={(option) =>
-            setCurrentSelectedOptions((prev) =>
-              prev.some((opt) => opt.id === option.id) ? prev : [...prev, option]
-            )
-          }
+          addOption={addOption}
         />
       </div>
     </div>
