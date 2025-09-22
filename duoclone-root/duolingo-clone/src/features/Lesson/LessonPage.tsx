@@ -17,7 +17,7 @@ export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
 
-  const id = Number(lessonId); // convert
+  const id = Number(lessonId);
   const { data: exercises, isLoading } = useExercises(id, 1);
 
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<

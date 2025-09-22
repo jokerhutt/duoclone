@@ -12,6 +12,7 @@ export function LessonResult({isCorrect, correctAnswer}: LessonResultProps) {
   const incorrectColor = "text-duoIncorrectRed"  
 
   const incorrectHeader = "Correct Solution:"
+
   const correctHeader = "Great!"
 
   const color = isCorrect ? correctColor : incorrectColor;
