@@ -7,7 +7,7 @@ import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
-    addOption: (option: ExerciseOption) => void;
+  addOption: (option: ExerciseOption) => void;
   currentSelectedOptions: ExerciseOption[];
   removeOption: (option: ExerciseOption) => void;
 };
@@ -38,18 +38,34 @@ export function ComposeSentenceExercise({
   exercise,
   currentSelectedOptions,
   addOption,
-  removeOption
+  removeOption,
 }: ComponentSentenceExerciseProps) {
-  const [animationData, setAnimationData] = useState<any>(test);
+
+   const possibleAnimations = [
+    "/lottie-animations/LILY_NEUTRAL_PROMPT.json",
+    "/lottie-animations/EDDY_NEUTRAL_PROMPT.json",
+    "/lottie-animations/BEAR_NEUTRAL_PROMPT.json",
+    "/lottie-animations/LUCY_NEUTRAL_PROMPT.json"
+  ]; 
+
+  const [animationData, setAnimationData] = useState<any>(null);
+
+    useEffect(() => {
+    const random = Math.floor(Math.random() * possibleAnimations.length);
+    const file = possibleAnimations[random];
+
+    fetch(file)
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data));
+  }, []);
+
 
   const plannedRows = Math.max(
     1,
-    chunkByChars(exercise.options, chunkBy).length 
+    chunkByChars(exercise.options, chunkBy).length
   );
 
-  const displayRows = chunkByChars(
-    currentSelectedOptions,
-    chunkBy  );
+  const displayRows = chunkByChars(currentSelectedOptions, chunkBy);
 
   return (
     <div className="w-full h-full flex flex-col gap-12">
@@ -61,30 +77,31 @@ export function ComposeSentenceExercise({
           className="w-30 h-auto"
         />
         <div className="mt-10 p-4 border h-fit border-duoGrayBorder rounded-xl">
-          <p className="text-white font-light text-xl">
-            {exercise.prompt} 
-          </p>
+          <p className="text-white font-light text-xl">{exercise.prompt}</p>
         </div>
       </div>
 
       <div>
-      {Array.from({ length: plannedRows }).map((_, i) => {
-        const row = displayRows[i] ?? [];
-        return (
-          <div key={i} className="w-full border-b-4 min-h-16 max-h-16 border-b-duoGrayBorder">
-            <div className="flex gap-2 py-2 min-h-10">
-              {row.map((option) => (
-                <SelectionOptionButton
-                  key={option.id}
-                  text={option.content}
-                  isSelected={false}
-                  onClick={() => removeOption(option)}
-                />
-              ))}
+        {Array.from({ length: plannedRows }).map((_, i) => {
+          const row = displayRows[i] ?? [];
+          return (
+            <div
+              key={i}
+              className="w-full border-b-4 min-h-16 max-h-16 border-b-duoGrayBorder"
+            >
+              <div className="flex gap-2 py-2 min-h-10">
+                {row.map((option) => (
+                  <SelectionOptionButton
+                    key={option.id}
+                    text={option.content}
+                    isSelected={false}
+                    onClick={() => removeOption(option)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       </div>
 
       <div className="w-full h-full flex items-center justify-center">
