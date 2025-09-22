@@ -9,6 +9,7 @@ import { LessonCompleteCard } from "./LessonCompleteCard";
 import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
 
 export function LessonCompletePage() {
+
   const { lessonId } = useParams<{ lessonId: string }>();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
