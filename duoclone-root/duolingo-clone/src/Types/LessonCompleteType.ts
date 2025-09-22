@@ -3,6 +3,7 @@ import type { LessonType } from "./LessonType";
 
 export type LessonCompleteType = {
   totalScore: number;
+  accuracy: number;
   lessonId: number;
   updatedLesson: LessonType;
   updatedUserCourseProgress: CourseProgressType;
