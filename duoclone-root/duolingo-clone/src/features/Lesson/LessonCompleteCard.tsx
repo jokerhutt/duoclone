@@ -5,12 +5,14 @@ type LessonCompleteCard = {
   lottieRef: any;
   animationData: any;
   onComplete: () => void;
+  isPerfect: boolean;
 };
 
 export function LessonCompleteCard({
   title,
   lottieRef,
   animationData,
+  isPerfect,
   onComplete,
 }: LessonCompleteCard) {
   return (
@@ -25,9 +27,11 @@ export function LessonCompleteCard({
       />
       <div className="w-full flex flex-col items-center my-10">
         <p className="text-3xl text-duoGold">{title}</p>
-        <p className="py-6 text-lg font-light text-duoGrayBorder">
-          You made no mistakes in this lesson
-        </p>
+        {isPerfect && (
+          <p className="py-6 text-lg font-light text-duoGrayBorder">
+            You made no mistakes in this lesson
+          </p>
+        )}
       </div>
     </div>
   );
