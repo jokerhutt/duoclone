@@ -48,6 +48,7 @@ export function LessonCompletePage() {
     return <SpinnerPage />;
 
   const totalScore = lessonCompleteMutation.data.totalScore;
+  const accuracy = lessonCompleteMutation.data.accuracy;
   const message = lessonCompleteMutation.data.message;
 
   return (
@@ -61,7 +62,7 @@ export function LessonCompletePage() {
         />
         <LessonStatsGroup
           totalScore={totalScore}
-          correctPercentage={totalScore}
+          correctPercentage={accuracy}
         />
       </div>
 
