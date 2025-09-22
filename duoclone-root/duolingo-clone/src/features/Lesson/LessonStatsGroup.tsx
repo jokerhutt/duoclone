@@ -5,11 +5,13 @@ import { LessonStatsCard } from "./LessonStatsCard";
 type LessonStatsGroupProps = {
   totalScore: string | number;
   correctPercentage: string | number;
+  statsHeader: string;
 };
 
 export function LessonStatsGroup({
   totalScore,
   correctPercentage,
+  statsHeader,
 }: LessonStatsGroupProps) {
   return (
     <div className="w-full flex gap-6 justify-center">
@@ -22,7 +24,7 @@ export function LessonStatsGroup({
       />
 
       <LessonStatsCard
-        title="GOOD"
+        title={statsHeader}
         score={correctPercentage}
         scoreSign="%"
         mainColor="bg-duoLightGreen"

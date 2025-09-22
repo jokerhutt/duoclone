@@ -13,8 +13,17 @@ export function LessonCompletePage() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
 
+  const possibleAnimations = [
+    "/lottie-animations/EL_BEA_DUO.json",
+    "/lottie-animations/EL_LIN_DUO.json",
+    "/lottie-animations/EL_LUCY_DUO.json",
+  ];
+
   useEffect(() => {
-    fetch("/lottie-animations/EL_LIN_DUO.json")
+    const random = Math.floor(Math.random() * possibleAnimations.length);
+    const file = possibleAnimations[random];
+
+    fetch(file)
       .then((res) => res.json())
       .then((data) => setAnimationData(data));
   }, []);
@@ -48,20 +57,25 @@ export function LessonCompletePage() {
     return <SpinnerPage />;
 
   const totalScore = lessonCompleteMutation.data.totalScore;
-  const message = lessonCompleteMutation.data.message;
+  const accuracy = lessonCompleteMutation.data.accuracy;
+  const title = accuracy < 100 ? "Lesson Complete!" : "Perfect Lesson!";
+  const subtitle = accuracy == 100 ? "Take a bow!" : null;
+  const accuracyMessage = lessonCompleteMutation.data.message;
 
   return (
     <div className="w-full h-full flex items-center flex-col py-8 px-3 justify-center">
       <div className="w-full h-full flex flex-col items-center justify-center">
         <LessonCompleteCard
-          title={message}
+          title={title}
           lottieRef={lottieRef}
+          isPerfect={accuracy == 100}
           animationData={animationData}
           onComplete={handleComplete}
         />
         <LessonStatsGroup
           totalScore={totalScore}
-          correctPercentage={totalScore}
+          correctPercentage={accuracy}
+          statsHeader={accuracyMessage}
         />
       </div>
 

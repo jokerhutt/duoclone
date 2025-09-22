@@ -19,10 +19,7 @@ export function ClozeExercise({
     "https://d2pur3iezf4d1j.cloudfront.net/images/d109f51da8daee5c45d3f068fa1966e7";
 
   return (
-    <div className="w-full h-full flex flex-col gap-12">
-      <div className="w-full flex justify-center h-36">
-        <img src={img} />
-      </div>
+    <div className="w-full h-full flex flex-col gap-12 mt-10">
       <ExercisePrompt
         exercise={exercise}
         selectedOption={currentSelectedOptions[0]}
