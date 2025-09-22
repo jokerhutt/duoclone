@@ -12,7 +12,9 @@ type ComponentSentenceExerciseProps = {
   removeOption: (option: ExerciseOption) => void;
 };
 
-function chunkByChars(items: ExerciseOption[], limit = 40) {
+const chunkBy = 30;
+
+function chunkByChars(items: ExerciseOption[], limit = chunkBy) {
   const rows: ExerciseOption[][] = [];
   let row: ExerciseOption[] = [];
   let len = 0;
@@ -42,12 +44,12 @@ export function ComposeSentenceExercise({
 
   const plannedRows = Math.max(
     1,
-    chunkByChars(exercise.options, 40).length 
+    chunkByChars(exercise.options, chunkBy).length 
   );
 
   const displayRows = chunkByChars(
     currentSelectedOptions,
-    40  );
+    chunkBy  );
 
   return (
     <div className="w-full h-full flex flex-col gap-12">
