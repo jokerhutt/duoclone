@@ -1,12 +1,19 @@
 import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
 import { XIcon } from "../../components/atoms/Icons/XIcon";
 import { Header } from "../../components/molecules/Header/Header";
+import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
+import { SpinnerPage } from "../Section/SpinnerPage";
 
 type LessonHeaderProps = {
   handleExitClick: () => void;
 };
 
 export function LessonHeader({ handleExitClick }: LessonHeaderProps) {
+
+  const {data: currentUser, isLoading} = useCurrentUser(1);
+
+  if (isLoading) return <SpinnerPage/>
+
   return (
     <Header padding="px-4" height="">
       <button className="active">

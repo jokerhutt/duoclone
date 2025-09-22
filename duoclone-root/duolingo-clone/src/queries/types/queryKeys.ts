@@ -8,4 +8,5 @@ export const qk = {
   sectionTree: (id: number) => ["sectionTree", id] as const,
   courseProgress: (id: number) => ["courseProgress", id] as const,
   exercises: (lessonId: number) => ["exercises", lessonId] as const,
+  user: (id: number) => ["users", id] as const,
 };
