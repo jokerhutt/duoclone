@@ -40,12 +40,14 @@ export function LessonPage() {
   }, [lessonResponse]);
 
   const removeOption = (option: ExerciseOption) => {
+    if (lessonResponse) return;
     setCurrentSelectedOptions((prev) =>
       prev.filter((opt) => opt.id !== option.id)
     );
   };
 
   const addOption = (option: ExerciseOption) => {
+    if (lessonResponse) return;
     setCurrentSelectedOptions((prev) =>
       prev.some((opt) => opt.id === option.id) ? prev : [...prev, option]
     );
@@ -138,7 +140,9 @@ export function LessonPage() {
         key={1}
         bgColor="bg-duoDarkGrayAlt"
       >
-        <ExitConfirmationSheet setIntendsToExit={() => setIntendsToExit(false)}/>
+        <ExitConfirmationSheet
+          setIntendsToExit={() => setIntendsToExit(false)}
+        />
       </BottomSheet>
     </>
   );
