@@ -24,6 +24,8 @@ export function LessonPage() {
     ExerciseOption[]
   >([]);
 
+  const [intendsToExit, setIntendsToExit] = useState(false);
+
   const [lessonResponse, setLessonResponse] =
     useState<ExerciseAttemptResponse | null>(null);
 
@@ -100,7 +102,7 @@ export function LessonPage() {
   return (
     <>
       <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-        <LessonHeader />
+        <LessonHeader handleExitClick={() => setIntendsToExit(true)} />
         <div className="my-14 flex w-full h-full pt-4">
           <ExerciseComponent
             exercise={exercises[Number(position)]}
@@ -112,7 +114,7 @@ export function LessonPage() {
         <WideActionButton
           text="Check"
           onSubmit={() => submitAnswer()}
-          isActive={currentSelectedOptions.length > 0}
+          isActive={!intendsToExit && currentSelectedOptions.length > 0}
           isIncorrect={lessonResponse?.correct == false}
         />
       </div>
@@ -121,12 +123,44 @@ export function LessonPage() {
         isActive={!!lessonResponse}
         key={`result-${Number(position)}-${lessonResponse?.correct}`}
       >
-        {lessonResponse && (
+        {!!lessonResponse && (
           <LessonResult
             correctAnswer={lessonResponse.correctAnswer}
             isCorrect={lessonResponse.correct}
           />
         )}
+      </BottomSheet>
+
+      <BottomSheet
+        isActive={intendsToExit}
+        onClose={() => setIntendsToExit(false)}
+        isFullScreen={true}
+        key={1}
+        bgColor="bg-duoDarkGrayAlt"
+      >
+        <motion.div className="h-110 z-40 py-10 flex flex-col gap-4 px-6 items-center w-full bg-duoDarkGrayAlt">
+          <img src="https://d35aaqx5ub95lt.cloudfront.net/images/ed9f592a37a6ce248be0beec9c13a0e1.svg" />
+          <p className="text-center text-2xl text-white">
+            Wait, don’t go! You’ll lose your progress if you quit now
+          </p>
+          <WideActionButton
+            activeColor="bg-duoBlue"
+            activeTextColor=""
+            onSubmit={() => setIntendsToExit(false)}
+            text={"KEEP LEARNING"}
+            activeText="KEEP LEARNING"
+            isActive={true}
+          />
+
+          <WideActionButton
+            activeColor=""
+            activeTextColor="text-duoBlue"
+            onSubmit={() => navigate("/")}
+            text={"END SESSION"}
+            activeText="END SESSION"
+            isActive={true}
+          />
+        </motion.div>
       </BottomSheet>
     </>
   );
