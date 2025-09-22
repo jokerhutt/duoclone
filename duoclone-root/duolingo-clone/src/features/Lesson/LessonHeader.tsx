@@ -10,8 +10,6 @@ type LessonHeaderProps = {
 
 export function LessonHeader({ handleExitClick }: LessonHeaderProps) {
 
-
-
   return (
     <Header padding="px-4" height="">
       <button className="active">

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { LessonCompleteType } from "../../Types/LessonCompleteType";
 import { API_PATH } from "../../util/paths";
 import { qk } from "../types/queryKeys";
+import type { UserType } from "../../Types/UserType";
 
 type useLessonCompleteParams = {
   lessonId: string;
@@ -31,6 +32,14 @@ export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
         qk.courseProgress(1),
         data.updatedUserCourseProgress
       );
+      queryClient.setQueryData(qk.user(1), (prev: UserType | undefined) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          totalScore: data.totalScore,
+          streakLength: data.newStreakCount.newCount,
+        };
+      });
     },
   });
 };
