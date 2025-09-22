@@ -9,19 +9,22 @@ import { SpinnerPage } from "../Section/SpinnerPage";
 import { WideActionButton } from "../Common/WideActionButton";
 import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
-import { AnimatePresence, motion } from "framer-motion";
 import { bottomUpSpringAnimation } from "../../animations/BottomUpSpringAnimation";
+import { BottomSheet } from "./BottomSheet";
+import { ExitConfirmationSheet } from "./ExitConfirmationSheet";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
 
-  const id = Number(lessonId); // convert
+  const id = Number(lessonId);
   const { data: exercises, isLoading } = useExercises(id, 1);
 
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]
   >([]);
+
+  const [intendsToExit, setIntendsToExit] = useState(false);
 
   const [lessonResponse, setLessonResponse] =
     useState<ExerciseAttemptResponse | null>(null);
@@ -99,7 +102,7 @@ export function LessonPage() {
   return (
     <>
       <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-        <LessonHeader />
+        <LessonHeader handleExitClick={() => setIntendsToExit(true)} />
         <div className="my-14 flex w-full h-full pt-4">
           <ExerciseComponent
             exercise={exercises[Number(position)]}
@@ -111,27 +114,32 @@ export function LessonPage() {
         <WideActionButton
           text="Check"
           onSubmit={() => submitAnswer()}
-          isActive={currentSelectedOptions.length > 0}
-          isIncorrect={lessonResponse?.correct == false}
+          isActive={!intendsToExit && currentSelectedOptions.length > 0}
+          isIncorrect={!intendsToExit && lessonResponse?.correct == false}
         />
       </div>
-      <AnimatePresence>
-        {lessonResponse && (
-          <motion.div
-            key={`result-${Number(position)}-${lessonResponse.correct}`}
-            variants={bottomUpSpringAnimation}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            style={{ transformOrigin: "bottom center" }}
-          >
-            <LessonResult
-              correctAnswer={lessonResponse.correctAnswer}
-              isCorrect={lessonResponse.correct}
-            />
-          </motion.div>
+
+      <BottomSheet
+        isActive={!!lessonResponse && !intendsToExit}
+        key={`result-${Number(position)}-${lessonResponse?.correct}`}
+      >
+        {!!lessonResponse && (
+          <LessonResult
+            correctAnswer={lessonResponse.correctAnswer}
+            isCorrect={lessonResponse.correct}
+          />
         )}
-      </AnimatePresence>
+      </BottomSheet>
+
+      <BottomSheet
+        isActive={intendsToExit}
+        onClose={() => setIntendsToExit(false)}
+        isFullScreen={true}
+        key={1}
+        bgColor="bg-duoDarkGrayAlt"
+      >
+        <ExitConfirmationSheet setIntendsToExit={() => setIntendsToExit(false)}/>
+      </BottomSheet>
     </>
   );
 }
