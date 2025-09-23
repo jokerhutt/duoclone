@@ -41,6 +41,7 @@ export function UnitPath({ id, index }: UnitPathProps) {
 
   return (
     <>
+      {unit && unit.orderIndex != 1 && <SectionBreak lesson={unit.title} />}
       <div className="flex flex-col w-full items-center mt-20 mb-10 space-y-6 relative">
         {unit && unitLessons && (
           <>
@@ -66,7 +67,6 @@ export function UnitPath({ id, index }: UnitPathProps) {
           />
         </div>
       </div>
-      {unit && <SectionBreak lesson={unit.title} />}
     </>
   );
 }

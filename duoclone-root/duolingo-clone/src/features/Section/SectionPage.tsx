@@ -33,7 +33,7 @@ useUnitObserver(unitRefs, units ?? [], (u) => setCurrentUnit(u));
     <>
       <LearnHeader courseProgress={courseProgress} />
       <UnitBanner currentUnit={currentUnit} />
-      <div className="w-full h-full overflow-auto">
+      <div className="w-full h-full mb-10 overflow-auto">
         {units.map((unit, index) => (
           <div
             key={unit.id}
