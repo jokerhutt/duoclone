@@ -47,7 +47,6 @@ export function LessonButton({
   const isPassed =
     lesson?.isPassed || userCourseProgress?.currentLessonId == lesson?.id;
 
-  const lessonImage: string = chooseLessonImage(lesson, isPassed);
 
   if (!lesson) return null;
 
@@ -55,6 +54,8 @@ export function LessonButton({
     isPassed || lesson?.orderIndex == 1 ? "" : "brightness-50";
 
   const isCurrentLesson = lesson.id == userCourseProgress?.currentLessonId;
+
+  const lessonImage: string = chooseLessonImage(lesson, isPassed, isCurrentLesson);
 
   const unitColorToShow =
     isPassed || isCurrentLesson || lesson?.orderIndex == 1
@@ -74,7 +75,7 @@ export function LessonButton({
 
   return (
     <div className="relative">
-      {lesson.lessonType == "Review" && isPassed ? (
+      {lesson.lessonType == "Review" && lesson?.isPassed ? (
         <UnitReviewButton
           style={style.reviewTrophy}
           circleRef={circleRef}
