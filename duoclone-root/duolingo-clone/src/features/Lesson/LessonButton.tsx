@@ -9,6 +9,7 @@ import { CircleRing } from "../../components/atoms/Button/CircleRing";
 import type { ColorType } from "../../Types/ColorType";
 import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopPopover";
 import { colorMap } from "../../util/colorMap";
+import { UnitReviewButton } from "./UnitReviewButton";
 
 type LessonButtonProps = {
   idx: number;
@@ -94,16 +95,12 @@ export function LessonButton({
   return (
     <div className="relative">
       {lesson.lessonType == "Review" && isPassed ? (
-        <button
-          ref={circleRef ?? undefined}
-          className="relative hover:cursor-pointer"
-          onClick={handleButtonClick}
-        >
-          <p className="absolute inset-0 flex items-center mb-2 justify-center text-2xl text-duoSubText font-bold">
-            {unitOrderIndex}
-          </p>
-          <img className="h-20" src={style.reviewTrophy} />
-        </button>
+        <UnitReviewButton
+          style={style.reviewTrophy}
+          circleRef={circleRef}
+          handleButtonClick={() => handleButtonClick}
+          unitOrderIndex={unitOrderIndex}
+        />
       ) : (
         <CircleRing
           unitColor={unitColorToShow}
@@ -146,8 +143,6 @@ export function LessonButton({
           offset={getOffset(courseIndex, idx)}
           open={isCurrentLesson && open ? false : true}
           lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
-          onOpenChange={() => null}
-          triggerRef={circleRef}
           unitColor={unitColor}
         />
       )}

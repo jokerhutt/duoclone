@@ -1,10 +1,9 @@
 import type { ColorType } from "../../../Types/ColorType";
 import { colorMap } from "../../../util/colorMap";
+import { PopoverArrow } from "./PopoverArrow";
 
 type LessonTopPopoverProps = {
   open: boolean;
-  onOpenChange: (o: boolean) => void;
-  triggerRef: any;
   lessonStatus: "CURRENT" | "JUMP";
   unitColor?: ColorType;
   offset?: string;
@@ -13,7 +12,6 @@ type LessonTopPopoverProps = {
 export function LessonTopPopover({
   open,
   unitColor = "LOCKED",
-  triggerRef,
   lessonStatus,
   offset,
 }: LessonTopPopoverProps) {
@@ -23,7 +21,7 @@ export function LessonTopPopover({
   return (
     <>
       {open && (
-        <div className={`absolute left-1/2 -translate-x-1/2 bottom-16`} >
+        <div className={`absolute left-1/2 -translate-x-1/2 bottom-17`} >
           <button
             className={`rounded-xl bg-duoBackground border ${offset} border-duoGrayBorder py-2 px-4 shadow-lg bob`}
           >
@@ -32,12 +30,8 @@ export function LessonTopPopover({
             >
               {text}
             </div>
+            <PopoverArrow/>
 
-            <div
-              className="absolute left-1/2 top-full -translate-x-1/2 w-0 h-0
-             border-l-8 border-r-8 border-t-8
-             border-l-transparent border-r-transparent border-t-duoBackground"
-            />
           </button>
         </div>
       )}
