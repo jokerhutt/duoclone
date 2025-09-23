@@ -92,7 +92,7 @@ export function LessonButton({
   };
 
   return (
-    <>
+    <div className="relative">
       {lesson.lessonType == "Review" && isPassed ? (
         <button
           ref={circleRef ?? undefined}
@@ -143,6 +143,7 @@ export function LessonButton({
       )}
       {!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson) && (
         <LessonTopPopover
+          offset={getOffset(courseIndex, idx)}
           open={isCurrentLesson && open ? false : true}
           lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
           onOpenChange={() => null}
@@ -150,6 +151,6 @@ export function LessonButton({
           unitColor={unitColor}
         />
       )}
-    </>
+    </div>
   );
 }
