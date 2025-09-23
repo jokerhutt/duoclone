@@ -12,8 +12,7 @@ type LearnHeaderProps = {
 };
 
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
-  const { data: currentUser, isLoading } = useCurrentUser(1);
-  if (isLoading) return <SpinnerPage />;
+  const { data: currentUser } = useCurrentUser(1);
 
   return (
     <Header padding="px-4">
@@ -27,12 +26,12 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
       </div>
       <div className="flex gap-1 items-center">
         <GemsIcon />
-        <p className="text-xl text-duoBlue">100</p>
+        <p className="text-xl text-duoBlue">{currentUser?.points}</p>
       </div>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-1 items-center">
         <HeartIcon />
-        <p className="text-xl text-duoRed">5</p>
+        <p className="text-2xl text-duoRed">∞</p>
       </div>
     </Header>
   );
