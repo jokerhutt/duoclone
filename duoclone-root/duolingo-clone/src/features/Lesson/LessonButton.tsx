@@ -10,6 +10,7 @@ import type { ColorType } from "../../Types/ColorType";
 import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopPopover";
 import { colorMap } from "../../util/colorMap";
 import { UnitReviewButton } from "./UnitReviewButton";
+import { chooseLessonImage } from "../../util/lessonUtils";
 
 type LessonButtonProps = {
   idx: number;
@@ -46,28 +47,7 @@ export function LessonButton({
   const isPassed =
     lesson?.isPassed || userCourseProgress?.currentLessonId == lesson?.id;
 
-  const chooseLessonImage = () => {
-    if (!lesson || !lesson.lessonType || !lesson.orderIndex || !lesson.id)
-      return "";
-
-    if (lesson.orderIndex == 1 && !isPassed) {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/5e4203031e39fc43d94371565fd0d369.svg";
-    }
-
-    if (lesson.lessonType == "Lesson") {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/bfa591f6854b4de08e1656b3e8ca084f.svg";
-    }
-
-    if (lesson.lessonType == "Review" && !lesson.isPassed) {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/f4b1c683214cf55f5ddea4535b983745.svg";
-    } else if (lesson.lessonType == "Review") {
-      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/49d034cef4f32ed000c8a343425e0497.svg";
-    }
-
-    return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7aa61c3f60bd961a60a46fb36e76c72f.svg";
-  };
-
-  const lessonImage: string = chooseLessonImage();
+  const lessonImage: string = chooseLessonImage(lesson, isPassed);
 
   if (!lesson) return null;
 
