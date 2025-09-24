@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import type { SectionTreeNode } from "../Types/SectionTree/SectionTreeNodeTypes";
 import { GET_BULK_TREE } from "./paths";
-import { qk } from "./qk";
+import { qk } from "../queries/types/queryKeys";
 
 export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
   const tree = await fetchSectionTree(id);
