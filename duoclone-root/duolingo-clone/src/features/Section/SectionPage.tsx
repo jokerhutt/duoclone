@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LearnHeader } from "./LearnHeader";
 import { UnitBanner } from "../Unit/UnitBanner";
 import { UnitPath } from "../Unit/UnitPath";
@@ -9,10 +9,9 @@ import {
 } from "../../queries/useQuery/useSectionTree";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
-import { MainFooter } from "../Common/MainFooter";
-import type { UnitType } from "../../Types/UnitType";
 import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
+import { scrollToUnit } from "../../util/scrollUtils";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -22,19 +21,27 @@ export function SectionPage() {
 
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { data: currentUser, isLoading: loadingUser } = useCurrentUser(1);
 
-  const {data: currentUser, isLoading: loadingUser} = useCurrentUser(1);
+  useEffect(() => {
+    scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
+  }, []);
 
   useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
 
   if (isError) return <SpinnerPage color="border-red-400" />;
-  if (loadingUser || isLoading || !units || !courseProgress) return <SpinnerPage />;
+  if (loadingUser || isLoading || !units || !courseProgress)
+    return <SpinnerPage />;
 
   return (
     <>
       <LearnHeader courseProgress={courseProgress} />
       <UnitBanner currentUnit={currentUnit} />
-      <div className="w-full h-full mb-10 overflow-auto">
+      <div
+        ref={scrollContainerRef}
+        className="w-full h-full mb-10 overflow-auto"
+      >
         {units.map((unit, index) => (
           <div
             key={unit.id}
