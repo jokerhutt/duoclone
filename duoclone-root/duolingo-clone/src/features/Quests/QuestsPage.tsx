@@ -9,7 +9,7 @@ export function QuestsPage() {
 
   return (
     <div className="w-full p-4">
-      <ContentWidget>
+      <ContentWidget title={"Daily Quests"}>
         <QuestListWidget/>
       </ContentWidget>
     </div>
