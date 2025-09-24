@@ -6,10 +6,10 @@ type QuestListItemProps = {
 
 export function QuestListItem({isLast}: QuestListItemProps) {
 
-  const showBottomBorder = !isLast ? "border-b-duoGrayBorder border-b pb-4" : ""
+  const showBottomBorder = true ? "border-b-duoGrayBorder border-b" : ""
 
   return (
-    <div className={`w-full flex items-center ${showBottomBorder}`}>
+    <div className={`w-full flex items-center py-8 ${showBottomBorder}`}>
       <div className="w-20">
         <StreakIcon height="h-12" />
       </div>
