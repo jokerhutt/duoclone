@@ -1,0 +1,1 @@
+export type QuestCategory = "STREAK" | "ACCURACY" | "PERFECT"
