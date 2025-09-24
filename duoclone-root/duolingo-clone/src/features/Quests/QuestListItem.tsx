@@ -1,6 +1,7 @@
 import { StreakIcon } from "../../components/atoms/Icons/StreakIcon";
 import { QUEST_METADATA } from "../../Types/QuestCategory";
 import type { QuestType } from "../../Types/QuestType";
+import { QuestProgressBar } from "./QuestProgressBar";
 
 type QuestListItemProps = {
     isLast?: boolean;
@@ -26,13 +27,7 @@ export function QuestListItem({isLast, quest}: QuestListItemProps) {
         <div className="w-full text-white text-xl">
           <p>{metaData.description}</p>
         </div>
-        <div className="w-full relative rounded-full flex items-center justify-center bg-duoGrayLocked h-5">
-          <p className="text-duoLightGray mr-5">{completed} / {total}</p>
-          <img
-            className="absolute right-0 center bottom-0"
-            src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/df7eda7cc1cc833ba30cd1e82781b68f.svg"
-          />
-        </div>
+        <QuestProgressBar completed={completed} total={total}/>
       </div>
     </div>
   );
