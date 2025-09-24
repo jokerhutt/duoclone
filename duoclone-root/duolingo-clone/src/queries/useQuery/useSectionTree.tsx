@@ -9,13 +9,13 @@ export function useSectionTree(sectionId: number) {
 
   const q = useQuery({
     queryKey: qk.sectionTree(sectionId),
-    queryFn: () => fetchSectionTreeAndHydrate(qc, sectionId), // must return non-undefined (you did: `true`)
+    queryFn: () => fetchSectionTreeAndHydrate(qc, sectionId),
     enabled: Number.isFinite(sectionId),
-    staleTime: 0,
-    gcTime: 0,
-    retry: false, // avoid silent re-tries while wiring
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+    retry: false,
     refetchOnWindowFocus: false,
-    select: () => null, // we don’t use the payload
+    select: () => null,
   });
 
   return {

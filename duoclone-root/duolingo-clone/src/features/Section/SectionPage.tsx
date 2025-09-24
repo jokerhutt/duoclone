@@ -12,6 +12,7 @@ import { SpinnerPage } from "./SpinnerPage";
 import { MainFooter } from "../Common/MainFooter";
 import type { UnitType } from "../../Types/UnitType";
 import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
+import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -19,12 +20,12 @@ export function SectionPage() {
   const { data: courseProgress, isLoading: loadingProgress } =
     useCourseProgress(1, 1);
 
-  const [currentUnit, setCurrentUnit] = useState<UnitType | null>(null);
+  const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
 
   const {data: currentUser, isLoading: loadingUser} = useCurrentUser(1);
 
-useUnitObserver(unitRefs, units ?? [], (u) => setCurrentUnit(u));
+  useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
 
   if (isError) return <SpinnerPage color="border-red-400" />;
   if (loadingUser || isLoading || !units || !courseProgress) return <SpinnerPage />;
@@ -45,7 +46,6 @@ useUnitObserver(unitRefs, units ?? [], (u) => setCurrentUnit(u));
           </div>
         ))}
       </div>
-      <MainFooter />
     </>
   );
 }
