@@ -30,6 +30,8 @@ export const GET_COURSE_PROGRESS = (courseId: number, userId: number) =>
 
 export const GET_USER_BY_ID = (userId: number) => API_PATH + `/users/${userId}`;
 
+export const GET_QUESTS_BY_USER_ID = (userId: number) => API_PATH + `quests/${userId}`;
+
 // -------------------------------------------------------- //
 
 export const SUBMIT_LESSON_COMPLETE =
