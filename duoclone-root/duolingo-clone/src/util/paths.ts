@@ -34,8 +34,7 @@ export const GET_QUESTS_BY_USER_ID = (userId: number) => API_PATH + `/quests/${u
 
 // -------------------------------------------------------- //
 
-export const SUBMIT_LESSON_COMPLETE =
-  API_PATH + `/lessons/completions/completedLesson`;
+export const SUBMIT_LESSON_COMPLETE = API_PATH + `/lessons/completions/submit`;
 export const SUBMIT_EXERCISE_ATTEMPT = API_PATH + `/exercises/attempts/submit`;
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
