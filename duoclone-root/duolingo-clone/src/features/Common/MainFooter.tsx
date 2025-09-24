@@ -16,15 +16,15 @@ export function MainFooter() {
         <FooterButton path="/">
           <UserHomeIcon />
         </FooterButton>
-        <div>
+        <FooterButton path="/league">
           <UserLeagueIcon />
-        </div>
+        </FooterButton>
         <FooterButton path="/quests">
           <UserChestQuestsIcon />
         </FooterButton>
-        <div>
+        <FooterButton path="/user">
           <UserFooterIcon />
-        </div>
+        </FooterButton>
       </div>
     </Footer>
   );
