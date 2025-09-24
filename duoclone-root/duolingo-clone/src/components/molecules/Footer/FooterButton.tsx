@@ -1,25 +1,26 @@
-import type { ReactNode } from "react"
-import { useNavigate } from "react-router";
+import type { ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 type FooterButtonProps = {
-    children: React.ReactNode;
-    path: string;
-}
+  children: React.ReactNode;
+  path: string;
+};
 
-export function FooterButton ({children, path}: FooterButtonProps) {
+export function FooterButton({ children, path }: FooterButtonProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const navigate = useNavigate();
+  const isActive =
+    path === "/" ? location.pathname === "/" : location.pathname.includes(path);
 
-    const handleNavigation = () => {
-        if (path.length > 0) {
-            navigate(path);
-        }
+  const style = isActive ? "border border-duoBlue/80 bg-duoBlue/8" : "";
+  const baseStyle = "p-2 rounded-lg"
+
+  const handleNavigation = () => {
+    if (path.length > 0) {
+      navigate(path);
     }
+  };
 
-    return (
-        <div onClick={() => handleNavigation()}>
-            {children}
-        </div>
-    )
-
+  return <div className={`${baseStyle} ${style}`} onClick={() => handleNavigation()}>{children}</div>;
 }
