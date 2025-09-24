@@ -26,12 +26,15 @@ export const GET_UNIT_IDS = (sectionId: number) =>
 // -------------------------------------------------------- //
 
 export const GET_COURSE_PROGRESS = (courseId: number, userId: number) =>
-    API_PATH + `/users/progress/${courseId}/${userId}`
+  API_PATH + `/users/progress/${courseId}/${userId}`;
 
-export const GET_USER_BY_ID = (userId: number) => API_PATH + `/users/${userId}`
+export const GET_USER_BY_ID = (userId: number) => API_PATH + `/users/${userId}`;
 
 // -------------------------------------------------------- //
 
+export const SUBMIT_LESSON_COMPLETE =
+  API_PATH + `/lessons/completions/completedLesson`;
+export const SUBMIT_EXERCISE_ATTEMPT = API_PATH + `/exercises/attempts/submit`;
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
   API_PATH + `/lessons/ids?${lessonIds}&userId=${userId}`;
@@ -49,5 +52,4 @@ export const GET_BULK_TREE = (sectionId: number) =>
 
 // -------------------------------------------------------- //
 
-export const SUBMIT_ATTEMPT = API_PATH + `/exercises/submit`;
-``
+``;

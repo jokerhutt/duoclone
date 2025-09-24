@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { LessonCompleteType } from "../../Types/LessonCompleteType";
-import { API_PATH } from "../../util/paths";
+import { API_PATH, SUBMIT_LESSON_COMPLETE } from "../../util/paths";
 import { qk } from "../types/queryKeys";
 import type { UserType } from "../../Types/UserType";
 
@@ -14,7 +14,7 @@ export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
   return useMutation<LessonCompleteType>({
     mutationKey: ["lessonComplete", lessonId],
     mutationFn: async () => {
-      const res = await fetch(API_PATH + "/lessons/completedLesson", {
+      const res = await fetch(SUBMIT_LESSON_COMPLETE, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

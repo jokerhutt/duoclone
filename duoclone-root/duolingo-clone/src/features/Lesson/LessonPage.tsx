@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { SUBMIT_ATTEMPT } from "../../util/paths";
+import { SUBMIT_EXERCISE_ATTEMPT } from "../../util/paths";
 import type { ExerciseOption } from "../../Types/ExerciseType";
 import { ExerciseComponent } from "../Exercise/ExerciseComponent";
 import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptResponse";
@@ -59,7 +59,7 @@ export function LessonPage() {
       if (position == null || currentSelectedOptions.length < 1) return;
 
       try {
-        const response = await fetch(SUBMIT_ATTEMPT, {
+        const response = await fetch(SUBMIT_EXERCISE_ATTEMPT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
