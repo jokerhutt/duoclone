@@ -32,6 +32,8 @@ export const GET_USER_BY_ID = (userId: number) => API_PATH + `/users/${userId}`;
 
 export const GET_QUESTS_BY_USER_ID = (userId: number) => API_PATH + `/quests/${userId}`;
 
+export const GET_MONTHLY_CHALLENGE_BY_USER_ID = (userId: number) => API_PATH + `/monthly-challenges/${userId}`
+
 // -------------------------------------------------------- //
 
 export const SUBMIT_LESSON_COMPLETE = API_PATH + `/lessons/completions/submit`;
