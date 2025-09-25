@@ -12,6 +12,7 @@ export function UserProfileCard({user, followers}: UserProfileCardProps) {
     const ts = user.createdAt;
     const joinDate = format(new Date(ts), "MMMM yyyy");
 
+
   return (
     <>
       <div className="mt-20 flex px-4 justify-center">

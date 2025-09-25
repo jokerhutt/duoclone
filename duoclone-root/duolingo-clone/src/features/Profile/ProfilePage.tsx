@@ -9,6 +9,7 @@ import { ProfileStatisticsGroup } from "./ProfileStatsWidget/ProfileStatisticsGr
 import { UserProfileCard } from "./UserProfileCard";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useUser } from "../../queries/useQuery/useUser";
+import { FollowButton } from "./FollowButton";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
@@ -27,14 +28,18 @@ export function ProfilePage() {
   console.log("Followers:", followers);
   console.log("Following:", following);
 
-  if (!pageUser || !followers || !following || isLoading) return <SpinnerPage/>
+  const isOwnPage = pageUser?.id == 1;
+
+  if (!pageUser || !followers || !following || isLoading)
+    return <SpinnerPage />;
 
   return (
     <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
       <ProfileHeader />
-      <UserProfileCard user={pageUser} followers={followers.length}/>
-      <ProfileStatisticsGroup user={pageUser}/>
-      <FriendsListWidget followers={followers} following={following}/>
+      <UserProfileCard user={pageUser} followers={followers.length} />
+      <FollowButton pageUser={pageUser} show={!isOwnPage}/>
+      <ProfileStatisticsGroup user={pageUser} />
+      <FriendsListWidget followers={followers} following={following} />
     </div>
   );
 }
