@@ -7,7 +7,13 @@ export function scrollToUnit(
   scrollContainerRef: RefObject<HTMLDivElement | null>,
   unitRefs: RefObject<(HTMLElement | null)[]>
 ) {
-  if (!currentUnit || !units || !scrollContainerRef || !scrollContainerRef.current) return;
+  if (
+    !currentUnit ||
+    !units ||
+    !scrollContainerRef ||
+    !scrollContainerRef.current
+  )
+    return;
 
   const index = units.findIndex((unit) => unit.id === currentUnit.id);
   if (index === -1 || !unitRefs.current?.[index]) return;
@@ -19,3 +25,10 @@ export function scrollToUnit(
   const elementTop = element.offsetTop;
   container.scrollTop = elementTop - container.clientHeight / 2;
 }
+
+export const scrollToCurrentLesson = (currentLessonRef: any) => {
+  currentLessonRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+};

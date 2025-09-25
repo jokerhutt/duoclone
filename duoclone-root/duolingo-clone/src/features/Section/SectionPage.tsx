@@ -18,14 +18,17 @@ import { useIsElementVisible } from "../../util/useIsElementVisible";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 
 export function SectionPage() {
+  const unitRefs = useRef<(HTMLElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const currentLessonRef = useRef<HTMLDivElement>(null);
+
   const { isLoading, isError } = useSectionTree(1);
   const { units } = useSectionTreeData(1);
   const { data: courseProgress, isLoading: loadingProgress } =
     useCourseProgress(1, 1);
 
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
-  const unitRefs = useRef<(HTMLElement | null)[]>([]);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser(1);
 
   useEffect(() => {
@@ -34,15 +37,8 @@ export function SectionPage() {
 
   useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
 
-  const currentLessonRef = useRef<HTMLDivElement>(null);
   const isCurrentLessonVisible = useIsElementVisible(currentLessonRef);
 
-  const scrollToCurrentLesson = () => {
-    currentLessonRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  };
 
   if (isError) return <SpinnerPage color="border-red-400" />;
   if (loadingUser || isLoading || !units || !courseProgress)
@@ -73,12 +69,10 @@ export function SectionPage() {
             </motion.div>
           ))}
         </AnimatePresence>
-        {currentLessonRef && (
           <ScrollToLessonButton
-            onClick={() => scrollToCurrentLesson()}
+            currentLessonRef={currentLessonRef}
             isVisible={!isCurrentLessonVisible}
           />
-        )}
       </div>
     </>
   );
