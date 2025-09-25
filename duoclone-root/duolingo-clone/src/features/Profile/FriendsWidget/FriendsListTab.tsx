@@ -1,4 +1,4 @@
-import type { friendsTabType } from "../../Types/friendsTabType";
+import type { friendsTabType } from "../../../Types/friendsTabType";
 
 type FriendsListTabProps = {
   tabType: friendsTabType;

@@ -1,7 +1,7 @@
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
-import { FriendsListWidget } from "./FriendsListWidget";
+import { FriendsListWidget } from "./FriendsWidget/FriendsListWidget";
 import { ProfileHeader } from "./ProfileHeader";
-import { ProfileStatisticsGroup } from "./ProfileStatisticsGroup";
+import { ProfileStatisticsGroup } from "./ProfileStatsWidget/ProfileStatisticsGroup";
 import { UserProfileCard } from "./UserProfileCard";
 
 export function ProfilePage() {
@@ -9,10 +9,8 @@ export function ProfilePage() {
     <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
       <ProfileHeader />
       <UserProfileCard />
-      <ProfileStatisticsGroup/>
-      <FriendsListWidget/>
-
-
+      <ProfileStatisticsGroup />
+      <FriendsListWidget />
     </div>
   );
 }
