@@ -1,40 +1,104 @@
-import { useEffect, useState } from "react";
-import type { RefObject } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
-export function useIsElementVisible(elementRef: RefObject<HTMLElement | null>) {
-  const [isVisible, setIsVisible] = useState(false);
+interface VisibilityOptions {
+  rootRef?: any;
+}
 
+interface ElementVisibility {
+  isVisible: boolean;
+  position: "above" | "below";
+}
+
+export function useIsElementVisible(
+  elementRef: React.RefObject<HTMLElement | null>,
+  options?: VisibilityOptions
+) {
+  const rootElement = options?.rootRef?.current ?? null;
+  const VIEWPORT_OFFSET = 64;
+
+  // Setup intersection observer
+  const [inViewRef, isInView] = useInView({
+    threshold: 0.1,
+    root: rootElement,
+    rootMargin: "0px 0px 100px 0px",
+  });
+
+  // Track visibility state
+  const [visibility, setVisibility] = useState<ElementVisibility>({
+    isVisible: false,
+    position: "below",
+  });
+
+  const previousInViewState = useRef(isInView);
+
+  // Connect element to intersection observer
   useEffect(() => {
-    if (!elementRef.current) return;
+    if (elementRef.current) {
+      inViewRef(elementRef.current);
+    }
+  }, [inViewRef, elementRef, rootElement]);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
+  // Update visibility when intersection changes
+  useEffect(() => {
+    const hasInViewChanged = previousInViewState.current !== isInView;
+    
+    if (hasInViewChanged) {
+      previousInViewState.current = isInView;
+      setVisibility(prevState => ({
+        ...prevState,
+        isVisible: isInView
+      }));
+    }
+  }, [isInView]);
+
+  // Track element position relative to viewport
+  useEffect(() => {
+    const scrollContainer = rootElement ?? window;
+
+    const calculateElementPosition = () => {
+      const element = elementRef.current;
+      if (!element) return;
+
+      const elementRect = element.getBoundingClientRect();
+      const viewportHeight = rootElement instanceof Element 
+        ? rootElement.clientHeight 
+        : window.innerHeight;
+
+      let newPosition: "above" | "below" | null = null;
+
+      if (elementRect.top >= viewportHeight - VIEWPORT_OFFSET) {
+        newPosition = "below";
+      } else if (elementRect.bottom <= VIEWPORT_OFFSET) {
+        newPosition = "above";
       }
-    );
 
-    observer.observe(elementRef.current);
-
-    requestAnimationFrame(() => {
-      if (elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        const initiallyVisible =
-          rect.top < window.innerHeight &&
-          rect.bottom > 0 &&
-          rect.left < window.innerWidth &&
-          rect.right > 0;
-
-        setIsVisible(initiallyVisible);
+      // Only update if position actually changed
+      if (newPosition !== null) {
+        setVisibility(prevState => {
+          if (prevState.position === newPosition) {
+            return prevState;
+          }
+          return { ...prevState, position: newPosition };
+        });
       }
-    });
+    };
 
-    return () => observer.disconnect();
-  }, [elementRef.current]);
+    // Calculate initial position
+    calculateElementPosition();
 
-  return isVisible;
+    // Listen for scroll and resize events
+    const scrollListener = calculateElementPosition;
+    
+    scrollContainer.addEventListener("scroll", scrollListener, { passive: true });
+    window.addEventListener("resize", scrollListener);
+
+    // Cleanup event listeners
+    return () => {
+      scrollContainer.removeEventListener("scroll", scrollListener);
+      window.removeEventListener("resize", scrollListener);
+    };
+  }, [elementRef, rootElement]);
+
+  return visibility;
 }

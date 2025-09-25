@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { LearnHeader } from "./LearnHeader";
 import { UnitBanner } from "../Unit/UnitBanner";
 import { UnitPath } from "../Unit/UnitPath";
@@ -14,7 +14,6 @@ import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
-import { useIsElementVisible } from "../../util/useIsElementVisible";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 
 export function SectionPage() {
@@ -27,16 +26,17 @@ export function SectionPage() {
   // -- QUERY STATE -- //
   const { isLoading, isError } = useSectionTree(1);
   const { units } = useSectionTreeData(1);
-  const { data: courseProgress} = useCourseProgress(1, 1);
+  const { data: courseProgress } = useCourseProgress(1, 1);
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
-  const {isLoading: loadingUser } = useCurrentUser(1);
+  const { isLoading: loadingUser } = useCurrentUser(1);
 
-  // -- SCROLL RELATED -- //
+  // -- THIS MAKES IT SO THE PAGE STARTS AT THE LAST KNOWN POSITION -- //
   useEffect(() => {
     scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
   }, []);
+
+  // -- THIS HANDLES THE BANNER CHANGING -- //
   useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
-  const isCurrentLessonVisible = useIsElementVisible(currentLessonRef);
 
 
   if (isError) return <SpinnerPage color="border-red-400" />;
@@ -60,18 +60,18 @@ export function SectionPage() {
               }}
               {...fadeInStagger(index)}
             >
-              <UnitPath
-                id={unit.id}
-                index={index}
-                currentLessonButtonRef={currentLessonRef}
-              />
+                <UnitPath
+                  id={unit.id}
+                  index={index}
+                  currentLessonButtonRef={currentLessonRef}
+                />
             </motion.div>
           ))}
         </AnimatePresence>
-          <ScrollToLessonButton
-            currentLessonRef={currentLessonRef}
-            isVisible={!isCurrentLessonVisible}
-          />
+        <ScrollToLessonButton
+          rootRef={scrollContainerRef}
+          currentLessonRef={currentLessonRef}
+        />
       </div>
     </>
   );

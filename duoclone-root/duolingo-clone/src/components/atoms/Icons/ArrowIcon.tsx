@@ -9,14 +9,13 @@ export function ArrowIcon({
   size = "h-6 w-6",
 }: ArrowIconProps) {
 
-    const upArrow = "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/6a4aeae39e2054b3d9a33cc8e5a05816.svg";
-    const downArrow = "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/6a4aeae39e2054b3d9a33cc8e5a05816.svg";
+    const arrowSvg = "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/6a4aeae39e2054b3d9a33cc8e5a05816.svg";
+    
+    const rotation = isUp ? "rotate-0" : "rotate-180"
 
-    const arrowToShow = isUp ? upArrow : downArrow;
-
-    return (
+     return (
         <>
-            <img className={size} src={arrowToShow}/>
+            <img className={`${rotation} ${size}`} src={arrowSvg}/>
         </>
     )
 
