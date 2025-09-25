@@ -18,6 +18,7 @@ type LessonButtonProps = {
   unitOrderIndex: number;
   unitColor?: ColorType;
   courseIndex: number;
+  currentLessonButtonRef: any;
 };
 
 export function LessonButton({
@@ -26,6 +27,7 @@ export function LessonButton({
   courseIndex,
   unitColor,
   unitOrderIndex,
+  currentLessonButtonRef
 }: LessonButtonProps) {
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ export function LessonButton({
 
   const circleRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
+
 
   if (lessonLoading || userCourseProgressLoading) {
     return (
@@ -73,6 +76,9 @@ export function LessonButton({
     }
   };
 
+  const containerRef = isCurrentLesson ? currentLessonButtonRef : null;
+
+
   return (
     <div className="relative">
       {lesson.lessonType == "Review" && lesson?.isPassed ? (
@@ -91,6 +97,7 @@ export function LessonButton({
           <CircleButton
             icon={lessonImage}
             unitColor={unitColorToShow}
+            currentLessonRef={containerRef}
             buttonRef={circleRef}
             iconOpacity={iconOpacity}
             extraStyle={`${open ? "translate-y-[5px] shadow-none" : ""}`}

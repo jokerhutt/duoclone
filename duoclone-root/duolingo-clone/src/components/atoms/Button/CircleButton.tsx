@@ -11,6 +11,7 @@ type CircleButtonProps = {
   iconOpacity?: string;
   onClick: () => void;
   extraStyle?: string;
+  currentLessonRef?: any;
   buttonRef?: any;
 };
 
@@ -23,6 +24,7 @@ export function CircleButton({
   iconOpacity = "",
   extraStyle,
   onClick,
+  currentLessonRef,
   buttonRef,
 }: CircleButtonProps) {
   const toDisplayColor = unitColor ? colorMap[unitColor] : colorMap["GREEN"];
@@ -40,6 +42,7 @@ export function CircleButton({
         style={{ transition: "transform 0.2s" }}
       >
         <img
+          ref={currentLessonRef}
           src={icon}
           className={`flex items-center ${iconOpacity} justify-center rounded-full`}
         />

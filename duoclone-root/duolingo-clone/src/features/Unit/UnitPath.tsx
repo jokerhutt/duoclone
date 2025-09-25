@@ -9,9 +9,10 @@ import Lottie from "lottie-react";
 type UnitPathProps = {
   id: number;
   index: number;
+  currentLessonButtonRef: any;
 };
 
-export function UnitPath({ id, index }: UnitPathProps) {
+export function UnitPath({ id, index, currentLessonButtonRef }: UnitPathProps) {
   const { data: unit, isLoading: unitLoading } = useUnit(id);
   const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(
     id,
@@ -48,6 +49,7 @@ export function UnitPath({ id, index }: UnitPathProps) {
             {unitLessons.map((lesson, idx) => (
               <div className="w-auto py-1" key={idx}>
                 <LessonButton
+                  currentLessonButtonRef={currentLessonButtonRef}
                   idx={idx}
                   id={lesson.id}
                   courseIndex={index}

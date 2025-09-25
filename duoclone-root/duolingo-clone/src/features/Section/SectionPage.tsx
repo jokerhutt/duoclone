@@ -14,6 +14,8 @@ import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
+import { useIsElementVisible } from "../../util/useIsElementVisible";
+import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -31,6 +33,16 @@ export function SectionPage() {
   }, []);
 
   useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
+
+  const currentLessonRef = useRef<HTMLDivElement>(null);
+  const isCurrentLessonVisible = useIsElementVisible(currentLessonRef);
+
+  const scrollToCurrentLesson = () => {
+    currentLessonRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
 
   if (isError) return <SpinnerPage color="border-red-400" />;
   if (loadingUser || isLoading || !units || !courseProgress)
@@ -53,10 +65,20 @@ export function SectionPage() {
               }}
               {...fadeInStagger(index)}
             >
-              <UnitPath id={unit.id} index={index} />
+              <UnitPath
+                id={unit.id}
+                index={index}
+                currentLessonButtonRef={currentLessonRef}
+              />
             </motion.div>
           ))}
         </AnimatePresence>
+        {currentLessonRef && (
+          <ScrollToLessonButton
+            onClick={() => scrollToCurrentLesson()}
+            isVisible={!isCurrentLessonVisible}
+          />
+        )}
       </div>
     </>
   );
