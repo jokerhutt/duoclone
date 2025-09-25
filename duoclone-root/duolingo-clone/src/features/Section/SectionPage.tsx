@@ -13,6 +13,7 @@ import { SpinnerPage } from "./SpinnerPage";
 import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
+import { fadeInStagger } from "../../animations/FadeInAnimation";
 
 export function SectionPage() {
   const { isLoading, isError } = useSectionTree(1);
@@ -50,13 +51,7 @@ export function SectionPage() {
               ref={(el) => {
                 unitRefs.current[index] = el;
               }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.05,
-              }}
+              {...fadeInStagger(index)}
             >
               <UnitPath id={unit.id} index={index} />
             </motion.div>
