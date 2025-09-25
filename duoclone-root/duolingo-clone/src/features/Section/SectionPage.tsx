@@ -18,25 +18,24 @@ import { useIsElementVisible } from "../../util/useIsElementVisible";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 
 export function SectionPage() {
+
+  // -- REFS -- //
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
+  // -- QUERY STATE -- //
   const { isLoading, isError } = useSectionTree(1);
   const { units } = useSectionTreeData(1);
-  const { data: courseProgress, isLoading: loadingProgress } =
-    useCourseProgress(1, 1);
-
+  const { data: courseProgress} = useCourseProgress(1, 1);
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
+  const {isLoading: loadingUser } = useCurrentUser(1);
 
-  const { data: currentUser, isLoading: loadingUser } = useCurrentUser(1);
-
+  // -- SCROLL RELATED -- //
   useEffect(() => {
     scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
   }, []);
-
   useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
-
   const isCurrentLessonVisible = useIsElementVisible(currentLessonRef);
 
 

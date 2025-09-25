@@ -7,7 +7,6 @@ export function useIsElementVisible(elementRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (!elementRef.current) return;
 
-    // Create the observer
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -19,26 +18,23 @@ export function useIsElementVisible(elementRef: RefObject<HTMLElement | null>) {
       }
     );
 
-    // Start observing
     observer.observe(elementRef.current);
 
-    // Check initial visibility with requestAnimationFrame
-    // This ensures the DOM has painted before we check
     requestAnimationFrame(() => {
       if (elementRef.current) {
         const rect = elementRef.current.getBoundingClientRect();
-        const initiallyVisible = 
+        const initiallyVisible =
           rect.top < window.innerHeight &&
           rect.bottom > 0 &&
           rect.left < window.innerWidth &&
           rect.right > 0;
-        
+
         setIsVisible(initiallyVisible);
       }
     });
 
     return () => observer.disconnect();
-  }, [elementRef.current]); // Only re-run if the element reference changes
+  }, [elementRef.current]);
 
   return isVisible;
 }
