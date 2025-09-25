@@ -16,7 +16,7 @@ export function MainFooter() {
         <FooterButton path="/">
           <UserHomeIcon />
         </FooterButton>
-        <FooterButton path="/league">
+        <FooterButton path="/leaderboard">
           <UserLeagueIcon />
         </FooterButton>
         <FooterButton path="/quests">
