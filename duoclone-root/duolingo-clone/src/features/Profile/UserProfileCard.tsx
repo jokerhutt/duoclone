@@ -1,4 +1,14 @@
-export function UserProfileCard() {
+import { useUser } from "../../queries/useQuery/useUser";
+import type { UserType } from "../../Types/UserType";
+
+type UserProfileCardProps = {
+    user: UserType;
+    followers: number;
+}
+
+export function UserProfileCard({user, followers}: UserProfileCardProps) {
+
+
   return (
     <>
       <div className="mt-20 flex px-4 justify-center">
@@ -10,14 +20,14 @@ export function UserProfileCard() {
       <div className="w-full flex px-4 justify-between">
         <div className="w-full flex flex-col">
           <div className="w-full flex gap-1 flex-col">
-            <p className="text-white text-3xl">The Jokerhut</p>
+            <p className="text-white text-2xl">{user.firstName} {user.lastName}</p>
             <p className="text-duoGrayButtonText font-light text-xl">
-              thejokerhut
+              {user.username}
             </p>
             <p className="text-duoLightGray text-lg font-light">
               Joined September 2025
             </p>
-            <p className="text-duoBlue">7 Friends</p>
+            <p className="text-duoBlue">{followers} Followers</p>
           </div>
         </div>
 

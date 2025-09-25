@@ -22,7 +22,7 @@ export function MainFooter() {
         <FooterButton path="/quests">
           <UserChestQuestsIcon />
         </FooterButton>
-        <FooterButton path="/profile">
+        <FooterButton path={`/profile/1`}>
           <UserFooterIcon />
         </FooterButton>
       </div>

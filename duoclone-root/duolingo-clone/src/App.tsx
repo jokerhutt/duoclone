@@ -15,7 +15,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="" element={<SectionPage />} />
             <Route path="/quests" element={<QuestsPage />} /> 
-            <Route path="/profile" element={<ProfilePage/>} />
+            <Route path="/profile/:userId" element={<ProfilePage/>} />
           </Route>
 
           <Route path="/lessons/:lessonId/:position" element={<LessonPage />} />
