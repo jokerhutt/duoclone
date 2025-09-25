@@ -6,7 +6,7 @@ export function ProfileStatisticsGroup() {
   const streakIcon = "/icon-images/fittedStreakImg.svg";
 
   return (
-    <div className="flex w-full flex-col gap-2 px-4">
+    <div className="flex w-full flex-col gap-3 px-4">
       <p className="text-white text-2xl">Statistics</p>
       <div className="w-full flex gap-4 justify-between">
         <ProfileStatsWidget iconPath={streakIcon} statDescription="Day Streak" count={3}/>

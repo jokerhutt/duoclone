@@ -1,4 +1,5 @@
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
+import { FriendsListWidget } from "./FriendsListWidget";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileStatisticsGroup } from "./ProfileStatisticsGroup";
 import { UserProfileCard } from "./UserProfileCard";
@@ -9,6 +10,9 @@ export function ProfilePage() {
       <ProfileHeader />
       <UserProfileCard />
       <ProfileStatisticsGroup/>
+      <FriendsListWidget/>
+
+
     </div>
   );
 }

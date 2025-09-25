@@ -1,5 +1,5 @@
 type ContentWidgetProps = {
-  title?: string;
+  title?: string | null;
   children: React.ReactNode;
   padding?: string;
 };
