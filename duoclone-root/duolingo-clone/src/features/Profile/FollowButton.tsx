@@ -1,15 +1,11 @@
-import { useFollowers } from "../../queries/useQuery/FollowQueries/useFollowers";
-import { useUser } from "../../queries/useQuery/useUser";
-import type { UserType } from "../../Types/UserType";
 import { WideActionButton } from "../Common/WideActionButton";
 
 type FollowButtonProps = {
-  pageUser: UserType;
+  isFollowing: boolean;
+  handleFollow: () => void;
 };
 
-export function FollowButton({pageUser }: FollowButtonProps) {
-  const { data: pageUserFollowers } = useFollowers(pageUser.id);
-  const isFollowing = pageUserFollowers?.includes(1) ?? false;
+export function FollowButton({isFollowing, handleFollow }: FollowButtonProps) {
 
   const icon = isFollowing
     ? "https://d35aaqx5ub95lt.cloudfront.net/images/profile/4b39e57262e5c6f7d50d1eea429c071f.svg"
@@ -18,7 +14,7 @@ export function FollowButton({pageUser }: FollowButtonProps) {
     return (
       <div className="w-4/5 py-2 px-4">
         <WideActionButton
-          onSubmit={() => console.log("hi")}
+          onSubmit={handleFollow}
           isActive={isFollowing}
           icon={icon}
           disabledTextColor={"text-duoBackground"}

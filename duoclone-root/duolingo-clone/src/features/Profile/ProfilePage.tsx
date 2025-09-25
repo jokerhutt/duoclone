@@ -10,6 +10,7 @@ import { UserProfileCard } from "./UserProfileCard";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useUser } from "../../queries/useQuery/useUser";
 import { FollowButton } from "./FollowButton";
+import { FollowButtonManager } from "./FollowButtonManager";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
@@ -37,7 +38,7 @@ export function ProfilePage() {
     <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
       <ProfileHeader />
       <UserProfileCard user={pageUser} followers={followers.length} />
-      <FollowButton pageUser={pageUser} show={!isOwnPage}/>
+      <FollowButtonManager pageUser={pageUser} show={!isOwnPage}/>
       <ProfileStatisticsGroup user={pageUser} />
       <FriendsListWidget followers={followers} following={following} />
     </div>

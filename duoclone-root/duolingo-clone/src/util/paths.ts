@@ -40,6 +40,9 @@ export const GET_FOLLOW_COUNTS_BY_USER_ID = (userId: number) => API_PATH + `/fol
 
 export const SUBMIT_LESSON_COMPLETE = API_PATH + `/lessons/completions/submit`;
 export const SUBMIT_EXERCISE_ATTEMPT = API_PATH + `/exercises/attempts/submit`;
+export const FOLLOW_USER = API_PATH + `/follows/follow`
+export const UNFOLLOW_USER = API_PATH + `/follows/unfollow`
+
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
   API_PATH + `/lessons/ids?${lessonIds}&userId=${userId}`;
