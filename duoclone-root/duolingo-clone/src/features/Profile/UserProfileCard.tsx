@@ -1,5 +1,6 @@
 import { useUser } from "../../queries/useQuery/useUser";
 import type { UserType } from "../../Types/UserType";
+import { format } from "date-fns";
 
 type UserProfileCardProps = {
     user: UserType;
@@ -8,6 +9,8 @@ type UserProfileCardProps = {
 
 export function UserProfileCard({user, followers}: UserProfileCardProps) {
 
+    const ts = user.createdAt;
+    const joinDate = format(new Date(ts), "MMMM yyyy");
 
   return (
     <>
@@ -25,7 +28,7 @@ export function UserProfileCard({user, followers}: UserProfileCardProps) {
               {user.username}
             </p>
             <p className="text-duoLightGray text-lg font-light">
-              Joined September 2025
+              Joined {joinDate}
             </p>
             <p className="text-duoBlue">{followers} Followers</p>
           </div>
