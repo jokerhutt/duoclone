@@ -1,4 +1,17 @@
-export function FriendsListUserRow() {
+import { useUser } from "../../../queries/useQuery/useUser";
+import type { UserType } from "../../../Types/UserType";
+import { FriendsListUserRowSkeleton } from "./FriendsListUserRowSkeleton";
+
+type FriendsListUserRowProps = {
+  userId: number;
+}
+
+export function FriendsListUserRow({userId}: FriendsListUserRowProps) {
+
+  const {data: user, isLoading} = useUser(userId);
+
+  if (!user || isLoading) return <FriendsListUserRowSkeleton/>;
+
   return (
     <div className="w-full flex py-2">
       <div className="w-20">
@@ -8,8 +21,8 @@ export function FriendsListUserRow() {
         />
       </div>
       <div className="w-full flex flex-col">
-        <p className="text-xl text-white">Jokerhut</p>
-        <p className="font-light text-duoGrayButtonText">100 XP</p>
+        <p className="text-xl text-white">{user.firstName}</p>
+        <p className="font-light text-duoGrayButtonText">{user.points} XP</p>
       </div>
     </div>
   );

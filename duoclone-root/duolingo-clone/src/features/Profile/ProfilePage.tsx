@@ -34,7 +34,7 @@ export function ProfilePage() {
       <ProfileHeader />
       <UserProfileCard user={pageUser} followers={followers.length}/>
       <ProfileStatisticsGroup />
-      <FriendsListWidget />
+      <FriendsListWidget followers={followers} following={following}/>
     </div>
   );
 }
