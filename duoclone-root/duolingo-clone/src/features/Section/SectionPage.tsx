@@ -7,6 +7,7 @@ import {
   useSectionTree,
   useSectionTreeData,
 } from "../../queries/useQuery/useSectionTree";
+import { motion, AnimatePresence } from "framer-motion";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
 import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
@@ -42,16 +43,25 @@ export function SectionPage() {
         ref={scrollContainerRef}
         className="w-full h-full mb-10 overflow-auto"
       >
-        {units.map((unit, index) => (
-          <div
-            key={unit.id}
-            ref={(el) => {
-              unitRefs.current[index] = el;
-            }}
-          >
-            <UnitPath id={unit.id} index={index} />
-          </div>
-        ))}
+        <AnimatePresence>
+          {units.map((unit, index) => (
+            <motion.div
+              key={unit.id}
+              ref={(el) => {
+                unitRefs.current[index] = el;
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.05,
+              }}
+            >
+              <UnitPath id={unit.id} index={index} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </>
   );

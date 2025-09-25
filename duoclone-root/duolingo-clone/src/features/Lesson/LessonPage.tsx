@@ -9,7 +9,6 @@ import { SpinnerPage } from "../Section/SpinnerPage";
 import { WideActionButton } from "../Common/WideActionButton";
 import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
-import { bottomUpSpringAnimation } from "../../animations/BottomUpSpringAnimation";
 import { BottomSheet } from "./BottomSheet";
 import { ExitConfirmationSheet } from "./ExitConfirmationSheet";
 
