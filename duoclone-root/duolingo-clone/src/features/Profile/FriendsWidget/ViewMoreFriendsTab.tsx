@@ -2,12 +2,16 @@ import { HollowedArrow } from "../../../components/atoms/HollowedArrow/HollowedA
 
 type ViewMoreFriendsTabProps = {
   show: boolean;
+  count: number;
 };
 
-export function ViewMoreFriendsTab({show}: ViewMoreFriendsTabProps) {
-  return (
+export function ViewMoreFriendsTab({show, count}: ViewMoreFriendsTabProps) {
+
+  const remaining = count - 3;  
+
+  if (show) return (
     <div className="px-4 py-2 w-full flex items-center justify-between border-t border-t-duoGrayBorder">
-      <p className="text-lg text-white">View 4 more</p>
+      <p className="text-lg text-white">View {remaining} more</p>
       <HollowedArrow />
     </div>
   );
