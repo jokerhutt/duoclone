@@ -33,7 +33,7 @@ export function ProfilePage() {
     <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
       <ProfileHeader />
       <UserProfileCard user={pageUser} followers={followers.length}/>
-      <ProfileStatisticsGroup />
+      <ProfileStatisticsGroup user={pageUser}/>
       <FriendsListWidget followers={followers} following={following}/>
     </div>
   );
