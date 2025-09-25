@@ -1,4 +1,3 @@
-import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { ProfileStatsWidget } from "./ProfileStatsWidget";
 
 export function ProfileStatisticsGroup() {

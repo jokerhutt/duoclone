@@ -15,7 +15,7 @@ export function FriendsListTab({ tabType, activeTab }: FriendsListTabProps) {
     <div
       className={`w-full flex border-b py-2 ${bottomBorderColor} items-center justify-center`}
     >
-      <p className="text-duoBlue">FOLLOWING</p>
+      <p className="text-duoBlue">{tabType}</p>
     </div>
   );
 }
