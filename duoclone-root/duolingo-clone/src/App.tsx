@@ -5,6 +5,7 @@ import { LessonPage } from "./features/Lesson/LessonPage";
 import { LessonCompletePage } from "./features/Lesson/LessonCompletePage";
 import { QuestsPage } from "./features/Quests/QuestsPage";
 import { MainLayout } from "./components/layouts/MainLayout";
+import { ProfilePage } from "./features/Profile/ProfilePage";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="" element={<SectionPage />} />
-            <Route path="/quests" element={<QuestsPage />} />
+            <Route path="/quests" element={<QuestsPage />} /> 
+            <Route path="/profile/:userId" element={<ProfilePage/>} />
           </Route>
 
           <Route path="/lessons/:lessonId/:position" element={<LessonPage />} />

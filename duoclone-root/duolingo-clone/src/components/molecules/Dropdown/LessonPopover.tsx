@@ -65,7 +65,7 @@ export default function LessonPopover({
     } else if (lessonStatus == "LOCKED") {
       return "Complete all levels above to unlock this!"
     } else {
-      return "Lesson 1 of 3"
+      return "Lesson 1 of 1"
     }
   }
 
