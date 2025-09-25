@@ -17,7 +17,7 @@ export function UserProfileCard({user, followers}: UserProfileCardProps) {
       <div className="mt-20 flex px-4 justify-center">
         <img
           className="w-full h-50 object-cover rounded-xl"
-          src="/pfp/av3.png"
+          src={user.pfpSrc}
         />
       </div>
       <div className="w-full flex px-4 justify-between">
