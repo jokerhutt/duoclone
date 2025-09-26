@@ -1,5 +1,5 @@
 import type { friendsTabType } from "../../../Types/friendsTabType";
-import { FriendsListUserRow } from "./FriendsListUserRow";
+import { UserRow } from "./UserRow";
 import { FriendsListUserRowSkeleton } from "./FriendsListUserRowSkeleton";
 
 type FriendsListProps = {
@@ -10,9 +10,9 @@ type FriendsListProps = {
 export function FriendsList({ activeTab, toDisplay }: FriendsListProps) {
   return (
     <div className="w-full flex my-2 px-4 flex-col">
-        {toDisplay.map((userId) => (
-            <FriendsListUserRow userId={userId}/>
-        ))}
+      {toDisplay.map((userId) => (
+        <UserRow userId={userId} />
+      ))}
     </div>
   );
 }

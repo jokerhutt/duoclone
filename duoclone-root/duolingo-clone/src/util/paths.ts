@@ -60,6 +60,9 @@ export const GET_SECTIONS_FROM_IDS = (sectionIds: string) =>
 export const GET_BULK_TREE = (sectionId: number) =>
   API_PATH + `/sections/getBulk/${sectionId}/${1}`;
 
+export const GET_PAGINATED_LEADERBOARD = (cursor: string | null, limit: number) =>
+  API_PATH +`/leaderboard/paginated?limit=${limit}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`;
+
 // -------------------------------------------------------- //
 
-``;
+
