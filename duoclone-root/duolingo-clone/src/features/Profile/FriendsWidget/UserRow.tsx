@@ -13,8 +13,7 @@ export function UserRow({ userId, specialBg }: UserRow) {
   const navigate = useNavigate();
 
   const style = specialBg ? "bg-duoBlue/20" : "";
-
-  if (!user || isLoading) return <FriendsListUserRowSkeleton />;
+  const pfp = user ? user.pfpSrc : "https://preview.colorkit.co/color/808080.png?size=wallpaper&static=true"
 
   return (
     <div
@@ -24,12 +23,12 @@ export function UserRow({ userId, specialBg }: UserRow) {
       <div className="w-20">
         <img
           className="w-11 h-11 object-cover rounded-full"
-          src={user.pfpSrc}
+          src={pfp}
         />
       </div>
       <div className={`w-full flex flex-col`}>
-        <p className="text-xl text-white">{user.firstName}</p>
-        <p className="font-light text-duoGrayButtonText">{user.points} XP</p>
+        <p className="text-xl text-white">{user?.firstName}</p>
+        <p className="font-light text-duoGrayButtonText">{user?.points} XP</p>
       </div>
     </div>
   );

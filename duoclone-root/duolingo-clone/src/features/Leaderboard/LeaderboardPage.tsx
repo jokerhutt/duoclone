@@ -3,6 +3,7 @@ import { useInfiniteList } from "../../queries/useQuery/InfiniteScroll/useInfini
 import { UserRow } from "../Profile/FriendsWidget/UserRow";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useInView } from "react-intersection-observer";
+import { InfiniteScrollTriggerRef } from "../../components/atoms/ScrollRef/InfiniteScrollTriggerRef";
 
 export function LeaderboardPage() {
   const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -39,19 +40,14 @@ export function LeaderboardPage() {
         />
         <h1 className="text-3xl text-white">Leaderboard</h1>
       </div>
-      {isLoading ? (
+      {isLoading || isFetchingNextPage ? (
         <SpinnerPage />
       ) : (
         <div className="flex flex-col w-full gap-2">
           {sortedUsers.map((user) => (
             <UserRow userId={user.id} specialBg={user.id == 1}/>
           ))}
-          <div
-            ref={sentinelRef}
-            className="h-20 flex justify-center items-center"
-          >
-            {isFetchingNextPage && <SpinnerPage />}
-          </div>
+        <InfiniteScrollTriggerRef sentinelRef={sentinelRef} isFetchingNextPage={isFetchingNextPage}/>
         </div>
       )}
     </div>
