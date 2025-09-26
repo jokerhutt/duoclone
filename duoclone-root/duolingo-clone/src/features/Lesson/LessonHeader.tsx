@@ -3,12 +3,15 @@ import { XIcon } from "../../components/atoms/Icons/XIcon";
 import { Header } from "../../components/molecules/Header/Header";
 import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { SpinnerPage } from "../Section/SpinnerPage";
+import { LessonProgressBar } from "./LessonProgressBar";
 
 type LessonHeaderProps = {
   handleExitClick: () => void;
+  completed: number;
+  total: number;
 };
 
-export function LessonHeader({ handleExitClick }: LessonHeaderProps) {
+export function LessonHeader({ handleExitClick, completed, total }: LessonHeaderProps) {
 
   return (
     <Header padding="px-4" height="">
@@ -16,7 +19,7 @@ export function LessonHeader({ handleExitClick }: LessonHeaderProps) {
         <XIcon onClick={handleExitClick} />
       </button>
       <div className="w-full h-7 px-6 py-1">
-        <div className="w-full bg-duoGrayBorder rounded-4xl h-full border"></div>
+        <LessonProgressBar total={total} completed={completed}/>
       </div>
       <HeartIcon />
     </Header>

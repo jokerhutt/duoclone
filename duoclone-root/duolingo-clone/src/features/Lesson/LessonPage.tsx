@@ -23,6 +23,13 @@ export function LessonPage() {
     ExerciseOption[]
   >([]);
 
+  const currentPosition = Number(position) || 0;
+  const totalExercises = exercises?.length || 0;
+  const percentageComplete =
+    totalExercises > 0
+      ? Math.round(((currentPosition + 1) / totalExercises) * 100)
+      : 0;
+
   const [intendsToExit, setIntendsToExit] = useState(false);
 
   const [lessonResponse, setLessonResponse] =
@@ -100,10 +107,13 @@ export function LessonPage() {
     return <SpinnerPage />;
   }
 
+  const numPosition = Number(position)
+  const completed = lessonResponse ? numPosition + 1 : numPosition;
+
   return (
     <>
       <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-        <LessonHeader handleExitClick={() => setIntendsToExit(true)} />
+        <LessonHeader completed={completed} total={exercises.length} handleExitClick={() => setIntendsToExit(true)} />
         <div className="my-14 flex w-full h-full pt-4">
           <ExerciseComponent
             exercise={exercises[Number(position)]}
