@@ -32,6 +32,11 @@ export function CoursesPage() {
     );
   };
 
+  function capitalizeFirst(str: string) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
   if (coursesArray && courseProgress)
     return (
       <div>
@@ -47,7 +52,7 @@ export function CoursesPage() {
                   <LanguageFlag icon={course.imgSrc} height="h-12" />
                 </div>
                 <div className="items-center flex">
-                  <p className="text-2xl text-white">{course.title}</p>
+                  <p className="text-2xl text-white">{capitalizeFirst(course.title)}</p>
                 </div>
                 <div className="flex w-full items-center justify-end">
                   <HollowedArrow />
