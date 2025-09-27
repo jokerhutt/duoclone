@@ -78,6 +78,8 @@ export function LessonButton({
 
   const containerRef = isCurrentLesson ? currentLessonButtonRef : null;
 
+  const isFirstLessonOfSection = lesson.orderIndex == 1 && unitOrderIndex == 1;
+
 
   return (
     <div className="relative">
@@ -126,7 +128,7 @@ export function LessonButton({
           onOpenChange={setOpen}
         />
       )}
-      {!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson) && (
+      {!isFirstLessonOfSection && !lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson) && (
         <LessonTopPopover
           offset={getOffset(courseIndex, idx)}
           open={isCurrentLesson && open ? false : true}
