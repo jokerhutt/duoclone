@@ -25,7 +25,6 @@ export function SectionPage() {
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
   // -- QUERY STATE -- //
-
   const {data: currentUser} = useUser(1);
 
 
