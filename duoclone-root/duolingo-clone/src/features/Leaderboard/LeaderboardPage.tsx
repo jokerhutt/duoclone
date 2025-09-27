@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useUser } from "../../queries/useQuery/useUser";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
+import { Spinner } from "../../components/atoms/Loading/Spinner";
 
 export function LeaderboardPage() {
   const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -61,7 +62,7 @@ export function LeaderboardPage() {
               ref={sentinelRef}
               className="h-20 flex justify-center items-center"
             >
-              {isFetchingNextPage && <SpinnerPage />}
+              {isFetchingNextPage && <Spinner />}
             </div>
           </motion.div>
         </AnimatePresence>

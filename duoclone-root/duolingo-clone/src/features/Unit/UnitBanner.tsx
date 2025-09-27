@@ -12,7 +12,7 @@ export function UnitBanner({currentUnit}: UnitBannerProps){
       <div className="flex rounded-2xl h-20 w-full">
         <div className="w-5/6 h-full px-4 pb-3 flex flex-col">
           <div className="mt-3 text-duoSubText">
-            <p>SECTION 3, UNIT {currentUnit?.orderIndex}</p>
+            <p>SECTION 1, UNIT {currentUnit?.orderIndex}</p>
           </div>
           <div className="text-white text-xl">
             <p>{currentUnit?.title}</p>
