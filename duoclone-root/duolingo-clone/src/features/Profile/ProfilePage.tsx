@@ -17,6 +17,8 @@ export function ProfilePage() {
   const userIdNumber = userId ? parseInt(userId, 10) : 0;
 
   const { data: pageUser, isLoading } = useUser(userIdNumber);
+  const { data: currentUser } = useUser(1); // assuming current user ID is 1
+  const { data: pageUserFollowers } = useFollowers(pageUser?.id ?? 0);
 
   useFollowCaches(userIdNumber);
 
@@ -31,14 +33,14 @@ export function ProfilePage() {
 
   const isOwnPage = pageUser?.id == 1;
 
-  if (!pageUser || !followers || !following || isLoading)
+  if (!pageUserFollowers || !currentUser || !pageUser || !followers || !following || isLoading)
     return <SpinnerPage />;
 
   return (
     <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
       <ProfileHeader />
       <UserProfileCard user={pageUser} followers={followers.length} />
-      <FollowButtonManager pageUser={pageUser} show={!isOwnPage}/>
+      <FollowButtonManager pageUserFollowers={pageUserFollowers} currentUser={currentUser} pageUser={pageUser} show={!isOwnPage}/>
       <ProfileStatisticsGroup user={pageUser} />
       <FriendsListWidget userId={pageUser.id} concise={true} followers={followers} following={following} />
     </div>

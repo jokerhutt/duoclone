@@ -5,14 +5,16 @@ import type { UserType } from "../../Types/UserType";
 import { FollowButton } from "./FollowButton";
 type FollowButtonManagerProps = {
   pageUser: UserType;
+  pageUserFollowers: number[];
+  currentUser: UserType;
   show: boolean;
 };
 export function FollowButtonManager({
   pageUser,
   show,
+  currentUser,
+  pageUserFollowers
 }: FollowButtonManagerProps) {
-  const { data: currentUser } = useUser(1); // assuming current user ID is 1
-  const { data: pageUserFollowers } = useFollowers(pageUser.id);
   const followMutation = useFollowMutation();
 
   const isFollowing = pageUserFollowers?.includes(1) ?? false;
