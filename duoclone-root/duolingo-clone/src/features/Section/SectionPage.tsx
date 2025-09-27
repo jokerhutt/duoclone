@@ -15,6 +15,7 @@ import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore"
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
+import { useUser } from "../../queries/useQuery/useUser";
 
 export function SectionPage() {
 
@@ -24,6 +25,11 @@ export function SectionPage() {
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
   // -- QUERY STATE -- //
+
+  const {data: currentUser} = useUser(1);
+
+
+  //TODO add the courseId?
   const { isLoading, isError } = useSectionTree(1);
   const { units } = useSectionTreeData(1);
   const { data: courseProgress } = useCourseProgress(1, 1);
