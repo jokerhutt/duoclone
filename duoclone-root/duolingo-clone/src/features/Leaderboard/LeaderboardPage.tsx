@@ -4,6 +4,8 @@ import { UserRow } from "../Profile/FriendsWidget/UserRow";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useInView } from "react-intersection-observer";
 import { useUser } from "../../queries/useQuery/useUser";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeInStagger } from "../../animations/FadeInAnimation";
 
 export function LeaderboardPage() {
   const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -43,17 +45,26 @@ export function LeaderboardPage() {
       {!users || isLoading ? (
         <SpinnerPage />
       ) : (
-        <div className="flex flex-col w-full gap-2">
-          {sortedUsers.map((user) => (
-            <UserRow userInstance={user} userId={user.id} specialBg={user.id == 1} />
-          ))}
-          <div
-            ref={sentinelRef}
-            className="h-20 flex justify-center items-center"
+        <AnimatePresence>
+          <motion.div
+            {...fadeInStagger(1)}
+            className="flex flex-col w-full gap-2"
           >
-            {isFetchingNextPage && <SpinnerPage />}
-          </div>
-        </div>
+            {sortedUsers.map((user) => (
+              <UserRow
+                userInstance={user}
+                userId={user.id}
+                specialBg={user.id == 1}
+              />
+            ))}
+            <div
+              ref={sentinelRef}
+              className="h-20 flex justify-center items-center"
+            >
+              {isFetchingNextPage && <SpinnerPage />}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       )}
     </div>
   );
