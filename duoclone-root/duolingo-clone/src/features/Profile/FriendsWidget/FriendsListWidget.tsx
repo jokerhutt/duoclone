@@ -11,24 +11,35 @@ import { ViewMoreFriendsTab } from "./ViewMoreFriendsTab";
 type FriendsListWidgetProps = {
   followers: number[];
   following: number[];
+  concise?: boolean;
+  userId: number;
 };
 
 export function FriendsListWidget({
   followers,
   following,
+  userId,
+  concise,
 }: FriendsListWidgetProps) {
   const [activeTab, setActiveTab] = useState<friendsTabType>("FOLLOWING");
 
   const listToDisplay = activeTab == "FOLLOWING" ? following : followers;
+  const displayedList = concise ? listToDisplay.slice(0, 3) : listToDisplay;
   const showMore = listToDisplay.length > 3;
+
+  const title = concise ? "Friends" : "All Friends";
 
   return (
     <div className="w-full px-4 flex flex-col">
-      <ContentWidget title="Friends" padding="">
+      <ContentWidget title={title} padding="">
         <div className="w-full flex flex-col">
           <FriendListTabRow setActiveTab={setActiveTab} activeTab={activeTab} />
-          <FriendsList activeTab={activeTab} toDisplay={listToDisplay} />
-          <ViewMoreFriendsTab show={showMore} count={listToDisplay.length} />
+          <FriendsList activeTab={activeTab} toDisplay={displayedList} />
+          <ViewMoreFriendsTab
+            userId={userId}
+            show={!!concise && showMore}
+            count={listToDisplay.length}
+          />
         </div>
       </ContentWidget>
     </div>

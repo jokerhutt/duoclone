@@ -34,7 +34,7 @@ export function LeaderboardPage() {
   }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div className="w-full py-4 flex items-center flex-col">
+    <div className="w-full h-full py-4 flex items-center flex-col">
       <div className="w-full flex flex-col pb-4 border-b border-b-duoGrayBorder items-center gap-4">
         <img
           className="h-20"

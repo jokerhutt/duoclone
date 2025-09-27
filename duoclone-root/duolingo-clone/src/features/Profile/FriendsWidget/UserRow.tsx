@@ -19,7 +19,7 @@ export function UserRow({ userId, specialBg, userInstance }: UserRow) {
 
   return (
     <div
-      className={`w-full hover:cursor-pointer px-4 flex py-2 ${style}`}
+      className={`w-full hover:cursor-pointer px-4 h-18 flex py-2 ${style}`}
       onClick={() => navigate(`/profile/${userId}`)}
     >
       <div className="w-20">
