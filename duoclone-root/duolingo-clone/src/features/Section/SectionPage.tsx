@@ -48,7 +48,6 @@ export function SectionPage() {
 
   return (
     <>
-      <LearnHeader courseProgress={courseProgress} />
       <UnitBanner currentUnit={currentUnit} />
       <div
         ref={scrollContainerRef}

@@ -4,20 +4,15 @@ import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { useChangeCourse } from "../../queries/mutations/useChangeCourse";
 import { useCourse } from "../../queries/useQuery/useCourse";
-import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { useUser } from "../../queries/useQuery/useUser";
 import type { CourseType } from "../../Types/CourseType";
-import { LearnHeader } from "../Section/LearnHeader";
 
 export function CoursesPage() {
   const navigate = useNavigate();
 
-  const { data: user, isLoading } = useUser(1);
+  const { data: user} = useUser(1);
   const { data: allCourses } = useCourse("all");
-  const { data: courseProgress } = useCourseProgress(
-    user?.currentCourseId,
-    user?.id
-  );
+
   const changeCourseMutation = useChangeCourse();
   const coursesArray = allCourses as CourseType[];
 
@@ -45,10 +40,8 @@ export function CoursesPage() {
     }
   }
 
-  if (coursesArray && courseProgress)
+  if (coursesArray)
     return (
-      <div>
-        <LearnHeader courseProgress={courseProgress} />
         <div className="py-20 px-4">
           <ContentWidget title={"All Languages"}>
             {coursesArray.map((course, idx) => (
@@ -69,6 +62,5 @@ export function CoursesPage() {
             ))}
           </ContentWidget>
         </div>
-      </div>
     );
 }
