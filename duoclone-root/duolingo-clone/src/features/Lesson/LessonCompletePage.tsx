@@ -7,12 +7,15 @@ import { WideActionButton } from "../Common/WideActionButton";
 import { LessonStatsGroup } from "./LessonStatsGroup";
 import { LessonCompleteCard } from "./LessonCompleteCard";
 import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
+import { useUser } from "../../queries/useQuery/useUser";
 
 export function LessonCompletePage() {
 
   const { lessonId } = useParams<{ lessonId: string }>();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
+
+  const {data: user} = useUser(1);
 
   const possibleAnimations = [
     "/lottie-animations/EL_BEA_DUO.json",
@@ -42,9 +45,13 @@ export function LessonCompletePage() {
   };
 
   const lessonIdForMutation: string = lessonId ?? "";
+  const userIdForMutation: number = user?.id ?? 0;
+  const courseIdForMutation: number = user?.currentCourseId ?? 0;
 
   const lessonCompleteMutation = useLessonComplete({
     lessonId: lessonIdForMutation,
+    userId: userIdForMutation,
+    courseId: courseIdForMutation
   });
 
   useEffect(() => {
@@ -60,7 +67,6 @@ export function LessonCompletePage() {
   const totalScore = lessonCompleteMutation.data.totalScore;
   const accuracy = lessonCompleteMutation.data.accuracy;
   const title = accuracy < 100 ? "Lesson Complete!" : "Perfect Lesson!";
-  const subtitle = accuracy == 100 ? "Take a bow!" : null;
   const accuracyMessage = lessonCompleteMutation.data.message;
 
   return (

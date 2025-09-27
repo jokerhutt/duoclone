@@ -11,6 +11,7 @@ import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopP
 import { colorMap } from "../../util/colorMap";
 import { UnitReviewButton } from "./UnitReviewButton";
 import { chooseLessonImage } from "../../util/lessonUtils";
+import { useUser } from "../../queries/useQuery/useUser";
 
 type LessonButtonProps = {
   idx: number;
@@ -27,17 +28,17 @@ export function LessonButton({
   courseIndex,
   unitColor,
   unitOrderIndex,
-  currentLessonButtonRef
+  currentLessonButtonRef,
 }: LessonButtonProps) {
   const navigate = useNavigate();
 
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
+  const {data: user} = useUser(1);
   const { data: userCourseProgress, isLoading: userCourseProgressLoading } =
-    useCourseProgress(1, 1);
+    useCourseProgress(user?.currentCourseId, user?.id);
 
   const circleRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
-
 
   if (lessonLoading || userCourseProgressLoading) {
     return (
@@ -50,7 +51,6 @@ export function LessonButton({
   const isPassed =
     lesson?.isPassed || userCourseProgress?.currentLessonId == lesson?.id;
 
-
   if (!lesson) return null;
 
   const iconOpacity =
@@ -58,7 +58,13 @@ export function LessonButton({
 
   const isCurrentLesson = lesson.id == userCourseProgress?.currentLessonId;
 
-  const lessonImage: string = chooseLessonImage(lesson, isPassed, isCurrentLesson);
+  const isFirstLessonOfSection = lesson.orderIndex == 1 && unitOrderIndex == 1;
+  const lessonImage: string = chooseLessonImage(
+    lesson,
+    isPassed,
+    isCurrentLesson,
+    isFirstLessonOfSection
+  );
 
   const unitColorToShow =
     isPassed || isCurrentLesson || lesson?.orderIndex == 1
@@ -77,7 +83,6 @@ export function LessonButton({
   };
 
   const containerRef = isCurrentLesson ? currentLessonButtonRef : null;
-
 
   return (
     <div className="relative">
@@ -126,14 +131,16 @@ export function LessonButton({
           onOpenChange={setOpen}
         />
       )}
-      {!lesson.isPassed && (lesson.orderIndex == 1 || isCurrentLesson) && (
-        <LessonTopPopover
-          offset={getOffset(courseIndex, idx)}
-          open={isCurrentLesson && open ? false : true}
-          lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
-          unitColor={unitColor}
-        />
-      )}
+      {!isFirstLessonOfSection &&
+        !lesson.isPassed &&
+        (lesson.orderIndex == 1 || isCurrentLesson) && (
+          <LessonTopPopover
+            offset={getOffset(courseIndex, idx)}
+            open={isCurrentLesson && open ? false : true}
+            lessonStatus={isCurrentLesson ? "CURRENT" : "JUMP"}
+            unitColor={unitColor}
+          />
+        )}
     </div>
   );
 }

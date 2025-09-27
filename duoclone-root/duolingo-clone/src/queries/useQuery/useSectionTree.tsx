@@ -4,13 +4,19 @@ import { qk } from "../types/queryKeys";
 import type { SectionType } from "../../Types/SectionType";
 import type { UnitType } from "../../Types/UnitType";
 
-export function useSectionTree(sectionId: number) {
+export function useSectionTree(sectionId?: number) {
   const qc = useQueryClient();
 
   const q = useQuery({
-    queryKey: qk.sectionTree(sectionId),
-    queryFn: () => fetchSectionTreeAndHydrate(qc, sectionId),
-    enabled: Number.isFinite(sectionId),
+    queryKey:
+      sectionId != null
+        ? qk.sectionTree(sectionId)
+        : (["sectionTree", "pending"] as const),
+    queryFn: () => {
+      if (sectionId == null) throw new Error("Missing sectionId");
+      return fetchSectionTreeAndHydrate(qc, sectionId);
+    },
+    enabled: sectionId != null,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
     retry: false,
@@ -27,9 +33,13 @@ export function useSectionTree(sectionId: number) {
   };
 }
 
-export function useSectionTreeData(sectionId: number) {
+export function useSectionTreeData(sectionId?: number) {
   const qc = useQueryClient();
+
+  if (sectionId == null) return { section: undefined, units: undefined };
+
   const section = qc.getQueryData<SectionType>(qk.section(sectionId));
   const units = qc.getQueryData<UnitType[]>(qk.unitsBySection(sectionId));
+
   return { section, units };
 }

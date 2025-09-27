@@ -42,6 +42,7 @@ export const SUBMIT_LESSON_COMPLETE = API_PATH + `/lessons/completions/submit`;
 export const SUBMIT_EXERCISE_ATTEMPT = API_PATH + `/exercises/attempts/submit`;
 export const FOLLOW_USER = API_PATH + `/follows/follow`
 export const UNFOLLOW_USER = API_PATH + `/follows/unfollow`
+export const CHANGE_COURSE = API_PATH + `/courses/change`
 
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
@@ -55,10 +56,14 @@ export const GET_UNITS_FROM_IDS = (unitIds: string) =>
 export const GET_SECTIONS_FROM_IDS = (sectionIds: string) =>
   API_PATH + `/sections/ids?${sectionIds}`;
 
+export const GET_ALL_COURSES = API_PATH + `/courses/all`
+
 // -------------------------------------------------------- //
 
 export const GET_BULK_TREE = (sectionId: number) =>
   API_PATH + `/sections/getBulk/${sectionId}/${1}`;
+
+
 
 export const GET_PAGINATED_LEADERBOARD = (cursor: string | null, limit: number) =>
   API_PATH +`/leaderboard/paginated?limit=${limit}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`;

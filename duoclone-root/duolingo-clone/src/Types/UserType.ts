@@ -6,6 +6,7 @@ export type UserType = {
     lastName: string;
     pfpSrc: string;
     points: number;
+    currentCourseId: number;
     createdAt?: string;
     streakLength: number;
 }

@@ -1,12 +1,13 @@
 type LanguageFlagProps = {
   height?: string;
+  icon?: string;
 }
 
 
-export function LanguageFlag({height = "h-10"}) {
+export function LanguageFlag({height = "h-10", icon = "/French_flag.webp"}) {
   return (
     <>
-      <img src="/French_flag.webp" className={`w-fit ${height} `}/>
+      <img src={icon} className={`w-fit ${height} `}/>
     </>
   );
 }

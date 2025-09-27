@@ -6,17 +6,27 @@ export const checkButtonStyle = (isSelected: boolean) => {
     : "bg-duoGrayBorder";
 };
 
-export const chooseLessonImage = (lesson: LessonType | undefined, isPassed: boolean, isCurrent: boolean) => {
+//TODO add some kind of constants for these urls
+export const chooseLessonImage = (lesson: LessonType | undefined, isPassed: boolean, isCurrent: boolean, isVeryFirstLesson: boolean) => {
     if (!lesson || !lesson.lessonType || !lesson.orderIndex || !lesson.id)
       return "";
+
+    if (isVeryFirstLesson) {
+      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg"
+    }
 
     if (lesson.orderIndex == 1 && !isPassed) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/5e4203031e39fc43d94371565fd0d369.svg";
     }
 
-    if (lesson.lessonType == "Lesson") {
+    if (lesson.lessonType == "Lesson" && isPassed) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/bfa591f6854b4de08e1656b3e8ca084f.svg";
+    } else if (lesson.lessonType == "Lesson" && !isPassed && isCurrent) {
+      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg"
+    } else if (lesson.lessonType == "Lesson") {
+      return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/cbb0e971ac10030a120848c71c419892.svg"
     }
+
 
     if (lesson.lessonType == "Review" && isCurrent) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/44fdc5acd4cc2644f6c8329939446b42.svg";
