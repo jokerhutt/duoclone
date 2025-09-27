@@ -18,31 +18,29 @@ import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 import { useUser } from "../../queries/useQuery/useUser";
 
 export function SectionPage() {
-
   // -- REFS -- //
   const unitRefs = useRef<(HTMLElement | null)[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
   // -- QUERY STATE -- //
-  const {data: currentUser} = useUser(1);
-
-
-  //TODO add the courseId?
-  const { isLoading, isError } = useSectionTree(1);
-  const { units } = useSectionTreeData(1);
-  const { data: courseProgress } = useCourseProgress(1, 1);
-  const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
+  const { data: currentUser } = useUser(1);
+  const { data: courseProgress } = useCourseProgress(
+    currentUser?.currentCourseId,
+    currentUser?.id
+  );
+  const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
+  const { units } = useSectionTreeData(courseProgress?.sectionId);
   const { isLoading: loadingUser } = useCurrentUser(1);
+
+  // -- THIS HANDLES THE BANNER CHANGING -- //
+  const { currentUnit, setCurrentUnit } = useCurrentUnitStore();
+  useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
 
   // -- THIS MAKES IT SO THE PAGE STARTS AT THE LAST KNOWN POSITION -- //
   useEffect(() => {
     scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
   }, []);
-
-  // -- THIS HANDLES THE BANNER CHANGING -- //
-  useUnitObserver(unitRefs, units ?? [], setCurrentUnit);
-
 
   if (isError) return <SpinnerPage color="border-red-400" />;
   if (loadingUser || isLoading || !units || !courseProgress)
@@ -65,11 +63,11 @@ export function SectionPage() {
               }}
               {...fadeInStagger(index)}
             >
-                <UnitPath
-                  id={unit.id}
-                  index={index}
-                  currentLessonButtonRef={currentLessonRef}
-                />
+              <UnitPath
+                id={unit.id}
+                index={index}
+                currentLessonButtonRef={currentLessonRef}
+              />
             </motion.div>
           ))}
         </AnimatePresence>
