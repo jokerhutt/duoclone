@@ -12,7 +12,7 @@ type UserRow = {
 export function UserRow({ userId, specialBg, userInstance }: UserRow) {
   const { data: user } = useUser(userId);
   const navigate = useNavigate();
-  const realUser = userInstance ?? user;
+  const realUser = !user && userInstance ? userInstance : user;
   const style = specialBg ? "bg-duoBlue/20" : "";
 
   if (!realUser) return <FriendsListUserRowSkeleton />;
