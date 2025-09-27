@@ -6,9 +6,11 @@ import type { UserType } from "../../Types/UserType";
 
 type useLessonCompleteParams = {
   lessonId: string;
+  userId: number;
+  courseId: number;
 };
 
-export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
+export const useLessonComplete = ({ lessonId, userId, courseId }: useLessonCompleteParams) => {
   const queryClient = useQueryClient();
 
   return useMutation<LessonCompleteType>({
@@ -19,8 +21,8 @@ export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           lessonId: Number(lessonId),
-          userId: 1,
-          courseId: 1,
+          userId: userId,
+          courseId: courseId,
         }),
       });
       if (!res.ok) throw new Error("Failed");
@@ -31,7 +33,7 @@ export const useLessonComplete = ({ lessonId }: useLessonCompleteParams) => {
       queryClient.invalidateQueries({queryKey: qk.monthlyChallenges(1)})
       queryClient.setQueryData(qk.lesson(data.lessonId), data.updatedLesson);
       queryClient.setQueryData(
-        qk.courseProgress(1),
+        qk.courseProgress(courseId),
         data.updatedUserCourseProgress
       );
       queryClient.setQueryData(qk.user(1), (prev: UserType | undefined) => {
