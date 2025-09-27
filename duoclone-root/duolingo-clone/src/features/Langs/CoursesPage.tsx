@@ -37,16 +37,24 @@ export function CoursesPage() {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
+  const showBorder = (idx: number) => {
+    if (idx != (coursesArray.length - 1)) {
+      return "border-b border-b-duoGrayBorder"
+    } else {
+      return ""
+    }
+  }
+
   if (coursesArray && courseProgress)
     return (
       <div>
         <LearnHeader courseProgress={courseProgress} />
         <div className="py-20 px-4">
           <ContentWidget title={"All Languages"}>
-            {coursesArray.map((course) => (
+            {coursesArray.map((course, idx) => (
               <div
                 onClick={() => handleSelectCourse(course.id)}
-                className="w-full py-4 flex gap-2"
+                className={`w-full py-6 flex gap-4 ${showBorder(idx)}`}
               >
                 <div className="w-30 flex items-center">
                   <LanguageFlag icon={course.imgSrc} height="h-12" />
