@@ -55,10 +55,13 @@ export const GET_UNITS_FROM_IDS = (unitIds: string) =>
 export const GET_SECTIONS_FROM_IDS = (sectionIds: string) =>
   API_PATH + `/sections/ids?${sectionIds}`;
 
+export const GET_ALL_COURSES = API_PATH + `/courses/all`
+
 // -------------------------------------------------------- //
 
 export const GET_BULK_TREE = (sectionId: number) =>
   API_PATH + `/sections/getBulk/${sectionId}/${1}`;
+
 
 export const GET_PAGINATED_LEADERBOARD = (cursor: string | null, limit: number) =>
   API_PATH +`/leaderboard/paginated?limit=${limit}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`;

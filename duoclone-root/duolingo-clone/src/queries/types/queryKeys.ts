@@ -12,5 +12,6 @@ export const qk = {
   exercises: (lessonId: number) => ["exercises", lessonId] as const,
   user: (id: number) => ["users", id] as const,
   quests: (id: number) => ["quests", id] as const,
+  courses: (id: number | "all") => ["courses", id] as const,
   monthlyChallenges: (id: number) => ["monthlyChallenges", id] as const,
 };
