@@ -40,7 +40,7 @@ export function ProfilePage() {
       <UserProfileCard user={pageUser} followers={followers.length} />
       <FollowButtonManager pageUser={pageUser} show={!isOwnPage}/>
       <ProfileStatisticsGroup user={pageUser} />
-      <FriendsListWidget followers={followers} following={following} />
+      <FriendsListWidget concise={true} followers={followers} following={following} />
     </div>
   );
 }
