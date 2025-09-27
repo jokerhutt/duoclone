@@ -5,16 +5,17 @@ import { FriendsListUserRowSkeleton } from "./FriendsListUserRowSkeleton";
 
 type UserRow = {
   userId: number;
+  userInstance?: UserType;
   specialBg?: boolean;
 };
 
-export function UserRow({ userId, specialBg }: UserRow) {
-  const { data: user, isLoading } = useUser(userId);
+export function UserRow({ userId, specialBg, userInstance }: UserRow) {
+  const { data: user } = useUser(userId);
   const navigate = useNavigate();
-
+  const realUser = userInstance ?? user;
   const style = specialBg ? "bg-duoBlue/20" : "";
 
-  if (!user || isLoading) return <FriendsListUserRowSkeleton />;
+  if (!realUser) return <FriendsListUserRowSkeleton />;
 
   return (
     <div
@@ -24,12 +25,12 @@ export function UserRow({ userId, specialBg }: UserRow) {
       <div className="w-20">
         <img
           className="w-11 h-11 object-cover rounded-full"
-          src={user.pfpSrc}
+          src={realUser.pfpSrc}
         />
       </div>
       <div className={`w-full flex flex-col`}>
-        <p className="text-xl text-white">{user.firstName}</p>
-        <p className="font-light text-duoGrayButtonText">{user.points} XP</p>
+        <p className="text-xl text-white">{realUser.firstName}</p>
+        <p className="font-light text-duoGrayButtonText">{realUser.points} XP</p>
       </div>
     </div>
   );
