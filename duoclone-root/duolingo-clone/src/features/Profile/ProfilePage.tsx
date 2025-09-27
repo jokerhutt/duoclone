@@ -10,7 +10,9 @@ import { UserProfileCard } from "./UserProfileCard";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useUser } from "../../queries/useQuery/useUser";
 import { FollowButton } from "./FollowButton";
+import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
+import { fadeInStagger } from "../../animations/FadeInAnimation";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
@@ -33,16 +35,35 @@ export function ProfilePage() {
 
   const isOwnPage = pageUser?.id == 1;
 
-  if (!pageUserFollowers || !currentUser || !pageUser || !followers || !following || isLoading)
+  if (
+    !pageUserFollowers ||
+    !currentUser ||
+    !pageUser ||
+    !followers ||
+    !following ||
+    isLoading
+  )
     return <SpinnerPage />;
 
   return (
-    <div className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
-      <ProfileHeader />
-      <UserProfileCard user={pageUser} followers={followers.length} />
-      <FollowButtonManager pageUserFollowers={pageUserFollowers} currentUser={currentUser} pageUser={pageUser} show={!isOwnPage}/>
-      <ProfileStatisticsGroup user={pageUser} />
-      <FriendsListWidget userId={pageUser.id} concise={true} followers={followers} following={following} />
-    </div>
+    <AnimatePresence>
+      <motion.div {...fadeInStagger(1)} className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
+        <ProfileHeader />
+        <UserProfileCard user={pageUser} followers={followers.length} />
+        <FollowButtonManager
+          pageUserFollowers={pageUserFollowers}
+          currentUser={currentUser}
+          pageUser={pageUser}
+          show={!isOwnPage}
+        />
+        <ProfileStatisticsGroup user={pageUser} />
+        <FriendsListWidget
+          userId={pageUser.id}
+          concise={true}
+          followers={followers}
+          following={following}
+        />
+      </motion.div>
+    </AnimatePresence>
   );
 }
