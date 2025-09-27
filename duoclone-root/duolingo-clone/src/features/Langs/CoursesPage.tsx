@@ -1,23 +1,36 @@
+import { useNavigate } from "react-router";
 import { HollowedArrow } from "../../components/atoms/HollowedArrow/HollowedArrow";
 import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { useChangeCourse } from "../../queries/mutations/useChangeCourse";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
+import { useUser } from "../../queries/useQuery/useUser";
 import type { CourseType } from "../../Types/CourseType";
 import { LearnHeader } from "../Section/LearnHeader";
 
 export function CoursesPage() {
-  const { data: courseProgress } = useCourseProgress(1, 1);
+  const navigate = useNavigate();
+
+  const { data: user, isLoading } = useUser(1);
   const { data: allCourses } = useCourse("all");
+  const { data: courseProgress } = useCourseProgress(
+    user?.currentCourseId,
+    user?.id
+  );
   const changeCourseMutation = useChangeCourse();
   const coursesArray = allCourses as CourseType[];
 
-
   const handleSelectCourse = (courseId: number) => {
-    changeCourseMutation.mutate({ userId: 1, newCourse: courseId });
+    changeCourseMutation.mutate(
+      { userId: user!.id, newCourse: courseId },
+      {
+        onSuccess: () => {
+          navigate(`/`);
+        },
+      }
+    );
   };
-
 
   if (coursesArray && courseProgress)
     return (
@@ -26,7 +39,10 @@ export function CoursesPage() {
         <div className="py-20 px-4">
           <ContentWidget title={"All Languages"}>
             {coursesArray.map((course) => (
-              <div onClick={() => handleSelectCourse(course.id)} className="w-full py-4 flex gap-2">
+              <div
+                onClick={() => handleSelectCourse(course.id)}
+                className="w-full py-4 flex gap-2"
+              >
                 <div className="w-30 flex items-center">
                   <LanguageFlag icon={course.imgSrc} height="h-12" />
                 </div>
