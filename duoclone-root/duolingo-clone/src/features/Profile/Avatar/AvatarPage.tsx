@@ -5,10 +5,13 @@ import { AvatarHeader } from "./AvatarHeader";
 import { UserWideImage } from "../UserWideImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../../animations/FadeInAnimation";
+import { useUpdateAvatar } from "../../../queries/mutations/useUpdateAvatar";
+import { useNavigate } from "react-router";
 
 export function AvatarPage() {
   const { data: currentUser } = useCurrentUser();
   const { data: avatars } = useAvatars();
+  const navigate = useNavigate();
 
   function chunkArray<T>(arr: T[], size: number): T[][] {
     const chunks: T[][] = [];
@@ -25,11 +28,26 @@ export function AvatarPage() {
   const showSelectedBorder = (avatarUrl: string) =>
     avatarUrl == selectedAvatar ? "border-6 border-duoBlue" : "";
 
+  const updateAvatarMutation = useUpdateAvatar();
+
+  const submitUpdateAvatar = () => {
+    if (selectedAvatar != currentUser.pfpSrc) {
+        updateAvatarMutation.mutate(
+            {userId: currentUser.id, selectedAvatar: selectedAvatar},
+            {onSuccess: () => {
+                navigate(`/profile/${currentUser.id}`);
+            }},
+        )
+    } else {
+        navigate(`/profile/${currentUser.id}`)
+    }
+  }
+
   if (avatars && currentUser)
     return (
       <AnimatePresence>
         <motion.div {...fadeInStagger(1)} className="w-full h-full">
-          <AvatarHeader currentUserId={currentUser.id} />
+          <AvatarHeader submit={() => submitUpdateAvatar()} currentUserId={currentUser.id} />
 
           <div className="mt-20 relative flex px-4 justify-center">
             <UserWideImage imgSrc={selectedAvatar} />

@@ -44,6 +44,7 @@ export const FOLLOW_USER = API_PATH + `/follows/follow`
 export const UNFOLLOW_USER = API_PATH + `/follows/unfollow`
 export const CHANGE_COURSE = API_PATH + `/courses/change`
 export const GOOGLE_LOGIN = API_PATH + `/auth/google-login`
+export const UPDATE_AVATAR = API_PATH + `/users/update-avatar`
 
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string) =>
