@@ -4,7 +4,6 @@ import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
 import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { StreakIcon } from "../../components/atoms/Icons/StreakIcon";
 import { Header } from "../../components/molecules/Header/Header";
-import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import type { CourseProgressType } from "../../Types/CourseProgressType";
 import { SpinnerPage } from "./SpinnerPage";
 import { useNavigate } from "react-router";

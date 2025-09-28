@@ -6,7 +6,7 @@ export function useCurrentUser() {
   const queryClient = useQueryClient();
 
   return useQuery({
-    queryKey: qk.currentUserId(),
+    queryKey: qk.currentUser(),
     queryFn: async () => {
       const res = await fetch(GET_AUTH_ME, {
         credentials: "include",
@@ -14,8 +14,9 @@ export function useCurrentUser() {
       if (!res.ok) throw new Error("Not authenticated");
       const user = await res.json();
       queryClient.setQueryData(qk.user(user.id), user);
+      queryClient.setQueryData(qk.currentUser(), user);
       
-      return user;
+      return user.id;
     },
     retry: false,
     staleTime: 1 * 60 * 1000,

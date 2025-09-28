@@ -10,12 +10,12 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
-import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 import { useUser } from "../../queries/useQuery/useUser";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function SectionPage() {
   // -- REFS -- //
@@ -31,7 +31,7 @@ export function SectionPage() {
   );
   const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
-  const { isLoading: loadingUser } = useCurrentUser(1);
+  const { isLoading: loadingUser } = useCurrentUser();
 
   // -- THIS HANDLES THE BANNER CHANGING -- //
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();

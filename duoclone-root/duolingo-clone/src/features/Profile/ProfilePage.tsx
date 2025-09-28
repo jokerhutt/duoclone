@@ -13,13 +13,14 @@ import { FollowButton } from "./FollowButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
   const userIdNumber = userId ? parseInt(userId, 10) : 0;
 
   const { data: pageUser, isLoading } = useUser(userIdNumber);
-  const { data: currentUser } = useUser(1); // assuming current user ID is 1
+  const {data: currentUser} = useCurrentUser();
   const { data: pageUserFollowers } = useFollowers(pageUser?.id ?? 0);
 
   useFollowCaches(userIdNumber);

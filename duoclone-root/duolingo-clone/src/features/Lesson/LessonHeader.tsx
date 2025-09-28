@@ -1,7 +1,6 @@
 import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
 import { XIcon } from "../../components/atoms/Icons/XIcon";
 import { Header } from "../../components/molecules/Header/Header";
-import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { LessonProgressBar } from "./LessonProgressBar";
 

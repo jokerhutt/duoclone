@@ -20,10 +20,9 @@ export function useGoogleAuthEntry() {
 
       const user = await res.json();
       queryClient.setQueryData(qk.user(user.id), user);
-      queryClient.setQueryData(qk.currentUserId(), user.id);
+      queryClient.setQueryData(qk.currentUser(), user);
       window.location.href = "/";
     },
     onError: (err) => console.error("Google login failed", err),
   });
-
 }
