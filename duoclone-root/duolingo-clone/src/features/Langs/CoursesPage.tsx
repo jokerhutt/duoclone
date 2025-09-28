@@ -11,7 +11,7 @@ import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 export function CoursesPage() {
   const navigate = useNavigate();
 
-  const { data: user} = useCurrentUser();
+  const { data: user } = useCurrentUser();
   const { data: allCourses } = useCourse("all");
 
   const changeCourseMutation = useChangeCourse();
@@ -19,7 +19,7 @@ export function CoursesPage() {
 
   const handleSelectCourse = (courseId: number) => {
     changeCourseMutation.mutate(
-      { userId: user!.id, newCourse: courseId },
+      { userId: user.id, newCourse: courseId },
       {
         onSuccess: () => {
           navigate(`/`);
@@ -34,34 +34,36 @@ export function CoursesPage() {
   }
 
   const showBorder = (idx: number) => {
-    if (idx != (coursesArray.length - 1)) {
-      return "border-b border-b-duoGrayBorder"
+    if (idx != coursesArray.length - 1) {
+      return "border-b border-b-duoGrayBorder";
     } else {
-      return ""
+      return "";
     }
-  }
+  };
 
   if (coursesArray)
     return (
-        <div className="py-20 px-4">
-          <ContentWidget title={"All Languages"}>
-            {coursesArray.map((course, idx) => (
-              <div
-                onClick={() => handleSelectCourse(course.id)}
-                className={`w-full py-6 flex gap-4 ${showBorder(idx)}`}
-              >
-                <div className="w-30 flex items-center">
-                  <LanguageFlag icon={course.imgSrc} height="h-12" />
-                </div>
-                <div className="items-center flex">
-                  <p className="text-2xl text-white">{capitalizeFirst(course.title)}</p>
-                </div>
-                <div className="flex w-full items-center justify-end">
-                  <HollowedArrow />
-                </div>
+      <div className="py-20 px-4">
+        <ContentWidget title={"All Languages"}>
+          {coursesArray.map((course, idx) => (
+            <div
+              onClick={() => handleSelectCourse(course.id)}
+              className={`w-full py-6 flex gap-4 ${showBorder(idx)}`}
+            >
+              <div className="w-30 flex items-center">
+                <LanguageFlag icon={course.imgSrc} height="h-12" />
               </div>
-            ))}
-          </ContentWidget>
-        </div>
+              <div className="items-center flex">
+                <p className="text-2xl text-white">
+                  {capitalizeFirst(course.title)}
+                </p>
+              </div>
+              <div className="flex w-full items-center justify-end">
+                <HollowedArrow />
+              </div>
+            </div>
+          ))}
+        </ContentWidget>
+      </div>
     );
 }

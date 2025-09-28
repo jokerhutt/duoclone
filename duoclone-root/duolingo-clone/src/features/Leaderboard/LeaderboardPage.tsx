@@ -7,10 +7,13 @@ import { useUser } from "../../queries/useQuery/useUser";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { Spinner } from "../../components/atoms/Loading/Spinner";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LeaderboardPage() {
   const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteList();
+
+  const {data: currentUser} = useCurrentUser();
 
   const { ref: sentinelRef, inView: isInView } = useInView({
     rootMargin: "100px 0px",
@@ -55,7 +58,7 @@ export function LeaderboardPage() {
               <UserRow
                 userInstance={user}
                 userId={user.id}
-                specialBg={user.id == 1}
+                specialBg={user.id == currentUser?.id}
               />
             ))}
             <div

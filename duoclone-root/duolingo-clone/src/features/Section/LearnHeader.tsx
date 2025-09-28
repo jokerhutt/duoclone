@@ -22,7 +22,7 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
   const navigate = useNavigate();
 
-  if (course) return (
+  if (course && currentUser) return (
     <div className="flex flex-col w-full relative">
       <Header padding="px-4">
         <div className="flex gap-3 items-center">
@@ -35,11 +35,11 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
         </div>
         <div className="flex gap-2 items-center">
           <StreakIcon />
-          <p className="text-xl text-duoOrange">{currentUser?.streakLength}</p>
+          <p className="text-xl text-duoOrange">{currentUser.streakLength}</p>
         </div>
         <div className="flex gap-1 items-center">
           <GemsIcon />
-          <p className="text-xl text-duoBlue">{currentUser?.points}</p>
+          <p className="text-xl text-duoBlue">{currentUser.points}</p>
         </div>
 
         <div className="flex gap-1 items-center">
