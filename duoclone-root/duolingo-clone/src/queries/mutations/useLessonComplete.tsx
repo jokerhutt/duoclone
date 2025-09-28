@@ -10,7 +10,11 @@ type useLessonCompleteParams = {
   courseId: number;
 };
 
-export const useLessonComplete = ({ lessonId, userId, courseId }: useLessonCompleteParams) => {
+export const useLessonComplete = ({
+  lessonId,
+  userId,
+  courseId,
+}: useLessonCompleteParams) => {
   const queryClient = useQueryClient();
 
   return useMutation<LessonCompleteType>({
@@ -30,20 +34,34 @@ export const useLessonComplete = ({ lessonId, userId, courseId }: useLessonCompl
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: qk.quests(1) });
-      queryClient.invalidateQueries({queryKey: qk.monthlyChallenges(1)})
+      queryClient.invalidateQueries({ queryKey: qk.monthlyChallenges(1) });
       queryClient.setQueryData(qk.lesson(data.lessonId), data.updatedLesson);
       queryClient.setQueryData(
         qk.courseProgress(courseId),
         data.updatedUserCourseProgress
       );
-      queryClient.setQueryData(qk.user(1), (prev: UserType | undefined) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          totalScore: data.totalScore,
-          streakLength: data.newStreakCount.newCount,
-        };
-      });
+      queryClient.setQueryData(
+        qk.user(userId),
+        (prev: UserType | undefined) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            totalScore: data.totalScore,
+            streakLength: data.newStreakCount.newCount,
+          };
+        }
+      );
+      queryClient.setQueryData(
+        qk.currentUser(),
+        (prev: UserType | undefined) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            totalScore: data.totalScore,
+            streakLength: data.newStreakCount.newCount,
+          };
+        }
+      );
     },
   });
 };
