@@ -13,6 +13,7 @@ import { LearnHeaderLayout } from "./components/layouts/LearnHeaderLayout";
 import { LoginPage } from "./features/Auth/LoginPage";
 import { GOOGLE_CLIENT_ID } from "./constants/env";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { AuthGuard } from "./features/Auth/AuthGuard";
 
 function App() {
   return (
@@ -20,31 +21,33 @@ function App() {
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <div className="w-dvw h-dvh flex flex-col overflow-auto bg-duoBackground">
           <Routes>
-            <Route element={<MainLayout />}>
-              <Route element={<LearnHeaderLayout />}>
-                <Route path="" element={<SectionPage />} />
-                <Route
-                  path="/profile/:userId/friends"
-                  element={<FriendsPage />}
-                />
-                <Route path="/courses" element={<CoursesPage />} />
-              </Route>
-              <Route path="/auth/courses" element={<CoursesPage/>}/>
-              <Route path="/leaderboard" element={<LeaderboardPage />} />
-              <Route path="/quests" element={<QuestsPage />} />
-              <Route path="/profile/:userId" element={<ProfilePage />} />
-            </Route>
-
             <Route path="/auth" element={<LoginPage />} />
 
-            <Route
-              path="/lessons/:lessonId/:position"
-              element={<LessonPage />}
-            />
-            <Route
-              path="/lessons/:lessonId/complete"
-              element={<LessonCompletePage />}
-            />
+            <Route element={<AuthGuard />}>
+              <Route element={<MainLayout />}>
+                <Route element={<LearnHeaderLayout />}>
+                  <Route path="" element={<SectionPage />} />
+                  <Route
+                    path="/profile/:userId/friends"
+                    element={<FriendsPage />}
+                  />
+                  <Route path="/courses" element={<CoursesPage />} />
+                </Route>
+                <Route path="/auth/courses" element={<CoursesPage />} />
+                <Route path="/leaderboard" element={<LeaderboardPage />} />
+                <Route path="/quests" element={<QuestsPage />} />
+                <Route path="/profile/:userId" element={<ProfilePage />} />
+              </Route>
+
+              <Route
+                path="/lessons/:lessonId/:position"
+                element={<LessonPage />}
+              />
+              <Route
+                path="/lessons/:lessonId/complete"
+                element={<LessonCompletePage />}
+              />
+            </Route>
           </Routes>
         </div>
       </GoogleOAuthProvider>
