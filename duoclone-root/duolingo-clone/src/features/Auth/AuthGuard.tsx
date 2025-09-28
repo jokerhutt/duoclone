@@ -10,6 +10,8 @@ export function AuthGuard() {
   useEffect(() => {
     if (!isLoading && !user) {
       navigate("/auth");
+    } else if (!user.currentCourseId) {
+      navigate("/auth/courses")  
     }
   }, [user, isLoading, navigate]);
 

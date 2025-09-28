@@ -31,13 +31,14 @@ function App() {
                     path="/profile/:userId/friends"
                     element={<FriendsPage />}
                   />
-                  <Route path="/courses" element={<CoursesPage />} />
+                  <Route path="/courses" element={<CoursesPage title="All Languages"/>} />
                 </Route>
-                <Route path="/auth/courses" element={<CoursesPage />} />
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
                 <Route path="/quests" element={<QuestsPage />} />
                 <Route path="/profile/:userId" element={<ProfilePage />} />
               </Route>
+
+              <Route path="/auth/courses" element={<CoursesPage title="Choose your first language"/>} />
 
               <Route
                 path="/lessons/:lessonId/:position"

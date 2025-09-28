@@ -8,7 +8,11 @@ import { useUser } from "../../queries/useQuery/useUser";
 import type { CourseType } from "../../Types/CourseType";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
-export function CoursesPage() {
+type CoursesPageProps = {
+  title: string;
+}
+
+export function CoursesPage({title}: CoursesPageProps) {
   const navigate = useNavigate();
 
   const { data: user } = useCurrentUser();
@@ -44,7 +48,7 @@ export function CoursesPage() {
   if (coursesArray)
     return (
       <div className="py-20 px-4">
-        <ContentWidget title={"All Languages"}>
+        <ContentWidget title={title}>
           {coursesArray.map((course, idx) => (
             <div
               onClick={() => handleSelectCourse(course.id)}
