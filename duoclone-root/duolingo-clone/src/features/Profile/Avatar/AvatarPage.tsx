@@ -3,6 +3,8 @@ import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser";
 import { useAvatars } from "../../../queries/useQuery/useAvatars";
 import { AvatarHeader } from "./AvatarHeader";
 import { UserWideImage } from "../UserWideImage";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeInStagger } from "../../../animations/FadeInAnimation";
 
 export function AvatarPage() {
   const { data: currentUser } = useCurrentUser();
@@ -20,34 +22,39 @@ export function AvatarPage() {
 
   const [selectedAvatar, setSelectedAvatar] = useState(currentUser.pfpSrc);
 
-  const showSelectedBorder = (avatarUrl: string) => avatarUrl == selectedAvatar ? "border-6 border-duoBlue" : "";
+  const showSelectedBorder = (avatarUrl: string) =>
+    avatarUrl == selectedAvatar ? "border-6 border-duoBlue" : "";
 
   if (avatars && currentUser)
     return (
-      <div className="w-full h-full">
-        <AvatarHeader />
+      <AnimatePresence>
+        <motion.div {...fadeInStagger(1)} className="w-full h-full">
+          <AvatarHeader currentUserId={currentUser.id} />
 
-        <div className="mt-20 relative flex px-4 justify-center">
-          <UserWideImage imgSrc={selectedAvatar} />
-        </div>
+          <div className="mt-20 relative flex px-4 justify-center">
+            <UserWideImage imgSrc={selectedAvatar} />
+          </div>
 
-        <div className="w-full pt-10 flex gap-8 flex-col items-center px-4">
-          {avatarPairs.map((pair, idx) => (
-            <div
-              key={idx}
-              className="w-full flex justify-between items-center gap-6"
-            >
-              {pair.map((avatarUrl, i) => (
-                <img
-                  onClick={() => setSelectedAvatar(avatarUrl)}  
-                  key={i}
-                  className={`min-h-17 max-h-17 h-17 w-full rounded-xl object-cover ${showSelectedBorder(avatarUrl)}`}
-                  src={avatarUrl}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+          <div className="w-full pt-10 flex gap-8 flex-col items-center px-4">
+            {avatarPairs.map((pair, idx) => (
+              <div
+                key={idx}
+                className="w-full flex justify-between items-center gap-6"
+              >
+                {pair.map((avatarUrl, i) => (
+                  <img
+                    onClick={() => setSelectedAvatar(avatarUrl)}
+                    key={i}
+                    className={`min-h-17 max-h-17 h-17 w-full rounded-xl object-cover ${showSelectedBorder(
+                      avatarUrl
+                    )}`}
+                    src={avatarUrl}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     );
 }

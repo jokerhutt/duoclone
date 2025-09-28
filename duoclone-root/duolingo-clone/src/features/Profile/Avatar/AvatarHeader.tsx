@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router";
 import { Header } from "../../../components/molecules/Header/Header";
 
-export function AvatarHeader () {
+type AvatarHeaderProps = {
+    currentUserId: number;
+}
+
+export function AvatarHeader ({currentUserId}: AvatarHeaderProps) {
+
+    const navigate = useNavigate();
+
+    const closePage = () => {
+        navigate(`/profile/${currentUserId}`)
+    }
 
     return (
 
