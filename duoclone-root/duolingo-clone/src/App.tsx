@@ -14,6 +14,7 @@ import { LoginPage } from "./features/Auth/LoginPage";
 import { GOOGLE_CLIENT_ID } from "./constants/env";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthGuard } from "./features/Auth/AuthGuard";
+import { AvatarPage } from "./features/Profile/Avatar/AvatarPage";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
               <Route
                 path="/lessons/:lessonId/complete"
                 element={<LessonCompletePage />}
+              />
+              <Route
+                path="/avatar"
+                element={<AvatarPage/>}
               />
             </Route>
           </Routes>

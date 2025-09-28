@@ -44,6 +44,7 @@ export const FOLLOW_USER = API_PATH + `/follows/follow`
 export const UNFOLLOW_USER = API_PATH + `/follows/unfollow`
 export const CHANGE_COURSE = API_PATH + `/courses/change`
 export const GOOGLE_LOGIN = API_PATH + `/auth/google-login`
+export const UPDATE_AVATAR = API_PATH + `/users/update-avatar`
 
 
 export const GET_LESSONS_FROM_IDS = (lessonIds: string) =>
@@ -68,6 +69,7 @@ export const LOGOUT = API_PATH + `/auth/logout`
 export const GET_BULK_TREE = (sectionId: number, userId: number) =>
   API_PATH + `/sections/getBulk/${sectionId}/${userId}`;
 
+export const GET_AVATARS = API_PATH + `/users/avatars`
 
 
 export const GET_PAGINATED_LEADERBOARD = (cursor: string | null, limit: number) =>
