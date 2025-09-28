@@ -20,7 +20,7 @@ export function AvatarPage() {
 
   const [selectedAvatar, setSelectedAvatar] = useState(currentUser.pfpSrc);
 
-  const showSelectedBorder = (avatarUrl: string) => avatarUrl == selectedAvatar ? "border-6 border-duoBlue" : ""
+  const showSelectedBorder = (avatarUrl: string) => avatarUrl == selectedAvatar ? "border-6 border-duoBlue" : "";
 
   if (avatars && currentUser)
     return (
@@ -39,8 +39,9 @@ export function AvatarPage() {
             >
               {pair.map((avatarUrl, i) => (
                 <img
+                  onClick={() => setSelectedAvatar(avatarUrl)}  
                   key={i}
-                  className={`w-full h-17 rounded-xl object-cover ${showSelectedBorder(avatarUrl)}`}
+                  className={`min-h-17 max-h-17 h-17 w-full rounded-xl object-cover ${showSelectedBorder(avatarUrl)}`}
                   src={avatarUrl}
                 />
               ))}
