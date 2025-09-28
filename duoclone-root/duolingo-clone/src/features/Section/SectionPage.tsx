@@ -24,14 +24,13 @@ export function SectionPage() {
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
   // -- QUERY STATE -- //
-  const { data: currentUser } = useUser(1);
+  const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { data: courseProgress } = useCourseProgress(
     currentUser?.currentCourseId,
     currentUser?.id
   );
   const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
-  const { isLoading: loadingUser } = useCurrentUser();
 
   // -- THIS HANDLES THE BANNER CHANGING -- //
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();

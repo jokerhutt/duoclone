@@ -2,6 +2,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useQueryClient } from "@tanstack/react-query";
 import { qk } from "../../types/queryKeys";
 import { GOOGLE_LOGIN } from "../../../util/paths";
+import type { UserType } from "../../../Types/UserType";
 
 export function useGoogleAuthEntry() {
   const queryClient = useQueryClient();
@@ -18,10 +19,15 @@ export function useGoogleAuthEntry() {
         credentials: "include",
       });
 
-      const user = await res.json();
+      const user: UserType = await res.json();
       queryClient.setQueryData(qk.user(user.id), user);
       queryClient.setQueryData(qk.currentUser(), user);
-      window.location.href = "/";
+
+      if (user.currentCourseId == null) {
+        window.location.href = "/auth/courses"
+      } else {
+        window.location.href = "/";
+      }
     },
     onError: (err) => console.error("Google login failed", err),
   });

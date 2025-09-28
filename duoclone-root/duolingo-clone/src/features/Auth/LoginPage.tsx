@@ -3,6 +3,7 @@ import { WideActionButton } from "../Common/WideActionButton";
 
 export function LoginPage() {
   const googleLogin = useGoogleAuthEntry();
+
   return (
     <div className="w-full flex items-center px-4 flex-col gap-6 justify-center h-full bg-white">
       <div className="w-full flex items-center flex-col">

@@ -8,6 +8,7 @@ import { LessonStatsGroup } from "./LessonStatsGroup";
 import { LessonCompleteCard } from "./LessonCompleteCard";
 import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
 import { useUser } from "../../queries/useQuery/useUser";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LessonCompletePage() {
 
@@ -15,7 +16,7 @@ export function LessonCompletePage() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
 
-  const {data: user} = useUser(1);
+  const {data: user} = useCurrentUser();
 
   const possibleAnimations = [
     "/lottie-animations/EL_BEA_DUO.json",

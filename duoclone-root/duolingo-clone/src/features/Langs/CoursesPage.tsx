@@ -6,11 +6,12 @@ import { useChangeCourse } from "../../queries/mutations/useChangeCourse";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import { useUser } from "../../queries/useQuery/useUser";
 import type { CourseType } from "../../Types/CourseType";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function CoursesPage() {
   const navigate = useNavigate();
 
-  const { data: user} = useUser(1);
+  const { data: user} = useCurrentUser();
   const { data: allCourses } = useCourse("all");
 
   const changeCourseMutation = useChangeCourse();

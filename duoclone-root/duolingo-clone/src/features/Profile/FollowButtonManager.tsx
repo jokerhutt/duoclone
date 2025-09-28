@@ -16,8 +16,9 @@ export function FollowButtonManager({
   pageUserFollowers
 }: FollowButtonManagerProps) {
   const followMutation = useFollowMutation();
+  
 
-  const isFollowing = pageUserFollowers?.includes(1) ?? false;
+  const isFollowing = pageUserFollowers?.includes(currentUser.id) ?? false;
 
   const handleFollowToggle = () => {
     if (!currentUser) return;

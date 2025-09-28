@@ -28,6 +28,7 @@ export function useChangeCourse() {
     },
     onSuccess: (updatedUser: UserType) => {
       qc.setQueryData(qk.user(updatedUser.id), updatedUser);
+      qc.setQueryData(qk.currentUser(), updatedUser);
     },
   });
 }
