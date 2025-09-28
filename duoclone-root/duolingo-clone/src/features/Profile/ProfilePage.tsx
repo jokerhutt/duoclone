@@ -34,7 +34,7 @@ export function ProfilePage() {
   console.log("Followers:", followers);
   console.log("Following:", following);
 
-  const isOwnPage = pageUser?.id == 1;
+  const isOwnPage = pageUser?.id == currentUser.id;
 
   if (
     !pageUserFollowers ||

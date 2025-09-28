@@ -11,13 +11,16 @@ import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
 import { BottomSheet } from "./BottomSheet";
 import { ExitConfirmationSheet } from "./ExitConfirmationSheet";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
 
+  const {data: currentUser} = useCurrentUser();
+
   const id = Number(lessonId);
-  const { data: exercises, isLoading } = useExercises(id, 1);
+  const { data: exercises, isLoading } = useExercises(id, currentUser.id);
 
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]
@@ -71,7 +74,7 @@ export function LessonPage() {
           body: JSON.stringify({
             exerciseId: exercises[Number(position)].id,
             optionIds: currentSelectedOptions.map((option) => option.id),
-            userId: 1,
+            userId: currentUser.id,
           }),
         });
 

@@ -29,7 +29,7 @@ export function SectionPage() {
     currentUser?.currentCourseId,
     currentUser?.id
   );
-  const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
+  const { isLoading, isError } = useSectionTree(currentUser.id, courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
 
   // -- THIS HANDLES THE BANNER CHANGING -- //

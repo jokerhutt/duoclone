@@ -63,8 +63,8 @@ export const GET_AUTH_ME = API_PATH + `/auth/me`;
 
 // -------------------------------------------------------- //
 
-export const GET_BULK_TREE = (sectionId: number) =>
-  API_PATH + `/sections/getBulk/${sectionId}/${1}`;
+export const GET_BULK_TREE = (sectionId: number, userId: number) =>
+  API_PATH + `/sections/getBulk/${sectionId}/${userId}`;
 
 
 
