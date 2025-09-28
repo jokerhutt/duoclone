@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { LogoutButton } from "./LogoutButton";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
@@ -65,6 +66,7 @@ export function ProfilePage() {
           followers={followers}
           following={following}
         />
+        <LogoutButton show={isOwnPage}/>
       </motion.div>
     </AnimatePresence>
   );

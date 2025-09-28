@@ -61,6 +61,8 @@ export const GET_ALL_COURSES = API_PATH + `/courses/all`
 
 export const GET_AUTH_ME = API_PATH + `/auth/me`;
 
+export const LOGOUT = API_PATH + `/auth/logout`
+
 // -------------------------------------------------------- //
 
 export const GET_BULK_TREE = (sectionId: number, userId: number) =>
