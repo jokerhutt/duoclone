@@ -68,6 +68,7 @@ export const LOGOUT = API_PATH + `/auth/logout`
 export const GET_BULK_TREE = (sectionId: number, userId: number) =>
   API_PATH + `/sections/getBulk/${sectionId}/${userId}`;
 
+export const GET_AVATARS = API_PATH + `/users/avatars`
 
 
 export const GET_PAGINATED_LEADERBOARD = (cursor: string | null, limit: number) =>
