@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { GemsIcon } from "../../components/atoms/Icons/GemsIcon";
 import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
 import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { StreakIcon } from "../../components/atoms/Icons/StreakIcon";
 import { Header } from "../../components/molecules/Header/Header";
 import type { CourseProgressType } from "../../Types/CourseProgressType";
-import { SpinnerPage } from "./SpinnerPage";
 import { useNavigate } from "react-router";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
 import { useUser } from "../../queries/useQuery/useUser";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 type LearnHeaderProps = {
   courseProgress: CourseProgressType;
@@ -17,7 +16,7 @@ type LearnHeaderProps = {
 
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
-  const { data: currentUser } = useUser(1);
+  const { data: currentUser } = useCurrentUser();
   const { data: course, isLoading} = useCourse(courseProgress.courseId);
   const courseObject = course as CourseType;
 

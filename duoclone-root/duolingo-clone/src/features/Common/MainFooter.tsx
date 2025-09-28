@@ -6,9 +6,12 @@ import { UserLeagueIcon } from "../../components/atoms/Icons/UserLeagueIcon";
 import { UserPracticeIcon } from "../../components/atoms/Icons/UserPracticeIcon";
 import { Footer } from "../../components/molecules/Footer/Footer";
 import { FooterButton } from "../../components/molecules/Footer/FooterButton";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function MainFooter() {
   const navigate = useNavigate();
+
+  const {data: currentUser} = useCurrentUser();
 
   return (
     <Footer padding="px-6" height="h-20 border-t border-t-duoGrayBorder">
@@ -22,7 +25,7 @@ export function MainFooter() {
         <FooterButton path="/quests">
           <UserChestQuestsIcon />
         </FooterButton>
-        <FooterButton path={`/profile/1`}>
+        <FooterButton navigateOn={!!currentUser} path={currentUser ? `/profile/${currentUser.id}` : "#"}>
           <UserFooterIcon />
         </FooterButton>
       </div>
