@@ -46,8 +46,8 @@ export const CHANGE_COURSE = API_PATH + `/courses/change`
 export const GOOGLE_LOGIN = API_PATH + `/auth/google-login`
 
 
-export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
-  API_PATH + `/lessons/ids?${lessonIds}&userId=${userId}`;
+export const GET_LESSONS_FROM_IDS = (lessonIds: string) =>
+  API_PATH + `/lessons/ids?${lessonIds}`;
 
 export const GET_USERS_FROM_IDS = (userIds: string) => API_PATH + `/users/ids?${userIds}`
 
