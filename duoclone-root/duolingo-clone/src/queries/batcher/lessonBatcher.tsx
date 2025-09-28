@@ -7,7 +7,8 @@ import { parseIdsToRequestParam } from "../../util/pathParsers";
 export const lessonBatcher = create<LessonType, number>({
   fetcher: async (ids: number[]) => {
     const res = await fetch(
-      GET_LESSONS_FROM_IDS(parseIdsToRequestParam("lessonIds", ids), 1)
+      GET_LESSONS_FROM_IDS(parseIdsToRequestParam("lessonIds", ids)),
+      { credentials: "include" }
     );
     if (!res.ok) throw new Error("Failed to fetch lessons");
     return await res.json();

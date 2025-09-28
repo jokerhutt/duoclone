@@ -3,11 +3,13 @@ import { useQuests } from "../../queries/useQuery/useQuests";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { QuestListItem } from "./QuestListItem";
 
-type QuestListWidgetProps = {};
+type QuestListWidgetProps = {
+  userId: number;
+};
 
-export function QuestListWidget({}: QuestListWidgetProps) {
+export function QuestListWidget({userId}: QuestListWidgetProps) {
 
-  const {data: quests, isLoading: isLoading, isError: isError} = useQuests(1);  
+  const {data: quests, isLoading: isLoading, isError: isError} = useQuests(userId);  
 
   if (!quests || isLoading || isError) return <SpinnerPage/>
 

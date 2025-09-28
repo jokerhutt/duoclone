@@ -10,12 +10,12 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { SpinnerPage } from "./SpinnerPage";
-import { useCurrentUser } from "../../queries/useQuery/useCurrentUser";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
 import { useUser } from "../../queries/useQuery/useUser";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function SectionPage() {
   // -- REFS -- //
@@ -24,14 +24,13 @@ export function SectionPage() {
   const currentLessonRef = useRef<HTMLDivElement>(null);
 
   // -- QUERY STATE -- //
-  const { data: currentUser } = useUser(1);
+  const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { data: courseProgress } = useCourseProgress(
     currentUser?.currentCourseId,
     currentUser?.id
   );
-  const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
+  const { isLoading, isError } = useSectionTree(currentUser.id, courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
-  const { isLoading: loadingUser } = useCurrentUser(1);
 
   // -- THIS HANDLES THE BANNER CHANGING -- //
   const { currentUnit, setCurrentUnit } = useCurrentUnitStore();

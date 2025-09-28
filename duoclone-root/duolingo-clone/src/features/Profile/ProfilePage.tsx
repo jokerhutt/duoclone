@@ -13,13 +13,15 @@ import { FollowButton } from "./FollowButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { LogoutButton } from "./LogoutButton";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
   const userIdNumber = userId ? parseInt(userId, 10) : 0;
 
   const { data: pageUser, isLoading } = useUser(userIdNumber);
-  const { data: currentUser } = useUser(1); // assuming current user ID is 1
+  const {data: currentUser} = useCurrentUser();
   const { data: pageUserFollowers } = useFollowers(pageUser?.id ?? 0);
 
   useFollowCaches(userIdNumber);
@@ -33,7 +35,7 @@ export function ProfilePage() {
   console.log("Followers:", followers);
   console.log("Following:", following);
 
-  const isOwnPage = pageUser?.id == 1;
+  const isOwnPage = pageUser?.id == currentUser.id;
 
   if (
     !pageUserFollowers ||
@@ -45,6 +47,7 @@ export function ProfilePage() {
   )
     return <SpinnerPage />;
 
+  //TODO If no pfp, set it to the first name with circle
   return (
     <AnimatePresence>
       <motion.div {...fadeInStagger(1)} className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
@@ -63,6 +66,7 @@ export function ProfilePage() {
           followers={followers}
           following={following}
         />
+        <LogoutButton show={isOwnPage}/>
       </motion.div>
     </AnimatePresence>
   );

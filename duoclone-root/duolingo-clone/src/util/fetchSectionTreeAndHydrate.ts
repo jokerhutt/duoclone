@@ -3,8 +3,8 @@ import type { SectionTreeNode } from "../Types/SectionTree/SectionTreeNodeTypes"
 import { GET_BULK_TREE } from "./paths";
 import { qk } from "../queries/types/queryKeys";
 
-export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
-  const tree = await fetchSectionTree(id);
+export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number, userId: number) {
+  const tree = await fetchSectionTree(id, userId);
 
   //SET SECTION TREE QUERY
   qc.setQueryData(qk.section(id), tree.section);
@@ -38,9 +38,10 @@ export async function fetchSectionTreeAndHydrate(qc: QueryClient, id: number) {
 }
 
 export async function fetchSectionTree(
-  sectionId: number
+  sectionId: number,
+  userId: number
 ): Promise<SectionTreeNode> {
-  const res = await fetch(GET_BULK_TREE(sectionId));
+  const res = await fetch(GET_BULK_TREE(sectionId, userId));
   if (!res.ok) throw new Error(`Failed to fetch sectionTree for ${sectionId}`);
   return (await res.json()) as SectionTreeNode;
 }

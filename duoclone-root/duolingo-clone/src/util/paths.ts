@@ -43,10 +43,11 @@ export const SUBMIT_EXERCISE_ATTEMPT = API_PATH + `/exercises/attempts/submit`;
 export const FOLLOW_USER = API_PATH + `/follows/follow`
 export const UNFOLLOW_USER = API_PATH + `/follows/unfollow`
 export const CHANGE_COURSE = API_PATH + `/courses/change`
+export const GOOGLE_LOGIN = API_PATH + `/auth/google-login`
 
 
-export const GET_LESSONS_FROM_IDS = (lessonIds: string, userId: number) =>
-  API_PATH + `/lessons/ids?${lessonIds}&userId=${userId}`;
+export const GET_LESSONS_FROM_IDS = (lessonIds: string) =>
+  API_PATH + `/lessons/ids?${lessonIds}`;
 
 export const GET_USERS_FROM_IDS = (userIds: string) => API_PATH + `/users/ids?${userIds}`
 
@@ -58,10 +59,14 @@ export const GET_SECTIONS_FROM_IDS = (sectionIds: string) =>
 
 export const GET_ALL_COURSES = API_PATH + `/courses/all`
 
+export const GET_AUTH_ME = API_PATH + `/auth/me`;
+
+export const LOGOUT = API_PATH + `/auth/logout`
+
 // -------------------------------------------------------- //
 
-export const GET_BULK_TREE = (sectionId: number) =>
-  API_PATH + `/sections/getBulk/${sectionId}/${1}`;
+export const GET_BULK_TREE = (sectionId: number, userId: number) =>
+  API_PATH + `/sections/getBulk/${sectionId}/${userId}`;
 
 
 

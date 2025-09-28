@@ -2,9 +2,13 @@ import { useMonthlyChallenge } from "../../queries/useQuery/useMonthlyChallenge"
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { MonthlyChallengeProgressBar } from "./MonthlyChallengeProgressBar";
 
-export function MonthlyChallengeCard () {
+type MonthlyChallengeCardProps = {
+    userId: number
+}
 
-    const {data: monthlyChallenge, isLoading: isLoading, isError: isError} = useMonthlyChallenge(1);
+export function MonthlyChallengeCard ({userId}: MonthlyChallengeCardProps) {
+
+    const {data: monthlyChallenge, isLoading: isLoading, isError: isError} = useMonthlyChallenge(userId);
 
     const completed = monthlyChallenge?.progress ?? 10;
     const total = monthlyChallenge?.total ?? 20;

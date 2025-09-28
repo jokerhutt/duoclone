@@ -12,6 +12,7 @@ import { colorMap } from "../../util/colorMap";
 import { UnitReviewButton } from "./UnitReviewButton";
 import { chooseLessonImage } from "../../util/lessonUtils";
 import { useUser } from "../../queries/useQuery/useUser";
+import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 type LessonButtonProps = {
   idx: number;
@@ -33,7 +34,7 @@ export function LessonButton({
   const navigate = useNavigate();
 
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
-  const {data: user} = useUser(1);
+  const {data: user} = useCurrentUser();
   const { data: userCourseProgress, isLoading: userCourseProgressLoading } =
     useCourseProgress(user?.currentCourseId, user?.id);
 
