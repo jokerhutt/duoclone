@@ -10,6 +10,7 @@ import { LeaderboardPage } from "./features/Leaderboard/LeaderboardPage";
 import { FriendsPage } from "./features/Profile/FriendsPage";
 import { CoursesPage } from "./features/Langs/CoursesPage";
 import { LearnHeaderLayout } from "./components/layouts/LearnHeaderLayout";
+import { LoginPage } from "./features/Auth/LoginPage";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
             <Route path="/quests" element={<QuestsPage />} />
             <Route path="/profile/:userId" element={<ProfilePage />} />
           </Route>
+
+          <Route path="/auth" element={<LoginPage/>} />
 
           <Route path="/lessons/:lessonId/:position" element={<LessonPage />} />
           <Route
