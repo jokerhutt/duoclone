@@ -47,7 +47,7 @@ export function ProfilePage() {
   )
     return <SpinnerPage />;
 
-  //TODO If no pfp, set it to the first name with circle
+  //TODO add a more languages button? at least a page for a users languages
   return (
     <AnimatePresence>
       <motion.div {...fadeInStagger(1)} className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
