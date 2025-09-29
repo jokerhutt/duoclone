@@ -32,15 +32,25 @@ function App() {
                     path="/profile/:userId/friends"
                     element={<FriendsPage />}
                   />
-                  <Route path="/courses" element={<CoursesPage title="All Languages"/>} />
-                  <Route path="/courses/:userId" element={<CoursesPage title="Languages"/>}/>
+                  <Route
+                    path="/courses"
+                    element={<CoursesPage title="All Languages" />}
+                  />
+                  <Route
+                    path="/courses/:userId"
+                    element={<CoursesPage title="Languages" />}
+                  />
                 </Route>
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
                 <Route path="/quests" element={<QuestsPage />} />
                 <Route path="/profile/:userId" element={<ProfilePage />} />
+                <Route path="/avatar" element={<AvatarPage />} />
               </Route>
 
-              <Route path="/auth/courses" element={<CoursesPage title="Choose your first language"/>} />
+              <Route
+                path="/auth/courses"
+                element={<CoursesPage title="Choose your first language" />}
+              />
 
               <Route
                 path="/lessons/:lessonId/:position"
@@ -49,10 +59,6 @@ function App() {
               <Route
                 path="/lessons/:lessonId/complete"
                 element={<LessonCompletePage />}
-              />
-              <Route
-                path="/avatar"
-                element={<AvatarPage/>}
               />
             </Route>
           </Routes>

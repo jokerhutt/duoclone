@@ -4,6 +4,7 @@ import { MainFooter } from "../../features/Common/MainFooter";
 export function MainLayout() {
   return (
     <>
+      
       <Outlet />
       <MainFooter />
     </>

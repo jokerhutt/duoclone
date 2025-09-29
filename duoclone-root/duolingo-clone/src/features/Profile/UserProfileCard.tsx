@@ -45,7 +45,6 @@ export function UserProfileCard({ user, followers, userCourseInstances }: UserPr
             <p className="text-duoBlue">{followers} Followers</p>
           </div>
         </div>
-
         <div className="w-full flex flex-col justify-end items-end">
           <div className="flex py-3 w-full gap-2 justify-end items-center">
             {userCourseInstances.map((course) => (
