@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { LearnHeader } from "./LearnHeader";
 import { UnitBanner } from "../Unit/UnitBanner";
 import { UnitPath } from "../Unit/UnitPath";
 import { useUnitObserver } from "../../util/UnitObserver";
@@ -14,7 +13,6 @@ import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore"
 import { scrollToUnit } from "../../util/scrollUtils";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
-import { useUser } from "../../queries/useQuery/useUser";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function SectionPage() {
@@ -27,9 +25,8 @@ export function SectionPage() {
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { data: courseProgress } = useCourseProgress(
     currentUser?.currentCourseId,
-    currentUser?.id
   );
-  const { isLoading, isError } = useSectionTree(currentUser.id, courseProgress?.sectionId);
+  const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
 
   // -- THIS HANDLES THE BANNER CHANGING -- //

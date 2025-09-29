@@ -4,7 +4,6 @@ import { qk } from "../types/queryKeys";
 import { CHANGE_COURSE } from "../../util/paths";
 
 interface ChangeCourseVariables {
-  userId: number;
   newCourse: number;
 }
 
@@ -13,12 +12,13 @@ export function useChangeCourse() {
 
   return useMutation<UserType, Error, ChangeCourseVariables>({
     mutationFn: async (variables: ChangeCourseVariables): Promise<UserType> => {
-      const { userId, newCourse } = variables;
+      const { newCourse } = variables;
 
       const res = await fetch(CHANGE_COURSE, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, newCourse }),
+        body: JSON.stringify({ newCourse }),
+        credentials: "include",
       });
 
       if (!res.ok) throw new Error("Failed to change course");

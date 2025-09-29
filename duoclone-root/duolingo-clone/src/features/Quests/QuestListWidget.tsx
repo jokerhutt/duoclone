@@ -1,15 +1,10 @@
-import { Spinner } from "../../components/atoms/Loading/Spinner";
 import { useQuests } from "../../queries/useQuery/useQuests";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { QuestListItem } from "./QuestListItem";
 
-type QuestListWidgetProps = {
-  userId: number;
-};
+export function QuestListWidget() {
 
-export function QuestListWidget({userId}: QuestListWidgetProps) {
-
-  const {data: quests, isLoading: isLoading, isError: isError} = useQuests(userId);  
+  const {data: quests, isLoading: isLoading, isError: isError} = useQuests();  
 
   if (!quests || isLoading || isError) return <SpinnerPage/>
 

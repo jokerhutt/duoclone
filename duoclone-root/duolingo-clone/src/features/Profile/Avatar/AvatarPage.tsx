@@ -33,7 +33,7 @@ export function AvatarPage() {
   const submitUpdateAvatar = () => {
     if (selectedAvatar != currentUser.pfpSrc) {
         updateAvatarMutation.mutate(
-            {userId: currentUser.id, selectedAvatar: selectedAvatar},
+            {selectedAvatar: selectedAvatar},
             {onSuccess: () => {
                 navigate(`/profile/${currentUser.id}`);
             }},

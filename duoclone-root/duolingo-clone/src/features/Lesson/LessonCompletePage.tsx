@@ -7,7 +7,6 @@ import { WideActionButton } from "../Common/WideActionButton";
 import { LessonStatsGroup } from "./LessonStatsGroup";
 import { LessonCompleteCard } from "./LessonCompleteCard";
 import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
-import { useUser } from "../../queries/useQuery/useUser";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LessonCompletePage() {
@@ -46,12 +45,10 @@ export function LessonCompletePage() {
   };
 
   const lessonIdForMutation: string = lessonId ?? "";
-  const userIdForMutation: number = user?.id ?? 0;
   const courseIdForMutation: number = user?.currentCourseId ?? 0;
 
   const lessonCompleteMutation = useLessonComplete({
     lessonId: lessonIdForMutation,
-    userId: userIdForMutation,
     courseId: courseIdForMutation
   });
 

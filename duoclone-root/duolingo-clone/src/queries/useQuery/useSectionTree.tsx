@@ -4,7 +4,7 @@ import { qk } from "../types/queryKeys";
 import type { SectionType } from "../../Types/SectionType";
 import type { UnitType } from "../../Types/UnitType";
 
-export function useSectionTree(userId: number, sectionId?: number) {
+export function useSectionTree(sectionId?: number) {
   const qc = useQueryClient();
 
   const q = useQuery({
@@ -14,7 +14,7 @@ export function useSectionTree(userId: number, sectionId?: number) {
         : (["sectionTree", "pending"] as const),
     queryFn: () => {
       if (sectionId == null) throw new Error("Missing sectionId");
-      return fetchSectionTreeAndHydrate(qc, sectionId, userId);
+      return fetchSectionTreeAndHydrate(qc, sectionId);
     },
     enabled: sectionId != null,
     staleTime: 1000 * 60 * 5,

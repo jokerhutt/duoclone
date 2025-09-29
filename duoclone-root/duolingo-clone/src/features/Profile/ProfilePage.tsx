@@ -1,5 +1,4 @@
 import { useParams } from "react-router";
-import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { useFollowCaches } from "../../queries/useQuery/FollowQueries/useFollowCaches";
 import { useFollowers } from "../../queries/useQuery/FollowQueries/useFollowers";
 import { useFollowingIds } from "../../queries/useQuery/FollowQueries/useFollowing";
@@ -9,7 +8,6 @@ import { ProfileStatisticsGroup } from "./ProfileStatsWidget/ProfileStatisticsGr
 import { UserProfileCard } from "./UserProfileCard";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useUser } from "../../queries/useQuery/useUser";
-import { FollowButton } from "./FollowButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
 import { fadeInStagger } from "../../animations/FadeInAnimation";

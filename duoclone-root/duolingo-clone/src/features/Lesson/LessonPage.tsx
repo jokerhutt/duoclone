@@ -11,27 +11,17 @@ import { LessonHeader } from "./LessonHeader";
 import { LessonResult } from "./LessonResult";
 import { BottomSheet } from "./BottomSheet";
 import { ExitConfirmationSheet } from "./ExitConfirmationSheet";
-import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
 
-  const {data: currentUser} = useCurrentUser();
-
   const id = Number(lessonId);
-  const { data: exercises, isLoading } = useExercises(id, currentUser.id);
+  const { data: exercises, isLoading } = useExercises(id);
 
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]
   >([]);
-
-  const currentPosition = Number(position) || 0;
-  const totalExercises = exercises?.length || 0;
-  const percentageComplete =
-    totalExercises > 0
-      ? Math.round(((currentPosition + 1) / totalExercises) * 100)
-      : 0;
 
   const [intendsToExit, setIntendsToExit] = useState(false);
 
@@ -74,8 +64,8 @@ export function LessonPage() {
           body: JSON.stringify({
             exerciseId: exercises[Number(position)].id,
             optionIds: currentSelectedOptions.map((option) => option.id),
-            userId: currentUser.id,
           }),
+          credentials: "include",
         });
 
         if (!response.ok) {

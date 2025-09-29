@@ -4,7 +4,6 @@ import { qk } from "../types/queryKeys";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../../util/paths";
 
 type FollowMutationParams = {
-  followerId: number;
   followedId: number;
   isFollowing: boolean;
 };
@@ -13,7 +12,7 @@ export function useFollowMutation() {
   const qc = useQueryClient();
 
   return useMutation<FollowMutationResponse, Error, FollowMutationParams>({
-    mutationFn: async ({ followerId, followedId, isFollowing }) => {
+    mutationFn: async ({ followedId, isFollowing }) => {
 
       const path = isFollowing ? UNFOLLOW_USER : FOLLOW_USER  
 
@@ -22,7 +21,8 @@ export function useFollowMutation() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ followerId, followedId }),
+        body: JSON.stringify({ followedId }),
+        credentials: "include"
       });
       
       if (!response.ok) {
@@ -31,10 +31,14 @@ export function useFollowMutation() {
       
       return response.json();
     },
-    onSuccess: (data, { followerId, followedId }) => {
-      qc.setQueryData(qk.follows(followerId), data.followersNewStats);
-      qc.setQueryData(qk.followers(followerId), data.followersNewStats.followerIds);
-      qc.setQueryData(qk.following(followerId), data.followersNewStats.followingIds);
+    onSuccess: (data, { }) => {
+
+      const actorId = data.actorUserId;
+      const followedId = data.followedUserId;
+
+      qc.setQueryData(qk.follows(actorId), data.followersNewStats);
+      qc.setQueryData(qk.followers(actorId), data.followersNewStats.followerIds);
+      qc.setQueryData(qk.following(actorId), data.followersNewStats.followingIds);
 
       qc.setQueryData(qk.follows(followedId), data.followedNewStats);
       qc.setQueryData(qk.followers(followedId), data.followedNewStats.followerIds);

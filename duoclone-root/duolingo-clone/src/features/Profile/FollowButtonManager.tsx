@@ -1,6 +1,4 @@
 import { useFollowMutation } from "../../queries/mutations/useFollowMutation";
-import { useFollowers } from "../../queries/useQuery/FollowQueries/useFollowers";
-import { useUser } from "../../queries/useQuery/useUser";
 import type { UserType } from "../../Types/UserType";
 import { FollowButton } from "./FollowButton";
 type FollowButtonManagerProps = {
@@ -17,14 +15,12 @@ export function FollowButtonManager({
 }: FollowButtonManagerProps) {
   const followMutation = useFollowMutation();
   
-
   const isFollowing = pageUserFollowers?.includes(currentUser.id) ?? false;
 
   const handleFollowToggle = () => {
     if (!currentUser) return;
 
     followMutation.mutate({
-      followerId: currentUser.id,
       followedId: pageUser.id,
       isFollowing: isFollowing,
     });

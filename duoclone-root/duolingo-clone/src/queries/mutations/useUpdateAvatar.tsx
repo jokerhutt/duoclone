@@ -4,7 +4,6 @@ import { qk } from "../types/queryKeys";
 import type { UserType } from "../../Types/UserType";
 
 interface UpdateAvatarVariables {
-  userId: number;
   selectedAvatar: string;
 }
 
@@ -13,25 +12,23 @@ export function useUpdateAvatar() {
 
   return useMutation<UserType, Error, UpdateAvatarVariables>({
     mutationFn: async (variables: UpdateAvatarVariables): Promise<UserType> => {
-      const { userId, selectedAvatar } = variables;
+      const { selectedAvatar } = variables;
 
       const res = await fetch(UPDATE_AVATAR, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, selectedAvatar }),
+        body: JSON.stringify({ selectedAvatar }),
+        credentials: "include",
       });
 
       if (!res.ok) throw new Error("Failed to update avatar");
 
       const data = (await res.json()) as UserType;
       return data;
-
     },
     onSuccess: (updatedUser: UserType) => {
       qc.setQueryData(qk.user(updatedUser.id), updatedUser);
       qc.setQueryData(qk.currentUser(), updatedUser);
-    }
-
-
+    },
   });
 }
