@@ -14,6 +14,7 @@ export const qk = {
   currentUser: () => ["currentUser"],
   user: (id: number) => ["users", id] as const,
   quests: () => ["quests"] as const,
+  userCourses: (userId: number) => ["userCourses", userId] as const,
   courses: (id: number | "all") => ["courses", id] as const,
   monthlyChallenges: () => ["monthlyChallenges"] as const,
   
