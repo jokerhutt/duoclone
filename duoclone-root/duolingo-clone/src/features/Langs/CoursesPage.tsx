@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { HollowedArrow } from "../../components/atoms/HollowedArrow/HollowedArrow";
 import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { useChangeCourse } from "../../queries/mutations/useChangeCourse";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
+import { useUserCourses } from "../../queries/useQuery/useUserCourses";
 
 type CoursesPageProps = {
   title: string;
@@ -12,11 +13,12 @@ type CoursesPageProps = {
 
 export function CoursesPage({title}: CoursesPageProps) {
   const navigate = useNavigate();
-
   const { data: allCourses } = useCourse("all");
-
+  const { userId } = useParams<{ userId?: string }>();
+  const numUserId = userId ? Number(userId) : undefined;
   const changeCourseMutation = useChangeCourse();
-  const coursesArray = allCourses as CourseType[];
+  const {data: userCourses} = useUserCourses(numUserId);
+  const coursesArray = numUserId ? userCourses : allCourses as CourseType[]
 
   const handleSelectCourse = (courseId: number) => {
     changeCourseMutation.mutate(
@@ -35,6 +37,7 @@ export function CoursesPage({title}: CoursesPageProps) {
   }
 
   const showBorder = (idx: number) => {
+    if (!coursesArray) return "";
     if (idx != coursesArray.length - 1) {
       return "border-b border-b-duoGrayBorder";
     } else {

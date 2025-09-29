@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { UserType } from "../../Types/UserType";
 import { qk } from "../types/queryKeys";
 import { CHANGE_COURSE } from "../../util/paths";
+import type { CourseType } from "../../Types/CourseType";
 
 interface ChangeCourseVariables {
   newCourse: number;
@@ -9,7 +10,7 @@ interface ChangeCourseVariables {
 
 type CourseChangeType = {
   newUser: UserType;
-  newCourses: number[];
+  newCourses: CourseType[];
 }
 
 export function useChangeCourse() {
