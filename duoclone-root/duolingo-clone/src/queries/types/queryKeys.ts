@@ -13,8 +13,8 @@ export const qk = {
   avatars: () => ["avatars"] as const,
   currentUser: () => ["currentUser"],
   user: (id: number) => ["users", id] as const,
-  quests: (id: number) => ["quests", id] as const,
+  quests: () => ["quests"] as const,
   courses: (id: number | "all") => ["courses", id] as const,
-  monthlyChallenges: (id: number) => ["monthlyChallenges", id] as const,
+  monthlyChallenges: () => ["monthlyChallenges"] as const,
   
 };

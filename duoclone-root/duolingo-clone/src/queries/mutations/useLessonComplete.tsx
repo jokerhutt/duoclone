@@ -1,18 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { LessonCompleteType } from "../../Types/LessonCompleteType";
-import { API_PATH, SUBMIT_LESSON_COMPLETE } from "../../util/paths";
+import { SUBMIT_LESSON_COMPLETE } from "../../util/paths";
 import { qk } from "../types/queryKeys";
 import type { UserType } from "../../Types/UserType";
 
 type useLessonCompleteParams = {
   lessonId: string;
-  userId: number;
   courseId: number;
 };
 
 export const useLessonComplete = ({
   lessonId,
-  userId,
   courseId,
 }: useLessonCompleteParams) => {
   const queryClient = useQueryClient();
@@ -25,16 +23,17 @@ export const useLessonComplete = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           lessonId: Number(lessonId),
-          userId: userId,
           courseId: courseId,
         }),
+        credentials: "include",
       });
       if (!res.ok) throw new Error("Failed");
       return res.json();
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: qk.quests(userId) });
-      queryClient.invalidateQueries({ queryKey: qk.monthlyChallenges(userId) });
+      const userId = data.userId;
+      queryClient.invalidateQueries({ queryKey: qk.quests()});
+      queryClient.invalidateQueries({ queryKey: qk.monthlyChallenges() });
       queryClient.setQueryData(qk.lesson(data.lessonId), data.updatedLesson);
       queryClient.setQueryData(
         qk.courseProgress(courseId),

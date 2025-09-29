@@ -23,13 +23,6 @@ export function LessonPage() {
     ExerciseOption[]
   >([]);
 
-  const currentPosition = Number(position) || 0;
-  const totalExercises = exercises?.length || 0;
-  const percentageComplete =
-    totalExercises > 0
-      ? Math.round(((currentPosition + 1) / totalExercises) * 100)
-      : 0;
-
   const [intendsToExit, setIntendsToExit] = useState(false);
 
   const [lessonResponse, setLessonResponse] =

@@ -11,7 +11,6 @@ import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopP
 import { colorMap } from "../../util/colorMap";
 import { UnitReviewButton } from "./UnitReviewButton";
 import { chooseLessonImage } from "../../util/lessonUtils";
-import { useUser } from "../../queries/useQuery/useUser";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 type LessonButtonProps = {
@@ -36,7 +35,7 @@ export function LessonButton({
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
   const {data: user} = useCurrentUser();
   const { data: userCourseProgress, isLoading: userCourseProgressLoading } =
-    useCourseProgress(user?.currentCourseId, user?.id);
+    useCourseProgress(user?.currentCourseId);
 
   const circleRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);

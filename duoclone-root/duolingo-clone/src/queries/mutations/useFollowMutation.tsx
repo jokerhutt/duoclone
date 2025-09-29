@@ -33,8 +33,8 @@ export function useFollowMutation() {
     },
     onSuccess: (data, { }) => {
 
-      const actorId = data.actorId;
-      const followedId = data.followedId;
+      const actorId = data.actorUserId;
+      const followedId = data.followedUserId;
 
       qc.setQueryData(qk.follows(actorId), data.followersNewStats);
       qc.setQueryData(qk.followers(actorId), data.followersNewStats.followerIds);

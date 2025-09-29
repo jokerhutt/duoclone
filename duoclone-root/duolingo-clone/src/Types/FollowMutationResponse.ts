@@ -1,8 +1,8 @@
 import type { FollowResponse } from "./FollowResponse"
 
 export type FollowMutationResponse = {
-    actorId: number;
-    followedId: number;
+    actorUserId: number;
+    followedUserId: number;
     followersNewStats: FollowResponse;
     followedNewStats: FollowResponse;
 }
