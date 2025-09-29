@@ -10,8 +10,8 @@ export function MonthlyChallengeCard ({userId}: MonthlyChallengeCardProps) {
 
     const {data: monthlyChallenge, isLoading: isLoading, isError: isError} = useMonthlyChallenge(userId);
 
-    const completed = monthlyChallenge?.progress ?? 10;
-    const total = monthlyChallenge?.total ?? 20;
+    const completed = monthlyChallenge?.progress ?? 0;
+    const total = monthlyChallenge?.total ?? 30;
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentMonth = monthNames[new Date().getMonth()].toUpperCase();
 
