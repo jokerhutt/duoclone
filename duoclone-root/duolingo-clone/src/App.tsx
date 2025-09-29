@@ -33,6 +33,7 @@ function App() {
                     element={<FriendsPage />}
                   />
                   <Route path="/courses" element={<CoursesPage title="All Languages"/>} />
+                  <Route path="/courses/:userId" element={<CoursesPage title="Languages"/>}/>
                 </Route>
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
                 <Route path="/quests" element={<QuestsPage />} />

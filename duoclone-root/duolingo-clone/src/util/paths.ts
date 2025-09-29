@@ -23,6 +23,8 @@ export const GET_LESSON_IDS = (unitId: number) =>
 export const GET_UNIT_IDS = (sectionId: number) =>
   API_PATH + `/sections/${sectionId}/units/ids`;
 
+export const GET_COURSE_IDS_FOR_USER = (userId: number) => API_PATH + `/courses/get/${userId}`
+
 // -------------------------------------------------------- //
 
 export const GET_COURSE_PROGRESS = (courseId: number) =>

@@ -2,16 +2,22 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { UserType } from "../../Types/UserType";
 import { qk } from "../types/queryKeys";
 import { CHANGE_COURSE } from "../../util/paths";
+import type { CourseType } from "../../Types/CourseType";
 
 interface ChangeCourseVariables {
   newCourse: number;
 }
 
+type CourseChangeType = {
+  newUser: UserType;
+  newCourses: CourseType[];
+}
+
 export function useChangeCourse() {
   const qc = useQueryClient();
 
-  return useMutation<UserType, Error, ChangeCourseVariables>({
-    mutationFn: async (variables: ChangeCourseVariables): Promise<UserType> => {
+  return useMutation<CourseChangeType, Error, ChangeCourseVariables>({
+    mutationFn: async (variables: ChangeCourseVariables): Promise<CourseChangeType> => {
       const { newCourse } = variables;
 
       const res = await fetch(CHANGE_COURSE, {
@@ -23,12 +29,15 @@ export function useChangeCourse() {
 
       if (!res.ok) throw new Error("Failed to change course");
 
-      const data = (await res.json()) as UserType;
+      const data = (await res.json()) as CourseChangeType;
       return data;
     },
-    onSuccess: (updatedUser: UserType) => {
+    onSuccess: (updatedCourse: CourseChangeType) => {
+      const updatedUser = updatedCourse.newUser;
+      const newCourseList = updatedCourse.newCourses;
       qc.setQueryData(qk.user(updatedUser.id), updatedUser);
       qc.setQueryData(qk.currentUser(), updatedUser);
+      qc.setQueryData(qk.userCourses(updatedUser.id), newCourseList)
     },
   });
 }

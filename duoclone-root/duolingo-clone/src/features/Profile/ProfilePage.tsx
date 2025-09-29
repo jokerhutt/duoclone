@@ -13,14 +13,17 @@ import { FollowButtonManager } from "./FollowButtonManager";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 import { LogoutButton } from "./LogoutButton";
+import { useUserCourses } from "../../queries/useQuery/useUserCourses";
 
 export function ProfilePage() {
   const { userId } = useParams<{ userId: string }>();
   const userIdNumber = userId ? parseInt(userId, 10) : 0;
 
   const { data: pageUser, isLoading } = useUser(userIdNumber);
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const { data: pageUserFollowers } = useFollowers(pageUser?.id ?? 0);
+
+  const { data: userCourses } = useUserCourses(userIdNumber);
 
   useFollowCaches(userIdNumber);
 
@@ -36,6 +39,7 @@ export function ProfilePage() {
   const isOwnPage = pageUser?.id == currentUser.id;
 
   if (
+    !userCourses ||
     !pageUserFollowers ||
     !currentUser ||
     !pageUser ||
@@ -48,9 +52,12 @@ export function ProfilePage() {
   //TODO add a more languages button? at least a page for a users languages
   return (
     <AnimatePresence>
-      <motion.div {...fadeInStagger(1)} className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center">
+      <motion.div
+        {...fadeInStagger(1)}
+        className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center"
+      >
         <ProfileHeader />
-        <UserProfileCard user={pageUser} followers={followers.length} />
+        <UserProfileCard user={pageUser} followers={followers.length} userCourseInstances={userCourses}/>
         <FollowButtonManager
           pageUserFollowers={pageUserFollowers}
           currentUser={currentUser}
@@ -64,7 +71,7 @@ export function ProfilePage() {
           followers={followers}
           following={following}
         />
-        <LogoutButton show={isOwnPage}/>
+        <LogoutButton show={isOwnPage} />
       </motion.div>
     </AnimatePresence>
   );
