@@ -12,8 +12,8 @@ export const GET_LESSONS_BY_UNIT = (unitId: number, userId: number) =>
 export const GET_UNITS_BY_SECTION = (sectionId: number) =>
   API_PATH + `/sections/${sectionId}/units`;
 
-export const GET_EXERCISES_BY_LESSON = (lessonId: number, userId: number) =>
-  API_PATH + `/lessons/${lessonId}/${userId}/exercises`;
+export const GET_EXERCISES_BY_LESSON = (lessonId: number) =>
+  API_PATH + `/lessons/${lessonId}/exercises`;
 
 // -------------------------------------------------------- //
 

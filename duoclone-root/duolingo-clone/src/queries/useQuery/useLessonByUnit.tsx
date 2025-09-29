@@ -16,8 +16,8 @@ export async function fetchLessonsByUnit(
 export function useLessonsByUnit(id: number, userId: number) {
   const qc = useQueryClient();
   return useQuery({
-    queryKey: qk.lessonsByUnit(id, userId),
+    queryKey: qk.lessonsByUnit(id),
     queryFn: () => fetchLessonsByUnit(id, userId),
-    initialData: () => qc.getQueryData(qk.lessonsByUnit(id, userId)),
+    initialData: () => qc.getQueryData(qk.lessonsByUnit(id)),
   });
 }
