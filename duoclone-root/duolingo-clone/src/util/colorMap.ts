@@ -17,7 +17,7 @@ export const colorMap: Record<string, {color: string, text: string; shadow: stri
     circleShadow: "shadow-duoBlueCircleShadow",
     fill: "fill-duoBlue",
     altBg: "bg-duoBlue",
-    reviewTrophy: "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/c610ac3d2982c63695de280bfc5b2690.svg"
+    reviewTrophy: "https://d35aaqx5ub95lt.cloudfront.net/images/path/trophies/49d034cef4f32ed000c8a343425e0497.svg"
   },
   GREEN: {
     color: "#58cc04",

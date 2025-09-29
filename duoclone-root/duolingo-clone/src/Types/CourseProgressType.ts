@@ -3,6 +3,7 @@ export type CourseProgressType = {
   userId: number;
   courseId: number;
   sectionId: number;
+  isComplete: boolean;
   currentLessonId: number;
   completedLessons: number;
 };

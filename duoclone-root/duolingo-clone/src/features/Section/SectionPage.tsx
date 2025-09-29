@@ -59,6 +59,7 @@ export function SectionPage() {
               {...fadeInStagger(index)}
             >
               <UnitPath
+              unit={unit}
                 id={unit.id}
                 index={index}
                 currentLessonButtonRef={currentLessonRef}

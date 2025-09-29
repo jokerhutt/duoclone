@@ -5,20 +5,19 @@ import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit";
 import { shouldInvert } from "../Lesson/types/pathOffets";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
+import type { UnitType } from "../../Types/UnitType";
 
 type UnitPathProps = {
   id: number;
   index: number;
+  unit: UnitType;
   currentLessonButtonRef: any;
 };
 
-export function UnitPath({ id, index, currentLessonButtonRef }: UnitPathProps) {
-  const { data: unit, isLoading: unitLoading } = useUnit(id);
-  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(
-    id,
-    1
-  );
+export function UnitPath({ id, index, currentLessonButtonRef, unit }: UnitPathProps) {
+  const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(id);
   const [animationData, setAnimationData] = useState<any>(null);
+
 
   useEffect(() => {
     if (!unit) return;
@@ -32,7 +31,7 @@ export function UnitPath({ id, index, currentLessonButtonRef }: UnitPathProps) {
 
   const imageOffset = shouldInvert(index) ? leftOffset : rightOffset;
 
-  if (unitLoading || lessonsLoading) {
+  if (!unit || lessonsLoading) {
     return (
       <div className="flex justify-center items-center py-4">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />

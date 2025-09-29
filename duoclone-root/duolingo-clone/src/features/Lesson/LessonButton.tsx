@@ -88,9 +88,10 @@ export function LessonButton({
     <div className="relative">
       {lesson.lessonType == "Review" && lesson?.isPassed ? (
         <UnitReviewButton
+          currentLessonRef={containerRef}
           style={style.reviewTrophy}
           circleRef={circleRef}
-          handleButtonClick={() => handleButtonClick}
+          handleButtonClick={handleButtonClick}
           unitOrderIndex={unitOrderIndex}
         />
       ) : (
