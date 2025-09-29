@@ -11,7 +11,7 @@ export const chooseLessonImage = (lesson: LessonType | undefined, isPassed: bool
     if (!lesson || !lesson.lessonType || !lesson.orderIndex || !lesson.id)
       return "";
 
-    if (isVeryFirstLesson) {
+    if (isVeryFirstLesson && !isPassed) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg"
     }
 
@@ -19,11 +19,15 @@ export const chooseLessonImage = (lesson: LessonType | undefined, isPassed: bool
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/5e4203031e39fc43d94371565fd0d369.svg";
     }
 
-    if (lesson.lessonType == "Lesson" && isPassed) {
+    if (lesson.lessonType == "Lesson" && isPassed && !isCurrent) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/bfa591f6854b4de08e1656b3e8ca084f.svg";
-    } else if (lesson.lessonType == "Lesson" && !isPassed && isCurrent) {
+    }
+    
+    if (lesson.lessonType == "Lesson" && isCurrent) {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg"
-    } else if (lesson.lessonType == "Lesson") {
+    } 
+    
+    if (lesson.lessonType == "Lesson") {
       return "https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/cbb0e971ac10030a120848c71c419892.svg"
     }
 
