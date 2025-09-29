@@ -4,9 +4,7 @@ import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
 import { ContentWidget } from "../../components/atoms/Widget/ContentWidget";
 import { useChangeCourse } from "../../queries/mutations/useChangeCourse";
 import { useCourse } from "../../queries/useQuery/useCourse";
-import { useUser } from "../../queries/useQuery/useUser";
 import type { CourseType } from "../../Types/CourseType";
-import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 type CoursesPageProps = {
   title: string;
@@ -15,7 +13,6 @@ type CoursesPageProps = {
 export function CoursesPage({title}: CoursesPageProps) {
   const navigate = useNavigate();
 
-  const { data: user } = useCurrentUser();
   const { data: allCourses } = useCourse("all");
 
   const changeCourseMutation = useChangeCourse();
@@ -23,7 +20,7 @@ export function CoursesPage({title}: CoursesPageProps) {
 
   const handleSelectCourse = (courseId: number) => {
     changeCourseMutation.mutate(
-      { userId: user.id, newCourse: courseId },
+      {newCourse: courseId },
       {
         onSuccess: () => {
           navigate(`/`);

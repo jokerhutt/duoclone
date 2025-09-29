@@ -24,7 +24,6 @@ export function FollowButtonManager({
     if (!currentUser) return;
 
     followMutation.mutate({
-      followerId: currentUser.id,
       followedId: pageUser.id,
       isFollowing: isFollowing,
     });

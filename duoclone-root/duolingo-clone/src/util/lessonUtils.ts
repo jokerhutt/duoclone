@@ -7,6 +7,7 @@ export const checkButtonStyle = (isSelected: boolean) => {
 };
 
 //TODO add some kind of constants for these urls
+//TODO ENUM??
 export const chooseLessonImage = (lesson: LessonType | undefined, isPassed: boolean, isCurrent: boolean, isVeryFirstLesson: boolean) => {
     if (!lesson || !lesson.lessonType || !lesson.orderIndex || !lesson.id)
       return "";
