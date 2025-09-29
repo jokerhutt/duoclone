@@ -3,6 +3,7 @@ import type { LessonCompleteType } from "../../Types/LessonCompleteType";
 import { SUBMIT_LESSON_COMPLETE } from "../../util/paths";
 import { qk } from "../types/queryKeys";
 import type { UserType } from "../../Types/UserType";
+import type { LessonType } from "../../Types/LessonType";
 
 type useLessonCompleteParams = {
   lessonId: string;
@@ -39,6 +40,11 @@ export const useLessonComplete = ({
         qk.courseProgress(courseId),
         data.updatedUserCourseProgress
       );
+      if (data.lessonsToUpdate.length) {
+        data.lessonsToUpdate.forEach((lesson: LessonType) => {
+          queryClient.setQueryData(qk.lesson(lesson.id), lesson);
+        });
+      }
       queryClient.setQueryData(
         qk.user(userId),
         (prev: UserType | undefined) => {

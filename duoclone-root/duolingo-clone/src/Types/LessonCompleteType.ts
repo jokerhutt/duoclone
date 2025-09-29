@@ -9,6 +9,7 @@ export type LessonCompleteType = {
   accuracy: number;
   lessonId: number;
   updatedLesson: LessonType;
+  lessonsToUpdate: LessonType[];
   updatedUserCourseProgress: CourseProgressType;
   newStreakCount: NewStreakCount;
   message: string;
