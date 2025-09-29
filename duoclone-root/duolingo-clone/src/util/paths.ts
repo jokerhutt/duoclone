@@ -28,8 +28,6 @@ export const GET_UNIT_IDS = (sectionId: number) =>
 export const GET_COURSE_PROGRESS = (courseId: number) =>
   API_PATH + `/users/progress/${courseId}`;
 
-export const GET_USER_BY_ID = (userId: number) => API_PATH + `/users/${userId}`;
-
 export const GET_QUESTS_BY_USER_ID = () =>
   API_PATH + `/quests/get`;
 
