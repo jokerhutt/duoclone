@@ -9,7 +9,7 @@ type UnitBannerProps = {
 export function UnitBanner({ currentUnit }: UnitBannerProps) {
   if (currentUnit)
     return (
-          <RectangleButton unitColor={currentUnit?.color}>
+          <RectangleButton buttonWidth="w-full 2xl:w-2/3" unitColor={currentUnit?.color}>
             <div className="flex rounded-2xl h-20 w-full">
               <div className="w-5/6 h-full px-4 pb-3 flex flex-col">
                 <div className="mt-3 text-duoSubText">

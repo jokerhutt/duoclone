@@ -31,7 +31,7 @@ export function CircleButton({
   const colorCSS = mainColor 
     ? mainColor
     : `${toDisplayColor.circleShadow} ${toDisplayColor.bg}`;
-
+    
   return (
     <>
       <button
