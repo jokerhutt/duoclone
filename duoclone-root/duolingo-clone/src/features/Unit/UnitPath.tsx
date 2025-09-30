@@ -26,10 +26,10 @@ export function UnitPath({ id, index, currentLessonButtonRef, unit }: UnitPathPr
       .then((data) => setAnimationData(data));
   }, [unit]);
 
-  const leftOffset = "mr-40";
-  const rightOffset = "ml-40";
+  const leftImageOffset = "mr-40 lg:mr-60"
+  const rightImageOffset = "ml-40 lg:ml-60"
 
-  const imageOffset = shouldInvert(index) ? leftOffset : rightOffset;
+  const imageOffset = shouldInvert(index) ? leftImageOffset : rightImageOffset;
 
   if (!unit || lessonsLoading) {
     return (
