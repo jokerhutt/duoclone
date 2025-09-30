@@ -34,7 +34,7 @@ export function ProgressBar({
           style={{ width: `${progressPercentage}%` }}
         />
         {showCountText && (
-          <p className={`relative ${textColorToShow} z-10 mr-5`}>
+          <p className={`relative ${textColorToShow} z-8 mr-5`}>
             {completed} / {total}
           </p>
         )}
