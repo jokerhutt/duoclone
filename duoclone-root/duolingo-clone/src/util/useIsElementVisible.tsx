@@ -27,7 +27,7 @@ export function useIsElementVisible(
   // Track visibility state
   const [visibility, setVisibility] = useState<ElementVisibility>({
     isVisible: false,
-    position: "below",
+    position: "above",
   });
 
   const previousInViewState = useRef(isInView);
