@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { UserMainStats } from "../Common/UserMainStats";
 
 type LearnHeaderProps = {
   courseProgress: CourseProgressType;
@@ -23,27 +24,7 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
   if (course && currentUser) return (
       <Header padding="px-4">
-        <div className="flex gap-3 items-center">
-          <div onClick={() => navigate("/courses")}>
-            <LanguageFlag height="h-8" icon={courseObject.imgSrc}/>
-          </div>
-          <p className="text-xl text-white">
-            {courseProgress.completedLessons}
-          </p>
-        </div>
-        <div className="flex gap-2 items-center">
-          <StreakIcon />
-          <p className="text-xl text-duoOrange">{currentUser.streakLength}</p>
-        </div>
-        <div className="flex gap-1 items-center">
-          <GemsIcon />
-          <p className="text-xl text-duoBlue">{currentUser.points}</p>
-        </div>
-
-        <div className="flex gap-1 items-center">
-          <HeartIcon />
-          <p className="text-2xl text-duoRed">∞</p>
-        </div>
+          <UserMainStats currentUser={currentUser} courseObject={courseObject} courseProgress={courseProgress}/>
       </Header>
   );
 }

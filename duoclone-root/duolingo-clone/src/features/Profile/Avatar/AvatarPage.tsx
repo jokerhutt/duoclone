@@ -46,10 +46,10 @@ export function AvatarPage() {
   if (avatars && currentUser)
     return (
       <AnimatePresence>
-        <motion.div {...fadeInStagger(1)} className="w-full h-full">
+        <motion.div {...fadeInStagger(1)} className="w-full h-full pb-24">
           <AvatarHeader submit={() => submitUpdateAvatar()} currentUserId={currentUser.id} />
 
-          <div className="mt-20 relative flex px-4 justify-center">
+          <div className="mt-6 relative flex px-4 justify-center">
             <UserWideImage imgSrc={selectedAvatar} />
           </div>
 

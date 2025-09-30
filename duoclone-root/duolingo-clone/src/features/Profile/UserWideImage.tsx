@@ -4,6 +4,6 @@ type UserWideImageProps = {
 
 export function UserWideImage({ imgSrc }: UserWideImageProps) {
   return (
-    <img className="w-full h-50 object-cover rounded-xl" src={imgSrc} />
+    <img className="w-full h-50 lg:h-auto object-cover rounded-xl" src={imgSrc} />
   );
 }
