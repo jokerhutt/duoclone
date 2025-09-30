@@ -24,7 +24,7 @@ export function SectionPage() {
   // -- QUERY STATE -- //
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { data: courseProgress } = useCourseProgress(
-    currentUser?.currentCourseId,
+    currentUser?.currentCourseId
   );
   const { isLoading, isError } = useSectionTree(courseProgress?.sectionId);
   const { units } = useSectionTreeData(courseProgress?.sectionId);
@@ -47,7 +47,7 @@ export function SectionPage() {
       <UnitBanner currentUnit={currentUnit} />
       <div
         ref={scrollContainerRef}
-        className="w-full h-full mb-10 overflow-auto"
+        className="w-full relative h-full mb-10 overflow-auto"
       >
         <AnimatePresence>
           {units.map((unit, index) => (
@@ -59,7 +59,7 @@ export function SectionPage() {
               {...fadeInStagger(index)}
             >
               <UnitPath
-              unit={unit}
+                unit={unit}
                 id={unit.id}
                 index={index}
                 currentLessonButtonRef={currentLessonRef}
@@ -67,11 +67,11 @@ export function SectionPage() {
             </motion.div>
           ))}
         </AnimatePresence>
-        <ScrollToLessonButton
-          rootRef={scrollContainerRef}
-          currentLessonRef={currentLessonRef}
-        />
       </div>
+      <ScrollToLessonButton
+        rootRef={scrollContainerRef}
+        currentLessonRef={currentLessonRef}
+      />
     </>
   );
 }

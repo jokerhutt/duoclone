@@ -13,7 +13,7 @@ export function Footer({
 }: FooterProps) {
   return (
     <footer
-      className={`w-full absolute bottom-0 bg-duoBackground flex justify-between z-10 items-center ${height} ${padding}`}
+      className={`lg:hidden w-full absolute bottom-0 bg-duoBackground flex justify-between z-10 items-center ${height} ${padding}`}
     >
       {children}
     </footer>

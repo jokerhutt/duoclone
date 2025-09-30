@@ -7,7 +7,7 @@ export function MainFooter() {
   const {data: currentUser} = useCurrentUser();
 
   return (
-    <Footer padding="px-6" height="h-20 lg:hidden border-t border-t-duoGrayBorder">
+    <Footer padding="px-6" height="h-20 border-t border-t-duoGrayBorder">
       <div className="w-full flex items-center justify-between">
         <MainNavigationButtons currentUser={currentUser}/>
       </div>
