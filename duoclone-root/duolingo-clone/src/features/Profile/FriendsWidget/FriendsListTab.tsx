@@ -15,7 +15,7 @@ export function FriendsListTab({ tabType, activeTab, onClick }: FriendsListTabPr
   return (
     <div
       onClick={onClick}
-      className={`w-full flex border-b py-2 ${bottomBorderColor} items-center justify-center`}
+      className={`w-full hover:cursor-pointer flex border-b py-2 ${bottomBorderColor} items-center justify-center`}
     >
       <p className="text-duoBlue">{tabType}</p>
     </div>

@@ -15,7 +15,7 @@ export function LoginPage() {
         </p>
       </div>
 
-      <div className="w-full">
+      <div className="w-full lg:w-1/2">
         <WideActionButton
           onSubmit={() => googleLogin()}
           isActive={true}

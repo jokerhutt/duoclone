@@ -68,7 +68,7 @@ export function ComposeSentenceExercise({
   const displayRows = chunkByChars(currentSelectedOptions, chunkBy);
 
   return (
-    <div className="w-full h-full flex flex-col gap-12">
+    <div className="w-full h-full flex flex-col gap-2">
       <div className="w-full flex justify-start gap-4">
         <Lottie
           animationData={animationData}

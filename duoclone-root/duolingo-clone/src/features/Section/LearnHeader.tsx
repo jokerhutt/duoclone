@@ -20,8 +20,6 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
   const { data: course} = useCourse(courseProgress.courseId);
   const courseObject = course as CourseType;
 
-  const navigate = useNavigate();
-
   if (course && currentUser) return (
       <Header padding="px-4">
           <UserMainStats currentUser={currentUser} courseObject={courseObject} courseProgress={courseProgress}/>

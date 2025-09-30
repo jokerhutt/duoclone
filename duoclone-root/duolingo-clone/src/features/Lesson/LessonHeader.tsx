@@ -13,7 +13,7 @@ type LessonHeaderProps = {
 export function LessonHeader({ handleExitClick, completed, total }: LessonHeaderProps) {
 
   return (
-    <Header padding="px-4" height="">
+    <Header showOnLg={true} padding="px-4" height="">
       <button className="active">
         <XIcon onClick={handleExitClick} />
       </button>

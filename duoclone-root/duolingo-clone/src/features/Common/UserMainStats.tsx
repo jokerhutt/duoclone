@@ -20,12 +20,12 @@ export function UserMainStats({courseObject, courseProgress, currentUser}: UserM
   return (
     <>
       <div className="flex gap-3 items-center">
-        <div onClick={() => navigate("/courses")}>
+        <div className="hover:cursor-pointer" onClick={() => navigate("/courses")}>
           <LanguageFlag height="h-8" icon={courseObject.imgSrc} />
         </div>
         <p className="text-xl text-white">{courseProgress.completedLessons}</p>
       </div>
-      <div className="flex gap-2 items-center">
+      <div  className="flex gap-2 items-center">
         <StreakIcon />
         <p className="text-xl text-duoOrange">{currentUser.streakLength}</p>
       </div>

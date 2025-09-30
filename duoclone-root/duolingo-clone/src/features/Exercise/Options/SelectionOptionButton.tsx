@@ -33,7 +33,7 @@ export function SelectionOptionButton({
       className={`active:translate-y-[5px] active:shadow-none font-light border ${
         isSelected
           ? `${selectedBgColor} ${selectedTextColor}`
-          : disabledTextColor
+          : `${disabledTextColor} hover:cursor-pointer`
       } ${shadowColor} ${borderColor} rounded-2xl`}
     >
       <p className={`${paddingX} ${paddingY}`}>{text}</p>

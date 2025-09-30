@@ -100,14 +100,18 @@ export function LessonPage() {
     return <SpinnerPage />;
   }
 
-  const numPosition = Number(position)
+  const numPosition = Number(position);
   const completed = lessonResponse ? numPosition + 1 : numPosition;
 
   return (
     <>
-      <div className="w-full h-full relative flex flex-col px-3 py-6 items-center">
-        <LessonHeader completed={completed} total={exercises.length} handleExitClick={() => setIntendsToExit(true)} />
-        <div className="my-14 flex w-full h-full pt-4">
+      <div className="w-full lg:px-40 lg:py-10 h-full relative flex flex-col px-3 py-6 items-center">
+        <LessonHeader
+          completed={completed}
+          total={exercises.length}
+          handleExitClick={() => setIntendsToExit(true)}
+        />
+        <div className="my-6 flex w-full lg:px-40 h-full pt-4">
           <ExerciseComponent
             exercise={exercises[Number(position)]}
             currentSelectedOptions={currentSelectedOptions}
@@ -115,12 +119,15 @@ export function LessonPage() {
             removeOption={removeOption}
           />
         </div>
-        <WideActionButton
-          text="Check"
-          onSubmit={() => submitAnswer()}
-          isActive={!intendsToExit && currentSelectedOptions.length > 0}
-          isIncorrect={!intendsToExit && lessonResponse?.correct == false}
-        />
+        <div className="w-full flex lg:justify-end lg:px-40">
+          <WideActionButton
+            height={"h-14 lg:w-40"}
+            text="Check"
+            onSubmit={() => submitAnswer()}
+            isActive={!intendsToExit && currentSelectedOptions.length > 0}
+            isIncorrect={!intendsToExit && lessonResponse?.correct == false}
+          />
+        </div>
       </div>
 
       <BottomSheet

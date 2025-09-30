@@ -48,7 +48,7 @@ export function UserProfileCard({ user, followers, userCourseInstances }: UserPr
         <div className="w-full flex flex-col justify-end items-end">
           <div className="flex py-3 w-full gap-2 justify-end items-center">
             {userCourseInstances.map((course) => (
-              <img onClick={() => navigate(`/courses/${user.id}`)} className="h-7" src={course.imgSrc}/>
+              <img onClick={() => navigate(`/courses/${user.id}`)} className="h-7 hover:cursor-pointer" src={course.imgSrc}/>
             ))}
           </div>
         </div>
