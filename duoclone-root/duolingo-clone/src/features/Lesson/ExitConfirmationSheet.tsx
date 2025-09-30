@@ -17,6 +17,7 @@ export function ExitConfirmationSheet({setIntendsToExit}: ExitConfirmationSheetP
         Wait, don’t go! You’ll lose your progress if you quit now
       </p>
       <WideActionButton
+        height="h-14 lg:w-1/2"
         activeColor="bg-duoBlue"
         activeTextColor=""
         onSubmit={setIntendsToExit}
@@ -27,10 +28,11 @@ export function ExitConfirmationSheet({setIntendsToExit}: ExitConfirmationSheetP
 
       <WideActionButton
         activeColor=""
-        activeTextColor="text-duoBlue"
+        height="h-14 lg:w-1/2"
+        activeTextColor="text-duoRed/70"
         onSubmit={() => navigate("/")}
-        text={"END SESSION"}
-        activeText="END SESSION"
+        text={"END LESSON"}
+        activeText="END LESSON"
         isActive={true}
       />
     </motion.div>

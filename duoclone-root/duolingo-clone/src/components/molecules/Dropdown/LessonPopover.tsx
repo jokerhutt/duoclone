@@ -99,11 +99,11 @@ export default function LessonPopover({
               return;
             }
             e.preventDefault(); // cancel Radix’s immediate close
-            scheduleClose(100); // delayed close
+            scheduleClose(200); // delayed close
           }}
           onFocusOutside={(e) => {
             e.preventDefault(); // prevent immediate close on focus shift
-            scheduleClose(100);
+            scheduleClose(200);
           }}
           onEscapeKeyDown={() => onOpenChange(false)} // keep ESC instant if you want
         >
