@@ -67,8 +67,8 @@ export function LessonCompletePage() {
   const accuracyMessage = lessonCompleteMutation.data.message;
 
   return (
-    <div className="w-full h-full flex items-center flex-col py-8 px-3 justify-center">
-      <div className="w-full h-full flex flex-col lg:pb-20 items-center justify-center">
+    <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
+      <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
         <LessonCompleteCard
           title={title}
           lottieRef={lottieRef}
@@ -82,7 +82,7 @@ export function LessonCompletePage() {
           statsHeader={accuracyMessage}
         />
       </div>
-      <div className="w-1/2 flex lg:justify-end">
+      <div className="lg:w-1/2 w-full px-2 flex lg:justify-end">
         <WideActionButton
           text="End Lesson"
           isActive={true}
