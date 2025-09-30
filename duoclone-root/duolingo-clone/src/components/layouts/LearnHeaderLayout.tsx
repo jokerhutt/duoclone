@@ -8,7 +8,7 @@ import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LearnHeaderLayout() {
     const {data: user} = useCurrentUser();
-    const {data: userCourseProgress} = useCourseProgress(user?.currentCourseId, user?.id); 
+    const {data: userCourseProgress} = useCourseProgress(user?.currentCourseId); 
 
     if (!user || !userCourseProgress) return <SpinnerPage/>
 

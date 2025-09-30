@@ -20,7 +20,7 @@ export function BottomSheet({
   bgColor="bg-duoDarkGray"
 }: BottomSheetProps) {
   const fullScreenStyle = "absolute";
-  const normalStyle = "absolute";
+  const normalStyle = "absolute lg:fixed";
 
   const style = isFullScreen ? fullScreenStyle : normalStyle;
 

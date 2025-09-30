@@ -46,10 +46,10 @@ export function AvatarPage() {
   if (avatars && currentUser)
     return (
       <AnimatePresence>
-        <motion.div {...fadeInStagger(1)} className="w-full h-full">
+        <motion.div {...fadeInStagger(1)} className="w-full h-full pb-24">
           <AvatarHeader submit={() => submitUpdateAvatar()} currentUserId={currentUser.id} />
 
-          <div className="mt-20 relative flex px-4 justify-center">
+          <div className="mt-6 relative flex px-4 justify-center">
             <UserWideImage imgSrc={selectedAvatar} />
           </div>
 
@@ -63,7 +63,7 @@ export function AvatarPage() {
                   <img
                     onClick={() => setSelectedAvatar(avatarUrl)}
                     key={i}
-                    className={`min-h-17 max-h-17 h-17 w-full rounded-xl object-cover ${showSelectedBorder(
+                    className={`min-h-14 max-h-14 h-14 lg:min-h-30 lg:max-h-30 lg:h-30 w-full rounded-xl object-cover ${showSelectedBorder(
                       avatarUrl
                     )}`}
                     src={avatarUrl}

@@ -47,12 +47,12 @@ export function CoursesPage({title}: CoursesPageProps) {
 
   if (coursesArray)
     return (
-      <div className="py-20 px-4">
+      <div className="lg:py-6 lg:w-full py-20 px-4">
         <ContentWidget title={title}>
           {coursesArray.map((course, idx) => (
             <div
               onClick={() => handleSelectCourse(course.id)}
-              className={`w-full py-6 flex gap-4 ${showBorder(idx)}`}
+              className={`w-full py-6 hover:cursor-pointer flex gap-4 ${showBorder(idx)}`}
             >
               <div className="w-30 flex items-center">
                 <LanguageFlag icon={course.imgSrc} height="h-12" />

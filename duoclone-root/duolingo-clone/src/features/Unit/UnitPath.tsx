@@ -26,10 +26,10 @@ export function UnitPath({ id, index, currentLessonButtonRef, unit }: UnitPathPr
       .then((data) => setAnimationData(data));
   }, [unit]);
 
-  const leftOffset = "mr-40";
-  const rightOffset = "ml-40";
+  const leftImageOffset = "mr-40 lg:mr-60"
+  const rightImageOffset = "ml-40 lg:ml-60"
 
-  const imageOffset = shouldInvert(index) ? leftOffset : rightOffset;
+  const imageOffset = shouldInvert(index) ? leftImageOffset : rightImageOffset;
 
   if (!unit || lessonsLoading) {
     return (
@@ -42,7 +42,7 @@ export function UnitPath({ id, index, currentLessonButtonRef, unit }: UnitPathPr
   return (
     <>
       {unit && unit.orderIndex != 1 && <SectionBreak lesson={unit.title} />}
-      <div className="flex flex-col w-full items-center mt-20 mb-10 space-y-6 relative">
+      <div className="flex flex-col w-full items-center lg:mb-0 mt-20 lg:mt-10 space-y-6 relative">
         {unit && unitLessons && (
           <>
             {unitLessons.map((lesson, idx) => (

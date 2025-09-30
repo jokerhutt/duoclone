@@ -25,7 +25,7 @@ export function ExercisePrompt({
   );
 
   return (
-    <p className="text-white text-xl leading-relaxed font-light">
+    <p className="text-white text-xl leading-loose font-light">
       {parts.map((part, index) => (
         <Fragment key={index}>
           <span>{part}</span>

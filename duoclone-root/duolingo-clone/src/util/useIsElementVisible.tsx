@@ -27,7 +27,7 @@ export function useIsElementVisible(
   // Track visibility state
   const [visibility, setVisibility] = useState<ElementVisibility>({
     isVisible: false,
-    position: "below",
+    position: "above",
   });
 
   const previousInViewState = useRef(isInView);
@@ -41,8 +41,11 @@ export function useIsElementVisible(
 
   // Update visibility when intersection changes
   useEffect(() => {
+    console.log("Visible")
     const hasInViewChanged = previousInViewState.current !== isInView;
     
+    console.log("Has in view changed: now is: " + hasInViewChanged)
+
     if (hasInViewChanged) {
       previousInViewState.current = isInView;
       setVisibility(prevState => ({

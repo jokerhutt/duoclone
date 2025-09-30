@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 type FooterButtonProps = {
@@ -7,15 +6,22 @@ type FooterButtonProps = {
   navigateOn?: boolean;
 };
 
-export function FooterButton({ children, path, navigateOn = true }: FooterButtonProps) {
+export function FooterButton({
+  children,
+  path,
+  navigateOn = true,
+}: FooterButtonProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const isActive =
-    navigateOn && path && path === "/" ? location.pathname === "/" : location.pathname.includes(path);
+    navigateOn && path && path === "/"
+      ? location.pathname === "/"
+      : location.pathname.includes(path);
 
   const style = isActive ? "border border-duoBlue/80 bg-duoBlue/8" : "";
-  const baseStyle = "p-2 rounded-lg"
+  const baseStyle = "p-2 rounded-lg";
+  const hoverStyle = isActive ? "hover:bg-duoBlue/20" : "hover:bg-duoGrayButtonText/30";
 
   const handleNavigation = () => {
     if (path && path.length > 0 && navigateOn) {
@@ -23,5 +29,12 @@ export function FooterButton({ children, path, navigateOn = true }: FooterButton
     }
   };
 
-  return <div className={`${baseStyle} ${style}`} onClick={() => handleNavigation()}>{children}</div>;
+  return (
+    <div
+      className={`${baseStyle} ${style} ${hoverStyle} lg:flex hover:cursor-pointer lg:items-center lg:gap-6`}
+      onClick={() => handleNavigation()}
+    >
+      {children}
+    </div>
+  );
 }

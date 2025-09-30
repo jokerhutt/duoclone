@@ -10,12 +10,11 @@ import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LessonCompletePage() {
-
   const { lessonId } = useParams<{ lessonId: string }>();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
 
-  const {data: user} = useCurrentUser();
+  const { data: user } = useCurrentUser();
 
   const possibleAnimations = [
     "/lottie-animations/EL_BEA_DUO.json",
@@ -49,7 +48,7 @@ export function LessonCompletePage() {
 
   const lessonCompleteMutation = useLessonComplete({
     lessonId: lessonIdForMutation,
-    courseId: courseIdForMutation
+    courseId: courseIdForMutation,
   });
 
   useEffect(() => {
@@ -68,8 +67,8 @@ export function LessonCompletePage() {
   const accuracyMessage = lessonCompleteMutation.data.message;
 
   return (
-    <div className="w-full h-full flex items-center flex-col py-8 px-3 justify-center">
-      <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
+      <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
         <LessonCompleteCard
           title={title}
           lottieRef={lottieRef}
@@ -83,13 +82,14 @@ export function LessonCompletePage() {
           statsHeader={accuracyMessage}
         />
       </div>
-
-      <WideActionButton
-        text="End Lesson"
-        isActive={true}
-        activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
-        onSubmit={() => navigate("/")}
-      />
+      <div className="lg:w-1/2 w-full px-2 flex lg:justify-end">
+        <WideActionButton
+          text="End Lesson"
+          isActive={true}
+          activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
+          onSubmit={() => navigate("/")}
+        />
+      </div>
     </div>
   );
 }

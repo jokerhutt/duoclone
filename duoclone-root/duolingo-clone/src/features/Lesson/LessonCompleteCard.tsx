@@ -16,16 +16,16 @@ export function LessonCompleteCard({
   onComplete,
 }: LessonCompleteCard) {
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-end">
       <Lottie
         lottieRef={lottieRef}
         animationData={animationData}
         loop={false}
         autoplay
         onComplete={onComplete}
-        className="w-100 h-100"
+        className="w-full h-80"
       />
-      <div className="w-full flex flex-col items-center my-10">
+      <div className="w-full flex flex-col items-center my-4">
         <p className="text-3xl text-duoGold">{title}</p>
         {isPerfect && (
           <p className="py-6 text-lg font-light text-duoGrayBorder">

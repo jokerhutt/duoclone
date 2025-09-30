@@ -7,8 +7,8 @@ import type { CourseProgressType } from "../../Types/CourseProgressType";
 import { useNavigate } from "react-router";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
-import { useUser } from "../../queries/useQuery/useUser";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { UserMainStats } from "../Common/UserMainStats";
 
 type LearnHeaderProps = {
   courseProgress: CourseProgressType;
@@ -17,36 +17,12 @@ type LearnHeaderProps = {
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
   const { data: currentUser } = useCurrentUser();
-  const { data: course, isLoading} = useCourse(courseProgress.courseId);
+  const { data: course} = useCourse(courseProgress.courseId);
   const courseObject = course as CourseType;
 
-  const navigate = useNavigate();
-
   if (course && currentUser) return (
-    <div className="flex flex-col w-full relative">
       <Header padding="px-4">
-        <div className="flex gap-3 items-center">
-          <div onClick={() => navigate("/courses")}>
-            <LanguageFlag height="h-8" icon={courseObject.imgSrc}/>
-          </div>
-          <p className="text-xl text-white">
-            {courseProgress.completedLessons}
-          </p>
-        </div>
-        <div className="flex gap-2 items-center">
-          <StreakIcon />
-          <p className="text-xl text-duoOrange">{currentUser.streakLength}</p>
-        </div>
-        <div className="flex gap-1 items-center">
-          <GemsIcon />
-          <p className="text-xl text-duoBlue">{currentUser.points}</p>
-        </div>
-
-        <div className="flex gap-1 items-center">
-          <HeartIcon />
-          <p className="text-2xl text-duoRed">∞</p>
-        </div>
+          <UserMainStats currentUser={currentUser} courseObject={courseObject} courseProgress={courseProgress}/>
       </Header>
-    </div>
   );
 }

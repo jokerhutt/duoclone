@@ -14,6 +14,36 @@
   font-style: normal;
 }
 
+@layer utilities {
+  .scrollbar-duoGreen {
+    scrollbar-width: thin;
+    scrollbar-color: #58cc04 transparent;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar-thumb {
+    background-color: #58cc04;
+    border-radius: 4px;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @theme {
   --color-duoGrayText: #52656d;
 

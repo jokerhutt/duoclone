@@ -19,7 +19,7 @@ export function FriendsPage() {
 
   return (
     <div className="w-full h-full">
-      <div className="h-full w-full pt-20 pb-20">
+      <div className="h-full w-full lg:pt-6 lg:pb-0 pt-20 pb-20">
         <FriendsListWidget
           userId={userIdNumber}
           followers={followers}
