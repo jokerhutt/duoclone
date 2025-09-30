@@ -6,10 +6,10 @@ import { MainRightSideBar } from "./MainRightSideBar";
 export function MainLayout() {
   return (
     <>
-      <div className="min-h-dvh h-dvh max-h-dvh lg:grid overflow-y-auto lg:grid-cols-[200px_minmax(0,1fr)_300px]">
+      <div className="min-h-dvh h-dvh max-h-dvh lg:grid overflow-y-auto lg:grid-cols-[280px_minmax(0,1fr)_400px]">
         <MainLeftSidebar />
 
-        <div className="flex flex-col min-w-0">
+        <div className="flex flex-col items-center min-w-0">
           <Outlet />
         </div>
         <MainFooter />
