@@ -40,7 +40,7 @@ export function WideActionButton({
         onSubmit()
       }
       }
-      className={`w-full rounded-2xl z-10 ${height} justify-center items-center ${
+      className={`w-full hover:cursor-pointer rounded-2xl z-10 ${height} justify-center items-center ${
         isIncorrect ? incorrectColor : isActive ? activeColor : disabledColor
       } flex gap-2 text-xl`}
     >

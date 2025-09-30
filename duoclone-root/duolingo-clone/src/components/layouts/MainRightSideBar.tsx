@@ -2,7 +2,7 @@
 export function MainRightSideBar () {
 
 return (
-    <aside className="hidden lg:block w-[300px] border-l border-duoGrayBorder bg-duoBackground" />
+    <aside className="hidden lg:block border-l border-duoGrayBorder bg-duoBackground w-110" />
   );
 
 }
