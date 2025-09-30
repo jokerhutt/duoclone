@@ -15,7 +15,7 @@ export function Header({
 }: HeaderProps) {
   return (
     <nav
-      className={`lg:hidden w-full fixed ${background} flex justify-between z-10 items-center ${height} ${padding}`}
+      className={`lg:hidden w-full absolute ${background} flex justify-between z-10 items-center ${height} ${padding}`}
     >
       {children}
     </nav>

@@ -13,7 +13,7 @@ export function LeaderboardPage() {
   const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteList();
 
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
 
   const { ref: sentinelRef, inView: isInView } = useInView({
     rootMargin: "100px 0px",
@@ -63,9 +63,11 @@ export function LeaderboardPage() {
             ))}
             <div
               ref={sentinelRef}
-              className="h-20 flex justify-center items-center"
+              className={`h-20 flex justify-center items-center ${
+                hasNextPage ? "" : "hidden"
+              }`}
             >
-              {isFetchingNextPage && <Spinner />}
+              <Spinner />
             </div>
           </motion.div>
         </AnimatePresence>

@@ -23,7 +23,6 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
   const navigate = useNavigate();
 
   if (course && currentUser) return (
-    <div className="flex flex-col w-full relative">
       <Header padding="px-4">
         <div className="flex gap-3 items-center">
           <div onClick={() => navigate("/courses")}>
@@ -47,6 +46,5 @@ export function LearnHeader({ courseProgress }: LearnHeaderProps) {
           <p className="text-2xl text-duoRed">∞</p>
         </div>
       </Header>
-    </div>
   );
 }

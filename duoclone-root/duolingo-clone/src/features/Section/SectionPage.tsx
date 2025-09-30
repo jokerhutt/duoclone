@@ -47,7 +47,7 @@ export function SectionPage() {
       <UnitBanner currentUnit={currentUnit} />
       <div
         ref={scrollContainerRef}
-        className="w-full relative h-full mb-10 overflow-auto"
+        className="w-full h-full pb-20 lg:overflow-visible"
       >
         <AnimatePresence>
           {units.map((unit, index) => (
