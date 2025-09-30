@@ -7,7 +7,6 @@ import type { CourseProgressType } from "../../Types/CourseProgressType";
 import { useNavigate } from "react-router";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
-import { useUser } from "../../queries/useQuery/useUser";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 type LearnHeaderProps = {
@@ -17,7 +16,7 @@ type LearnHeaderProps = {
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
   const { data: currentUser } = useCurrentUser();
-  const { data: course, isLoading} = useCourse(courseProgress.courseId);
+  const { data: course} = useCourse(courseProgress.courseId);
   const courseObject = course as CourseType;
 
   const navigate = useNavigate();

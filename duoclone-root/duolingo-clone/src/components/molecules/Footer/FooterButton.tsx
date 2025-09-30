@@ -23,5 +23,5 @@ export function FooterButton({ children, path, navigateOn = true }: FooterButton
     }
   };
 
-  return <div className={`${baseStyle} ${style}`} onClick={() => handleNavigation()}>{children}</div>;
+  return <div className={`${baseStyle} ${style} lg:flex hover:cursor-pointer lg:items-center lg:gap-6`} onClick={() => handleNavigation()}>{children}</div>;
 }
