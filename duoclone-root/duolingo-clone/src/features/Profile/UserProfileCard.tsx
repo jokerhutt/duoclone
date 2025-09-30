@@ -24,7 +24,7 @@ export function UserProfileCard({ user, followers, userCourseInstances }: UserPr
 
   return (
     <>
-      <div className="mt-20 relative flex px-4 justify-center">
+      <div className="mt-20 lg:mt-6 relative flex px-4 justify-center">
         <div onClick={(e) => editAvatar(e)} className="absolute z-2 hover:cursor-pointer rounded-2xl p-2 bg-black/8 flex items-center justify-center border top-5 right-9">
           <RiPencilFill className="h-8 w-8"/>
         </div>

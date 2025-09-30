@@ -54,7 +54,7 @@ export function ProfilePage() {
     <AnimatePresence>
       <motion.div
         {...fadeInStagger(1)}
-        className="w-full h-full flex overflow-y-auto pb-26 flex-col gap-4 items-center"
+        className="w-full h-full flex overflow-y-auto lg:pb-6 pb-26 flex-col gap-4 items-center"
       >
         <ProfileHeader />
         <UserProfileCard user={pageUser} followers={followers.length} userCourseInstances={userCourses}/>

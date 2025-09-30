@@ -8,7 +8,7 @@ export function QuestsPage() {
   return (
     <>
       <QuestsHeader />
-      <div className="w-full h-full mt-14">
+      <div className="w-full lg:mt-0 mt-14">
         <MonthlyChallengeCard />
         <div className="w-full h-full p-4">
           <ContentWidget title={"Daily Quests"}>
