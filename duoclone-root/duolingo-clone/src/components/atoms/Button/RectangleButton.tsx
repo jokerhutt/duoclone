@@ -16,7 +16,7 @@ export function RectangleButton({ color, unitColor, children }: RectangleButtonP
   return (
     <div className="px-4 w-full sticky top-16 lg:top-6 z-20">
       <button
-        className={`w-full h-20 active:translate-y-[5px] active:shadow-none shadow-duoShadow ${colorCSS} rounded-2xl`}
+        className={`w-full hover:cursor-pointer h-20 active:translate-y-[5px] active:shadow-none shadow-duoShadow ${colorCSS} rounded-2xl`}
       >
         {children}
       </button>

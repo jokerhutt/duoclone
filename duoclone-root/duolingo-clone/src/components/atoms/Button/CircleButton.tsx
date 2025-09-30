@@ -37,7 +37,7 @@ export function CircleButton({
       <button
         ref={buttonRef ?? undefined}
         onClick={onClick}
-        className={`h-14 w-16 rounded-full ${colorCSS} ${offset} ${extraStyle} active:translate-y-[5px] active:shadow-none flex items-center justify-center
+        className={`h-14 w-16 hover:cursor-pointer rounded-full ${colorCSS} ${offset} ${extraStyle} active:translate-y-[5px] active:shadow-none flex items-center justify-center
         `}
         style={{ transition: "transform 0.2s" }}
       >

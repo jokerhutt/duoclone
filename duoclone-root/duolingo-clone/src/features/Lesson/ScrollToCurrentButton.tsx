@@ -20,7 +20,7 @@ export function ScrollToLessonButton({
     <motion.button
       initial={{ opacity: 0 }}
       animate={{ opacity: !visibility.isVisible ? 1 : 0 }}
-      className="fixed bottom-24 z-200 lg:bottom-50 lg:right-20 right-4 border-3 shadow bg-duoGrayLockedShadow shadow-duoDarkGray  border-duoGrayLocked rounded-2xl p-3"
+      className="fixed bottom-24 hover:cursor-pointer z-200 lg:bottom-10 lg:right-110 right-4 border-3 shadow bg-duoGrayLockedShadow shadow-duoDarkGray  border-duoGrayLocked rounded-2xl p-3"
       onClick={() => scrollToCurrentLesson(currentLessonRef)}
     >
       <ArrowIcon isUp={showDownArrow}/>
