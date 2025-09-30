@@ -10,25 +10,36 @@ type UserProfileCardProps = {
   user: UserType;
   followers: number;
   userCourseInstances: CourseType[];
+  isOwnPage: boolean;
 };
 
-export function UserProfileCard({ user, followers, userCourseInstances }: UserProfileCardProps) {
+export function UserProfileCard({
+  user,
+  followers,
+  userCourseInstances,
+  isOwnPage,
+}: UserProfileCardProps) {
   const ts = user.createdAt;
   const joinDate = ts ? format(new Date(ts), "MMMM yyyy") : "";
   const navigate = useNavigate();
 
   const editAvatar = (e: any) => {
     e.stopPropagation();
-    navigate("/avatar")
-  }
+    navigate("/avatar");
+  };
 
   return (
     <>
       <div className="mt-20 lg:mt-6 relative flex px-4 justify-center">
-        <div onClick={(e) => editAvatar(e)} className="absolute z-2 hover:cursor-pointer rounded-2xl p-2 bg-black/8 flex items-center justify-center border top-5 right-9">
-          <RiPencilFill className="h-8 w-8"/>
-        </div>
-        <UserWideImage imgSrc={user.pfpSrc}/>
+        {isOwnPage && (
+          <div
+            onClick={(e) => editAvatar(e)}
+            className="absolute z-2 hover:cursor-pointer rounded-2xl p-2 bg-black/8 flex items-center justify-center border top-5 right-9"
+          >
+            <RiPencilFill className="h-8 w-8" />
+          </div>
+        )}
+        <UserWideImage imgSrc={user.pfpSrc} />
       </div>
       <div className="w-full flex px-4 justify-between">
         <div className="w-full flex flex-col">
@@ -48,7 +59,11 @@ export function UserProfileCard({ user, followers, userCourseInstances }: UserPr
         <div className="w-full flex flex-col justify-end items-end">
           <div className="flex py-3 w-full gap-2 justify-end items-center">
             {userCourseInstances.map((course) => (
-              <img onClick={() => navigate(`/courses/${user.id}`)} className="h-7 hover:cursor-pointer" src={course.imgSrc}/>
+              <img
+                onClick={() => navigate(`/courses/${user.id}`)}
+                className="h-7 hover:cursor-pointer"
+                src={course.imgSrc}
+              />
             ))}
           </div>
         </div>
