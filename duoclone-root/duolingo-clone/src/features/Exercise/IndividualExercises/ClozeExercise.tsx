@@ -15,8 +15,6 @@ export function ClozeExercise({
   addOption,
   removeOption,
 }: ClozeExerciseProps) {
-  const img =
-    "https://d2pur3iezf4d1j.cloudfront.net/images/d109f51da8daee5c45d3f068fa1966e7";
 
   return (
     <div className="w-full h-full flex flex-col gap-12 mt-10">

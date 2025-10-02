@@ -1,10 +1,5 @@
-import { GemsIcon } from "../../components/atoms/Icons/GemsIcon";
-import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
-import { LanguageFlag } from "../../components/atoms/Icons/LanguageFlag";
-import { StreakIcon } from "../../components/atoms/Icons/StreakIcon";
 import { Header } from "../../components/molecules/Header/Header";
 import type { CourseProgressType } from "../../Types/CourseProgressType";
-import { useNavigate } from "react-router";
 import { useCourse } from "../../queries/useQuery/useCourse";
 import type { CourseType } from "../../Types/CourseType";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";

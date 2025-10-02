@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { useEffect, useState } from "react";
-import test from "../../../../public/lottie-animations/LILY_NEUTRAL_PROMPT.json";
 import { OptionsList } from "../OptionsList";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 

@@ -1,6 +1,5 @@
 import { LessonButton } from "../Lesson/LessonButton";
 import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak";
-import { useUnit } from "../../queries/useQuery/useUnit";
 import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit";
 import { shouldInvert } from "../Lesson/types/pathOffets";
 import { useEffect, useState } from "react";

@@ -1,4 +1,3 @@
-import type { Variants, Transition } from "framer-motion";
 
 export const fadeInStagger = (index: number) => ({
   variants: {

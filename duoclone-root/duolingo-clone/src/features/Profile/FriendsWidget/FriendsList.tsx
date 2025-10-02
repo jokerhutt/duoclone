@@ -1,6 +1,5 @@
 import type { friendsTabType } from "../../../Types/friendsTabType";
 import { UserRow } from "./UserRow";
-import { FriendsListUserRowSkeleton } from "./FriendsListUserRowSkeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../../animations/FadeInAnimation";
 type FriendsListProps = {
@@ -8,7 +7,7 @@ type FriendsListProps = {
   toDisplay: number[];
 };
 
-export function FriendsList({ activeTab, toDisplay }: FriendsListProps) {
+export function FriendsList({ toDisplay }: FriendsListProps) {
   return (
     <AnimatePresence>
       <motion.div 

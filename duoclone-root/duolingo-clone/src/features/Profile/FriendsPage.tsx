@@ -3,7 +3,6 @@ import { useFollowers } from "../../queries/useQuery/FollowQueries/useFollowers"
 import { useFollowingIds } from "../../queries/useQuery/FollowQueries/useFollowing";
 import { useFollowCaches } from "../../queries/useQuery/FollowQueries/useFollowCaches";
 import { FriendsListWidget } from "./FriendsWidget/FriendsListWidget";
-import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 
 export function FriendsPage() {
   const { userId } = useParams<{ userId: string }>();

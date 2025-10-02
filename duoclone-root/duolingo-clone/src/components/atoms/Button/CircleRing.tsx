@@ -17,7 +17,6 @@ export function CircleRing({
   show = false,
   size = 86,
   stroke = 4,
-  color = "#f886d0",
   unitColor = "LOCKED",
   progress = 1,
   offset = "",

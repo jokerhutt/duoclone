@@ -10,7 +10,6 @@ type StreakCompleteCardProps = {
 
 export function StreakCompleteCard({
   lottieRef,
-  oldCount,
   newCount,
   animationData,
 }: StreakCompleteCardProps) {

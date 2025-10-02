@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { RectangleButton } from "../../components/atoms/Button/RectangleButton";
 import type { UnitType } from "../../Types/UnitType";
 

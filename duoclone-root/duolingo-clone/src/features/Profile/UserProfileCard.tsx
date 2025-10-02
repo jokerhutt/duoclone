@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import { useUser } from "../../queries/useQuery/useUser";
 import type { UserType } from "../../Types/UserType";
 import { format } from "date-fns";
 import { RiPencilFill } from "react-icons/ri";

@@ -1,7 +1,6 @@
 import * as Popover from "@radix-ui/react-popover";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef} from "react";
 import type { LessonType } from "../../../Types/LessonType";
-import { RectangleButton } from "../../atoms/Button/RectangleButton";
 import { WideActionButton } from "../../../features/Common/WideActionButton";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -19,7 +18,6 @@ type LessonPopoverProps = {
 };
 
 export default function LessonPopover({
-  lessonIndex,
   lesson,
   triggerRef,
   unitColor = "LOCKED",

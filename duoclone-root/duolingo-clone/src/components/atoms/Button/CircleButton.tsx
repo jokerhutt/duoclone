@@ -1,4 +1,3 @@
-import { forwardRef, type RefObject } from "react";
 import type { ColorType } from "../../../Types/ColorType";
 import { colorMap } from "../../../util/colorMap";
 
@@ -18,7 +17,6 @@ type CircleButtonProps = {
 export function CircleButton({
   mainColor,
   unitColor,
-  shadowColor,
   icon,
   offset = "",
   iconOpacity = "",

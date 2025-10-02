@@ -1,4 +1,3 @@
-import type { ColorType } from "../../Types/ColorType";
 
 type UnitReviewButtonProps = {
     style: string;

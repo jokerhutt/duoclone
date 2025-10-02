@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { WideActionButton } from "../Common/WideActionButton";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 type ExitConfirmationSheetProps = {
     setIntendsToExit: () => void;

@@ -1,4 +1,3 @@
-import { StreakIcon } from "../../components/atoms/Icons/StreakIcon";
 import { QUEST_METADATA } from "../../Types/QuestCategory";
 import type { QuestType } from "../../Types/QuestType";
 import { QuestProgressBar } from "./QuestProgressBar";
@@ -8,7 +7,7 @@ type QuestListItemProps = {
     quest: QuestType;
 };
 
-export function QuestListItem({isLast, quest}: QuestListItemProps) {
+export function QuestListItem({quest}: QuestListItemProps) {
 
   const total = quest.total;
   const completed = quest.progress;

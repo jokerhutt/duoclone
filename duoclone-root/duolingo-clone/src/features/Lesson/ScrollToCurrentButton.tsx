@@ -9,7 +9,6 @@ type ScrollToLessonButtonProps = {
 };
 
 export function ScrollToLessonButton({
-  rootRef,
   currentLessonRef,
 }: ScrollToLessonButtonProps) {
 

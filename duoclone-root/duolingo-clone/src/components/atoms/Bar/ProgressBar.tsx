@@ -13,7 +13,6 @@ export function ProgressBar({
   completed,
   total,
   barColor = "bg-duoGreen",
-  bgColor = "bg-duoGrayLocked",
   textColor = "text-duoLightGray",
   showCountText,
   showGoldOnComplete,

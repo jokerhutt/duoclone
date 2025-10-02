@@ -1,5 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { useQuery } from "@tanstack/react-query";
 import { GET_COURSE_IDS_FOR_USER as GET_COURSES_FOR_USER } from "../../util/paths";
 import type { CourseType } from "../../Types/CourseType";
 

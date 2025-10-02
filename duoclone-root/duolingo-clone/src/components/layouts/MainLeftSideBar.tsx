@@ -1,7 +1,5 @@
 import { MainNavigationButtons } from "../../features/Common/MainNavigationButtons";
-import { QuestListWidget } from "../../features/Quests/QuestListWidget";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
-import { ContentWidget } from "../atoms/Widget/ContentWidget";
 
 export function MainLeftSidebar() {
   const { data: currentUser } = useCurrentUser();

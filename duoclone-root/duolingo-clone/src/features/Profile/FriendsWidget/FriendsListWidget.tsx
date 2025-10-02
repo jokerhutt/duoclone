@@ -1,10 +1,7 @@
-import { act, useState } from "react";
+import { useState } from "react";
 import { ContentWidget } from "../../../components/atoms/Widget/ContentWidget";
-import { FriendsListTab } from "./FriendsListTab";
 import type { friendsTabType } from "../../../Types/friendsTabType";
 import { FriendListTabRow } from "./FriendListTabRow";
-import { UserRow } from "./UserRow";
-import { HollowedArrow } from "../../../components/atoms/HollowedArrow/HollowedArrow";
 import { FriendsList } from "./FriendsList";
 import { ViewMoreFriendsTab } from "./ViewMoreFriendsTab";
 
