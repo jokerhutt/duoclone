@@ -22,6 +22,8 @@ export function LessonCompletePage() {
     "/lottie-animations/EL_LUCY_DUO.json",
   ];
 
+  const completeSound = new Audio("/audio/completeLesson.mp3")
+
   useEffect(() => {
     const random = Math.floor(Math.random() * possibleAnimations.length);
     const file = possibleAnimations[random];
@@ -52,7 +54,10 @@ export function LessonCompletePage() {
   });
 
   useEffect(() => {
-    if (lessonId) lessonCompleteMutation.mutate();
+    if (lessonId) {
+      lessonCompleteMutation.mutate()
+      completeSound.play();
+    };
   }, [lessonId]);
 
   if (lessonCompleteMutation.isError)

@@ -6,7 +6,7 @@ type LessonResultProps = {
 
 export function LessonResult({isCorrect, correctAnswer}: LessonResultProps) {
 
-  
+
 
   const correctColor = "text-duoLightGreen"
   const incorrectColor = "text-duoIncorrectRed"  

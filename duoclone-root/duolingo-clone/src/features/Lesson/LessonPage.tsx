@@ -19,6 +19,9 @@ export function LessonPage() {
   const id = Number(lessonId);
   const { data: exercises, isLoading } = useExercises(id);
 
+  const correctSound = new Audio("/audio/correct.mp3");
+  const incorrectSound = new Audio("/audio/incorrect.mp3")
+
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]
   >([]);
@@ -73,6 +76,13 @@ export function LessonPage() {
         }
 
         const result: ExerciseAttemptResponse = await response.json();
+
+        if (result.correct) {
+          correctSound.play();
+        } else {
+          incorrectSound.play();
+        }
+
         setLessonResponse(result);
         if (result.correct) {
           return true;
