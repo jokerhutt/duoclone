@@ -100,7 +100,7 @@ export function LessonCompletePage() {
   }
 
   if (!hasStreakIncreased) return (
-    <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
+    <div className="w-full h-full flex items-center justify-between flex-col gap-6 pt-4 pb-4 px-3">
       <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
         <LessonCompleteCard
           title={title}
@@ -115,8 +115,9 @@ export function LessonCompletePage() {
           statsHeader={accuracyMessage}
         />
       </div>
-      <div className="lg:w-1/2 w-full px-2 flex lg:justify-end">
+      <div className="lg:w-1/2 pb-4 w-full px-2 flex lg:justify-end">
         <WideActionButton
+
           text="End Lesson"
           isActive={true}
           activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
