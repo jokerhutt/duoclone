@@ -8,7 +8,7 @@ export function SectionBreak({ lesson }: SectionBreakType) {
       <div className="w-full">
         <hr />
       </div>
-      <p className="text-duoGrayText px-2 whitespace-nowrap w-full text-xl font-bold">
+      <p className="text-duoGrayText text-center px-2 whitespace-nowrap w-full text-xl font-bold">
         {lesson}
       </p>
       <div className="w-full">
