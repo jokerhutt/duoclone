@@ -11,9 +11,9 @@ export function LearnHeaderLayout() {
     if (!user || !userCourseProgress) return <SpinnerPage/>
 
     return (
-    <>
+    <div className="w-full h-full flex flex-col">
       <LearnHeader courseProgress={userCourseProgress}/>  
       <Outlet />
-    </>
+    </div>
   );
 }

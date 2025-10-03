@@ -119,6 +119,7 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   width: 100dvw;
+  height: 100dvh;
   overscroll-behavior: contain;
   font-family: DIN;
   font-weight: 700;

@@ -18,7 +18,7 @@ export function UserMainStats({courseObject, courseProgress, currentUser}: UserM
   const navigate = useNavigate();  
 
   return (
-    <>
+    <div className="flex w-full justify-between">
       <div className="flex gap-3 items-center">
         <div className="hover:cursor-pointer" onClick={() => navigate("/courses")}>
           <LanguageFlag height="h-8" icon={courseObject.imgSrc} />
@@ -38,6 +38,6 @@ export function UserMainStats({courseObject, courseProgress, currentUser}: UserM
         <HeartIcon />
         <p className="text-2xl text-duoRed">∞</p>
       </div>
-    </>
+    </div>
   );
 }
