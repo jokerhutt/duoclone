@@ -60,7 +60,7 @@ export function AvatarPage() {
                   <img
                     onClick={() => setSelectedAvatar(avatarUrl)}
                     key={i}
-                    className={`min-h-14 max-h-14 h-14 lg:min-h-30 lg:max-h-30 lg:h-30 w-full rounded-xl object-cover ${showSelectedBorder(
+                    className={`min-h-14 max-h-14 h-14 hover:cursor-pointer hover:opacity-85 lg:min-h-30 lg:max-h-30 lg:h-30 w-full rounded-xl object-cover ${showSelectedBorder(
                       avatarUrl
                     )}`}
                     src={avatarUrl}
