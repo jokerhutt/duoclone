@@ -1,6 +1,5 @@
 import { Spinner } from "../../components/atoms/Loading/Spinner";
 import { useQuests } from "../../queries/useQuery/useQuests";
-import { SpinnerPage } from "../Section/SpinnerPage";
 import { QuestListItem } from "./QuestListItem";
 
 export function QuestListWidget() {

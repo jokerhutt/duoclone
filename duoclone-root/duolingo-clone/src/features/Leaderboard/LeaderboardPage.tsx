@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useInfiniteList } from "../../queries/useQuery/InfiniteScroll/useInfiniteList";
 import { UserRow } from "../Profile/FriendsWidget/UserRow";
-import { SpinnerPage } from "../Section/SpinnerPage";
 import { useInView } from "react-intersection-observer";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../animations/FadeInAnimation";
