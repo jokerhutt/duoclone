@@ -19,5 +19,6 @@ export function useLessonsByUnit(id: number) {
     queryKey: qk.lessonsByUnit(id),
     queryFn: () => fetchLessonsByUnit(id),
     initialData: () => qc.getQueryData(qk.lessonsByUnit(id)),
+    staleTime: 60_000,
   });
 }

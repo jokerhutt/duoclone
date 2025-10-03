@@ -7,6 +7,7 @@ export function useExercises(lessonId: number) {
   return useQuery({
     queryKey: qk.exercises(lessonId),
     queryFn: () => fetchExercisesByLesson(lessonId),
+    staleTime: 60_000,
   });
 }
 

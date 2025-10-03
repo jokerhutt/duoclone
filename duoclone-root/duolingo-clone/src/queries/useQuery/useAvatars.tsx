@@ -6,6 +6,7 @@ export function useAvatars() {
     return useQuery({
         queryKey: qk.avatars(),
         queryFn: () => fetchAvatars(),
+        staleTime: 60_000,
     })
 }
 

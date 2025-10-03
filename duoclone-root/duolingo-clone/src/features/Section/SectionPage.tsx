@@ -39,15 +39,13 @@ export function SectionPage() {
   }, []);
 
   if (isError) return <SpinnerPage color="border-red-400" />;
-  if (loadingUser || isLoading || !units || !courseProgress)
-    return <SpinnerPage />;
 
-  return (
+  if (!loadingUser && !isLoading && !!units && !!courseProgress) return (
     <>
       <UnitBanner currentUnit={currentUnit} />
       <div
         ref={scrollContainerRef}
-        className="w-full h-full pb-20 lg:pb-0 bg-duoBackground lg:overflow-visible"
+        className="w-full h-full pb-20 lg:pb-0 bg-duoBackground overscroll-contain lg:overflow-visible"
       >
         <AnimatePresence>
           {units.map((unit, index) => (

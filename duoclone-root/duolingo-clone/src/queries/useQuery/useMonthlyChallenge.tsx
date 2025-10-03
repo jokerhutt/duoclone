@@ -7,6 +7,7 @@ export function useMonthlyChallenge() {
   return useQuery({
     queryKey: qk.monthlyChallenges(),
     queryFn: () => fetchMonthlyExerciseForUser(),
+    staleTime: 60_000,
   });
 }
 

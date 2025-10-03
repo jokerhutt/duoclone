@@ -7,6 +7,7 @@ export function useUnit(id: number) {
   return useQuery({
     queryKey: qk.unit(id),
     queryFn: () => unitBatcher.fetch(id!),
+    staleTime: 60_000,
     initialData: () => qc.getQueryData(qk.unit(id)),
   });
 }

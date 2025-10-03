@@ -20,15 +20,15 @@ export function LessonCompleteCard({
       <Lottie
         lottieRef={lottieRef}
         animationData={animationData}
-        loop={false}
+        loop={true}
         autoplay
         onComplete={onComplete}
         className="w-full h-80"
       />
-      <div className="w-full flex flex-col items-center my-4">
+      <div className="w-full flex flex-col items-center my-2">
         <p className="text-3xl text-duoGold">{title}</p>
         {isPerfect && (
-          <p className="py-6 text-lg font-light text-duoGrayBorder">
+          <p className="pt-2 text-lg font-light text-duoGrayBorder">
             You made no mistakes in this lesson
           </p>
         )}

@@ -13,5 +13,6 @@ export function useFollowers(userId: number) {
       });
       return base.followerIds;
     },
+    staleTime: 60_000,
   });
 }

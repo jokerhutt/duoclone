@@ -8,6 +8,7 @@ export function useLesson(id: number) {
   return useQuery({
     queryKey: qk.lesson(id),
     queryFn: () => lessonBatcher.fetch(id!),
+    staleTime: 60_000,
     initialData: () => qc.getQueryData(qk.lesson(id)),
   });
 }

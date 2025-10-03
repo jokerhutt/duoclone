@@ -25,6 +25,7 @@ export function CoursesPage({title}: CoursesPageProps) {
       {newCourse: courseId },
       {
         onSuccess: () => {
+          
           navigate(`/`);
         },
       }

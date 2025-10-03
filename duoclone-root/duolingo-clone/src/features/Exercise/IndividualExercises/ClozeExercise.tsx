@@ -17,7 +17,7 @@ export function ClozeExercise({
 }: ClozeExerciseProps) {
 
   return (
-    <div className="w-full h-full flex flex-col gap-12 mt-10">
+    < div className="w-full h-full flex flex-col gap-12 mt-10">
       <ExercisePrompt
         exercise={exercise}
         selectedOption={currentSelectedOptions[0]}

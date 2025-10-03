@@ -48,5 +48,6 @@ export function useCourse(id: number | "all") {
       }
       return foundCourse;
     },
+    staleTime: 60_000,
   });
 }

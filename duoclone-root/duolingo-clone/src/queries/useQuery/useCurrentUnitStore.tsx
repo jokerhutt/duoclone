@@ -7,9 +7,9 @@ export function useCurrentUnitStore() {
 
   const { data: currentUnit } = useQuery<UnitType | null>({
     queryKey,
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 5, // Changed from cacheTime to gcTime
-    queryFn: () => queryClient.getQueryData(queryKey) ?? null, // Added queryFn
+    staleTime: 60_000,
+    gcTime: 1000 * 60 * 5,
+    queryFn: () => queryClient.getQueryData(queryKey) ?? null,
     initialData: null
   });
 

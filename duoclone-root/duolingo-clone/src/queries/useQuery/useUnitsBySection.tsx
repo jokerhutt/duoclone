@@ -18,5 +18,6 @@ export function useUnitsBySection(id: number) {
     queryKey: qk.unitsBySection(id),
     queryFn: () => fetchUnitsBySection(id),
     initialData: () => qc.getQueryData(qk.unitsBySection(id)),
+    staleTime: 60_000,
   });
 }

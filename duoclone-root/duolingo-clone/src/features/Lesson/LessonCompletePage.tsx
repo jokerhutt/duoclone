@@ -15,6 +15,7 @@ export function LessonCompletePage() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const lottieStreakRed = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
+
   const [streakAnimationData, setStreakAnimationData] = useState<any>(null);
 
   const { data: user } = useCurrentUser();
@@ -53,9 +54,13 @@ export function LessonCompletePage() {
     if (!lottieRef.current) return;
 
     const totalFrames = lottieRef.current.getDuration(true);
+
     if (!totalFrames) return;
 
-    const loopStart = totalFrames - 4;
+    console.log("Total frames: " + totalFrames);
+
+    const loopStart = totalFrames - 40;
+    console.log("Loop start: " + loopStart)
     lottieRef.current.playSegments([loopStart, totalFrames], true);
   };
 
@@ -100,7 +105,7 @@ export function LessonCompletePage() {
   }
 
   if (!hasStreakIncreased) return (
-    <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
+    <div className="w-full h-full flex items-center justify-between flex-col gap-6 pt-4 pb-4 px-3">
       <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
         <LessonCompleteCard
           title={title}
@@ -115,7 +120,7 @@ export function LessonCompletePage() {
           statsHeader={accuracyMessage}
         />
       </div>
-      <div className="lg:w-1/2 w-full px-2 flex lg:justify-end">
+      <div className="lg:w-1/2 pb-4 w-full px-2 flex lg:justify-end">
         <WideActionButton
           text="End Lesson"
           isActive={true}
