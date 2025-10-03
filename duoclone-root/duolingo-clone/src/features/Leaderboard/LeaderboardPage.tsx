@@ -36,7 +36,7 @@ export function LeaderboardPage() {
   }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div className="w-full h-full pb-20 py-4 flex items-center flex-col">
+    <div className="w-full h-full pb-20 lg:pb-4 py-4 flex items-center flex-col">
       <div className="w-full flex flex-col pb-4 border-b border-b-duoGrayBorder items-center gap-4">
         <img
           className="h-20"
@@ -48,7 +48,7 @@ export function LeaderboardPage() {
         <AnimatePresence>
           <motion.div
             {...fadeInStagger(1)}
-            className="flex flex-col w-full gap-2"
+            className="flex flex-col w-full pt-2 gap-2"
           >
             {sortedUsers.map((user) => (
               <UserRow
