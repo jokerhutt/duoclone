@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { ColorType } from "../../../Types/ColorType";
 import { colorMap } from "../../../util/colorMap";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInStagger } from "../../../animations/FadeInAnimation";
+import { fadeInStagger } from "../../../effects/FadeInAnimation";
 
 type RectangleButtonProps = {
   color?: string;

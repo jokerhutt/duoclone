@@ -1,5 +1,5 @@
 import { create, windowScheduler } from "@yornaath/batshit";
-import { GET_SECTIONS_FROM_IDS } from "../../util/paths";
+import { GET_SECTIONS_FROM_IDS } from "../../constants/paths.ts";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
 import type { SectionType } from "../../Types/SectionType";
 

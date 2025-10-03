@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
-import { UnitBanner } from "../Unit/UnitBanner";
-import { UnitPath } from "../Unit/UnitPath";
-import { useUnitObserver } from "../../util/UnitObserver";
+import { UnitBanner } from "./UnitBanner.tsx";
+import { UnitPath } from "./UnitPath.tsx";
+import { useUnitObserver } from "../../effects/Observers/UnitObserver.tsx";
 import {
   useSectionTree,
   useSectionTreeData,
 } from "../../queries/useQuery/useSectionTree";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
-import { SpinnerPage } from "./SpinnerPage";
+import { SpinnerPage } from "../../components/layouts/SpinnerPage.tsx";
 import { useCurrentUnitStore } from "../../queries/useQuery/useCurrentUnitStore";
 import { scrollToUnit } from "../../util/scrollUtils";
-import { fadeInStagger } from "../../animations/FadeInAnimation";
-import { ScrollToLessonButton } from "../Lesson/ScrollToCurrentButton";
+import { fadeInStagger } from "../../effects/FadeInAnimation";
+import { ScrollToLessonButton } from "./ScrollToCurrentButton.tsx";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function SectionPage() {

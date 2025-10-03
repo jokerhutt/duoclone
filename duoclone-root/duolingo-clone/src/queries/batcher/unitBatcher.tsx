@@ -1,5 +1,5 @@
 import { create, windowScheduler } from "@yornaath/batshit";
-import { GET_UNITS_FROM_IDS } from "../../util/paths";
+import { GET_UNITS_FROM_IDS } from "../../constants/paths.ts";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
 import type { UnitType } from "../../Types/UnitType";
 

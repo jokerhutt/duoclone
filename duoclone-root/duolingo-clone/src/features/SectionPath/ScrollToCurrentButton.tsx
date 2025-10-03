@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { scrollToCurrentLesson } from "../../util/scrollUtils";
-import { ArrowIcon } from "../../components/atoms/Icons/ArrowIcon";
-import { useIsElementVisible } from "../../util/useIsElementVisible";
+import { scrollToCurrentLesson } from "../../util/scrollUtils.ts";
+import { ArrowIcon } from "../../components/atoms/Icons/ArrowIcon.tsx";
+import { useIsElementVisible } from "../../effects/Observers/useIsElementVisible.tsx";
 
 type ScrollToLessonButtonProps = {
   rootRef: any;

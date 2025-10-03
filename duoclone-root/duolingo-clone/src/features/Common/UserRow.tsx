@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import { useUser } from "../../../queries/useQuery/useUser";
-import type { UserType } from "../../../Types/UserType";
-import { FriendsListUserRowSkeleton } from "./FriendsListUserRowSkeleton";
+import { useUser } from "../../queries/useQuery/useUser.tsx";
+import type { UserType } from "../../Types/UserType.ts";
+import { FriendsListUserRowSkeleton } from "../Profile/FriendsWidget/FriendsListUserRowSkeleton.tsx";
 
 type UserRow = {
   userId: number;

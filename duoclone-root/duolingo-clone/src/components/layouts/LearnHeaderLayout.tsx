@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { LearnHeader } from "../../features/Section/LearnHeader";
+import { LearnHeader } from "../../features/SectionPath/LearnHeader";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 

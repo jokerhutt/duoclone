@@ -1,5 +1,5 @@
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
-import { OptionsList } from "../OptionsList";
+import { OptionsList } from "../Options/OptionsList.tsx";
 import { ExercisePrompt } from "../Prompt/ExercisePrompt";
 
 type ClozeExerciseProps = {

@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchSectionTreeAndHydrate } from "../../util/fetchSectionTreeAndHydrate";
-import { qk } from "../types/queryKeys";
+import { fetchSectionTreeAndHydrate } from "./fetchSectionTreeAndHydrate.ts";
+import { qk } from "../../constants/queryKeys.ts";
 import type { SectionType } from "../../Types/SectionType";
 import type { UnitType } from "../../Types/UnitType";
 import { fetchUnitsBySection } from "./useUnitsBySection";

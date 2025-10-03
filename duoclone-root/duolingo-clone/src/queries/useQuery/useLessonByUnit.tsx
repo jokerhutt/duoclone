@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
-import { GET_LESSONS_BY_UNIT } from "../../util/paths";
+import { qk } from "../../constants/queryKeys.ts";
+import { GET_LESSONS_BY_UNIT } from "../../constants/paths.ts";
 import type { LessonType } from "../../Types/LessonType";
 
 export async function fetchLessonsByUnit(

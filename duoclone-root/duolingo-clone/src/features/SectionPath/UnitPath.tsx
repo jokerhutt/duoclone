@@ -1,10 +1,10 @@
-import { LessonButton } from "../Lesson/LessonButton";
-import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak";
-import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit";
-import { shouldInvert } from "../Lesson/types/pathOffets";
+import { LessonButton } from "./LessonButtons/LessonButton.tsx";
+import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak.tsx";
+import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit.tsx";
+import { shouldInvert } from "../../constants/lessonPositionOffsets.ts";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import type { UnitType } from "../../Types/UnitType";
+import type { UnitType } from "../../Types/UnitType.ts";
 
 type UnitPathProps = {
   id: number;

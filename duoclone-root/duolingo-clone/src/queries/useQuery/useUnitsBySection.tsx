@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { qk } from "../../constants/queryKeys.ts";
 import type { UnitType } from "../../Types/UnitType";
-import { GET_UNITS_BY_SECTION } from "../../util/paths";
+import { GET_UNITS_BY_SECTION } from "../../constants/paths.ts";
 
 export async function fetchUnitsBySection(
   sectionId: number

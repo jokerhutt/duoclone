@@ -1,6 +1,6 @@
-import { LightningIcon } from "../../components/atoms/Icons/LightningIcon";
-import { ScoreTargetIcon } from "../../components/atoms/Icons/ScoreTargetIcon";
-import { LessonStatsCard } from "./LessonStatsCard";
+import { LightningIcon } from "../../../components/atoms/Icons/LightningIcon.tsx";
+import { ScoreTargetIcon } from "../../../components/atoms/Icons/ScoreTargetIcon.tsx";
+import { LessonStatsCard } from "./LessonStatsCard.tsx";
 
 type LessonStatsGroupProps = {
   totalScore: string | number;

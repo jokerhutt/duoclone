@@ -1,4 +1,4 @@
-import { Spinner } from "../../components/atoms/Loading/Spinner";
+import { Spinner } from "../atoms/Loading/Spinner.tsx";
 
 type SpinnerPageProps = {
   color?: string;

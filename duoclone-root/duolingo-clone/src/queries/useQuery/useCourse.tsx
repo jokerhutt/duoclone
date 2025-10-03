@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { qk } from "../../constants/queryKeys.ts";
 import type { CourseType } from "../../Types/CourseType";
-import { GET_ALL_COURSES } from "../../util/paths";
+import { GET_ALL_COURSES } from "../../constants/paths.ts";
 
 export function useCourse(id: number | "all") {
   const qc = useQueryClient();

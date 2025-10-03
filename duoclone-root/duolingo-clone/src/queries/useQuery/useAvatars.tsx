@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
-import { GET_AVATARS } from "../../util/paths";
+import { qk } from "../../constants/queryKeys.ts";
+import { GET_AVATARS } from "../../constants/paths.ts";
 
 export function useAvatars() {
     return useQuery({

@@ -1,10 +1,10 @@
 import Lottie from "lottie-react";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { useEffect, useState } from "react";
-import { OptionsList } from "../OptionsList";
+import { OptionsList } from "../Options/OptionsList.tsx";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInStagger } from "../../../animations/FadeInAnimation";
+import { fadeInStagger } from "../../../effects/FadeInAnimation";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
@@ -42,10 +42,10 @@ export function ComposeSentenceExercise({
   removeOption,
 }: ComponentSentenceExerciseProps) {
   const possibleAnimations = [
-    "/lottie-animations/LILY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/EDDY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/BEAR_NEUTRAL_PROMPT.json",
-    "/lottie-animations/LUCY_NEUTRAL_PROMPT.json",
+    "/lottie-effects/LILY_NEUTRAL_PROMPT.json",
+    "/lottie-effects/EDDY_NEUTRAL_PROMPT.json",
+    "/lottie-effects/BEAR_NEUTRAL_PROMPT.json",
+    "/lottie-effects/LUCY_NEUTRAL_PROMPT.json",
   ];
 
   const [animationData, setAnimationData] = useState<any>(null);

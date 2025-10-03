@@ -1,6 +1,6 @@
-import type { ColorType } from "../../../Types/ColorType";
-import { colorMap } from "../../../util/colorMap";
-import { PopoverArrow } from "./PopoverArrow";
+import type { ColorType } from "../../../Types/ColorType.ts";
+import { colorMap } from "../../../util/colorMap.ts";
+import { PopoverArrow } from "./PopoverArrow.tsx";
 
 type LessonTopPopoverProps = {
   open: boolean;

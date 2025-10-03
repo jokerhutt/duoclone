@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { qk } from "../../constants/queryKeys.ts";
 import type { QuestType } from "../../Types/QuestType";
-import { GET_MONTHLY_CHALLENGE_BY_USER_ID } from "../../util/paths";
+import { GET_MONTHLY_CHALLENGE_BY_USER_ID } from "../../constants/paths.ts";
 
 export function useMonthlyChallenge() {
   return useQuery({
