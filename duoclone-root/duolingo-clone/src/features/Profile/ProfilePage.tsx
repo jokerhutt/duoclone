@@ -47,7 +47,6 @@ export function ProfilePage() {
   )
     return <SpinnerPage />;
 
-  //TODO add a more languages button? at least a page for a users languages
   return (
       <div
         className="w-full h-full flex overflow-y-auto lg:pb-6 pb-26 flex-col gap-4 items-center"

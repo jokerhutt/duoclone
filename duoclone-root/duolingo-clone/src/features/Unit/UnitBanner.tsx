@@ -1,5 +1,7 @@
+import { motion, AnimatePresence } from "framer-motion";
 import { RectangleButton } from "../../components/atoms/Button/RectangleButton";
 import type { UnitType } from "../../Types/UnitType";
+import { fadeInStagger } from "../../animations/FadeInAnimation";
 
 type UnitBannerProps = {
   currentUnit: UnitType | null;
@@ -8,7 +10,10 @@ type UnitBannerProps = {
 export function UnitBanner({ currentUnit }: UnitBannerProps) {
   if (currentUnit)
     return (
-          <RectangleButton buttonWidth="w-full 2xl:w-3/4" unitColor={currentUnit?.color}>
+          <RectangleButton
+            buttonWidth="w-full 2xl:w-3/4"
+            unitColor={currentUnit?.color}
+          >
             <div className="flex rounded-2xl h-20 w-full">
               <div className="w-5/6 h-full px-4 pb-3 flex flex-col">
                 <div className="mt-3 text-duoSubText">

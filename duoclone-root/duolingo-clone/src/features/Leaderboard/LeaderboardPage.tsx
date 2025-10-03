@@ -45,9 +45,7 @@ export function LeaderboardPage() {
         />
         <h1 className="text-3xl text-white">Leaderboard</h1>
       </div>
-      {!users || isLoading ? (
-        <SpinnerPage />
-      ) : (
+      {users && !isLoading && (
         <AnimatePresence>
           <motion.div
             {...fadeInStagger(1)}
