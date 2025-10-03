@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET_COURSE_IDS_FOR_USER as GET_COURSES_FOR_USER } from "../../util/paths";
+import { GET_COURSE_IDS_FOR_USER as GET_COURSES_FOR_USER } from "../../constants/paths.ts";
 import type { CourseType } from "../../Types/CourseType";
 
 export function useUserCourses(userId?: number) {

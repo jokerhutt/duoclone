@@ -6,11 +6,11 @@ import { FriendsListWidget } from "./FriendsWidget/FriendsListWidget";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileStatisticsGroup } from "./ProfileStatsWidget/ProfileStatisticsGroup";
 import { UserProfileCard } from "./UserProfileCard";
-import { SpinnerPage } from "../Section/SpinnerPage";
+import { SpinnerPage } from "../../components/layouts/SpinnerPage.tsx";
 import { useUser } from "../../queries/useQuery/useUser";
-import { FollowButtonManager } from "./FollowButtonManager";
+import { FollowButtonManager } from "./Follows/FollowButtonManager.tsx";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
-import { LogoutButton } from "./LogoutButton";
+import { LogoutButton } from "../Auth/LogoutButton.tsx";
 import { useUserCourses } from "../../queries/useQuery/useUserCourses";
 
 export function ProfilePage() {

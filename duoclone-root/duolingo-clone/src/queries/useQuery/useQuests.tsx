@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { QuestType } from "../../Types/QuestType";
-import { GET_QUESTS_BY_USER_ID } from "../../util/paths";
-import { qk } from "../types/queryKeys";
+import { GET_QUESTS_BY_USER_ID } from "../../constants/paths.ts";
+import { qk } from "../../constants/queryKeys.ts";
 
 export function useQuests() {
   return useQuery({

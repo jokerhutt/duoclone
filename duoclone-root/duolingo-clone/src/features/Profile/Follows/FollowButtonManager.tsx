@@ -1,6 +1,6 @@
-import { useFollowMutation } from "../../queries/mutations/useFollowMutation";
-import type { UserType } from "../../Types/UserType";
-import { FollowButton } from "./FollowButton";
+import { useFollowMutation } from "../../../queries/mutations/useFollowMutation.tsx";
+import type { UserType } from "../../../Types/UserType.ts";
+import { FollowButton } from "./FollowButton.tsx";
 type FollowButtonManagerProps = {
   pageUser: UserType;
   pageUserFollowers: number[];

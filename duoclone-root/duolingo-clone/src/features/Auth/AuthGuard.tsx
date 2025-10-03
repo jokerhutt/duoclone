@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
-import { SpinnerPage } from "../Section/SpinnerPage";
+import { SpinnerPage } from "../../components/layouts/SpinnerPage.tsx";
 
 export function AuthGuard() {
   const navigate = useNavigate();

@@ -2,13 +2,13 @@ import { useNavigate, useParams } from "react-router";
 import { type LottieRefCurrentProps } from "lottie-react";
 
 import { useEffect, useRef, useState } from "react";
-import { SpinnerPage } from "../Section/SpinnerPage";
-import { WideActionButton } from "../Common/WideActionButton";
-import { LessonStatsGroup } from "./LessonStatsGroup";
-import { LessonCompleteCard } from "./LessonCompleteCard";
-import { useLessonComplete } from "../../queries/mutations/useLessonComplete";
-import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
-import { StreakCompleteCard } from "./StreakCompleteCard";
+import { SpinnerPage } from "../../../components/layouts/SpinnerPage.tsx";
+import { WideActionButton } from "../../../components/atoms/Button/WideActionButton.tsx";
+import { LessonStatsGroup } from "./LessonStatsGroup.tsx";
+import { LessonCompleteCard } from "./LessonCompleteCard.tsx";
+import { useLessonComplete } from "../../../queries/mutations/useLessonComplete.tsx";
+import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser.tsx";
+import { StreakCompleteCard } from "./StreakCompleteCard.tsx";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -23,9 +23,9 @@ export function LessonCompletePage() {
   const [hasStreakIncreased, setHasStreakIncreased] = useState(false);
 
   const possibleAnimations = [
-    "/lottie-animations/EL_BEA_DUO.json",
-    "/lottie-animations/EL_LIN_DUO.json",
-    "/lottie-animations/EL_LUCY_DUO.json",
+    "/lottie-effects/EL_BEA_DUO.json",
+    "/lottie-effects/EL_LIN_DUO.json",
+    "/lottie-effects/EL_LUCY_DUO.json",
   ];
 
 
@@ -41,7 +41,7 @@ export function LessonCompletePage() {
   }, []);
 
   useEffect(() => {
-    const file = "/lottie-animations/STREAK_INCREMENT.json"
+    const file = "/lottie-effects/STREAK_INCREMENT.json"
 
     fetch(file)
       .then((res) => res.json())

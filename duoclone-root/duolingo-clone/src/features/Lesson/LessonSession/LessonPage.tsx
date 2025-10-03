@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { SUBMIT_EXERCISE_ATTEMPT } from "../../util/paths";
-import type { ExerciseOption } from "../../Types/ExerciseType";
-import { ExerciseComponent } from "../Exercise/ExerciseComponent";
-import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptResponse";
-import { useExercises } from "../../queries/useQuery/useExercises";
-import { SpinnerPage } from "../Section/SpinnerPage";
-import { WideActionButton } from "../Common/WideActionButton";
-import { LessonHeader } from "./LessonHeader";
-import { LessonResult } from "./LessonResult";
-import { BottomSheet } from "./BottomSheet";
-import { ExitConfirmationSheet } from "./ExitConfirmationSheet";
+import { SUBMIT_EXERCISE_ATTEMPT } from "../../../constants/paths.ts";
+import type { ExerciseOption } from "../../../Types/ExerciseType.ts";
+import { ExerciseComponent } from "../../Exercise/ExerciseComponent.tsx";
+import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse.ts";
+import { useExercises } from "../../../queries/useQuery/useExercises.tsx";
+import { SpinnerPage } from "../../../components/layouts/SpinnerPage.tsx";
+import { WideActionButton } from "../../../components/atoms/Button/WideActionButton.tsx";
+import { LessonHeader } from "../LessonHeader.tsx";
+import { LessonResult } from "./LessonResult.tsx";
+import { BottomSheet } from "../../../effects/ModalSheet/BottomSheet.tsx";
+import { ExitConfirmationSheet } from "../ExitConfirmationSheet.tsx";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();

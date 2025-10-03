@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router";
-import { CircleButton } from "../../components/atoms/Button/CircleButton";
-import { getOffset } from "./types/pathOffets";
-import { useLesson } from "../../queries/useQuery/useLesson";
-import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
+import { CircleButton } from "../../../components/atoms/Button/CircleButton.tsx";
+import { getOffset } from "../../../constants/lessonPositionOffsets.ts";
+import { useLesson } from "../../../queries/useQuery/useLesson.tsx";
+import { useCourseProgress } from "../../../queries/useQuery/useCourseProgress.tsx";
 import { useRef, useState } from "react";
-import LessonPopover from "../../components/molecules/Dropdown/LessonPopover";
-import { CircleRing } from "../../components/atoms/Button/CircleRing";
-import type { ColorType } from "../../Types/ColorType";
-import { LessonTopPopover } from "../../components/molecules/Dropdown/LessonTopPopover";
-import { colorMap } from "../../util/colorMap";
-import { UnitReviewButton } from "./UnitReviewButton";
-import { chooseLessonImage } from "../../util/lessonUtils";
-import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import LessonPopover from "../../../components/molecules/Popover/LessonPopover.tsx";
+import { CircleRing } from "../../../components/atoms/Button/CircleRing.tsx";
+import type { ColorType } from "../../../Types/ColorType.ts";
+import { LessonTopPopover } from "../../../components/molecules/Popover/LessonTopPopover.tsx";
+import { colorMap } from "../../../util/colorMap.ts";
+import { UnitReviewButton } from "./UnitReviewButton.tsx";
+import { chooseLessonImage } from "../../../util/lessonUtils.ts";
+import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser.tsx";
 
 type LessonButtonProps = {
   idx: number;

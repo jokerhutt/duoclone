@@ -1,5 +1,5 @@
 import { create, windowScheduler } from "@yornaath/batshit";
-import { GET_LESSONS_FROM_IDS } from "../../util/paths";
+import { GET_LESSONS_FROM_IDS } from "../../constants/paths.ts";
 import type { LessonType } from "../../Types/LessonType";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
 

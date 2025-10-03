@@ -1,7 +1,7 @@
 import { create, windowScheduler } from "@yornaath/batshit";
 import type { UserType } from "../../Types/UserType";
 import { parseIdsToRequestParam } from "../../util/pathParsers";
-import { GET_USERS_FROM_IDS } from "../../util/paths";
+import { GET_USERS_FROM_IDS } from "../../constants/paths.ts";
 
 export const userBatcher = create<UserType, number>({
   fetcher: async (ids: number[]) => {

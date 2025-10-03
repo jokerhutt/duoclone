@@ -1,7 +1,7 @@
 import type { friendsTabType } from "../../../Types/friendsTabType";
-import { UserRow } from "./UserRow";
+import { UserRow } from "../../Common/UserRow.tsx";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInStagger } from "../../../animations/FadeInAnimation";
+import { fadeInStagger } from "../../../effects/FadeInAnimation";
 type FriendsListProps = {
   activeTab: friendsTabType;
   toDisplay: number[];

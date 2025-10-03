@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { CourseProgressType } from "../../Types/CourseProgressType";
-import { GET_COURSE_PROGRESS } from "../../util/paths";
-import { qk } from "../types/queryKeys";
+import { GET_COURSE_PROGRESS } from "../../constants/paths.ts";
+import { qk } from "../../constants/queryKeys.ts";
 
 export function useCourseProgress(courseId: number | undefined) {
   return useQuery({

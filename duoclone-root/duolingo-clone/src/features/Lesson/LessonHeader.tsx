@@ -1,7 +1,7 @@
-import { HeartIcon } from "../../components/atoms/Icons/HeartIcon";
-import { XIcon } from "../../components/atoms/Icons/XIcon";
-import { Header } from "../../components/molecules/Header/Header";
-import { LessonProgressBar } from "./LessonProgressBar";
+import { HeartIcon } from "../../components/atoms/Icons/HeartIcon.tsx";
+import { XIcon } from "../../components/atoms/Icons/XIcon.tsx";
+import { Header } from "../../components/molecules/Header/Header.tsx";
+import { LessonProgressBar } from "./LessonSession/LessonProgressBar.tsx";
 
 type LessonHeaderProps = {
   handleExitClick: () => void;

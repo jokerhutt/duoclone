@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { bottomUpSpringAnimation } from "../../animations/BottomUpSpringAnimation";
+import { bottomUpSpringAnimation } from "../BottomUpSpringAnimation.ts";
 import type { ReactNode } from "react";
 
 type BottomSheetProps = {

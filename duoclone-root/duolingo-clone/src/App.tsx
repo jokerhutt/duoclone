@@ -1,14 +1,14 @@
 import "./App.css";
-import { SectionPage } from "./features/Section/SectionPage";
+import { SectionPage } from "./features/SectionPath/SectionPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LessonPage } from "./features/Lesson/LessonPage";
-import { LessonCompletePage } from "./features/Lesson/LessonCompletePage";
+import { LessonPage } from "./features/Lesson/LessonSession/LessonPage.tsx";
+import { LessonCompletePage } from "./features/Lesson/LessonComplete/LessonCompletePage.tsx";
 import { QuestsPage } from "./features/Quests/QuestsPage";
 import { MainLayout } from "./components/layouts/MainLayout";
 import { ProfilePage } from "./features/Profile/ProfilePage";
 import { LeaderboardPage } from "./features/Leaderboard/LeaderboardPage";
 import { FriendsPage } from "./features/Profile/FriendsPage";
-import { CoursesPage } from "./features/Langs/CoursesPage";
+import { CoursesPage } from "./features/Courses/CoursesPage";
 import { LearnHeaderLayout } from "./components/layouts/LearnHeaderLayout";
 import { LoginPage } from "./features/Auth/LoginPage";
 import { GOOGLE_CLIENT_ID } from "./constants/env";

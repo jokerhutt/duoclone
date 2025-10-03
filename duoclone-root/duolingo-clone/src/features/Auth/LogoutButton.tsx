@@ -1,5 +1,5 @@
-import { LOGOUT } from "../../util/paths";
-import { WideActionButton } from "../Common/WideActionButton";
+import { LOGOUT } from "../../constants/paths.ts";
+import { WideActionButton } from "../../components/atoms/Button/WideActionButton.tsx";
 
 type LogoutButtonProps = {
   show?: boolean;

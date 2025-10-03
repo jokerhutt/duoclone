@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { LessonCompleteType } from "../../Types/LessonCompleteType";
-import { SUBMIT_LESSON_COMPLETE } from "../../util/paths";
-import { qk } from "../types/queryKeys";
+import { SUBMIT_LESSON_COMPLETE } from "../../constants/paths.ts";
+import { qk } from "../../constants/queryKeys.ts";
 import type { UserType } from "../../Types/UserType";
 import type { LessonType } from "../../Types/LessonType";
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { qk } from "../../constants/queryKeys.ts";
 import type { Exercise } from "../../Types/ExerciseType";
-import { GET_EXERCISES_BY_LESSON } from "../../util/paths";
+import { GET_EXERCISES_BY_LESSON } from "../../constants/paths.ts";
 
 export function useExercises(lessonId: number) {
   return useQuery({

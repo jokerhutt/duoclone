@@ -1,5 +1,5 @@
 import { useGoogleAuthEntry } from "../../queries/useQuery/Auth/useGoogleAuthEntry";
-import { WideActionButton } from "../Common/WideActionButton";
+import { WideActionButton } from "../../components/atoms/Button/WideActionButton.tsx";
 
 export function LoginPage() {
   const googleLogin = useGoogleAuthEntry();

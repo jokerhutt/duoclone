@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { qk } from "../types/queryKeys";
+import { qk } from "../../constants/queryKeys.ts";
 import { lessonBatcher } from "../batcher/lessonBatcher";
 
 export function useLesson(id: number) {
