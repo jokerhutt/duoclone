@@ -6,13 +6,11 @@ import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LearnHeaderLayout() {
     const {data: user} = useCurrentUser();
-    const {data: userCourseProgress} = useCourseProgress(user?.currentCourseId); 
-
-    if (!user || !userCourseProgress) return <SpinnerPage/>
+    const {data: userCourseProgress} = useCourseProgress(user.currentCourseId); 
 
     return (
     <div className="w-full h-full flex flex-col">
-      <LearnHeader courseProgress={userCourseProgress}/>  
+      {userCourseProgress && <LearnHeader courseProgress={userCourseProgress}/> }
       <Outlet />
     </div>
   );
