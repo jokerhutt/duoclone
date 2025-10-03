@@ -1,17 +1,18 @@
 import { UserMainStats } from "../../features/Common/UserMainStats";
 import { QuestListWidget } from "../../features/Quests/QuestListWidget";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { useCourse } from "../../queries/useQuery/useCourse";
 import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import type { CourseType } from "../../Types/CourseType";
 import { ContentWidget } from "../atoms/Widget/ContentWidget";
 
 export function MainRightSideBar() {
+  
   const { data: currentUser } = useCurrentUser();
-  const { data: userCourseProgress } = useCourseProgress(
-    currentUser?.currentCourseId
-  );
-  const { data: course } = useCourseProgress(userCourseProgress?.courseId);
-  const courseObject = course as CourseType | undefined;
+  const courseId = currentUser?.currentCourseId;
+
+  const { data: userCourseProgress } = useCourseProgress(courseId);
+  const { data: course } = useCourse(currentUser.currentCourseId);;
 
   if (course && userCourseProgress)
     return (
@@ -21,7 +22,7 @@ export function MainRightSideBar() {
             <UserMainStats
               currentUser={currentUser}
               courseProgress={userCourseProgress}
-              courseObject={courseObject as CourseType}
+              courseObject={course as CourseType}
             />
           </div>
           <ContentWidget padding="pl-4 pr-6" title={"Daily Quests"}>

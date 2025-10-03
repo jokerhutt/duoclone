@@ -20,7 +20,7 @@ export function LessonCompleteCard({
       <Lottie
         lottieRef={lottieRef}
         animationData={animationData}
-        loop={false}
+        loop={true}
         autoplay
         onComplete={onComplete}
         className="w-full h-80"

@@ -3,14 +3,17 @@ import { fetchSectionTreeAndHydrate } from "../../util/fetchSectionTreeAndHydrat
 import { qk } from "../types/queryKeys";
 import type { SectionType } from "../../Types/SectionType";
 import type { UnitType } from "../../Types/UnitType";
+import { fetchUnitsBySection } from "./useUnitsBySection";
+import { sectionBatcher } from "../batcher/sectionBatcher";
+
 
 export function useSectionTree(sectionId?: number) {
   const qc = useQueryClient();
   return useQuery({
-    queryKey: sectionId != null ? qk.sectionTree(sectionId) : ['sectionTree','pending'],
+    queryKey: sectionId != null ? qk.sectionTree(sectionId) : ["sectionTree", "pending"],
     enabled: sectionId != null,
     queryFn: async () => {
-      if (sectionId == null) throw new Error('Missing sectionId');
+      if (sectionId == null) throw new Error("Missing sectionId");
       await fetchSectionTreeAndHydrate(qc, sectionId);
       return { hydrated: true, sectionId };
     },
@@ -23,12 +26,32 @@ export function useSectionTree(sectionId?: number) {
 }
 
 export function useSectionTreeData(sectionId?: number) {
-  const qc = useQueryClient();
+  const enabled = !!sectionId;
 
-  if (sectionId == null) return { section: undefined, units: undefined };
+  const sectionQ = useQuery({
+    queryKey: sectionId ? qk.section(sectionId) : ["section", "pending"],
+    enabled,
+    queryFn: () => sectionBatcher.fetch(sectionId!),
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
-  const section = qc.getQueryData<SectionType>(qk.section(sectionId));
-  const units = qc.getQueryData<UnitType[]>(qk.unitsBySection(sectionId));
+  const unitsQ = useQuery({
+    queryKey: sectionId ? qk.unitsBySection(sectionId) : ["unitsBySection", "pending"],
+    enabled,
+    queryFn: () => fetchUnitsBySection(sectionId!),
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
-  return { section, units };
+  return {
+    section: sectionQ.data as SectionType | undefined,
+    units: unitsQ.data as UnitType[] | undefined,
+    isLoading: enabled && (sectionQ.isLoading || unitsQ.isLoading),
+    isError: sectionQ.isError || unitsQ.isError,
+  };
 }

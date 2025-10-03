@@ -12,7 +12,7 @@ type LearnHeaderProps = {
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
 
   const { data: currentUser } = useCurrentUser();
-  const { data: course} = useCourse(courseProgress.courseId);
+  const { data: course} = useCourse(currentUser.currentCourseId);
   const courseObject = course as CourseType;
 
   if (course && currentUser) return (

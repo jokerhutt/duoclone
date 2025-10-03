@@ -3,8 +3,6 @@ import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser";
 import { useAvatars } from "../../../queries/useQuery/useAvatars";
 import { AvatarHeader } from "./AvatarHeader";
 import { UserWideImage } from "../UserWideImage";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeInStagger } from "../../../animations/FadeInAnimation";
 import { useUpdateAvatar } from "../../../queries/mutations/useUpdateAvatar";
 import { useNavigate } from "react-router";
 
@@ -45,8 +43,7 @@ export function AvatarPage() {
 
   if (avatars && currentUser)
     return (
-      <AnimatePresence>
-        <motion.div {...fadeInStagger(1)} className="w-full h-full pb-24">
+        <div className="w-full h-full pb-24">
           <AvatarHeader submit={() => submitUpdateAvatar()} currentUserId={currentUser.id} />
 
           <div className="mt-6 relative flex px-4 justify-center">
@@ -72,7 +69,6 @@ export function AvatarPage() {
               </div>
             ))}
           </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
     );
 }

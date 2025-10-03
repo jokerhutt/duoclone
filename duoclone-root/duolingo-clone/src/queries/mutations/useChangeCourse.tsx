@@ -36,8 +36,11 @@ export function useChangeCourse() {
       const updatedUser = updatedCourse.newUser;
       const newCourseList = updatedCourse.newCourses;
       qc.setQueryData(qk.user(updatedUser.id), updatedUser);
+      qc.invalidateQueries({queryKey: qk.courseProgress(updatedUser.id)});
+      qc.invalidateQueries({queryKey: ["courseProgress", "pending"]})
       qc.setQueryData(qk.currentUser(), updatedUser);
       qc.setQueryData(qk.userCourses(updatedUser.id), newCourseList)
+    
     },
   });
 }

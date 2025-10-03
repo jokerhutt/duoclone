@@ -8,9 +8,7 @@ import { ProfileStatisticsGroup } from "./ProfileStatsWidget/ProfileStatisticsGr
 import { UserProfileCard } from "./UserProfileCard";
 import { SpinnerPage } from "../Section/SpinnerPage";
 import { useUser } from "../../queries/useQuery/useUser";
-import { motion, AnimatePresence } from "framer-motion";
 import { FollowButtonManager } from "./FollowButtonManager";
-import { fadeInStagger } from "../../animations/FadeInAnimation";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 import { LogoutButton } from "./LogoutButton";
 import { useUserCourses } from "../../queries/useQuery/useUserCourses";
@@ -51,9 +49,7 @@ export function ProfilePage() {
 
   //TODO add a more languages button? at least a page for a users languages
   return (
-    <AnimatePresence>
-      <motion.div
-        {...fadeInStagger(1)}
+      <div
         className="w-full h-full flex overflow-y-auto lg:pb-6 pb-26 flex-col gap-4 items-center"
       >
         <ProfileHeader />
@@ -72,7 +68,6 @@ export function ProfilePage() {
           following={following}
         />
         <LogoutButton show={isOwnPage} />
-      </motion.div>
-    </AnimatePresence>
+      </div>
   );
 }

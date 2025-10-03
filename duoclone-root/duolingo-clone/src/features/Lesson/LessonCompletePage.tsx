@@ -15,6 +15,7 @@ export function LessonCompletePage() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const lottieStreakRed = useRef<LottieRefCurrentProps>(null);
   const [animationData, setAnimationData] = useState<any>(null);
+
   const [streakAnimationData, setStreakAnimationData] = useState<any>(null);
 
   const { data: user } = useCurrentUser();
@@ -53,9 +54,13 @@ export function LessonCompletePage() {
     if (!lottieRef.current) return;
 
     const totalFrames = lottieRef.current.getDuration(true);
+
     if (!totalFrames) return;
 
-    const loopStart = totalFrames - 4;
+    console.log("Total frames: " + totalFrames);
+
+    const loopStart = totalFrames - 40;
+    console.log("Loop start: " + loopStart)
     lottieRef.current.playSegments([loopStart, totalFrames], true);
   };
 
@@ -117,7 +122,6 @@ export function LessonCompletePage() {
       </div>
       <div className="lg:w-1/2 pb-4 w-full px-2 flex lg:justify-end">
         <WideActionButton
-
           text="End Lesson"
           isActive={true}
           activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
