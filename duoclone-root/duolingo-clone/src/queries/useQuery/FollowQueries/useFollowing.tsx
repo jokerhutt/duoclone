@@ -13,5 +13,6 @@ export function useFollowingIds(userId: number) {
       });
       return base.followingIds;
     },
+    staleTime: 60_000,
   });
 }

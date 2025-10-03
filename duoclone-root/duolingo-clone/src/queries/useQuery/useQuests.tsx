@@ -7,6 +7,7 @@ export function useQuests() {
   return useQuery({
     queryKey: qk.quests(),
     queryFn: () => fetchQuestsForUser(),
+    staleTime: 60_000,
   });
 }
 

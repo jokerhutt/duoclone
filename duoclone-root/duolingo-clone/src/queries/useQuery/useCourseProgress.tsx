@@ -15,6 +15,7 @@ export function useCourseProgress(courseId: number | undefined) {
       }
       return fetchCourseProgress(courseId);
     },
+    staleTime: 60_000,
     enabled: courseId != null,
   });
 }

@@ -9,6 +9,7 @@ export function useUser(id: number) {
     queryKey: qk.user(id),
     queryFn: () => userBatcher.fetch(id!),
     initialData: () => qc.getQueryData(qk.user(id)),
+    staleTime: 60_000,
   });
   
 }
