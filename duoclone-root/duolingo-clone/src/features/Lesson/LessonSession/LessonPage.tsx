@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { SUBMIT_EXERCISE_ATTEMPT } from "../../../constants/paths.ts";
-import type { ExerciseOption } from "../../../Types/ExerciseType.ts";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+
 import { ExerciseComponent } from "../../Exercise/ExerciseComponent.tsx";
-import type { ExerciseAttemptResponse } from "../../../Types/ExerciseAttemptResponse.ts";
 import { useExercises } from "../../../queries/useQuery/useExercises.tsx";
 import { SpinnerPage } from "../../../components/layouts/SpinnerPage.tsx";
 import { WideActionButton } from "../../../components/atoms/Button/WideActionButton.tsx";
@@ -11,6 +9,7 @@ import { LessonHeader } from "../LessonHeader.tsx";
 import { LessonResult } from "./LessonResult.tsx";
 import { BottomSheet } from "../../../effects/ModalSheet/BottomSheet.tsx";
 import { ExitConfirmationSheet } from "../ExitConfirmationSheet.tsx";
+import { useLessonFlow } from "../../../hooks/useLessonFlow.tsx";
 
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -19,92 +18,13 @@ export function LessonPage() {
   const id = Number(lessonId);
   const { data: exercises, isLoading } = useExercises(id);
 
-  const correctSound = new Audio("/audio/correct.mp3");
-  const incorrectSound = new Audio("/audio/incorrect.mp3");
+  const {lessonResponse, submitAnswer, optsState} = useLessonFlow({lessonId: lessonId, position, exercises});
+  const {currentSelectedOptions, addOption, removeOption} = optsState;
 
-  const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
-    ExerciseOption[]
-  >([]);
 
   const [intendsToExit, setIntendsToExit] = useState(false);
 
-  const [lessonResponse, setLessonResponse] =
-    useState<ExerciseAttemptResponse | null>(null);
 
-  const navigate = useNavigate();
-
-  function endLesson() {
-    navigate(`/lessons/${lessonId}/complete`);
-  }
-
-  useEffect(() => {
-    if (!lessonResponse) return;
-  }, [lessonResponse]);
-
-  const removeOption = (option: ExerciseOption) => {
-    if (lessonResponse) return;
-    setCurrentSelectedOptions((prev) =>
-      prev.filter((opt) => opt.id !== option.id)
-    );
-  };
-
-  const addOption = (option: ExerciseOption) => {
-    if (lessonResponse) return;
-    setCurrentSelectedOptions((prev) =>
-      prev.some((opt) => opt.id === option.id) ? prev : [...prev, option]
-    );
-  };
-
-  async function submitAnswer() {
-    if (!exercises) return;
-    if (!lessonResponse) {
-      if (position == null || currentSelectedOptions.length < 1) return;
-
-      try {
-        const response = await fetch(SUBMIT_EXERCISE_ATTEMPT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            exerciseId: exercises[Number(position)].id,
-            optionIds: currentSelectedOptions.map((option) => option.id),
-          }),
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-
-        const result: ExerciseAttemptResponse = await response.json();
-
-        if (result.correct) {
-          correctSound.play();
-        } else {
-          incorrectSound.play();
-        }
-
-        setLessonResponse(result);
-        if (result.correct) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      const idx = Number(position);
-      const isLast = idx >= exercises.length - 1;
-      setCurrentSelectedOptions([]);
-      setLessonResponse(null);
-
-      if (isLast) {
-        endLesson();
-      } else {
-        navigate(`/lessons/${lessonId}/${idx + 1}`);
-      }
-    }
-  }
 
   if (isLoading || !exercises) {
     return <SpinnerPage />;
