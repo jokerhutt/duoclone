@@ -16,11 +16,8 @@ export function OptionsList({
 }: OptionsListProps) {
 
   const canAddOption = (option: ExerciseOption) => {
-
     if (!canAddMore) return;
     addOption(option);
-
-
   }
 
   return (
