@@ -2,6 +2,7 @@ import { Fragment, useMemo } from "react";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 import { PromptAnswerField } from "./PromptAnswerField";
+import { getLongestOptionLength, splitPromptGaps } from "../../../util/answerFieldUtils";
 
 type ExercisePrompt = {
   exercise: Exercise;
@@ -14,13 +15,14 @@ export function ExercisePrompt({
   selectedOption,
   setSelectedOption,
 }: ExercisePrompt) {
-  const parts = useMemo(() => exercise.prompt.split("___"), [exercise.prompt]);
+
+  const parts = useMemo(
+    () => splitPromptGaps(exercise, "___"),
+    [exercise.prompt]
+  );
   const longest = useMemo(
     () =>
-      Math.max(
-        0,
-        ...exercise.options.map((o) => (o.content ? o.content.length : 0))
-      ),
+    getLongestOptionLength(exercise),
     [exercise.options]
   );
 

@@ -1,3 +1,5 @@
+import { calculateBlankFieldWidth } from "../../../util/answerFieldUtils";
+
 type PromptAnswerFieldProps = {
   show: boolean;
   widthCh: number;
@@ -12,7 +14,7 @@ export function PromptAnswerField({
   return (
     <span
       className="relative inline-block align-baseline top-4 h-6"
-      style={{ width: `calc(${widthCh}ch + 2.5rem)` }}
+      style={{ width: calculateBlankFieldWidth(widthCh) }}
     >
       <span className="absolute inset-x-0 bottom-0 border-b-2 border-gray-400" />
       {show && (
