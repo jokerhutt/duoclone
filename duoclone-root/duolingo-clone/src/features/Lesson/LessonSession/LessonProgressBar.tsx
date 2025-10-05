@@ -1,17 +1,14 @@
 import { ProgressBar } from "../../../components/atoms/Bar/ProgressBar.tsx";
 
 type LessonProgressBarProps = {
-    completed: number;
-    total: number;
-}
+  completed: number;
+  total: number;
+};
 
-export function LessonProgressBar({completed, total}: LessonProgressBarProps) {
+export function LessonProgressBar({
+  completed,
+  total,
+}: LessonProgressBarProps) {
   const bgcolor = "bg-duoGreen";
-  return (
-    <ProgressBar
-      completed={completed}
-      total={total}
-      barColor={bgcolor}
-    />
-  );
+  return <ProgressBar completed={completed} total={total} barColor={bgcolor} />;
 }

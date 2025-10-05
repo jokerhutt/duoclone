@@ -7,7 +7,7 @@ export const API_PREFIX = "/api";
 
 //export const API_PATH = API_URL + API_PORT + API_PREFIX;
 
-export const API_PATH = API_URL + API_PREFIX
+export const API_PATH = API_URL + API_PREFIX;
 
 // -------------------------------------------------------- //
 
@@ -28,15 +28,15 @@ export const GET_LESSON_IDS = (unitId: number) =>
 export const GET_UNIT_IDS = (sectionId: number) =>
   API_PATH + `/sections/${sectionId}/units/ids`;
 
-export const GET_COURSE_IDS_FOR_USER = (userId: number) => API_PATH + `/courses/get/${userId}`
+export const GET_COURSE_IDS_FOR_USER = (userId: number) =>
+  API_PATH + `/courses/get/${userId}`;
 
 // -------------------------------------------------------- //
 
 export const GET_COURSE_PROGRESS = (courseId: number) =>
   API_PATH + `/users/progress/${courseId}`;
 
-export const GET_QUESTS_BY_USER_ID = () =>
-  API_PATH + `/quests/get`;
+export const GET_QUESTS_BY_USER_ID = () => API_PATH + `/quests/get`;
 
 export const GET_MONTHLY_CHALLENGE_BY_USER_ID = () =>
   API_PATH + `/monthly-challenges/get`;

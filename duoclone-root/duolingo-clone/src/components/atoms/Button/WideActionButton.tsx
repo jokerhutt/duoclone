@@ -29,22 +29,25 @@ export function WideActionButton({
   isIncorrect,
   disabledTextColor = activeTextColor,
 }: WideActionButtonProps) {
-  const textColor = isIncorrect ? incorrectTextColor : isActive ? activeTextColor : disabledTextColor;
+  const textColor = isIncorrect
+    ? incorrectTextColor
+    : isActive
+    ? activeTextColor
+    : disabledTextColor;
 
   const textToDisplay = isActive || isIncorrect ? activeText : text;
 
   return (
     <div
       onClick={(e) => {
-        e.stopPropagation()
-        onSubmit()
-      }
-      }
+        e.stopPropagation();
+        onSubmit();
+      }}
       className={`w-full hover:cursor-pointer rounded-2xl z-10 ${height} justify-center items-center ${
         isIncorrect ? incorrectColor : isActive ? activeColor : disabledColor
       } flex gap-2 text-xl`}
     >
-      {icon && <img src={icon} className="h-4"/>}
+      {icon && <img src={icon} className="h-4" />}
       <p className={textColor}>{textToDisplay}</p>
     </div>
   );

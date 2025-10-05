@@ -20,8 +20,10 @@ export function ProgressBar({
 }: ProgressBarProps) {
   const progressPercentage = (completed / total) * 100;
 
-  const barColorToShow = showGoldOnComplete && completed == total ? "bg-duoGold" : barColor;
-  const textColorToShow = showGoldOnComplete && completed == total ? "text-duoBackground" : textColor;  
+  const barColorToShow =
+    showGoldOnComplete && completed == total ? "bg-duoGold" : barColor;
+  const textColorToShow =
+    showGoldOnComplete && completed == total ? "text-duoBackground" : textColor;
 
   return (
     <div className="w-full relative">

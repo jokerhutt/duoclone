@@ -48,25 +48,28 @@ export function ProfilePage() {
     return <SpinnerPage />;
 
   return (
-      <div
-        className="w-full h-full flex overflow-y-auto lg:pb-6 pb-26 flex-col gap-4 items-center"
-      >
-        <ProfileHeader />
-        <UserProfileCard isOwnPage={isOwnPage} user={pageUser} followers={followers.length} userCourseInstances={userCourses}/>
-        <FollowButtonManager
-          pageUserFollowers={pageUserFollowers}
-          currentUser={currentUser}
-          pageUser={pageUser}
-          show={!isOwnPage}
-        />
-        <ProfileStatisticsGroup user={pageUser} />
-        <FriendsListWidget
-          userId={pageUser.id}
-          concise={true}
-          followers={followers}
-          following={following}
-        />
-        <LogoutButton show={isOwnPage} />
-      </div>
+    <div className="w-full h-full flex overflow-y-auto lg:pb-6 pb-26 flex-col gap-4 items-center">
+      <ProfileHeader />
+      <UserProfileCard
+        isOwnPage={isOwnPage}
+        user={pageUser}
+        followers={followers.length}
+        userCourseInstances={userCourses}
+      />
+      <FollowButtonManager
+        pageUserFollowers={pageUserFollowers}
+        currentUser={currentUser}
+        pageUser={pageUser}
+        show={!isOwnPage}
+      />
+      <ProfileStatisticsGroup user={pageUser} />
+      <FriendsListWidget
+        userId={pageUser.id}
+        concise={true}
+        followers={followers}
+        following={following}
+      />
+      <LogoutButton show={isOwnPage} />
+    </div>
   );
 }

@@ -10,14 +10,18 @@ type LearnHeaderProps = {
 };
 
 export function LearnHeader({ courseProgress }: LearnHeaderProps) {
-
   const { data: currentUser } = useCurrentUser();
-  const { data: course} = useCourse(currentUser.currentCourseId);
+  const { data: course } = useCourse(currentUser.currentCourseId);
   const courseObject = course as CourseType;
 
-  if (course && currentUser) return (
+  if (course && currentUser)
+    return (
       <Header padding="px-4">
-          <UserMainStats currentUser={currentUser} courseObject={courseObject} courseProgress={courseProgress}/>
+        <UserMainStats
+          currentUser={currentUser}
+          courseObject={courseObject}
+          courseProgress={courseProgress}
+        />
       </Header>
-  );
+    );
 }

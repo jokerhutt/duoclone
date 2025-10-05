@@ -21,7 +21,7 @@ export function LessonTopPopover({
   return (
     <>
       {open && (
-        <div className={`absolute left-1/2 -translate-x-1/2 bottom-17`} >
+        <div className={`absolute left-1/2 -translate-x-1/2 bottom-17`}>
           <button
             className={`rounded-xl bg-duoBackground border ${offset} border-duoGrayBorder py-2 px-4 shadow-lg bob`}
           >
@@ -30,8 +30,7 @@ export function LessonTopPopover({
             >
               {text}
             </div>
-            <PopoverArrow/>
-
+            <PopoverArrow />
           </button>
         </div>
       )}

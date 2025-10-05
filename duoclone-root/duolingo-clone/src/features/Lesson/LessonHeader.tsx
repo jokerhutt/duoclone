@@ -9,15 +9,18 @@ type LessonHeaderProps = {
   total: number;
 };
 
-export function LessonHeader({ handleExitClick, completed, total }: LessonHeaderProps) {
-
+export function LessonHeader({
+  handleExitClick,
+  completed,
+  total,
+}: LessonHeaderProps) {
   return (
     <Header showOnLg={true} padding="px-4" height="">
       <button className="active">
         <XIcon onClick={handleExitClick} />
       </button>
       <div className="w-full h-7 px-6 py-1">
-        <LessonProgressBar total={total} completed={completed}/>
+        <LessonProgressBar total={total} completed={completed} />
       </div>
       <HeartIcon />
     </Header>

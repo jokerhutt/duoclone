@@ -13,8 +13,7 @@ export function useFollowMutation() {
 
   return useMutation<FollowMutationResponse, Error, FollowMutationParams>({
     mutationFn: async ({ followedId, isFollowing }) => {
-
-      const path = isFollowing ? UNFOLLOW_USER : FOLLOW_USER  
+      const path = isFollowing ? UNFOLLOW_USER : FOLLOW_USER;
 
       const response = await fetch(path, {
         method: "POST",
@@ -22,27 +21,38 @@ export function useFollowMutation() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ followedId }),
-        credentials: "include"
+        credentials: "include",
       });
-      
+
       if (!response.ok) {
         throw new Error("Failed to follow/unfollow user");
       }
-      
+
       return response.json();
     },
-    onSuccess: (data, { }) => {
-
+    onSuccess: (data, {}) => {
       const actorId = data.actorUserId;
       const followedId = data.followedUserId;
 
       qc.setQueryData(qk.follows(actorId), data.followersNewStats);
-      qc.setQueryData(qk.followers(actorId), data.followersNewStats.followerIds);
-      qc.setQueryData(qk.following(actorId), data.followersNewStats.followingIds);
+      qc.setQueryData(
+        qk.followers(actorId),
+        data.followersNewStats.followerIds
+      );
+      qc.setQueryData(
+        qk.following(actorId),
+        data.followersNewStats.followingIds
+      );
 
       qc.setQueryData(qk.follows(followedId), data.followedNewStats);
-      qc.setQueryData(qk.followers(followedId), data.followedNewStats.followerIds);
-      qc.setQueryData(qk.following(followedId), data.followedNewStats.followingIds);
+      qc.setQueryData(
+        qk.followers(followedId),
+        data.followedNewStats.followerIds
+      );
+      qc.setQueryData(
+        qk.following(followedId),
+        data.followedNewStats.followingIds
+      );
     },
   });
 }

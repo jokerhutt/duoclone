@@ -11,13 +11,15 @@ interface ChangeCourseVariables {
 type CourseChangeType = {
   newUser: UserType;
   newCourses: CourseType[];
-}
+};
 
 export function useChangeCourse() {
   const qc = useQueryClient();
 
   return useMutation<CourseChangeType, Error, ChangeCourseVariables>({
-    mutationFn: async (variables: ChangeCourseVariables): Promise<CourseChangeType> => {
+    mutationFn: async (
+      variables: ChangeCourseVariables
+    ): Promise<CourseChangeType> => {
       const { newCourse } = variables;
 
       const res = await fetch(CHANGE_COURSE, {
@@ -36,11 +38,10 @@ export function useChangeCourse() {
       const updatedUser = updatedCourse.newUser;
       const newCourseList = updatedCourse.newCourses;
       qc.setQueryData(qk.user(updatedUser.id), updatedUser);
-      qc.invalidateQueries({queryKey: qk.courseProgress(updatedUser.id)});
-      qc.invalidateQueries({queryKey: ["courseProgress", "pending"]})
+      qc.invalidateQueries({ queryKey: qk.courseProgress(updatedUser.id) });
+      qc.invalidateQueries({ queryKey: ["courseProgress", "pending"] });
       qc.setQueryData(qk.currentUser(), updatedUser);
-      qc.setQueryData(qk.userCourses(updatedUser.id), newCourseList)
-    
+      qc.setQueryData(qk.userCourses(updatedUser.id), newCourseList);
     },
   });
 }

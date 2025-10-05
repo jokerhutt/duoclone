@@ -26,10 +26,10 @@ export function CircleButton({
   buttonRef,
 }: CircleButtonProps) {
   const toDisplayColor = unitColor ? colorMap[unitColor] : colorMap["GREEN"];
-  const colorCSS = mainColor 
+  const colorCSS = mainColor
     ? mainColor
     : `${toDisplayColor.circleShadow} ${toDisplayColor.bg}`;
-    
+
   return (
     <>
       <button

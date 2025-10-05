@@ -6,11 +6,13 @@ import type { UnitType } from "../../Types/UnitType";
 import { fetchUnitsBySection } from "./useUnitsBySection";
 import { sectionBatcher } from "../batcher/sectionBatcher";
 
-
 export function useSectionTree(sectionId?: number) {
   const qc = useQueryClient();
   return useQuery({
-    queryKey: sectionId != null ? qk.sectionTree(sectionId) : ["sectionTree", "pending"],
+    queryKey:
+      sectionId != null
+        ? qk.sectionTree(sectionId)
+        : ["sectionTree", "pending"],
     enabled: sectionId != null,
     queryFn: async () => {
       if (sectionId == null) throw new Error("Missing sectionId");
@@ -39,7 +41,9 @@ export function useSectionTreeData(sectionId?: number) {
   });
 
   const unitsQ = useQuery({
-    queryKey: sectionId ? qk.unitsBySection(sectionId) : ["unitsBySection", "pending"],
+    queryKey: sectionId
+      ? qk.unitsBySection(sectionId)
+      : ["unitsBySection", "pending"],
     enabled,
     queryFn: () => fetchUnitsBySection(sectionId!),
     staleTime: 5 * 60 * 1000,

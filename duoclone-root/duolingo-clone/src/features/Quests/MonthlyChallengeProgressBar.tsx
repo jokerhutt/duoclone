@@ -11,8 +11,8 @@ export function MonthlyChallengeProgressBar({
 }: MonthlyChallengeProgressBarProps) {
   const chestIcon =
     "https://d35aaqx5ub95lt.cloudfront.net/images/58175d43db9f94dc1d83cd35d63ef58d.svg";
- 
-  const bgcolor = "text-duoBackground bg-duoDarkGreen"
+
+  const bgcolor = "text-duoBackground bg-duoDarkGreen";
 
   return (
     <ProgressBar
@@ -23,5 +23,5 @@ export function MonthlyChallengeProgressBar({
       showCountText={true}
       icon={chestIcon}
     />
-  )
+  );
 }

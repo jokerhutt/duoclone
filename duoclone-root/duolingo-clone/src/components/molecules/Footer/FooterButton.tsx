@@ -21,7 +21,9 @@ export function FooterButton({
 
   const style = isActive ? "border border-duoBlue/80 bg-duoBlue/8" : "";
   const baseStyle = "p-2 rounded-lg";
-  const hoverStyle = isActive ? "hover:bg-duoBlue/20" : "hover:bg-duoGrayButtonText/30";
+  const hoverStyle = isActive
+    ? "hover:bg-duoBlue/20"
+    : "hover:bg-duoGrayButtonText/30";
 
   const handleNavigation = () => {
     if (path && path.length > 0 && navigateOn) {

@@ -1,5 +1,5 @@
 import * as Popover from "@radix-ui/react-popover";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 import type { LessonType } from "../../../Types/LessonType.ts";
 import { WideActionButton } from "../../atoms/Button/WideActionButton.tsx";
 import { useNavigate } from "react-router";
@@ -34,9 +34,12 @@ export default function LessonPopover({
     closeTimer.current = window.setTimeout(() => onOpenChange(false), ms);
   };
 
-  useEffect(() => () => {
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    },
+    []
+  );
   useEffect(() => {
     if (!open) return;
 

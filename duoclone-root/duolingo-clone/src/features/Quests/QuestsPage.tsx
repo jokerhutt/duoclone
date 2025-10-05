@@ -4,7 +4,6 @@ import { QuestListWidget } from "./QuestListWidget";
 import { QuestsHeader } from "./QuestsHeader";
 
 export function QuestsPage() {
-
   return (
     <>
       <QuestsHeader />
@@ -12,7 +11,7 @@ export function QuestsPage() {
         <MonthlyChallengeCard />
         <div className="w-full h-full p-4">
           <ContentWidget padding="pl-4 pr-6" title={"Daily Quests"}>
-            <QuestListWidget/>
+            <QuestListWidget />
           </ContentWidget>
         </div>
       </div>

@@ -3,12 +3,12 @@ import { colorMap } from "../../../util/colorMap";
 
 type CircleRingProps = {
   children: React.ReactNode;
-  unitColor?: ColorType
-  show?: boolean;       // ← new
+  unitColor?: ColorType;
+  show?: boolean;
   size?: number;
   stroke?: number;
   color?: string;
-  progress?: number;    // 0–1
+  progress?: number;
   offset?: string;
 };
 
@@ -25,14 +25,31 @@ export function CircleRing({
   const c = 2 * Math.PI * r;
   const dashOffset = c * (1 - progress);
 
-  const style = colorMap[unitColor]
+  const style = colorMap[unitColor];
 
   return (
-    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
+    <div
+      className="relative inline-flex items-center justify-center"
+      style={{ width: size, height: size }}
+    >
       {show && (
-        <svg className={`absolute ${offset} mt-2`} width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={size/2} cy={size/2} r={r} stroke={style.color} strokeWidth={stroke}
-                  fill="none" strokeDasharray={c} strokeDashoffset={dashOffset} strokeLinecap="round" />
+        <svg
+          className={`absolute ${offset} mt-2`}
+          width={size}
+          height={size}
+          style={{ transform: "rotate(-90deg)" }}
+        >
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={r}
+            stroke={style.color}
+            strokeWidth={stroke}
+            fill="none"
+            strokeDasharray={c}
+            strokeDashoffset={dashOffset}
+            strokeLinecap="round"
+          />
         </svg>
       )}
       <div className="relative">{children}</div>
