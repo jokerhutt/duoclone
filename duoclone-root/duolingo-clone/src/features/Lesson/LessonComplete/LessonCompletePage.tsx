@@ -23,9 +23,9 @@ export function LessonCompletePage() {
   const [hasStreakIncreased, setHasStreakIncreased] = useState(false);
 
   const possibleAnimations = [
-    "/lottie-effects/EL_BEA_DUO.json",
-    "/lottie-effects/EL_LIN_DUO.json",
-    "/lottie-effects/EL_LUCY_DUO.json",
+    "/lottie-animations/EL_BEA_DUO.json",
+    "/lottie-animations/EL_LIN_DUO.json",
+    "/lottie-animations/EL_LUCY_DUO.json",
   ];
 
 
@@ -82,7 +82,7 @@ export function LessonCompletePage() {
   if (lessonCompleteMutation.isError)
     return <p>Error: {lessonCompleteMutation.error.message}</p>;
 
-  if (lessonCompleteMutation.isPending || !lessonCompleteMutation.data)
+  if (lessonCompleteMutation.isPending || !lessonCompleteMutation.data || !animationData)
     return <SpinnerPage />;
 
   const totalScore = lessonCompleteMutation.data.totalScore;
