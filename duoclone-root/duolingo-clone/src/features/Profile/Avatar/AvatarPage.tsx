@@ -5,21 +5,14 @@ import { AvatarHeader } from "./AvatarHeader";
 import { UserWideImage } from "../UserWideImage";
 import { useUpdateAvatar } from "../../../queries/mutations/useUpdateAvatar";
 import { useNavigate } from "react-router";
+import { groupArrayElements } from "../../../util/avatarUtils";
 
 export function AvatarPage() {
   const { data: currentUser } = useCurrentUser();
   const { data: avatars } = useAvatars();
   const navigate = useNavigate();
 
-  function chunkArray<T>(arr: T[], size: number): T[][] {
-    const chunks: T[][] = [];
-    for (let i = 0; i < arr.length; i += size) {
-      chunks.push(arr.slice(i, i + size));
-    }
-    return chunks;
-  }
-
-  const avatarPairs = avatars ? chunkArray(avatars, 2) : [];
+  const avatarPairs = groupArrayElements(2, avatars);
 
   const [selectedAvatar, setSelectedAvatar] = useState(currentUser.pfpSrc);
 
