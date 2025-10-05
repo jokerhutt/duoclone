@@ -1,15 +1,16 @@
 import { ContentWidget } from "../../../components/atoms/Widget/ContentWidget";
 
 type ProfileStatsWidgetProps = {
-    iconPath: string;
-    statDescription: string;
-    count: number;
-}
+  iconPath: string;
+  statDescription: string;
+  count: number;
+};
 
-export function ProfileStatsWidget({iconPath, statDescription, count}: ProfileStatsWidgetProps) {
-
-
-
+export function ProfileStatsWidget({
+  iconPath,
+  statDescription,
+  count,
+}: ProfileStatsWidgetProps) {
   return (
     <ContentWidget padding="p-2">
       <div className="w-full flex gap-2">

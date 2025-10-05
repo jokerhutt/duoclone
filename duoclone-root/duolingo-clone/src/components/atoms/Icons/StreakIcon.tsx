@@ -1,9 +1,8 @@
-
 type StreakIconProps = {
   height?: string;
 };
 
-export function StreakIcon({height = "h-8"}: StreakIconProps) {
+export function StreakIcon({ height = "h-8" }: StreakIconProps) {
   return (
     <>
       <img

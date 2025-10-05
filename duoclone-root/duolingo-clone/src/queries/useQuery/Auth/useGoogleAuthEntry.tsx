@@ -24,7 +24,7 @@ export function useGoogleAuthEntry() {
       queryClient.setQueryData(qk.currentUser(), user);
 
       if (user.currentCourseId == null) {
-        window.location.href = "/auth/courses"
+        window.location.href = "/auth/courses";
       } else {
         window.location.href = "/";
       }

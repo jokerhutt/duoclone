@@ -33,7 +33,7 @@ export function LessonButton({
   const navigate = useNavigate();
 
   const { data: lesson, isLoading: lessonLoading } = useLesson(id);
-  const {data: user} = useCurrentUser();
+  const { data: user } = useCurrentUser();
   const { data: userCourseProgress, isLoading: userCourseProgressLoading } =
     useCourseProgress(user?.currentCourseId);
 

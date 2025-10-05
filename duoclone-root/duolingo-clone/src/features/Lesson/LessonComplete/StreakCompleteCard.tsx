@@ -28,8 +28,8 @@ export function StreakCompleteCard({
         autoplay
         className="w-full h-80"
       />
-        <h2 className="text-6xl text-duoOrange">{newCount}</h2>
-        <h3 className="text-duoOrange text-3xl">Day Streak</h3>
+      <h2 className="text-6xl text-duoOrange">{newCount}</h2>
+      <h3 className="text-duoOrange text-3xl">Day Streak</h3>
     </div>
   );
 }

@@ -4,12 +4,14 @@ import { useCourseProgress } from "../../queries/useQuery/useCourseProgress";
 import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
 
 export function LearnHeaderLayout() {
-    const {data: user} = useCurrentUser();
-    const {data: userCourseProgress} = useCourseProgress(user.currentCourseId); 
+  const { data: user } = useCurrentUser();
+  const { data: userCourseProgress } = useCourseProgress(user.currentCourseId);
 
-    return (
+  return (
     <div className="w-full h-full flex flex-col">
-      {userCourseProgress && <LearnHeader courseProgress={userCourseProgress}/> }
+      {userCourseProgress && (
+        <LearnHeader courseProgress={userCourseProgress} />
+      )}
       <Outlet />
     </div>
   );

@@ -20,7 +20,7 @@ export function LessonPage() {
   const { data: exercises, isLoading } = useExercises(id);
 
   const correctSound = new Audio("/audio/correct.mp3");
-  const incorrectSound = new Audio("/audio/incorrect.mp3")
+  const incorrectSound = new Audio("/audio/incorrect.mp3");
 
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<
     ExerciseOption[]

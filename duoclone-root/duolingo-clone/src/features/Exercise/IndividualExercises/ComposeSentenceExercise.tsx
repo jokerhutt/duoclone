@@ -42,10 +42,10 @@ export function ComposeSentenceExercise({
   removeOption,
 }: ComponentSentenceExerciseProps) {
   const possibleAnimations = [
-    "/lottie-effects/LILY_NEUTRAL_PROMPT.json",
-    "/lottie-effects/EDDY_NEUTRAL_PROMPT.json",
-    "/lottie-effects/BEAR_NEUTRAL_PROMPT.json",
-    "/lottie-effects/LUCY_NEUTRAL_PROMPT.json",
+    "/lottie-animations/LILY_NEUTRAL_PROMPT.json",
+    "/lottie-animations/EDDY_NEUTRAL_PROMPT.json",
+    "/lottie-animations/BEAR_NEUTRAL_PROMPT.json",
+    "/lottie-animations/LUCY_NEUTRAL_PROMPT.json",
   ];
 
   const [animationData, setAnimationData] = useState<any>(null);
@@ -66,10 +66,9 @@ export function ComposeSentenceExercise({
 
   const displayRows = chunkByChars(currentSelectedOptions, chunkBy);
 
-  if (!!animationData)
-    return (
+    if (!!animationData) return (
       <AnimatePresence>
-        <motion.div {...fadeInStagger(1)} className="w-full h-full flex flex-col gap-2">
+        <motion.div {...fadeInStagger(0.4)} className="w-full h-full flex flex-col gap-2">
           <div className="w-full flex justify-start gap-4">
             <Lottie
               animationData={animationData}

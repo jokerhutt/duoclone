@@ -3,9 +3,9 @@ import { GET_COURSE_IDS_FOR_USER as GET_COURSES_FOR_USER } from "../../constants
 import type { CourseType } from "../../Types/CourseType";
 
 export function useUserCourses(userId?: number) {
-  const enabled = typeof userId === 'number';
+  const enabled = typeof userId === "number";
   return useQuery<CourseType[]>({
-    queryKey: ['userCourses', userId] as const,
+    queryKey: ["userCourses", userId] as const,
     queryFn: () => fetchUserCourses(userId as number),
     staleTime: 60_000,
     enabled,

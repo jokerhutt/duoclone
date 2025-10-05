@@ -24,7 +24,10 @@ export function RectangleButton({
 
   return (
     <AnimatePresence>
-      <motion.div {...fadeInStagger(1)} className="px-4 w-full flex justify-center sticky top-16 lg:top-6 z-20">
+      <motion.div
+        {...fadeInStagger(1)}
+        className="px-4 w-full flex justify-center sticky top-16 lg:top-6 z-20"
+      >
         <button
           className={`${buttonWidth} hover:cursor-pointer h-20 active:translate-y-[5px] active:shadow-none shadow-duoShadow ${colorCSS} rounded-2xl`}
         >

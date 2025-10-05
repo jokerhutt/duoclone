@@ -40,36 +40,37 @@ export function SectionPage() {
 
   if (isError) return <SpinnerPage color="border-red-400" />;
 
-  if (!loadingUser && !isLoading && !!units && !!courseProgress) return (
-    <>
-      <UnitBanner currentUnit={currentUnit} />
-      <div
-        ref={scrollContainerRef}
-        className="w-full h-full pb-20 lg:pb-0 bg-duoBackground overscroll-contain lg:overflow-visible"
-      >
-        <AnimatePresence>
-          {units.map((unit, index) => (
-            <motion.div
-              key={unit.id}
-              ref={(el) => {
-                unitRefs.current[index] = el;
-              }}
-              {...fadeInStagger(index)}
-            >
-              <UnitPath
-                unit={unit}
-                id={unit.id}
-                index={index}
-                currentLessonButtonRef={currentLessonRef}
-              />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-      <ScrollToLessonButton
-        rootRef={scrollContainerRef}
-        currentLessonRef={currentLessonRef}
-      />
-    </>
-  );
+  if (!loadingUser && !isLoading && !!units && !!courseProgress)
+    return (
+      <>
+        <UnitBanner currentUnit={currentUnit} />
+        <div
+          ref={scrollContainerRef}
+          className="w-full h-full pb-20 lg:pb-0 bg-duoBackground overscroll-contain lg:overflow-visible"
+        >
+          <AnimatePresence>
+            {units.map((unit, index) => (
+              <motion.div
+                key={unit.id}
+                ref={(el) => {
+                  unitRefs.current[index] = el;
+                }}
+                {...fadeInStagger(index)}
+              >
+                <UnitPath
+                  unit={unit}
+                  id={unit.id}
+                  index={index}
+                  currentLessonButtonRef={currentLessonRef}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        <ScrollToLessonButton
+          rootRef={scrollContainerRef}
+          currentLessonRef={currentLessonRef}
+        />
+      </>
+    );
 }

@@ -11,5 +11,4 @@ export function useUser(id: number) {
     initialData: () => qc.getQueryData(qk.user(id)),
     staleTime: 60_000,
   });
-  
 }

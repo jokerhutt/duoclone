@@ -11,10 +11,10 @@ export function FollowButtonManager({
   pageUser,
   show,
   currentUser,
-  pageUserFollowers
+  pageUserFollowers,
 }: FollowButtonManagerProps) {
   const followMutation = useFollowMutation();
-  
+
   const isFollowing = pageUserFollowers?.includes(currentUser.id) ?? false;
 
   const handleFollowToggle = () => {
@@ -26,5 +26,11 @@ export function FollowButtonManager({
     });
   };
 
-  if (show) return <FollowButton handleFollow={() => handleFollowToggle()} isFollowing={isFollowing} />;
+  if (show)
+    return (
+      <FollowButton
+        handleFollow={() => handleFollowToggle()}
+        isFollowing={isFollowing}
+      />
+    );
 }

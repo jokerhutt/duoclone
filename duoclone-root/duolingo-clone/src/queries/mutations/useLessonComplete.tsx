@@ -33,7 +33,7 @@ export const useLessonComplete = ({
     },
     onSuccess: (data) => {
       const userId = data.userId;
-      queryClient.invalidateQueries({ queryKey: qk.quests()});
+      queryClient.invalidateQueries({ queryKey: qk.quests() });
       queryClient.invalidateQueries({ queryKey: qk.monthlyChallenges() });
       queryClient.setQueryData(qk.lesson(data.lessonId), data.updatedLesson);
       queryClient.setQueryData(

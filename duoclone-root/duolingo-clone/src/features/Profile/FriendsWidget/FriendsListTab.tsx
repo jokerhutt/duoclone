@@ -6,7 +6,11 @@ type FriendsListTabProps = {
   onClick: () => void;
 };
 
-export function FriendsListTab({ tabType, activeTab, onClick }: FriendsListTabProps) {
+export function FriendsListTab({
+  tabType,
+  activeTab,
+  onClick,
+}: FriendsListTabProps) {
   const isActive = activeTab == tabType;
   const bottomBorderColor = isActive
     ? "border-b-duoBlue"

@@ -17,5 +17,4 @@ export const qk = {
   userCourses: (userId: number) => ["userCourses", userId] as const,
   courses: (id: number | "all") => ["courses", id] as const,
   monthlyChallenges: () => ["monthlyChallenges"] as const,
-  
 };

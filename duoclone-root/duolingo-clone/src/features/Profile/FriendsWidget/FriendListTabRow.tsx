@@ -6,17 +6,27 @@ type FriendListTabRowProps = {
   setActiveTab: React.Dispatch<React.SetStateAction<friendsTabType>>;
 };
 
-export function FriendListTabRow({ activeTab, setActiveTab }: FriendListTabRowProps) {
-
+export function FriendListTabRow({
+  activeTab,
+  setActiveTab,
+}: FriendListTabRowProps) {
   const changeTab = (tab: friendsTabType) => {
     if (activeTab == tab) return;
-    setActiveTab(tab); 
-  }
+    setActiveTab(tab);
+  };
 
   return (
     <div className="w-full flex justify-between">
-      <FriendsListTab onClick={() => changeTab("FOLLOWING")} activeTab={activeTab} tabType={"FOLLOWING"} />
-      <FriendsListTab onClick={() => changeTab("FOLLOWERS")} activeTab={activeTab} tabType={"FOLLOWERS"} />
+      <FriendsListTab
+        onClick={() => changeTab("FOLLOWING")}
+        activeTab={activeTab}
+        tabType={"FOLLOWING"}
+      />
+      <FriendsListTab
+        onClick={() => changeTab("FOLLOWERS")}
+        activeTab={activeTab}
+        tabType={"FOLLOWERS"}
+      />
     </div>
   );
 }

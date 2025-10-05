@@ -3,12 +3,13 @@ import { WideActionButton } from "../../components/atoms/Button/WideActionButton
 import { motion } from "framer-motion";
 
 type ExitConfirmationSheetProps = {
-    setIntendsToExit: () => void;
-}
+  setIntendsToExit: () => void;
+};
 
-export function ExitConfirmationSheet({setIntendsToExit}: ExitConfirmationSheetProps) {
-
-  const navigate = useNavigate();  
+export function ExitConfirmationSheet({
+  setIntendsToExit,
+}: ExitConfirmationSheetProps) {
+  const navigate = useNavigate();
 
   return (
     <motion.div className="h-110 z-40 py-10 flex flex-col gap-4 px-6 items-center w-full bg-duoDarkGrayAlt">

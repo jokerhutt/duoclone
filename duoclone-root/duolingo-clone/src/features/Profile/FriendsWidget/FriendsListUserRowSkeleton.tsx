@@ -1,5 +1,4 @@
 export function FriendsListUserRowSkeleton() {
-
   return (
     <div className="w-full flex py-2">
       <div className="w-20">
@@ -9,7 +8,9 @@ export function FriendsListUserRowSkeleton() {
         />
       </div>
       <div className="w-full flex flex-col">
-        <p className="text-xl rounded-2xl text-duoGrayLocked bg-duoGrayLocked">______</p>
+        <p className="text-xl rounded-2xl text-duoGrayLocked bg-duoGrayLocked">
+          ______
+        </p>
       </div>
     </div>
   );

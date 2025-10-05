@@ -11,9 +11,8 @@ export function useQuests() {
   });
 }
 
-export async function fetchQuestsForUser(
-): Promise<QuestType[]> {
-  const res = await fetch(GET_QUESTS_BY_USER_ID(), {credentials: "include"});
+export async function fetchQuestsForUser(): Promise<QuestType[]> {
+  const res = await fetch(GET_QUESTS_BY_USER_ID(), { credentials: "include" });
   if (!res.ok) throw new Error("Failed to fetch quests");
   return (await res.json()) as QuestType[];
 }
