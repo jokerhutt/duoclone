@@ -1,11 +1,12 @@
 import Lottie from "lottie-react";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
-import { useEffect, useState } from "react";
 import { OptionsList } from "../Options/OptionsList.tsx";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../../effects/FadeInAnimation";
 import { getRowsForAnswerField, splitAnswerFieldIntoRows } from "../../../util/answerFieldUtils.ts";
+import { useRandomLottie } from "../../../hooks/useRandomLottie.tsx";
+import { EX_ANIMATIONS } from "../../../constants/animationPaths.ts";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
@@ -20,23 +21,8 @@ export function ComposeSentenceExercise({
   addOption,
   removeOption,
 }: ComponentSentenceExerciseProps) {
-  const possibleAnimations = [
-    "/lottie-animations/LILY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/EDDY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/BEAR_NEUTRAL_PROMPT.json",
-    "/lottie-animations/LUCY_NEUTRAL_PROMPT.json",
-  ];
 
-  const [animationData, setAnimationData] = useState<any>(null);
-
-  useEffect(() => {
-    const random = Math.floor(Math.random() * possibleAnimations.length);
-    const file = possibleAnimations[random];
-
-    fetch(file)
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, []);
+  const animationData = useRandomLottie(EX_ANIMATIONS);
 
   const plannedRows = getRowsForAnswerField(exercise, 30);
   const displayRows = splitAnswerFieldIntoRows(currentSelectedOptions, 30);

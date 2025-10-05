@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import type { UserType } from "../../Types/UserType";
-import { format } from "date-fns";
 import { RiPencilFill } from "react-icons/ri";
 import { UserWideImage } from "./UserWideImage";
 import type { CourseType } from "../../Types/CourseType";
