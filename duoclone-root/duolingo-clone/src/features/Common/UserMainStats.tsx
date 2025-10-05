@@ -21,7 +21,7 @@ export function UserMainStats({courseObject, courseProgress, currentUser}: UserM
     <div className="flex w-full justify-between">
       <div className="flex gap-3 items-center">
         <div className="hover:cursor-pointer" onClick={() => navigate("/courses")}>
-          <LanguageFlag height="h-8" icon={courseObject.imgSrc} />
+          <LanguageFlag height="h-8" icon={courseObject?.imgSrc} />
         </div>
         <p className="text-xl text-white">{courseProgress.completedLessons}</p>
       </div>
