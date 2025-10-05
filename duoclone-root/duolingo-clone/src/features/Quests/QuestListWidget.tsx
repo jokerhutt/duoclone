@@ -17,7 +17,7 @@ export function QuestListWidget() {
   return (
     <div className="w-hull w-full flex flex-col gap-2">
       {quests.map((quest, index) => (
-        <QuestListItem quest={quest} isLast={isLast(index)} />
+        <QuestListItem key={quest.code} quest={quest} isLast={isLast(index)} />
       ))}
     </div>
   );

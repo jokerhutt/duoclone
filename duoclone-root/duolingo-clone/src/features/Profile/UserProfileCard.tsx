@@ -59,6 +59,7 @@ export function UserProfileCard({
           <div className="flex py-3 w-full gap-2 justify-end items-center">
             {userCourseInstances.map((course) => (
               <img
+                key={course.id}
                 onClick={() => navigate(`/courses/${user.id}`)}
                 className="h-7 hover:cursor-pointer"
                 src={course.imgSrc}

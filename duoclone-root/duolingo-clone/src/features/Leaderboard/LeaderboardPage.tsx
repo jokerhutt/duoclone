@@ -52,6 +52,7 @@ export function LeaderboardPage() {
           >
             {sortedUsers.map((user) => (
               <UserRow
+                key={user.id}
                 userInstance={user}
                 userId={user.id}
                 specialBg={user.id == currentUser?.id}

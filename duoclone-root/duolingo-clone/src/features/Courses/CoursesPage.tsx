@@ -52,6 +52,7 @@ export function CoursesPage({title}: CoursesPageProps) {
         <ContentWidget title={title}>
           {coursesArray.map((course, idx) => (
             <div
+              key={course.id}
               onClick={() => handleSelectCourse(course.id)}
               className={`w-full py-6 hover:cursor-pointer flex gap-4 ${showBorder(idx)}`}
             >
