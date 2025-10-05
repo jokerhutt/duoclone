@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { RiPencilFill } from "react-icons/ri";
 import { UserWideImage } from "./UserWideImage";
 import type { CourseType } from "../../Types/CourseType";
+import { getJoinDate } from "../../util/dateUtiils";
 
 type UserProfileCardProps = {
   user: UserType;
@@ -18,8 +19,8 @@ export function UserProfileCard({
   userCourseInstances,
   isOwnPage,
 }: UserProfileCardProps) {
-  const ts = user.createdAt;
-  const joinDate = ts ? format(new Date(ts), "MMMM yyyy") : "";
+
+  const joinDate = getJoinDate(user.createdAt);
   const navigate = useNavigate();
 
   const editAvatar = (e: any) => {
