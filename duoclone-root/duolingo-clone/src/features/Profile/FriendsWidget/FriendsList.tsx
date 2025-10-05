@@ -15,7 +15,7 @@ export function FriendsList({ toDisplay }: FriendsListProps) {
         className="w-full flex scrollbar-duoGreen overflow-y-auto max-h-160 my-2 px-4 flex-col"
       >
         {toDisplay.map((userId) => (
-          <UserRow userId={userId} />
+          <UserRow key={userId} userId={userId} />
         ))}
       </motion.div>
     </AnimatePresence>

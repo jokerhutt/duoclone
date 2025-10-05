@@ -1,10 +1,12 @@
 import Lottie from "lottie-react";
 import type { Exercise, ExerciseOption } from "../../../Types/ExerciseType";
-import { useEffect, useState } from "react";
 import { OptionsList } from "../Options/OptionsList.tsx";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../../effects/FadeInAnimation";
+import { getRowsForAnswerField, splitAnswerFieldIntoRows } from "../../../util/answerFieldUtils.ts";
+import { useRandomLottie } from "../../../hooks/useRandomLottie.tsx";
+import { EX_ANIMATIONS } from "../../../constants/animationPaths.ts";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
@@ -13,58 +15,17 @@ type ComponentSentenceExerciseProps = {
   removeOption: (option: ExerciseOption) => void;
 };
 
-const chunkBy = 30;
-
-function chunkByChars(items: ExerciseOption[], limit = chunkBy) {
-  const rows: ExerciseOption[][] = [];
-  let row: ExerciseOption[] = [];
-  let len = 0;
-  for (const it of items) {
-    if (it.content == null) continue;
-    const w = it.content.length + (row.length ? 1 : 0);
-    if (row.length && len + w > limit) {
-      rows.push(row);
-      row = [it];
-      len = it.content.length;
-    } else {
-      row.push(it);
-      len += w;
-    }
-  }
-  if (row.length) rows.push(row);
-  return rows;
-}
-
 export function ComposeSentenceExercise({
   exercise,
   currentSelectedOptions,
   addOption,
   removeOption,
 }: ComponentSentenceExerciseProps) {
-  const possibleAnimations = [
-    "/lottie-animations/LILY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/EDDY_NEUTRAL_PROMPT.json",
-    "/lottie-animations/BEAR_NEUTRAL_PROMPT.json",
-    "/lottie-animations/LUCY_NEUTRAL_PROMPT.json",
-  ];
 
-  const [animationData, setAnimationData] = useState<any>(null);
+  const animationData = useRandomLottie(EX_ANIMATIONS);
 
-  useEffect(() => {
-    const random = Math.floor(Math.random() * possibleAnimations.length);
-    const file = possibleAnimations[random];
-
-    fetch(file)
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, []);
-
-  const plannedRows = Math.max(
-    1,
-    chunkByChars(exercise.options, chunkBy).length
-  );
-
-  const displayRows = chunkByChars(currentSelectedOptions, chunkBy);
+  const plannedRows = getRowsForAnswerField(exercise, 30);
+  const displayRows = splitAnswerFieldIntoRows(currentSelectedOptions, 30);
 
     if (!!animationData) return (
       <AnimatePresence>

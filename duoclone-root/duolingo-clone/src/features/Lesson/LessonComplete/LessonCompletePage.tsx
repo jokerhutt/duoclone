@@ -9,43 +9,23 @@ import { LessonCompleteCard } from "./LessonCompleteCard.tsx";
 import { useLessonComplete } from "../../../queries/mutations/useLessonComplete.tsx";
 import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser.tsx";
 import { StreakCompleteCard } from "./StreakCompleteCard.tsx";
+import { useRandomLottie } from "../../../hooks/useRandomLottie.tsx";
+import { EL_ANIMATIONS, STREAK_ANIMATION } from "../../../constants/animationPaths.ts";
+import { useLottie } from "../../../hooks/useLottie.tsx";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const lottieStreakRed = useRef<LottieRefCurrentProps>(null);
-  const [animationData, setAnimationData] = useState<any>(null);
 
-  const [streakAnimationData, setStreakAnimationData] = useState<any>(null);
+  const animationData = useRandomLottie(EL_ANIMATIONS);
+  const streakAnimationData = useLottie(STREAK_ANIMATION);
 
   const { data: user } = useCurrentUser();
 
   const [hasStreakIncreased, setHasStreakIncreased] = useState(false);
 
-  const possibleAnimations = [
-    "/lottie-animations/EL_BEA_DUO.json",
-    "/lottie-animations/EL_LIN_DUO.json",
-    "/lottie-animations/EL_LUCY_DUO.json",
-  ];
-
   const completeSound = new Audio("/audio/completeLesson.mp3");
-
-  useEffect(() => {
-    const random = Math.floor(Math.random() * possibleAnimations.length);
-    const file = possibleAnimations[random];
-
-    fetch(file)
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, []);
-
-  useEffect(() => {
-    const file = "/lottie-effects/STREAK_INCREMENT.json";
-
-    fetch(file)
-      .then((res) => res.json())
-      .then((data) => setStreakAnimationData(data));
-  }, []);
 
   const navigate = useNavigate();
 

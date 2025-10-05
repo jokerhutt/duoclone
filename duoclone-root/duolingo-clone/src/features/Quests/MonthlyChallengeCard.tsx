@@ -1,4 +1,5 @@
 import { useMonthlyChallenge } from "../../queries/useQuery/useMonthlyChallenge";
+import { getCurrentMonth } from "../../util/dateUtiils";
 import { MonthlyChallengeProgressBar } from "./MonthlyChallengeProgressBar";
 
 export function MonthlyChallengeCard() {
@@ -6,21 +7,8 @@ export function MonthlyChallengeCard() {
 
   const completed = monthlyChallenge?.progress ?? 0;
   const total = monthlyChallenge?.total ?? 30;
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const currentMonth = monthNames[new Date().getMonth()].toUpperCase();
+
+  const currentMonth = getCurrentMonth();
 
   return (
     <div className="w-full p-4 flex gap-4 flex-col bg-duoDarkGreen">

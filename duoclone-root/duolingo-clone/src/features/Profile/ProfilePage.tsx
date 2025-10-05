@@ -31,8 +31,6 @@ export function ProfilePage() {
   const followers = followersQuery.data || [];
   const following = followingQuery.data || [];
 
-  console.log("Followers:", followers);
-  console.log("Following:", following);
 
   const isOwnPage = pageUser?.id == currentUser.id;
 
