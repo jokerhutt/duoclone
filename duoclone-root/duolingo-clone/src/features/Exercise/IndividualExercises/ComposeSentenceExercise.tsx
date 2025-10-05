@@ -5,6 +5,7 @@ import { OptionsList } from "../Options/OptionsList.tsx";
 import { SelectionOptionButton } from "../Options/SelectionOptionButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../../effects/FadeInAnimation";
+import { getRowsForAnswerField, splitAnswerFieldIntoRows } from "../../../util/answerFieldUtils.ts";
 
 type ComponentSentenceExerciseProps = {
   exercise: Exercise;
@@ -12,28 +13,6 @@ type ComponentSentenceExerciseProps = {
   currentSelectedOptions: ExerciseOption[];
   removeOption: (option: ExerciseOption) => void;
 };
-
-const chunkBy = 30;
-
-function chunkByChars(items: ExerciseOption[], limit = chunkBy) {
-  const rows: ExerciseOption[][] = [];
-  let row: ExerciseOption[] = [];
-  let len = 0;
-  for (const it of items) {
-    if (it.content == null) continue;
-    const w = it.content.length + (row.length ? 1 : 0);
-    if (row.length && len + w > limit) {
-      rows.push(row);
-      row = [it];
-      len = it.content.length;
-    } else {
-      row.push(it);
-      len += w;
-    }
-  }
-  if (row.length) rows.push(row);
-  return rows;
-}
 
 export function ComposeSentenceExercise({
   exercise,
@@ -59,12 +38,8 @@ export function ComposeSentenceExercise({
       .then((data) => setAnimationData(data));
   }, []);
 
-  const plannedRows = Math.max(
-    1,
-    chunkByChars(exercise.options, chunkBy).length
-  );
-
-  const displayRows = chunkByChars(currentSelectedOptions, chunkBy);
+  const plannedRows = getRowsForAnswerField(exercise, 30);
+  const displayRows = splitAnswerFieldIntoRows(currentSelectedOptions, 30);
 
     if (!!animationData) return (
       <AnimatePresence>
