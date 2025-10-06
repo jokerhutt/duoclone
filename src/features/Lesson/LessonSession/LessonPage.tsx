@@ -14,8 +14,8 @@ import { useLessonFlow } from "../../../hooks/useLessonFlow.tsx";
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { position } = useParams<{ position: string }>();
-
   const id = Number(lessonId);
+
   const { data: exercises, isLoading } = useExercises(id);
 
   const { lessonResponse, submitAnswer, optsState } = useLessonFlow({
