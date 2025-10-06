@@ -10,12 +10,11 @@
 https://github.com/user-attachments/assets/a8027165-e932-4d14-a1b0-4be864bd2ee3
 
 ## Setup and Installation
-1. Clone the project using `git clone https://github.com/jokerhutt/duoclone.git`
-2. Then, `cd duoclone-root/duolingo-clone/src`
-3. Run `npm i`
-4. Fill the constants/env.ts directory with your backend api path and google client id
-5. Adjust the constants/paths.ts API paths as needed
-4. Run `npm run dev`
+1. Clone the project using `git clone <https://github.com/jokerhutt/duoclone.git`>
+2. Run `npm i`
+3. Fill the src/constants/env.ts directory with your backend api path and google client id
+4. Adjust the src/constants/paths.ts API paths as needed
+5. Run `npm run dev`
 
 ## Features
 - Courses, Sections, and Units
