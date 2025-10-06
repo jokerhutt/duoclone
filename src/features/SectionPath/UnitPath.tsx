@@ -5,6 +5,7 @@ import { shouldInvert } from "../../constants/lessonPositionOffsets.ts";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import type { UnitType } from "../../Types/UnitType.ts";
+import { useLottie } from "../../hooks/useLottie.tsx";
 
 type UnitPathProps = {
   id: number;
@@ -20,14 +21,8 @@ export function UnitPath({
   unit,
 }: UnitPathProps) {
   const { data: unitLessons, isLoading: lessonsLoading } = useLessonsByUnit(id);
-  const [animationData, setAnimationData] = useState<any>(null);
 
-  useEffect(() => {
-    if (!unit) return;
-    fetch(unit.animationPath)
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, [unit]);
+  const animationData = useLottie(unit.animationPath);
 
   const leftImageOffset = "mr-40 lg:mr-60";
   const rightImageOffset = "ml-40 lg:ml-60";
