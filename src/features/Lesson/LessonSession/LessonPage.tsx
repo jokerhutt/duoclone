@@ -18,13 +18,14 @@ export function LessonPage() {
   const id = Number(lessonId);
   const { data: exercises, isLoading } = useExercises(id);
 
-  const {lessonResponse, submitAnswer, optsState} = useLessonFlow({lessonId: lessonId, position, exercises});
-  const {currentSelectedOptions, addOption, removeOption} = optsState;
-
+  const { lessonResponse, submitAnswer, optsState } = useLessonFlow({
+    lessonId: lessonId,
+    position,
+    exercises,
+  });
+  const { currentSelectedOptions, addOption, removeOption } = optsState;
 
   const [intendsToExit, setIntendsToExit] = useState(false);
-
-
 
   if (isLoading || !exercises) {
     return <SpinnerPage />;

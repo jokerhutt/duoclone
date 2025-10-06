@@ -2,14 +2,12 @@ import Lottie from "lottie-react";
 import { useEffect } from "react";
 
 type StreakCompleteCardProps = {
-  lottieRef: any;
   animationData: any;
   oldCount: number;
   newCount: number;
 };
 
 export function StreakCompleteCard({
-  lottieRef,
   newCount,
   animationData,
 }: StreakCompleteCardProps) {
@@ -22,7 +20,6 @@ export function StreakCompleteCard({
   return (
     <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
       <Lottie
-        lottieRef={lottieRef}
         animationData={animationData}
         loop={false}
         autoplay

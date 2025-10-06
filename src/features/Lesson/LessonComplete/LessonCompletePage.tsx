@@ -15,8 +15,6 @@ import { useLottie } from "../../../hooks/useLottie.tsx";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
-  const lottieRef = useRef<LottieRefCurrentProps>(null);
-  const lottieStreakRed = useRef<LottieRefCurrentProps>(null);
 
   const animationData = useRandomLottie(EL_ANIMATIONS);
   const streakAnimationData = useLottie(STREAK_ANIMATION);
@@ -28,20 +26,6 @@ export function LessonCompletePage() {
   const completeSound = new Audio("/audio/completeLesson.mp3");
 
   const navigate = useNavigate();
-
-  const handleComplete = () => {
-    if (!lottieRef.current) return;
-
-    const totalFrames = lottieRef.current.getDuration(true);
-
-    if (!totalFrames) return;
-
-    console.log("Total frames: " + totalFrames);
-
-    const loopStart = totalFrames - 40;
-    console.log("Loop start: " + loopStart);
-    lottieRef.current.playSegments([loopStart, totalFrames], true);
-  };
 
   const lessonIdForMutation: string = lessonId ?? "";
   const courseIdForMutation: number = user?.currentCourseId ?? 0;
@@ -91,10 +75,8 @@ export function LessonCompletePage() {
         <div className="w-full h-full flex gap-6 flex-col lg:pb-20 justify-center items-center pb-6">
           <LessonCompleteCard
             title={title}
-            lottieRef={lottieRef}
             isPerfect={accuracy == 100}
             animationData={animationData}
-            onComplete={handleComplete}
           />
           <LessonStatsGroup
             totalScore={totalScore}
@@ -117,7 +99,6 @@ export function LessonCompletePage() {
     return (
       <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
         <StreakCompleteCard
-          lottieRef={lottieStreakRed}
           animationData={streakAnimationData}
           oldCount={lessonCompleteMutation.data.newStreakCount.oldCount}
           newCount={lessonCompleteMutation.data.newStreakCount.newCount}
