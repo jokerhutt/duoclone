@@ -18,7 +18,10 @@ export function ProgressBar({
   showGoldOnComplete,
   icon,
 }: ProgressBarProps) {
-  const progressPercentage = (completed / total) * 100;
+
+  const isComplete = completed >= total;
+
+  const progressPercentage = !isComplete ? (completed / total) * 100 : 100;
 
   const barColorToShow =
     showGoldOnComplete && completed == total ? "bg-duoGold" : barColor;
