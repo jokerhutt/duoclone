@@ -1,73 +1,37 @@
-import { useNavigate, useParams } from "react-router";
-import { type LottieRefCurrentProps } from "lottie-react";
-
-import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router";
 import { SpinnerPage } from "../../../components/layouts/SpinnerPage.tsx";
 import { WideActionButton } from "../../../components/atoms/Button/WideActionButton.tsx";
 import { LessonStatsGroup } from "./LessonStatsGroup.tsx";
 import { LessonCompleteCard } from "./LessonCompleteCard.tsx";
-import { useLessonComplete } from "../../../queries/mutations/useLessonComplete.tsx";
-import { useCurrentUser } from "../../../queries/useQuery/Auth/useCurrentUser.tsx";
 import { StreakCompleteCard } from "./StreakCompleteCard.tsx";
-import { useRandomLottie } from "../../../hooks/useRandomLottie.tsx";
-import { EL_ANIMATIONS, STREAK_ANIMATION } from "../../../constants/animationPaths.ts";
-import { useLottie } from "../../../hooks/useLottie.tsx";
+import {
+  useLessonCompleteFlow,
+  type LessonCompleteStats,
+} from "../../../hooks/useLessonCompleteFlow.tsx";
 
 export function LessonCompletePage() {
   const { lessonId } = useParams<{ lessonId: string }>();
 
-  const animationData = useRandomLottie(EL_ANIMATIONS);
-  const streakAnimationData = useLottie(STREAK_ANIMATION);
+  const lessonCompleteData = useLessonCompleteFlow({ lessonId });
 
-  const { data: user } = useCurrentUser();
+  const {
+    lessonCompleteStats,
+    animationData,
+    streakAnimationData,
+    hasStreakIncreased,
+    handleContinueAction,
+  } = lessonCompleteData;
 
-  const [hasStreakIncreased, setHasStreakIncreased] = useState(false);
+  if (lessonCompleteData.isError) {
+    return <p>Error: {lessonCompleteData.error?.message}</p>;
+  }
 
-  const completeSound = new Audio("/audio/completeLesson.mp3");
-
-  const navigate = useNavigate();
-
-  const lessonIdForMutation: string = lessonId ?? "";
-  const courseIdForMutation: number = user?.currentCourseId ?? 0;
-
-  const lessonCompleteMutation = useLessonComplete({
-    lessonId: lessonIdForMutation,
-    courseId: courseIdForMutation,
-  });
-
-  useEffect(() => {
-    if (lessonId) {
-      lessonCompleteMutation.mutate();
-      completeSound.play();
-    }
-  }, [lessonId]);
-
-  if (lessonCompleteMutation.isError)
-    return <p>Error: {lessonCompleteMutation.error.message}</p>;
-
-  if (
-    lessonCompleteMutation.isPending ||
-    !lessonCompleteMutation.data ||
-    !animationData
-  )
+  if (lessonCompleteData.isPending || !lessonCompleteStats || !animationData) {
     return <SpinnerPage />;
+  }
 
-  const totalScore = lessonCompleteMutation.data.totalScore;
-  const accuracy = lessonCompleteMutation.data.accuracy;
-  const title = accuracy < 100 ? "Lesson Complete!" : "Perfect Lesson!";
-  const accuracyMessage = lessonCompleteMutation.data.message;
-
-  const handleNavigation = () => {
-    if (!lessonCompleteMutation) return;
-
-    const streakCount = lessonCompleteMutation.data.newStreakCount;
-
-    if (!hasStreakIncreased && streakCount.oldCount != streakCount.newCount) {
-      setHasStreakIncreased(true);
-    } else {
-      navigate("/");
-    }
-  };
+  const { totalScore, accuracy, title, accuracyMessage, newCount, oldCount } =
+    lessonCompleteStats as LessonCompleteStats;
 
   if (!hasStreakIncreased)
     return (
@@ -89,26 +53,26 @@ export function LessonCompletePage() {
             text="End Lesson"
             isActive={true}
             activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
-            onSubmit={() => handleNavigation()}
+            onSubmit={() => handleContinueAction()}
           />
         </div>
       </div>
     );
 
-  if (hasStreakIncreased && lessonCompleteMutation)
+  if (hasStreakIncreased && lessonCompleteStats)
     return (
       <div className="w-full h-full flex items-center justify-between flex-col gap-6 py-8 px-3">
         <StreakCompleteCard
           animationData={streakAnimationData}
-          oldCount={lessonCompleteMutation.data.newStreakCount.oldCount}
-          newCount={lessonCompleteMutation.data.newStreakCount.newCount}
+          oldCount={oldCount}
+          newCount={newCount}
         />
         <div className="lg:w-1/2 w-full px-2 flex lg:justify-end">
           <WideActionButton
             text="End Lesson"
             isActive={true}
             activeColor="active:shadow-none active:translate-y-[5px] shadow-duoLightGreenShadow bg-duoLightGreen"
-            onSubmit={() => handleNavigation()}
+            onSubmit={() => handleContinueAction()}
           />
         </div>
       </div>
