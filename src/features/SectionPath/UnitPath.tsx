@@ -2,7 +2,6 @@ import { LessonButton } from "./LessonButtons/LessonButton.tsx";
 import { SectionBreak } from "../../components/atoms/LineBreaks/SectionBreak.tsx";
 import { useLessonsByUnit } from "../../queries/useQuery/useLessonByUnit.tsx";
 import { shouldInvert } from "../../constants/lessonPositionOffsets.ts";
-import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import type { UnitType } from "../../Types/UnitType.ts";
 import { useLottie } from "../../hooks/useLottie.tsx";
