@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { UnitType } from "../../Types/UnitType";
 
 export function useCurrentUnitStore() {
+
   const queryClient = useQueryClient();
   const queryKey = ["currentUnit"];
 
@@ -18,4 +19,5 @@ export function useCurrentUnitStore() {
   };
 
   return { currentUnit, setCurrentUnit };
+
 }
