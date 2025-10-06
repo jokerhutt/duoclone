@@ -1,39 +1,12 @@
-import { useEffect, useMemo } from "react";
-import { useInfiniteList } from "../../queries/useQuery/InfiniteScroll/useInfiniteList";
 import { UserRow } from "../Common/UserRow.tsx";
-import { useInView } from "react-intersection-observer";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../effects/FadeInAnimation";
 import { Spinner } from "../../components/atoms/Loading/Spinner";
-import { useCurrentUser } from "../../queries/useQuery/Auth/useCurrentUser";
+import { useLeaderboardFlow } from "../../hooks/useLeaderboardFlow.tsx";
 
 export function LeaderboardPage() {
-  const { users, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteList();
 
-  const { data: currentUser } = useCurrentUser();
-
-  const { ref: sentinelRef, inView: isInView } = useInView({
-    rootMargin: "100px 0px",
-    threshold: 0,
-  });
-
-  const sortedUsers = useMemo(
-    () => [...users].sort((a, b) => b.points - a.points || a.id - b.id),
-    [users]
-  );
-
-  useEffect(() => {
-    console.log("Effect triggered:", {
-      isInView,
-      hasNextPage,
-      isFetchingNextPage,
-    });
-    if (isInView && hasNextPage && !isFetchingNextPage) {
-      console.log("Fetching next page");
-      fetchNextPage();
-    }
-  }, [isInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  const {currentUser, users, sentinelRef, isLoading, hasNextPage} = useLeaderboardFlow();
 
   return (
     <div className="w-full h-full pb-20 lg:pb-4 py-4 flex items-center flex-col">
@@ -50,7 +23,7 @@ export function LeaderboardPage() {
             {...fadeInStagger(1)}
             className="flex flex-col w-full pt-2 gap-2"
           >
-            {sortedUsers.map((user) => (
+            {users.map((user) => (
               <UserRow
                 key={user.id}
                 userInstance={user}
