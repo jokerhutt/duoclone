@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeInStagger } from "../../effects/FadeInAnimation";
 import { Spinner } from "../../components/atoms/Loading/Spinner";
 import { useLeaderboardFlow } from "../../hooks/useLeaderboardFlow.tsx";
+import { LeaderboardHeader } from "./LeaderboardHeader.tsx";
 
 export function LeaderboardPage() {
 
@@ -10,13 +11,7 @@ export function LeaderboardPage() {
 
   return (
     <div className="w-full h-full pb-20 lg:pb-4 py-4 flex items-center flex-col">
-      <div className="w-full flex flex-col pb-4 border-b border-b-duoGrayBorder items-center gap-4">
-        <img
-          className="h-20"
-          src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/3ced84eb1f0274ec0f02b24ae6e3d29b.svg"
-        />
-        <h1 className="text-3xl text-white">Leaderboard</h1>
-      </div>
+      <LeaderboardHeader/>
       {users && !isLoading && (
         <AnimatePresence>
           <motion.div
