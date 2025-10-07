@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { qk } from "../../constants/queryKeys.ts";
-import { userBatcher } from "../batcher/userBatcher";
+import { userBatcher } from "../batcher/batchers.ts";
 
 export function useUser(id: number) {
   const qc = useQueryClient();

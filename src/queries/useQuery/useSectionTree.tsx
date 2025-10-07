@@ -4,7 +4,7 @@ import { qk } from "../../constants/queryKeys.ts";
 import type { SectionType } from "../../Types/SectionType";
 import type { UnitType } from "../../Types/UnitType";
 import { fetchUnitsBySection } from "./useUnitsBySection";
-import { sectionBatcher } from "../batcher/sectionBatcher";
+import { sectionBatcher } from "../batcher/batchers.ts";
 
 export function useSectionTree(sectionId?: number) {
   const qc = useQueryClient();

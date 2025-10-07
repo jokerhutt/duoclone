@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { qk } from "../../constants/queryKeys.ts";
-import { lessonBatcher } from "../batcher/lessonBatcher";
+import { lessonBatcher } from "../batcher/batchers.ts";
 
 export function useLesson(id: number) {
   const qc = useQueryClient();
