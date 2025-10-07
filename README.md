@@ -7,9 +7,11 @@
 </p>
 
 ## Preview 🎬
+
 https://github.com/user-attachments/assets/a8027165-e932-4d14-a1b0-4be864bd2ee3
 
 ## Setup and Installation
+
 1. Clone the project using `git clone <https://github.com/jokerhutt/duoclone.git`>
 2. Run `npm i`
 3. Fill the src/constants/env.ts directory with your backend api path and google client id
@@ -17,6 +19,7 @@ https://github.com/user-attachments/assets/a8027165-e932-4d14-a1b0-4be864bd2ee3
 5. Run `npm run dev`
 
 ## Features
+
 - Courses, Sections, and Units
 - Google OAuth
 - Caching with Tanstack Query
@@ -31,4 +34,31 @@ https://github.com/user-attachments/assets/a8027165-e932-4d14-a1b0-4be864bd2ee3
 - Follow System
 - Streaks
 - Daily Quests & Monthly Challenges
+
+## Technologies Used
+
+- React
+- Typescript
+- TailwindCSS
+- Tanstack Query
+- Framer Motion
+- Spring Boot (backend)
+- MySQL (database)
+
+## Structure and Notes
+
+### **Content Hierarchy**
+Course → Section → Unit → Lesson → Exercise
+
+### **Mutations (POST REQUESTS)**
+
+Mutations can be found under src/queries/mutations
+
+**There are 4 main mutations:**
+| Mutation | Hook |
+| ----------- | ----------- |
+| Submitting an exercise attempt | useSubmitExercise |
+| Submitting a lesson completion | useLessonComplete |
+| Changing course | useChangeCourse |
+| Follow / Unfollow | useFollowUser |
 

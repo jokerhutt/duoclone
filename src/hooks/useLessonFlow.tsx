@@ -2,9 +2,7 @@ import { useCallback, useState } from "react";
 import type { Exercise } from "../Types/ExerciseType";
 import type { ExerciseAttemptResponse } from "../Types/ExerciseAttemptResponse";
 import { useOptions, type useOptionsReturn } from "./useOptions";
-import {
-  useSubmitLesson,
-} from "./useSubmitLesson";
+import { useSubmitExercise } from "../queries/mutations/useSubmitExercise";
 
 type useLessonFlowProps = {
   lessonId: string | undefined;
@@ -39,7 +37,7 @@ export function useLessonFlow({
   },
   []);
 
-  const { submitAnswer } = useSubmitLesson({
+  const { submitAnswer } = useSubmitExercise({
     enabled: !lessonResponse,
     lessonId: lessonId,
     position: position,

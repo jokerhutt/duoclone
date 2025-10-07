@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import type { useOptionsReturn } from "./useOptions";
-import type { Exercise } from "../Types/ExerciseType";
-import type { ExerciseAttemptResponse } from "../Types/ExerciseAttemptResponse";
-import { SUBMIT_EXERCISE_ATTEMPT } from "../constants/paths";
+import type { useOptionsReturn } from "../../hooks/useOptions";
+import type { Exercise } from "../../Types/ExerciseType";
+import type { ExerciseAttemptResponse } from "../../Types/ExerciseAttemptResponse";
+import { SUBMIT_EXERCISE_ATTEMPT } from "../../constants/paths";
 import { useCallback } from "react";
 
 type Args = {
@@ -15,11 +15,11 @@ type Args = {
   exercises: Exercise[];
 };
 
-export type useSubmitLessonResponse = {
+export type useSubmitExerciseResponse = {
   submitAnswer: () => void;
 };
 
-export function useSubmitLesson({
+export function useSubmitExercise({
   enabled,
   lessonId,
   position,
@@ -27,7 +27,7 @@ export function useSubmitLesson({
   changeLessonResponse,
   clearLessonResponse,
   exercises,
-}: Args): useSubmitLessonResponse {
+}: Args): useSubmitExerciseResponse {
   const navigate = useNavigate();
 
   function endLesson() {
@@ -45,7 +45,8 @@ export function useSubmitLesson({
     if (enabled) {
       if (!exercises) return;
       if (lessonId == null) return;
-      if (position == null || optsState.currentSelectedOptions.length < 1) return;
+      if (position == null || optsState.currentSelectedOptions.length < 1)
+        return;
 
       try {
         const response = await fetch(SUBMIT_EXERCISE_ATTEMPT, {
@@ -73,7 +74,6 @@ export function useSubmitLesson({
         }
 
         changeLessonResponse(result);
-
       } catch (error) {
         console.log(error);
         return;
@@ -89,7 +89,6 @@ export function useSubmitLesson({
       } else {
         goToNextLesson(idx);
       }
-
     }
   }, [
     enabled,
